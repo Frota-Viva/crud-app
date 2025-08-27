@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layout Responsivo</title>
+<style>
+  body {
+    margin: 0;
+    font-family: sans-serif;
+  }
+
+  .hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .hero img {
+  width: 60%;    /* ocupa 60% do container */
+  height: auto;  /* mantém proporção */
+  display: block;
+  margin: 0 auto; /* centraliza horizontalmente */
+}
+
+
+  .hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .hero-text {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="/assets/imgs/caminhao-longo.png" alt="Imagem Responsiva">
+  <div class="hero-text">Bem-vindo ao Site</div>
+</div>
+
+</body>
+</html>
