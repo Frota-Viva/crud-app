@@ -17,14 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
         avancar.addEventListener("click", () => {
             i = (i + 1) % qtdCards;
             moverCards();
-            console.log(i)
+           
         });
     
         
         voltar.addEventListener("click", () => {
             i = (i - 1 + qtdCards) % qtdCards;
             moverCards();
-            console.log(i)
+           
         });
 
     })
