@@ -1,1 +1,20 @@
+# Ignorar pastas e arquivos do Maven
+/target/
+
+# Ignorar arquivos de configuração local
 .env
+
+# Logs
+*.log
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# Outros arquivos temporários
+*.class
