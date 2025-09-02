@@ -1,3 +1,6 @@
+package com.frotaviva.model;
+
+
 public class Endereco {
     // Atributos criados para endeco
     private String cep;

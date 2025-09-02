@@ -1,3 +1,6 @@
+package com.frotaviva.model;
+
+
 public class Frota {
     private long id;
     private int tamanhoFrota;

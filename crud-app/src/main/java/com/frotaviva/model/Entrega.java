@@ -1,3 +1,6 @@
+package com.frotaviva.model;
+
+
 import java.time.LocalDate;
 
 public class Entrega {

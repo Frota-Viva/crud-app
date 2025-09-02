@@ -1,3 +1,6 @@
+package com.frotaviva.model;
+
+
 public class TelefoneEmpresa {
     private long id;
     private String telefoneEmpresa;

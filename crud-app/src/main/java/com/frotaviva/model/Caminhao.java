@@ -1,3 +1,5 @@
+package com.frotaviva.model;
+
 public class Caminhao {
     private long id;
     private String placa;

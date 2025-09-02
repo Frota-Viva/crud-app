@@ -1,3 +1,6 @@
+package com.frotaviva.model;
+
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

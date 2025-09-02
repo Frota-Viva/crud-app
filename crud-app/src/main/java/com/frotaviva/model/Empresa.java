@@ -1,4 +1,4 @@
-import java.util.List;
+package com.frotaviva.model;
 
 public class Empresa {
     private long id;
