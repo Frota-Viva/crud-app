@@ -44,6 +44,15 @@ public class Caminhao {
     public long getIdMotorista(){
         return this.idMotorista;
     }
+    public void setPlaca(String placa){
+        this.placa=placa;
+    }
+    public void setIdMotorista(long idMotorista){
+        this.idMotorista=idMotorista;
+    }
+    public void setIdFrota(long idFrota){
+        this.idFrota=idFrota;
+    }
     public String toString(){
         return "Id: "+this.id+"\nModelo: "+this.modelo+"\nPlaca: "+this.placa+"\nKm Rodados: "+this.kmRodados+"\nStatus: "+this.status+
                 "\nId Frota: "+this.idFrota+"\nId Motorista: "+this.idMotorista;

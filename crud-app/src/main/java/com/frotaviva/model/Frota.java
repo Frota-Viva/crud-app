@@ -29,6 +29,15 @@ public class Frota {
     public long getIdEmpresa(){
         return this.idEmpresa;
     }
+    public void setTamanhoFrota(int tamanhoFrota){
+        this.tamanhoFrota=tamanhoFrota;
+    }
+    public void setRegiao(String regiao){
+        this.regiao=regiao;
+    }
+    public void setTipoFrota(String tipoFrota){
+        this.tipoFrota=tipoFrota;
+    }
     public String toString(){
         return "Id: "+this.id+"\nTamanho da Frota: "+this.tamanhoFrota+"\nTipo da Frota: "+this.tipoFrota+"\nRegião: "+this.regiao;
     }

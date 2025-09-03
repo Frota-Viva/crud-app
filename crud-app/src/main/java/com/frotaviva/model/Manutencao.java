@@ -56,6 +56,12 @@ public class Manutencao {
     public long getIdCaminhao() {
         return this.idCaminhao;
     }
+    public void setCusto(BigDecimal custo){
+        this.custo=custo;
+    }
+    public void setDescricaoServico(String descricaoServico){
+        this.descricaoServico=descricaoServico;
+    }
 
     public String toString(){
         return "Id: "+this.id+"\nData Cadastro: "+this.dtCadastro +"\nData Conclusão: "+this.dtConclusao +"\nCusto: "+this.custo+

@@ -22,57 +22,6 @@ public class Endereco {
         this.cidade=cidade;
     }
 
-// Sem o complemento
-
-//    public Endereco(String pais,String cep,String estado,String cidade,String rua,int numero){
-//        this.cep=cep;
-//        this.rua=rua;
-//        this.numero=numero;
-//        this.pais=pais;
-//        this.estado=estado;
-//        this.cidade=cidade;
-//    }
-
-// Sem o complemento, sem estado e sem cep, estes os dois ultimos pode ser que outros países não tenham
-
-//    public Endereco(String pais,String cidade,String rua,int numero){
-//        this.rua=rua;
-//        this.numero=numero;
-//        this.pais=pais;
-//        this.cidade=cidade;
-//    }
-
-// Sem cep, seguindo a mesma lógica da de cima
-
-//    public Endereco(String pais,String estado,String cidade,String rua,int numero,String complemento){
-//        this.rua=rua;
-//        this.complemento=complemento;
-//        this.numero=numero;
-//        this.pais=pais;
-//        this.estado=estado;
-//        this.cidade=cidade;
-//    }
-
-// Sem estado e sem cep, seguindo a mesma lógica de cima
-
-//    public Endereco(String pais,String cidade,String rua,int numero,String complemento){
-//        this.rua=rua;
-//        this.complemento=complemento;
-//        this.numero=numero;
-//        this.pais=pais;
-//        this.cidade=cidade;
-//    }
-
-// Sem cep e sem complemento, seguindo a mesma lógica de cima
-
-//    public Endereco(String pais,String estado,String cidade,String rua,int numero){
-//        this.rua=rua;
-//        this.numero=numero;
-//        this.pais=pais;
-//        this.estado=estado;
-//        this.cidade=cidade;
-//    }
-
 //  Métodos getters
     public String getCef(){
         return this.cep;
@@ -94,6 +43,27 @@ public class Endereco {
     }
     public String getCidade(){
         return this.cidade;
+    }
+    public void setCep(String cep){
+        this.cep=cep;
+    }
+    public void setRua(String rua){
+        this.rua=rua;
+    }
+    public void setComplemento(String complemento){
+        this.complemento=complemento;
+    }
+    public void setNumero(int numero){
+        this.numero=numero;
+    }
+    public void setCidade(String cidade){
+        this.cidade=cidade;
+    }
+    public void setEstado (String estado){
+        this.estado=estado;
+    }
+    public void setPais(String pais){
+        this.pais=pais;
     }
 
 // Método toString

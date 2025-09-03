@@ -33,6 +33,15 @@ public class Motorista {
     public long getIdEmpresa(){
         return this.idEmpresa;
     }
+    public void setNome(String nome){
+        this.nome=nome;
+    }
+    public void setEmail(String email){
+        this.email=email;
+    }
+    public void setSenha(String senha){
+        this.senha=senha;
+    }
     public String toString(){
         return "Id: "+this.id+"\nNome: "+this.nome+"\nCpf: "+this.cpf+"\nEmail: "+this.email+
                 "\nSenha: "+this.senha+"\nId Empresa: "+this.idEmpresa;

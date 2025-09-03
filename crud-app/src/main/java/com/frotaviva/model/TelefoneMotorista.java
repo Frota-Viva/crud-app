@@ -19,6 +19,9 @@ public class TelefoneMotorista {
     public String getIdMotorista(){
         return this.idMotorista;
     }
+    public void setTelefoneMotorista(String telefoneMotorista){
+        this.telefoneMotorista=telefoneMotorista;
+    }
     public String toString(){
         return "Id: "+this.idMotorista +"\nTelefone: "+this.telefoneMotorista +"\nId Empresa: "+this.idMotorista;
     }
