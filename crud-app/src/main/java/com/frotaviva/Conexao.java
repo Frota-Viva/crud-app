@@ -10,7 +10,7 @@ public class Conexao {
     private final static String url = dotenv.get("URL_DB");
     private final static String user = dotenv.get("USER_DB");
     private final static String password = dotenv.get("PASSWORD_DB");
-    public Connection conectar(){
+    public static Connection conectar(){
         Connection conn = null;
         try {
 //        Informado o driver que será usado

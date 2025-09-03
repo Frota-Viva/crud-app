@@ -22,12 +22,9 @@ public class Endereco {
         this.cidade=cidade;
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> f6d3f11c0e36128e0c31730a93c3b1d0d78f9ecb
 //  Métodos getters
-    public String getCef(){
+    public String getCep(){
         return this.cep;
     }
     public String getRua(){
