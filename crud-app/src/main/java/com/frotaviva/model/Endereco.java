@@ -22,7 +22,10 @@ public class Endereco {
         this.cidade=cidade;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f6d3f11c0e36128e0c31730a93c3b1d0d78f9ecb
 //  Métodos getters
     public String getCef(){
         return this.cep;
@@ -44,6 +47,27 @@ public class Endereco {
     }
     public String getCidade(){
         return this.cidade;
+    }
+    public void setCep(String cep){
+        this.cep=cep;
+    }
+    public void setRua(String rua){
+        this.rua=rua;
+    }
+    public void setComplemento(String complemento){
+        this.complemento=complemento;
+    }
+    public void setNumero(int numero){
+        this.numero=numero;
+    }
+    public void setCidade(String cidade){
+        this.cidade=cidade;
+    }
+    public void setEstado (String estado){
+        this.estado=estado;
+    }
+    public void setPais(String pais){
+        this.pais=pais;
     }
 
 // Método toString

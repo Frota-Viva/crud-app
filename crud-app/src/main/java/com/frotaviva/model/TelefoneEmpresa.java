@@ -19,6 +19,9 @@ public class TelefoneEmpresa {
     public String getIdEmpresa(){
         return this.idEmpresa;
     }
+    public void setTelefoneEmpresa(String telefoneEmpresa){
+        this.telefoneEmpresa=telefoneEmpresa;
+    }
     public String toString(){
         return "Id: "+this.idEmpresa+"\nTelefone: "+this.telefoneEmpresa +"\nId Empresa: "+this.idEmpresa;
     }

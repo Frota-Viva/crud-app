@@ -41,7 +41,18 @@ public class Empresa {
     public String getSenha(){
         return this.senha;
     }
-
+    public void setNome(String nome){
+        this.nome=nome;
+    }
+    public void setEndereco(Endereco endereco){
+        this.endereco=endereco;
+    }
+    public void setEmail(String email){
+        this.email=email;
+    }
+    public void setSenha(String senha){
+        this.senha=senha;
+    }
     public String toString(){
         return "Id: "+this.id+"\nNome: "+this.nome+"\nEndereco: "+this.endereco+"\nEmail: "+this.email+
                 "\nCnpj: "+this.cnpj+"\nTipo da Empresa: "+this.tipoEmpresa;
