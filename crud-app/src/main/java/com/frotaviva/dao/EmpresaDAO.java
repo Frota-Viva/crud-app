@@ -120,4 +120,35 @@ public class EmpresaDAO {
             sqle.printStackTrace();
         }
     }
+
+    public static Empresa getEmpresa(long id){
+        String sql = "SELECT * FROM empresa WHERE id = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setLong(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            long idEmpresa = rs.getLong("id");
+            String tipo_empresa = rs.getString("tipo_empresa");
+            String cnpj = rs.getString("cnpj");
+            String email = rs.getString("email");
+            String senha = rs.getString("senha");
+            String nome = rs.getString("nome");
+            String cep = rs.getString("cep");
+            String rua = rs.getString("rua");
+            String complemento = rs.getString("complemento");
+            int numero = rs.getInt("numero");
+            String pais = rs.getString("pais");
+            String estado = rs.getString("estado");
+            String cidade = rs.getString("cidade");
+
+            return new Empresa(id, tipo_empresa, cnpj, email, senha, nome,
+                    new Endereco(pais, cep, estado, cidade, rua, numero, complemento));
+        } catch (SQLException sqle){
+            sqle.printStackTrace();
+            return null;
+        }
+    }
 }
