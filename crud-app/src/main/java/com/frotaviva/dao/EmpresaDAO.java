@@ -8,7 +8,7 @@ import com.frotaviva.model.Endereco;
 import java.sql.*;
 
 public class EmpresaDAO {
-    public static void cadastrarEmpresa(Empresa empresa){
+    public static boolean cadastrarEmpresa(Empresa empresa){
         String sql = "INSERT INTO empresa(tipo_empresa, cnpj, email, senha, nome, cep, rua, complemento, numero, pais," +
                 " estado, cidade) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String senhaHash = Senhas.hashSenha(empresa.getSenha());
@@ -33,12 +33,15 @@ public class EmpresaDAO {
             stmt.setString(11, endereco.getEstado());
             stmt.setString(12, endereco.getCidade());
 
-            stmt.execute();
+             if (stmt.executeUpdate() > 0) return true;
+
+            return false;
         }catch (SQLException sqle){
             sqle.printStackTrace();
+            return false;
         }
     }
-    public static void atualizarNome(Empresa empresa){
+    public static boolean atualizarNome(Empresa empresa){
         String sql = "UPDATE empresa SET nome = ? WHERE id = ?";
 
         try (Connection conn = Conexao.conectar();
@@ -46,12 +49,15 @@ public class EmpresaDAO {
             stmt.setString(1, empresa.getNome());
             stmt.setLong(2, empresa.getId());
 
-            stmt.execute();
+            if (stmt.executeUpdate() > 0) return true;
+
+            return false;
         } catch (SQLException sqle){
             sqle.printStackTrace();
+            return false;
         }
     }
-    public static void atualizarEndereco(Empresa empresa){
+    public static boolean atualizarEndereco(Empresa empresa){
         String sql = "UPDATE empresa SET pais = ?, cep = ?, estado = ?, cidade = ?, rua = ?, numero = ?," +
                 " complemento = ? WHERE id = ?";
         Endereco endereco = empresa.getEndereco();
@@ -71,12 +77,15 @@ public class EmpresaDAO {
             }
             stmt.setLong(8, empresa.getId());
 
-            stmt.executeUpdate();
+            if (stmt.executeUpdate() > 0) return true;
+
+            return false;
         } catch (SQLException sqle){
             sqle.printStackTrace();
+            return false;
         }
     }
-    public static void atualizarEmail(Empresa empresa){
+    public static boolean atualizarEmail(Empresa empresa){
         String sql = "UPDATE empresa SET email = ? WHERE id = ?";
 
         try (Connection conn = Conexao.conectar();
@@ -84,9 +93,12 @@ public class EmpresaDAO {
             stmt.setString(1, empresa.getEmail());
             stmt.setLong(2, empresa.getId());
 
-            stmt.executeUpdate();
+            if (stmt.executeUpdate() > 0) return true;
+
+            return false;
         } catch (SQLException sqle){
             sqle.printStackTrace();
+            return false;
         }
     }
     public static boolean atualizarSenha(Empresa empresa){
@@ -101,24 +113,29 @@ public class EmpresaDAO {
             stmt.setString(1, senhaHash);
             stmt.setLong(2, empresa.getId());
 
-            stmt.executeUpdate();
-            return true;
+            if (stmt.executeUpdate() > 0) return true;
+            return false;
         } catch (SQLException sqle){
             sqle.printStackTrace();
             return false;
         }
     }
-    public static void deletarEmpresa(Empresa empresa){
+    public static boolean deletarEmpresa(Empresa empresa){
         String sql = "DELETE FROM empresa WHERE id = ?";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)){
 
             stmt.setLong(1, empresa.getId());
-            stmt.executeUpdate();
+
+            if (stmt.executeUpdate() > 0) return true;
+
+            return false;
         } catch (SQLException sqle) {
             sqle.printStackTrace();
+            return false;
         }
+
     }
 
     public static Empresa getEmpresa(long id){
