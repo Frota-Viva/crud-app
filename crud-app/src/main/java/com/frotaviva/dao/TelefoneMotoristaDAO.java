@@ -1,21 +1,21 @@
 package com.frotaviva.dao;
 
 import com.frotaviva.Conexao;
-import com.frotaviva.model.TelefoneEmpresa;
+import com.frotaviva.model.TelefoneMotorista;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
-public class TelefoneEmpresaDAO {
-    public static boolean cadastrarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa){
-        String sql = "INSERT INTO telefone_empresa(telefone_empresa, id_empresa) VALUES(? , ?)";
+public class TelefoneMotoristaDAO {
+    public static boolean cadastrarTelefoneMotorista(TelefoneMotorista telefoneMotorista){
+        String sql = "INSERT INTO telefone_motorista(telefone_motorista, id_motorista) VALUES(? , ?)";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt =  conn.prepareStatement(sql)){
-            stmt.setString(1, telefoneEmpresa.getTelefoneEmpresa());
-            stmt.setLong(2, telefoneEmpresa.getIdEmpresa());
+            stmt.setString(1, telefoneMotorista.getTelefoneMotorista());
+            stmt.setLong(2, telefoneMotorista.getIdMotorista());
 
             if (stmt.executeUpdate() > 0) return true;
             return false;
@@ -24,13 +24,13 @@ public class TelefoneEmpresaDAO {
             return false;
         }
     }
-    public static boolean atualizarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa){
-        String sql = "UPDATE telefone_empresa SET telefone_empresa = ? WHERE id = ?";
+    public static boolean atualizarTelefoneMotorista(TelefoneMotorista telefoneMotorista){
+        String sql = "UPDATE telefone_empresa SET telefone_motorista = ? WHERE id = ?";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)){
-            stmt.setString(1, telefoneEmpresa.getTelefoneEmpresa());
-            stmt.setLong(2, telefoneEmpresa.getId());
+            stmt.setString(1, telefoneMotorista.getTelefoneMotorista());
+            stmt.setLong(2, telefoneMotorista.getId());
 
             if (stmt.executeUpdate() > 0) return true;
 
@@ -40,13 +40,13 @@ public class TelefoneEmpresaDAO {
             return false;
         }
     }
-    public static boolean deletarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa){
-        String sql = "DELETE FROM telefone_empresa WHERE id = ?";
+    public static boolean deletarTelefoneMotorista(TelefoneMotorista telefoneMotorista){
+        String sql = "DELETE FROM telefone_motorista WHERE id = ?";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)){
 
-            stmt.setLong(1, telefoneEmpresa.getId());
+            stmt.setLong(1, telefoneMotorista.getId());
 
             if (stmt.executeUpdate() > 0) return true;
 
@@ -57,19 +57,19 @@ public class TelefoneEmpresaDAO {
         }
 
     }
-    public static TelefoneEmpresa getTelefoneEmpresa(long id){
-        String sql = "SELECT * FROM telefone_empresa WHERE id = ?";
+    public static TelefoneMotorista getTelefoneMotorista(long id){
+        String sql = "SELECT * FROM telefone_motorista WHERE id = ?";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareCall(sql)){
             stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
-            long idTelefoneEmpresa = rs.getLong("id");
-            String telefone_empresa = rs.getString("telefone_empresa");
-            long id_empresa = rs.getLong("id_empresa");
+            long idTelefoneMotorista = rs.getLong("id");
+            String telefone_motorista = rs.getString("telefone_empresa");
+            long id_motorista = rs.getLong("id_empresa");
 
-            return new TelefoneEmpresa(idTelefoneEmpresa, telefone_empresa, id_empresa);
+            return new TelefoneMotorista(idTelefoneMotorista, telefone_motorista, id_motorista);
         } catch (SQLException sqle){
             sqle.printStackTrace();
             return null;
