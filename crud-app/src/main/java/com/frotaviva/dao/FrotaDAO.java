@@ -1,9 +1,8 @@
 package com.frotaviva.dao;
 
 import com.frotaviva.Conexao;
-import com.frotaviva.Senhas;
 import com.frotaviva.model.Frota;
-import com.frotaviva.model.Motorista;
+import com.frotaviva.model.Manutencao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -70,6 +69,22 @@ public class FrotaDAO {
             if (stmt.executeUpdate() > 0) return true;
             return false;
         } catch (SQLException sqle){
+            sqle.printStackTrace();
+            return false;
+        }
+    }
+    public static boolean deletarFrota(Frota frota){
+        String sql = "DELETE FROM frota WHERE id = ?";
+
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setLong(1, frota.getId());
+
+            if (stmt.executeUpdate() > 0) return true;
+
+            return false;
+        } catch (SQLException sqle) {
             sqle.printStackTrace();
             return false;
         }

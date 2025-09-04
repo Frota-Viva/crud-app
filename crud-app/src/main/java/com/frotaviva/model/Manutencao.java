@@ -2,18 +2,19 @@ package com.frotaviva.model;
 
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Manutencao {
     private long id;
-    private LocalDate dtCadastro;
-    private LocalDate dtConclusao;
+    private Date dtCadastro;
+    private Date dtConclusao;
     private String tipoManutencao;
     private BigDecimal custo;
     private long ultimoMotorista;
     private String descricaoServico;
     private long idCaminhao;
-    public Manutencao(long id,LocalDate dataCadastro,LocalDate dataConclusao,String tipoManutencao,BigDecimal custo,long ultimoMotorista,String descricaoServico,long idCaminhao){
+    public Manutencao(long id, Date dataCadastro, Date dataConclusao,String tipoManutencao,BigDecimal custo,
+                      long ultimoMotorista,String descricaoServico,long idCaminhao){
         this.id=id;
         this.dtCadastro =dataCadastro;
         this.dtConclusao =dataConclusao;
@@ -23,22 +24,14 @@ public class Manutencao {
         this.descricaoServico=descricaoServico;
         this.idCaminhao=idCaminhao;
     }
-    public Manutencao(long id,LocalDate dataCadastro,String tipoManutencao,BigDecimal custo,long ultimoMotorista,String descricaoServico,long idCaminhao){
-        this.id=id;
-        this.dtCadastro =dataCadastro;
-        this.tipoManutencao=tipoManutencao;
-        this.custo=custo;
-        this.ultimoMotorista=ultimoMotorista;
-        this.descricaoServico=descricaoServico;
-        this.idCaminhao=idCaminhao;
-    }
+
     public long getId(){
         return this.id;
     }
-    public LocalDate getDtCadastro(){
+    public Date getDtCadastro(){
         return this.dtCadastro;
     }
-    public LocalDate getDtConclusao(){
+    public Date getDtConclusao(){
         return this.dtConclusao;
     }
     public String getTipoManutencao(){
