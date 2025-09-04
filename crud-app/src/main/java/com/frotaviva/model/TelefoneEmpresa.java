@@ -4,8 +4,8 @@ package com.frotaviva.model;
 public class TelefoneEmpresa {
     private long id;
     private String telefoneEmpresa;
-    private String idEmpresa;
-    public TelefoneEmpresa(long id, String telefoneEmpresa, String idEmpresa){
+    private long idEmpresa;
+    public TelefoneEmpresa(long id, String telefoneEmpresa, long idEmpresa){
         this.id=id;
         this.telefoneEmpresa = telefoneEmpresa;
         this.idEmpresa=idEmpresa;
@@ -16,7 +16,7 @@ public class TelefoneEmpresa {
     public String getTelefoneEmpresa(){
         return this.telefoneEmpresa;
     }
-    public String getIdEmpresa(){
+    public long getIdEmpresa(){
         return this.idEmpresa;
     }
     public void setTelefoneEmpresa(String telefoneEmpresa){
