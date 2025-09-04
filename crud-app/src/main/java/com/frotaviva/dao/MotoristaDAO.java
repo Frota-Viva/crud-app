@@ -80,7 +80,7 @@ public class MotoristaDAO {
         }
     }
 
-    public Motorista getMotorista(long id){
+    public static Motorista getMotorista(long id){
         String sql = "SELECT * FROM motorista WHERE id = ?";
 
         try (Connection conn = Conexao.conectar();
