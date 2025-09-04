@@ -47,6 +47,15 @@ public class Caminhao {
     public void setPlaca(String placa){
         this.placa=placa;
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setKmRodados(int kmRodados) {
+        this.kmRodados = kmRodados;
+    }
+
     public void setIdMotorista(long idMotorista){
         this.idMotorista=idMotorista;
     }

@@ -135,7 +135,6 @@ public class EmpresaDAO {
             sqle.printStackTrace();
             return false;
         }
-
     }
 
     public static Empresa getEmpresa(long id){
