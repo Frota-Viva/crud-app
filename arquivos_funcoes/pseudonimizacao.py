@@ -86,7 +86,7 @@ def pseudonimzar_tabela(tabela):
 
     # Percorre a tabela como um DICIONARIO, trazendo (chave, Valor)
     for titulo_coluna, coluna in tabela.items():
-        quant_linhas = len(str(list(coluna.keys())[-1])) # Conta o tamanho do ultimo indice (deixa o pseudonimo de nome melhor)
+        quant_linhas = len(coluna) # Conta o tamanho do ultimo indice (deixa o pseudonimo de nome melhor)
         pColuna = {} # Inicializa uma nova coluna como dict 
 
     # Chama as funções com suas palavras chaves/combinação(regex) (nos nomes das colunas)
