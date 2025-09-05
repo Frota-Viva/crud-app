@@ -1,8 +1,7 @@
 package com.frotaviva.model;
 
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 
 public class Entrega {
     private long cod_entrega;

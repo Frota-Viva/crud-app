@@ -1,7 +1,6 @@
 package com.frotaviva.dao;
 
 import com.frotaviva.Conexao;
-import com.frotaviva.model.Empresa;
 import com.frotaviva.model.Endereco;
 import com.frotaviva.model.Entrega;
 
@@ -15,9 +14,9 @@ public class EntregaDAO {
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setString(1, entrega.getDescricaoProduto());
-            stmt.setDate(2, (Date) entrega.getDtPedido());
+            stmt.setDate(2, entrega.getDtPedido());
             if (entrega.getDtEntrega() != null) {
-                stmt.setDate(3, (Date) entrega.getDtEntrega());
+                stmt.setDate(3, entrega.getDtEntrega());
             } else {
                 stmt.setNull(3, Types.DATE);
             }

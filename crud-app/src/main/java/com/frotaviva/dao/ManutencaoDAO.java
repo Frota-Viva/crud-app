@@ -13,9 +13,9 @@ public class ManutencaoDAO {
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)){
-            stmt.setDate(1, (Date)manutencao.getDtCadastro()); //Transforma a dtCadastro em tipo Date no SQL
+            stmt.setDate(1, manutencao.getDtCadastro()); //Transforma a dtCadastro em tipo Date no SQL
             if (manutencao.getDtConclusao() != null){
-                stmt.setDate(2, (Date)manutencao.getDtConclusao());
+                stmt.setDate(2, manutencao.getDtConclusao());
             } else {
                 stmt.setNull(2, Types.DATE);
             }
@@ -38,7 +38,7 @@ public class ManutencaoDAO {
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)){
-            stmt.setDate(1, (Date) manutencao.getDtConclusao());
+            stmt.setDate(1, manutencao.getDtConclusao());
             stmt.setLong(2, manutencao.getId());
 
             if (stmt.executeUpdate() > 0) return true;

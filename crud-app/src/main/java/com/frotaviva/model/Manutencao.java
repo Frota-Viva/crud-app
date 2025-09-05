@@ -2,7 +2,7 @@ package com.frotaviva.model;
 
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
 
 public class Manutencao {
     private long id;

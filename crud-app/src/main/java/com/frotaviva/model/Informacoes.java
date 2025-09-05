@@ -2,8 +2,8 @@ package com.frotaviva.model;
 
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 public class Informacoes {
     private long id;
@@ -12,15 +12,15 @@ public class Informacoes {
     private BigDecimal qtdCombustivel;
     private BigDecimal tempArrefecimento;
     private BigDecimal pressaoColetorAdmissao;
-    private LocalDateTime dtHoraLeitura;
-    private BigDecimal rmpMotor;
+    private Timestamp dtHoraLeitura;
+    private BigDecimal rpmMotor;
     private BigDecimal cargaMotor;
-    private LocalTime tempoMotorLigado;
+    private Time tempoMotorLigado;
     private BigDecimal posicaoAcelerador;
     private BigDecimal tempturaArAdmissao;
     private long idCaminhao;
-    private Informacoes(long id, BigDecimal tempturaArAdmissao, BigDecimal posicaoAcelerador, LocalTime tempoMotorLigado,
-                        BigDecimal cargaMotor, BigDecimal rmpMotor, LocalDateTime dtHoraLeitura, BigDecimal pressaoPneu,
+    public Informacoes(long id, BigDecimal tempturaArAdmissao, BigDecimal posicaoAcelerador, Time tempoMotorLigado,
+                        BigDecimal cargaMotor, BigDecimal rpmMotor, Timestamp dtHoraLeitura, BigDecimal pressaoPneu,
                         BigDecimal sensoresOxigenio, BigDecimal qtdCombustivel, BigDecimal tempArrefecimento,
                         BigDecimal pressaoColetorAdmissao, long idCaminhao){
         this.id=id;
@@ -30,7 +30,7 @@ public class Informacoes {
         this.tempArrefecimento = tempArrefecimento;
         this.pressaoColetorAdmissao=pressaoColetorAdmissao;
         this.dtHoraLeitura = dtHoraLeitura;
-        this.rmpMotor=rmpMotor;
+        this.rpmMotor=rpmMotor;
         this.cargaMotor=cargaMotor;
         this.tempoMotorLigado=tempoMotorLigado;
         this.posicaoAcelerador=posicaoAcelerador;
@@ -55,16 +55,16 @@ public class Informacoes {
     public BigDecimal getPressaoColetorAdmissao(){
         return this.pressaoColetorAdmissao;
     }
-    public LocalDateTime getDataHoraLeitura(){
+    public Timestamp getDataHoraLeitura(){
         return this.dtHoraLeitura;
     }
-    public BigDecimal getRmpMotor(){
-        return this.rmpMotor;
+    public BigDecimal getRpmMotor(){
+        return this.rpmMotor;
     }
     public BigDecimal getCargaMotor(){
         return this.cargaMotor;
     }
-    public LocalTime getTempoMotorLigado(){
+    public Time getTempoMotorLigado(){
         return this.tempoMotorLigado;
     }
     public BigDecimal getPosicaoAcelerador(){
@@ -91,16 +91,16 @@ public class Informacoes {
     public void setPressaoColetorAdmissao(BigDecimal pressaoColetorAdmissao){
         this.pressaoColetorAdmissao=pressaoColetorAdmissao;
     }
-    public void setDtHoraLeitura(LocalDateTime dtHoraLeitura){
+    public void setDtHoraLeitura(Timestamp dtHoraLeitura){
         this.dtHoraLeitura=dtHoraLeitura;
     }
-    public void setRmpMotor(BigDecimal rmpMotor){
-        this.rmpMotor=rmpMotor;
+    public void setRpmMotor(BigDecimal rmpMotor){
+        this.rpmMotor=rmpMotor;
     }
     public void setCargaMotor(BigDecimal cargaMotor){
         this.cargaMotor=cargaMotor;
     }
-    public void setTempoMotorLigado(LocalTime tempoMotorLigado){
+    public void setTempoMotorLigado(Time tempoMotorLigado){
         this.tempoMotorLigado=tempoMotorLigado;
     }
     public void setPosicaoAcelerador(BigDecimal posicaoAcelerador){
@@ -113,7 +113,7 @@ public class Informacoes {
         return "Id: "+this.id+"\nPressão Pneu: "+this.pressaoPneu+"\nSensores Oxigênio: "+this.sensoresOxigenio+
                 "\nQuantidade Combustível: "+this.qtdCombustivel +"\nTemperatura Arrefeciemnto: "+this.tempArrefecimento +
                 "\nPressão Coletor Admissão: "+this.pressaoColetorAdmissao+"\nData e Hora da Leitura: "+this.dtHoraLeitura +
-                "\nRpm Motor: "+this.rmpMotor+"\nCarga Motor: "+this.cargaMotor+"\nTempo Motor Ligado: "+this.tempoMotorLigado+
+                "\nRpm Motor: "+this.rpmMotor+"\nCarga Motor: "+this.cargaMotor+"\nTempo Motor Ligado: "+this.tempoMotorLigado+
                 "\nPosição Acelerador: "+this.posicaoAcelerador+"\nTemperatura Ar Admissão: "+ this.tempturaArAdmissao +
                 "Id Caminhão: "+this.idCaminhao;
     }
