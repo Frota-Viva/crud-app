@@ -1,5 +1,6 @@
-package com.frotaviva;
+package com.frotaviva.util;
 
+import com.frotaviva.util.Conexao;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;

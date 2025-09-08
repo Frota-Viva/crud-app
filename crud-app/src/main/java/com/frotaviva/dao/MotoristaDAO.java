@@ -2,9 +2,8 @@ package com.frotaviva.dao;
 
 import java.sql.*;
 
-import com.frotaviva.Conexao;
-import com.frotaviva.Senhas;
-import com.frotaviva.model.Empresa;
+import com.frotaviva.util.Conexao;
+import com.frotaviva.util.Senhas;
 import com.frotaviva.model.Motorista;
 
 

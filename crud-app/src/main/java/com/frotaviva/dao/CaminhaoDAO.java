@@ -1,9 +1,7 @@
 package com.frotaviva.dao;
 
-import com.frotaviva.Conexao;
+import com.frotaviva.util.Conexao;
 import com.frotaviva.model.Caminhao;
-import com.frotaviva.model.Empresa;
-import com.frotaviva.model.Endereco;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

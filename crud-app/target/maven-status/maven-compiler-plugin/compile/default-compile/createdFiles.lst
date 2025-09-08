@@ -1,0 +1,7 @@
+com\frotaviva\dao\TelefoneEmpresaDAO.class
+com\frotaviva\dao\CaminhaoDAO.class
+com\frotaviva\dao\InformacoesDAO.class
+com\frotaviva\dao\ManutencaoDAO.class
+com\frotaviva\dao\EntregaDAO.class
+com\frotaviva\dao\TelefoneMotoristaDAO.class
+com\frotaviva\servlet\MeuServlet.class

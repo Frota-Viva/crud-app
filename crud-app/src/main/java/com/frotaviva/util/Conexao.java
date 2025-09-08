@@ -1,4 +1,4 @@
-package com.frotaviva;
+package com.frotaviva.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

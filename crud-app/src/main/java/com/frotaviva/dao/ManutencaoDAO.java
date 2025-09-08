@@ -1,6 +1,6 @@
 package com.frotaviva.dao;
 
-import com.frotaviva.Conexao;
+import com.frotaviva.util.Conexao;
 import com.frotaviva.model.Manutencao;
 
 import java.math.BigDecimal;
