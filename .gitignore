@@ -1,20 +1,41 @@
-# Ignorar pastas e arquivos do Maven
-/target/
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!src/main/**/target/
+!src/test/**/target/
 
-# Ignorar arquivos de configuração local
-.env
-
-# Logs
-*.log
-
-# Arquivos do sistema
-.DS_Store
-Thumbs.db
-
-# IDEs
-.vscode/
-.idea/
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
 *.iml
+*.ipr
 
-# Outros arquivos temporários
-*.class
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!src/main/**/build/
+!src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+#env
+.env

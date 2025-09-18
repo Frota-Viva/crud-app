@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/avancar.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/icons/avancar.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/instagram.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/icons/instagram.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/outlook.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/icons/outlook.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/telephone.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/icons/telephone.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/voltar.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/icons/voltar.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/imgs/caminhao-atras-colaborador.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/caminhao-atras-colaborador.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/imgs/caminhao-longo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/caminhao-longo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/imgs/fundo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/fundo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/imgs/gestor-dados.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/gestor-dados.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/imgs/iPhone 16 Pro 3 (1).png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/iPhone 16 Pro 3 (1).png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/imgs/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/imgs/tela-notificacoes.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/tela-notificacoes.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/postgresql-42.7.7.jar" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql-42.7.7.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/CaminhaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/CaminhaoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/EmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EmpresaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/EntregaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EntregaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/Filtros.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/Filtros.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/FrotaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/FrotaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/InformacoesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/InformacoesDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/ManutencaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/ManutencaoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/MotoristaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/MotoristaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/TelefoneEmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneEmpresaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/TelefoneMotoristaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneMotoristaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Caminhao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Caminhao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Empresa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Empresa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Endereco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Endereco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Entrega.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Entrega.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Frota.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Frota.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Informacoes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Informacoes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Manutencao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Manutencao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Motorista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Motorista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/TelefoneEmpresa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/TelefoneEmpresa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/TelefoneMotorista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/TelefoneMotorista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/servlet/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/util/Conexao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/util/Conexao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/util/Senhas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/util/Senhas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/webapp/WEB-INF/view/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/src/main/webapp/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/target/tomcat/conf/logging.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/target/tomcat/conf/tomcat-users.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/target/tomcat/conf/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/target/tomcat/logs/access_log.2025-09-05" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/target/tomcat/work/Tomcat/localhost/_/SESSIONS.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/crud-app/target/tomcat/work/Tomcat/localhost/_/org/apache/jsp/index_jsp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="32s88QbKYNokaAmFhsdORrX8QpT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "19",
+    "last_opened_file_path": "C:/Users/ricardojunior-ieg/OneDrive - Instituto J&F/Interdisciplinar/Frota Viva/Codigos/Frota-Viva/postgresql-42.7.7.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva\src\main\webapp" />
+      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva\src\main\webapp\WEB-INF" />
+      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="" />
+      <created>1758197763063</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1758197763063</updated>
+      <workItem from="1758197766018" duration="29000" />
+      <workItem from="1758197886558" duration="1849000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
