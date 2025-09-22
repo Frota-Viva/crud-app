@@ -5,57 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/avancar.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/icons/avancar.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/instagram.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/icons/instagram.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/outlook.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/icons/outlook.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/telephone.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/icons/telephone.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/voltar.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/icons/voltar.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/caminhao-atras-colaborador.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/caminhao-atras-colaborador.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/caminhao-longo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/caminhao-longo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/fundo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/fundo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/gestor-dados.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/gestor-dados.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/iPhone 16 Pro 3 (1).png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/iPhone 16 Pro 3 (1).png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/imgs/tela-notificacoes.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/tela-notificacoes.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/postgresql-42.7.7.jar" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql-42.7.7.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/CaminhaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/CaminhaoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/EmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EmpresaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/EntregaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EntregaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/Filtros.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/Filtros.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/FrotaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/FrotaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/InformacoesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/InformacoesDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/ManutencaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/ManutencaoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/MotoristaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/MotoristaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/TelefoneEmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneEmpresaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/dao/TelefoneMotoristaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneMotoristaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Caminhao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Caminhao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Empresa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Empresa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Endereco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Endereco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Entrega.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Entrega.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Frota.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Frota.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Informacoes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Informacoes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Manutencao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Manutencao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/Motorista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Motorista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/TelefoneEmpresa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/TelefoneEmpresa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/model/TelefoneMotorista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/TelefoneMotorista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/servlet/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/util/Conexao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/util/Conexao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/java/com/frotaviva/util/Senhas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/util/Senhas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/webapp/WEB-INF/view/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/src/main/webapp/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/target/tomcat/conf/logging.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/target/tomcat/conf/tomcat-users.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/target/tomcat/conf/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/target/tomcat/logs/access_log.2025-09-05" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/target/tomcat/work/Tomcat/localhost/_/SESSIONS.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crud-app/target/tomcat/work/Tomcat/localhost/_/org/apache/jsp/index_jsp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,20 +43,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "19",
-    "last_opened_file_path": "C:/Users/ricardojunior-ieg/OneDrive - Instituto J&F/Interdisciplinar/Frota Viva/Codigos/Frota-Viva/postgresql-42.7.7.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ricardojunior-ieg/OneDrive - Instituto J&amp;F/Interdisciplinar/Frota Viva/Codigos/Frota-Viva/postgresql-42.7.7.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva\src\main\webapp" />
@@ -123,7 +78,10 @@
       <option name="presentableId" value="Default" />
       <updated>1758197763063</updated>
       <workItem from="1758197766018" duration="29000" />
-      <workItem from="1758197886558" duration="1849000" />
+      <workItem from="1758197886558" duration="2394000" />
+      <workItem from="1758292087043" duration="1136000" />
+      <workItem from="1758295735168" duration="20000" />
+      <workItem from="1758548367297" duration="14000" />
     </task>
     <servers />
   </component>
