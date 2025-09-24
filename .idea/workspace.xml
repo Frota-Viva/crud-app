@@ -10,12 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/MinhaServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/MinhaServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,12 +88,12 @@
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 11.0.11" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 11.0.11" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/Frota-Viva" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/Frota-Viva/index.html" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="Frota-Viva:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/Frota-Viva/index.html" />
+            <option name="CONTEXT_PATH" value="/Frota-Viva/" />
           </settings>
         </artifact>
       </deployment>
@@ -204,7 +200,7 @@
       <workItem from="1758295735168" duration="20000" />
       <workItem from="1758548367297" duration="14000" />
       <workItem from="1758719397384" duration="2324000" />
-      <workItem from="1758724657075" duration="1193000" />
+      <workItem from="1758724657075" duration="3110000" />
     </task>
     <servers />
   </component>
