@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>Login</h2>
-<form action="minha-servlet" method="post">
+<form action="login" method="post">
     <label for="usuario">Usuário:</label>
     <input type="text" id="usuario" name="usuario" required><br><br>
 
