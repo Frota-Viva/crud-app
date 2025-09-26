@@ -137,21 +137,20 @@ public class EmpresaDAO {
         }
     }
 
-    public static Empresa getEmpresa(long id){
-        String sql = "SELECT * FROM empresa WHERE id = ?";
+    public static Empresa getEmpresa(String cnpj, String email, String senha){
+        String sql = "SELECT * FROM empresa WHERE cnpj = ? and email = ? and senha = ?";
 
         try (Connection conn = Conexao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)){
-            stmt.setLong(1, id);
+            stmt.setString(1, cnpj);
+            stmt.setString(2, email);
+            stmt.setString(3, senha); //Mudar isso para pegar a senha do banco de dados (verificar também)
 
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()){
                 long idEmpresa = rs.getLong("id");
                 String tipo_empresa = rs.getString("tipo_empresa");
-                String cnpj = rs.getString("cnpj");
-                String email = rs.getString("email");
-                String senha = rs.getString("senha");
                 String nome = rs.getString("nome");
                 String cep = rs.getString("cep");
                 String rua = rs.getString("rua");
@@ -161,8 +160,12 @@ public class EmpresaDAO {
                 String estado = rs.getString("estado");
                 String cidade = rs.getString("cidade");
 
-                return new Empresa(id, tipo_empresa, cnpj, email, senha, nome,
+                return new Empresa(idEmpresa, tipo_empresa, cnpj, email, senha, nome,
                         new Endereco(pais, cep, estado, cidade, rua, numero, complemento));
+            }
+            if (!rs.next()){
+                System.out.println("deu erro aqui");
+                return null;
             }
             return null;
         } catch (SQLException sqle){
