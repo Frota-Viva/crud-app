@@ -16,6 +16,11 @@ public class LoginServlet extends HttpServlet{
         String cnpj = req.getParameter("cnpj");
         String senha = req.getParameter("senha");
 
-        if (EmpresaDAO.getEmpresa(cnpj, email, senha) != null) req.getRequestDispatcher("index.html").forward(req, res);
+        if (EmpresaDAO.getEmpresa(cnpj, email, senha) != null) {
+            res.sendRedirect("/Frota-Viva/");
+        } else {
+            req.setAttribute("erroLogin", "Empresa não cadastrada");
+            req.getRequestDispatcher("login.jsp").forward(req,res);
+        }
     }
 }

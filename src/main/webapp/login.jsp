@@ -16,6 +16,10 @@
     <label for="senha">Digite a senha da empresa:</label> <br>
     <input type="password" id="senha" name="senha" placeholder="*********" required><br><br>
 
+    <%if(request.getAttribute("erroLogin")!=null){%>
+    <p>Empresa não cadastrada</p>
+    <%}%>
+
     <button type="submit">Entrar</button>
 </form>
 </body>
