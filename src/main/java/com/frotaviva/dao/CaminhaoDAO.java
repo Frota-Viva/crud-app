@@ -3,18 +3,42 @@ package com.frotaviva.dao;
 import com.frotaviva.util.Conexao;
 import com.frotaviva.model.Caminhao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 public class CaminhaoDAO {
+
+    /*
+    * Logger está sendo usado para melhor tratamento e rastreamento de exceções.
+    * Ele registra mensagens de erro personalizadas com diagnóstico completo.
+    */
+
+    /*
+     * A classe CaminhaoDAO conta com os métodos:
+     * cadastrarCaminhao
+     * atualizarPlaca|KmRodados|Status|idFrota
+     * deletarCaminhao
+    */
+
+    private static final Logger log = LoggerFactory.getLogger(CaminhaoDAO.class);
+
     public static boolean cadastrarCaminhao(Caminhao caminhao){
+        Conexao conexao = new Conexao();
+        Connection con = null;
+
         String sql = "INSERT INTO caminhao(placa, status, km_rodados, modelo, capacidade, id_frota, id_motorista) " +
                 "VALUES(?, ?, ?, ?, ? ,? ,?)";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+        try {
+            con = conexao.conectar();
+            PreparedStatement stmt = con.prepareStatement(sql);
+            
             stmt.setString(1, caminhao.getPlaca());
             stmt.setString(2, caminhao.getStatus());
             stmt.setInt(3, caminhao.getKmRodados());
@@ -23,120 +47,177 @@ public class CaminhaoDAO {
             stmt.setLong(6, caminhao.getIdFrota());
             stmt.setLong(7, caminhao.getIdMotorista());
 
-            if (stmt.executeUpdate() > 0) return true;
+            if (stmt.executeUpdate() > 0){
+                stmt.close(); 
+                return true;
+            } 
             return false;
-        } catch (SQLException sqle){
-            sqle.printStackTrace();
+
+        } 
+        catch (SQLException sqle){
+            log.error("Erro ao cadastrar caminhão.", sqle);
             return false;
+        } 
+        finally{
+            conexao.desconectar(con);
         }
     }
+
     public static boolean atualizarPlaca(Caminhao caminhao){
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
         String sql = "UPDATE caminhao SET placa = ? WHERE id = ?";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+        try {
+            
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            
             stmt.setString(1, caminhao.getPlaca());
             stmt.setLong(2, caminhao.getId());
 
-            if (stmt.executeUpdate() > 0) return true;
+            if (stmt.executeUpdate() > 0){
+                stmt.close(); 
+                return true;
+            } 
+            return false;
 
+        } 
+        catch (SQLException sqle){
+            log.error("Erro ao atualizar placa do caminhão", sqle);
             return false;
-        } catch (SQLException sqle){
-            sqle.printStackTrace();
-            return false;
+        } 
+        finally {
+            conexao.desconectar(conn);
         }
     }
+
+
     public static boolean atualizarStatus(Caminhao caminhao){
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
         String sql = "UPDATE caminhao SET status = ? WHERE id = ?";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            
             stmt.setString(1, caminhao.getStatus());
             stmt.setLong(2, caminhao.getId());
 
-            if (stmt.executeUpdate() > 0) return true;
-
+            if (stmt.executeUpdate() > 0){
+                stmt.close(); 
+                return true;
+            } 
             return false;
-        } catch (SQLException sqle){
-            sqle.printStackTrace();
+        } 
+        catch (SQLException e){
+            log.error("Erro ao atualizar o status do caminhão", e);
             return false;
         }
+        finally{
+            conexao.desconectar(conn);
+        }
     }
+
+
     public static boolean atualizarKmRodados(Caminhao caminhao){
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
         String sql = "UPDATE caminhao SET km_rodados = ? WHERE id = ?";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            
             stmt.setInt(1, caminhao.getKmRodados());
             stmt.setLong(2, caminhao.getId());
 
             if (stmt.executeUpdate() > 0) return true;
+            return false;
 
-            return false;
         } catch (SQLException sqle){
-            sqle.printStackTrace();
+            
             return false;
+        } 
+        finally {
+            conexao.desconectar(conn);
         }
     }
-    public static boolean atualizarIdMotorista(Caminhao caminhao){
-        String sql = "UPDATE caminhao SET id_motorista = ? WHERE id = ?";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
-            stmt.setLong(1, caminhao.getIdMotorista());
-            stmt.setLong(2, caminhao.getId());
-
-            if (stmt.executeUpdate() > 0) return true;
-
-            return false;
-        } catch (SQLException sqle){
-            sqle.printStackTrace();
-            return false;
-        }
-    }
     public static boolean atualizarIdFrota(Caminhao caminhao){
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+        
         String sql = "UPDATE caminhao SET id_frota = ? WHERE id = ?";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            
             stmt.setLong(1, caminhao.getIdFrota());
             stmt.setLong(2, caminhao.getId());
 
-            if (stmt.executeUpdate() > 0) return true;
-
+            if (stmt.executeUpdate() > 0){
+                stmt.close(); 
+                return true;
+            } 
             return false;
-        } catch (SQLException sqle){
-            sqle.printStackTrace();
+
+        } catch (SQLException e){
+            log.error("Erro ao atualizar o ID da frota.", e);
             return false;
         }
+        finally {
+            conexao.desconectar(conn);
+        }
     }
+
+
     public static boolean deletarCaminhao(Caminhao caminhao){
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
         String sql = "DELETE FROM caminhao WHERE id = ?";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+        try {
+            
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setLong(1, caminhao.getId());
 
             if (stmt.executeUpdate() > 0) return true;
+            return false;
 
+        } catch (SQLException e) {
+            log.error("Erro ao deletar caminhão. ",e);
             return false;
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-            return false;
+        }
+        finally{
+            conexao.desconectar(conn);
         }
     }
 
     public static Caminhao getCaminhao(long id){
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
         String sql = "SELECT * FROM caminhao WHERE id = ?";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            
             stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()){
+
                 long idCaminhao = rs.getLong("id");
                 String placa = rs.getString("placa");
                 String status = rs.getString("status");
@@ -148,11 +229,15 @@ public class CaminhaoDAO {
 
                 return new Caminhao(idCaminhao, placa, status, km_rodados, modelo, capacidade, id_frota, id_motorista);
             }
+            return null;
 
+        } 
+        catch (SQLException e){
+            log.error("Erro ao resgatar o caminhão. ", e);
             return null;
-        } catch (SQLException sqle){
-            sqle.printStackTrace();
-            return null;
+        }
+        finally{
+            conexao.desconectar(conn);
         }
     }
 }

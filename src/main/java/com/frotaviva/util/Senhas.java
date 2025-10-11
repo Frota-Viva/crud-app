@@ -16,18 +16,28 @@ public class Senhas {
     public static boolean verificarSenha(String senhaDigitada,String hash){
         return BCrypt.checkpw(senhaDigitada, hash);
     }
+
     public static String getSenhaHash(long id){
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
         String sql = "SELECT senha FROM empresa WHERE id = ?";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            
             stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
             return rs.getString("senha");
-        } catch (SQLException sqle){
+        } 
+        catch (SQLException sqle){
             sqle.printStackTrace();
+        }
+        finally{
+            conexao.desconectar(conn);
         }
         return null;
     }

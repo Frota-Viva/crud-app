@@ -2,80 +2,135 @@ package com.frotaviva.dao;
 
 import com.frotaviva.util.Conexao;
 import com.frotaviva.model.TelefoneEmpresa;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.PreparedStatement;
+
+/*
+ * Logger está sendo usado para melhor tratamento e rastreamento de exceções.
+ * Ele registra mensagens de erro personalizadas com diagnóstico completo.
+ */
+
+/*
+ * A classe TelefoneEmpresaDAO conta com os métodos:
+ * cadastrarTelefoneEmpresa
+ * atualizarTelefoneEmpresa
+ * deletarTelefoneEmpresa
+ * getTelefoneEmpresa
+ */
 
 public class TelefoneEmpresaDAO {
-    public static boolean cadastrarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa){
-        String sql = "INSERT INTO telefone_empresa(telefone_empresa, id_empresa) VALUES(? , ?)";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt =  conn.prepareStatement(sql)){
+    private static final Logger log = LoggerFactory.getLogger(TelefoneEmpresaDAO.class);
+
+    public static boolean cadastrarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa) {
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+        String sql = "INSERT INTO telefone_empresa(telefone_empresa, id_empresa) VALUES(?, ?)";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
             stmt.setString(1, telefoneEmpresa.getTelefoneEmpresa());
             stmt.setLong(2, telefoneEmpresa.getIdEmpresa());
 
-            if (stmt.executeUpdate() > 0) return true;
+            if (stmt.executeUpdate() > 0) {
+                stmt.close();
+                return true;
+            }
             return false;
-        } catch (SQLException sqle){
-            sqle.printStackTrace();
+
+        } catch (SQLException e) {
+            log.error("Erro ao cadastrar telefone da empresa.", e);
             return false;
+        } finally {
+            conexao.desconectar(conn);
         }
     }
-    public static boolean atualizarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa){
+
+    public static boolean atualizarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa) {
+        Conexao conexao = new Conexao();
+        Connection conn = null;
         String sql = "UPDATE telefone_empresa SET telefone_empresa = ? WHERE id = ?";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
             stmt.setString(1, telefoneEmpresa.getTelefoneEmpresa());
             stmt.setLong(2, telefoneEmpresa.getId());
 
-            if (stmt.executeUpdate() > 0) return true;
+            if (stmt.executeUpdate() > 0) {
+                stmt.close();
+                return true;
+            }
+            return false;
 
+        } catch (SQLException e) {
+            log.error("Erro ao atualizar telefone da empresa.", e);
             return false;
-        } catch (SQLException sqle){
-            sqle.printStackTrace();
-            return false;
+        } finally {
+            conexao.desconectar(conn);
         }
     }
-    public static boolean deletarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa){
+
+    public static boolean deletarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa) {
+        Conexao conexao = new Conexao();
+        Connection conn = null;
         String sql = "DELETE FROM telefone_empresa WHERE id = ?";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setLong(1, telefoneEmpresa.getId());
 
-            if (stmt.executeUpdate() > 0) return true;
+            if (stmt.executeUpdate() > 0) {
+                stmt.close();
+                return true;
+            }
+            return false;
 
+        } catch (SQLException e) {
+            log.error("Erro ao deletar telefone da empresa.", e);
             return false;
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-            return false;
+        } finally {
+            conexao.desconectar(conn);
         }
-
     }
-    public static TelefoneEmpresa getTelefoneEmpresa(long id){
+
+    public static TelefoneEmpresa getTelefoneEmpresa(long id) {
+        Conexao conexao = new Conexao();
+        Connection conn = null;
         String sql = "SELECT * FROM telefone_empresa WHERE id = ?";
 
-        try (Connection conn = Conexao.conectar();
-             PreparedStatement stmt = conn.prepareCall(sql)){
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
             stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
-            if (rs.next()){
+
+            if (rs.next()) {
                 long idTelefoneEmpresa = rs.getLong("id");
-                String telefone_empresa = rs.getString("telefone_empresa");
-                long id_empresa = rs.getLong("id_empresa");
-                return new TelefoneEmpresa(idTelefoneEmpresa, telefone_empresa, id_empresa);
+                String telefoneEmpresa = rs.getString("telefone_empresa");
+                long idEmpresa = rs.getLong("id_empresa");
+
+                return new TelefoneEmpresa(idTelefoneEmpresa, telefoneEmpresa, idEmpresa);
             }
             return null;
 
-        } catch (SQLException sqle){
-            sqle.printStackTrace();
+        } catch (SQLException e) {
+            log.error("Erro ao resgatar telefone da empresa.", e);
             return null;
+        } finally {
+            conexao.desconectar(conn);
         }
     }
 }
