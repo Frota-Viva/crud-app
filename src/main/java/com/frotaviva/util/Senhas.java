@@ -1,14 +1,18 @@
 package com.frotaviva.util;
 
-import com.frotaviva.util.Conexao;
-import org.mindrot.jbcrypt.BCrypt;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Senhas {
+
+    private static final Logger log = LoggerFactory.getLogger(Senhas.class);
+
     public static String hashSenha(String senha){
         return BCrypt.hashpw(senha, BCrypt.gensalt());
     }
@@ -34,7 +38,7 @@ public class Senhas {
             return rs.getString("senha");
         } 
         catch (SQLException sqle){
-            sqle.printStackTrace();
+            log.error("Erro ao recuperar senha", sqle);
         }
         finally{
             conexao.desconectar(conn);

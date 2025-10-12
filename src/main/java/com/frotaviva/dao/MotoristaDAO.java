@@ -1,15 +1,16 @@
 package com.frotaviva.dao;
 
-import com.frotaviva.util.Conexao;
-import com.frotaviva.util.Senhas;
-import com.frotaviva.model.Motorista;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.frotaviva.model.Motorista;
+import com.frotaviva.util.Conexao;
+import com.frotaviva.util.Senhas;
 
 /*
  * Logger está sendo usado para melhor tratamento e rastreamento de exceções.
@@ -149,7 +150,10 @@ public class MotoristaDAO {
 
             stmt.setLong(1, motorista.getId());
 
-            if (stmt.executeUpdate() > 0) return true;
+            if (stmt.executeUpdate() > 0) {
+                stmt.close();
+                return true;
+            }
             return false;
 
         } catch (SQLException e) {
