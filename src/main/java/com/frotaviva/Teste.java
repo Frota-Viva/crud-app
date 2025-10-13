@@ -8,8 +8,13 @@ import java.sql.Connection;
 
 public class Teste {
     public static void main(String[] args) {
-        Connection conn = Conexao.conectar();
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        conn = conexao.conectar();
+
         System.out.println(conn);
+        
         Empresa empresa = EmpresaDAO.getEmpresa("21403579000103", "nviana@mendonca.br",
                 "&KfYvsy@9v");
         System.out.println(empresa);
