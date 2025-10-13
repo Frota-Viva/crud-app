@@ -25,10 +25,12 @@ public class EmpresaDAO implements DAO<Empresa>{
 
     /*
      * A classe EmpresaDAO conta com os métodos:
-     * cadastrarEmpresa
+     * inserir
      * atualizarNome|Endereco|Email|Senha
-     * deletarEmpresa
+     * deletar
      * getEmpresa
+     * buscarPorId
+     * buscarTodos
      */
 
     private static final Logger log = LoggerFactory.getLogger(EmpresaDAO.class);
