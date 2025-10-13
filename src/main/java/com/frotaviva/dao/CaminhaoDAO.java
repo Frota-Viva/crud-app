@@ -10,9 +10,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class CaminhaoDAO {
+public class CaminhaoDAO implements DAO<Caminhao>{
 
     /*
     * Logger está sendo usado para melhor tratamento e rastreamento de exceções.
@@ -21,14 +23,16 @@ public class CaminhaoDAO {
 
     /*
      * A classe CaminhaoDAO conta com os métodos:
-     * cadastrarCaminhao
+     * inserir
      * atualizarPlaca|KmRodados|Status|idFrota
-     * deletarCaminhao
+     * deletar
+     * buscarPorId
+     * buscarTodos
     */
 
     private static final Logger log = LoggerFactory.getLogger(CaminhaoDAO.class);
 
-    public static boolean cadastrarCaminhao(Caminhao caminhao){
+    public int inserir(Caminhao caminhao){
         Conexao conexao = new Conexao();
         Connection con = null;
 
@@ -49,21 +53,21 @@ public class CaminhaoDAO {
 
             if (stmt.executeUpdate() > 0){
                 stmt.close(); 
-                return true;
+                return 1;
             } 
-            return false;
+            return 0;
 
         } 
         catch (SQLException sqle){
             log.error("Erro ao cadastrar caminhão.", sqle);
-            return false;
+            return -1;
         } 
         finally{
             conexao.desconectar(con);
         }
     }
 
-    public static boolean atualizarPlaca(Caminhao caminhao){
+    public int atualizarPlaca(Caminhao caminhao){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -79,14 +83,14 @@ public class CaminhaoDAO {
 
             if (stmt.executeUpdate() > 0){
                 stmt.close(); 
-                return true;
+                return 1;
             } 
-            return false;
+            return 0;
 
         } 
         catch (SQLException sqle){
             log.error("Erro ao atualizar placa do caminhão", sqle);
-            return false;
+            return -1;
         } 
         finally {
             conexao.desconectar(conn);
@@ -94,7 +98,7 @@ public class CaminhaoDAO {
     }
 
 
-    public static boolean atualizarStatus(Caminhao caminhao){
+    public int atualizarStatus(Caminhao caminhao){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -109,13 +113,13 @@ public class CaminhaoDAO {
 
             if (stmt.executeUpdate() > 0){
                 stmt.close(); 
-                return true;
+                return 1;
             } 
-            return false;
+            return 0;
         } 
         catch (SQLException e){
             log.error("Erro ao atualizar o status do caminhão", e);
-            return false;
+            return -1;
         }
         finally{
             conexao.desconectar(conn);
@@ -123,11 +127,11 @@ public class CaminhaoDAO {
     }
 
 
-    public static boolean atualizarKmRodados(Caminhao caminhao){
+    public int atualizarKmRodados(Caminhao caminhao){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
-        String sql = "UPDATE caminhao SET km_rodados = ? WHERE id = ?";
+        String sql = "UPDATE caminhao SET kms_rodados = ? WHERE id = ?";
 
         try {
             conn = conexao.conectar();
@@ -136,19 +140,22 @@ public class CaminhaoDAO {
             stmt.setInt(1, caminhao.getKmRodados());
             stmt.setLong(2, caminhao.getId());
 
-            if (stmt.executeUpdate() > 0) return true;
-            return false;
+            if (stmt.executeUpdate() > 0){
+                stmt.close();
+                return 1;
+            }
+            return 0;
 
         } catch (SQLException sqle){
-            
-            return false;
+            log.error("Erro ao atualizar os kms_rodados.", sqle);
+            return -1;
         } 
         finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarIdFrota(Caminhao caminhao){
+    public static int atualizarIdFrota(Caminhao caminhao){
         Conexao conexao = new Conexao();
         Connection conn = null;
         
@@ -163,13 +170,13 @@ public class CaminhaoDAO {
 
             if (stmt.executeUpdate() > 0){
                 stmt.close(); 
-                return true;
+                return 1;
             } 
-            return false;
+            return 0;
 
         } catch (SQLException e){
             log.error("Erro ao atualizar o ID da frota.", e);
-            return false;
+            return -1;
         }
         finally {
             conexao.desconectar(conn);
@@ -177,7 +184,7 @@ public class CaminhaoDAO {
     }
 
 
-    public static boolean deletarCaminhao(Caminhao caminhao){
+    public int deletar(long id){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -188,21 +195,24 @@ public class CaminhaoDAO {
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            stmt.setLong(1, caminhao.getId());
+            stmt.setLong(1, id);
 
-            if (stmt.executeUpdate() > 0) return true;
-            return false;
+            if (stmt.executeUpdate() > 0){
+                stmt.close();
+                return 1;
+            }
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao deletar caminhão. ",e);
-            return false;
+            return -1;
         }
         finally{
             conexao.desconectar(conn);
         }
     }
 
-    public static Caminhao getCaminhao(long id){
+    public Caminhao buscarPorId(long id){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -221,11 +231,14 @@ public class CaminhaoDAO {
                 long idCaminhao = rs.getLong("id");
                 String placa = rs.getString("placa");
                 String status = rs.getString("status");
-                int km_rodados = rs.getInt("km_rodados");
+                int km_rodados = rs.getInt("kms_rodados");
                 String modelo = rs.getString("modelo");
                 int capacidade = rs.getInt("capacidade");
                 long id_frota = rs.getLong("id_frota");
-                long id_motorista = rs.getLong("id_motorista");
+                long id_motorista = 1;
+
+                stmt.close();
+                rs.close();
 
                 return new Caminhao(idCaminhao, placa, status, km_rodados, modelo, capacidade, id_frota, id_motorista);
             }
@@ -239,6 +252,52 @@ public class CaminhaoDAO {
         finally{
             conexao.desconectar(conn);
         }
+    }
+
+    @Override
+    public List<Caminhao> buscarTodos() {
+        List<Caminhao> caminhoes = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        String sql = "SELECT * FROM caminhao";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+
+                long idCaminhao = rs.getLong("id");
+                String placa = rs.getString("placa");
+                String status = rs.getString("status");
+                int km_rodados = rs.getInt("kms_rodados");
+                String modelo = rs.getString("modelo");
+                int capacidade = rs.getInt("capacidade");
+                long id_frota = rs.getLong("id_frota");
+                long id_motorista = 1;
+
+                Caminhao caminhao = new Caminhao(idCaminhao, placa, status, km_rodados, modelo,
+                        capacidade, id_frota, id_motorista);
+                caminhoes.add(caminhao);
+            }
+
+            stmt.close();
+            rs.close();
+
+            return caminhoes;
+
+        }
+        catch (SQLException e){
+            log.error("Erro ao resgatar o caminhão. ", e);
+            return null;
+        }
+        finally{
+            conexao.desconectar(conn);
+        }
+
     }
 }
 
