@@ -36,8 +36,8 @@ public class CaminhaoDAO implements DAO<Caminhao>{
         Conexao conexao = new Conexao();
         Connection con = null;
 
-        String sql = "INSERT INTO caminhao(placa, status, km_rodados, modelo, capacidade, id_frota, id_motorista) " +
-                "VALUES(?, ?, ?, ?, ? ,? ,?)";
+        String sql = "INSERT INTO caminhao(placa, status, km_rodados, modelo, capacidade, id_frota) " +
+                "VALUES(?, ?, ?, ?, ? ,?)";
 
         try {
             con = conexao.conectar();
@@ -49,7 +49,6 @@ public class CaminhaoDAO implements DAO<Caminhao>{
             stmt.setString(4, caminhao.getModelo());
             stmt.setInt(5, caminhao.getCapacidade());
             stmt.setLong(6, caminhao.getIdFrota());
-            stmt.setLong(7, caminhao.getIdMotorista());
 
             if (stmt.executeUpdate() > 0){
                 stmt.close(); 
@@ -235,12 +234,11 @@ public class CaminhaoDAO implements DAO<Caminhao>{
                 String modelo = rs.getString("modelo");
                 int capacidade = rs.getInt("capacidade");
                 long id_frota = rs.getLong("id_frota");
-                long id_motorista = 1;
 
                 stmt.close();
                 rs.close();
 
-                return new Caminhao(idCaminhao, placa, status, km_rodados, modelo, capacidade, id_frota, id_motorista);
+                return new Caminhao(idCaminhao, placa, status, km_rodados, modelo, capacidade, id_frota);
             }
             return null;
 
@@ -254,7 +252,6 @@ public class CaminhaoDAO implements DAO<Caminhao>{
         }
     }
 
-    @Override
     public List<Caminhao> buscarTodos() {
         List<Caminhao> caminhoes = new ArrayList<>();
         Conexao conexao = new Conexao();
@@ -277,10 +274,9 @@ public class CaminhaoDAO implements DAO<Caminhao>{
                 String modelo = rs.getString("modelo");
                 int capacidade = rs.getInt("capacidade");
                 long id_frota = rs.getLong("id_frota");
-                long id_motorista = 1;
 
                 Caminhao caminhao = new Caminhao(idCaminhao, placa, status, km_rodados, modelo,
-                        capacidade, id_frota, id_motorista);
+                        capacidade, id_frota);
                 caminhoes.add(caminhao);
             }
 

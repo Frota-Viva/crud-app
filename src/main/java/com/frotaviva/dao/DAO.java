@@ -4,8 +4,7 @@ import java.util.List;
 
 public interface DAO<T> {
     int inserir(T entidade);
-    int alterar(T entidade);
-    int deletar(int id);
+    int deletar(long id);
     List<T> buscarTodos();
-    T buscarPorId(int id);
+    T buscarPorId(long id);
 }

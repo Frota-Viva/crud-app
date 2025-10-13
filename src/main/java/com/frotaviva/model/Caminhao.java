@@ -8,9 +8,8 @@ public class Caminhao {
     private String modelo;
     private int capacidade;
     private long idFrota;
-    private long idMotorista;
     public Caminhao(long id,String placa,String status,int kmRodados,String modelo,int capacidade,
-                    long idFrota,long idMotorista ){
+                    long idFrota){
         this.id=id;
         this.status=status;
         this.modelo=modelo;
@@ -18,7 +17,6 @@ public class Caminhao {
         this.kmRodados=kmRodados;
         this.capacidade=capacidade;
         this.idFrota=idFrota;
-        this.idMotorista=idMotorista;
     }
     public long getId(){
         return this.id;
@@ -41,9 +39,6 @@ public class Caminhao {
     public long getIdFrota(){
         return this.idFrota;
     }
-    public long getIdMotorista(){
-        return this.idMotorista;
-    }
     public void setPlaca(String placa){
         this.placa=placa;
     }
@@ -56,14 +51,20 @@ public class Caminhao {
         this.kmRodados = kmRodados;
     }
 
-    public void setIdMotorista(long idMotorista){
-        this.idMotorista=idMotorista;
-    }
     public void setIdFrota(long idFrota){
         this.idFrota=idFrota;
     }
-    public String toString(){
-        return "Id: "+this.id+"\nModelo: "+this.modelo+"\nPlaca: "+this.placa+"\nKm Rodados: "+this.kmRodados+"\nStatus: "+this.status+
-                "\nId Frota: "+this.idFrota+"\nId Motorista: "+this.idMotorista;
+
+    @Override
+    public String toString() {
+        return "Caminhao{" +
+                "id=" + id +
+                ", placa='" + placa + '\'' +
+                ", status='" + status + '\'' +
+                ", kmRodados=" + kmRodados +
+                ", modelo='" + modelo + '\'' +
+                ", capacidade=" + capacidade +
+                ", idFrota=" + idFrota +
+                '}';
     }
 }
