@@ -9,13 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/Teste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/Teste.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/CaminhaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/CaminhaoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/DAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Caminhao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/model/Caminhao.java" afterDir="false" />
-    </list>
+    <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -214,7 +208,7 @@
       <workItem from="1759327743419" duration="2083000" />
       <workItem from="1759402467895" duration="56000" />
       <workItem from="1759844680835" duration="1101000" />
-      <workItem from="1760314483607" duration="4199000" />
+      <workItem from="1760314483607" duration="6919000" />
     </task>
     <servers />
   </component>
