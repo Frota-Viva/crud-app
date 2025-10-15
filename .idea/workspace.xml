@@ -9,7 +9,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="" />
+    <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/CSS/homeStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/CSS/loginStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/caneta-edit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/casa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/editar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/lixo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/logo2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/lupa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/olho.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/perfil.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/pessoa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/seta-dir-tabela.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/seta-esq-tabela.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-login/divisor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-login/imagem-caminhões-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-login/logo3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EmpresaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +79,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "19",
-    "last_opened_file_path": "C:/Users/ricardojunior-ieg/OneDrive - Instituto J&F/Interdisciplinar/Frota Viva/Codigos/crud-app/src/main/webapp/WEB-INF/lib/postgresql-42.7.7.jar",
+    "last_opened_file_path": "C:/Users/ricardojunior-ieg/OneDrive - Instituto J&F/Interdisciplinar/Frota Viva/Codigos/crud-app/src/main/webapp/assets/imgs",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -71,14 +94,16 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\crud-app\src\main\webapp\assets\imgs" />
+      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\crud-app\src\main\webapp\assets\CSS" />
       <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\crud-app\src\main\webapp\WEB-INF\view" />
       <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva\src\main\webapp" />
       <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva\src\main\webapp\WEB-INF\lib" />
       <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva\src\main\resources" />
       <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva\src\main\java\resources" />
-      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -89,12 +114,12 @@
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 11.0.11" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 11.0.11" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/Frota-Viva/index.html" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="crud-app:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/Frota-Viva" />
+            <option name="CONTEXT_PATH" value="/" />
           </settings>
         </artifact>
       </deployment>
@@ -209,6 +234,7 @@
       <workItem from="1759402467895" duration="56000" />
       <workItem from="1759844680835" duration="1101000" />
       <workItem from="1760314483607" duration="6919000" />
+      <workItem from="1760443408429" duration="8431000" />
     </task>
     <servers />
   </component>

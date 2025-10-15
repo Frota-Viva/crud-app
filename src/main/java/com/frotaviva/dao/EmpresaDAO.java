@@ -239,25 +239,25 @@ public class EmpresaDAO implements DAO<Empresa>{
         }
     }
 
-    public static Empresa getEmpresa(String cnpj, String email, String senha){
+    public static Empresa getEmpresa(String email, String senha){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
-        String sql = "SELECT * FROM empresa WHERE cnpj = ? and email = ? and senha = ?";
+        String sql = "SELECT * FROM empresa WHERE email = ? and senha = ?";
 
         try {
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            stmt.setString(1, cnpj);
-            stmt.setString(2, email);
-            stmt.setString(3, senha);
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
 
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()){
                 long idEmpresa = rs.getLong("id");
                 String tipo_empresa = rs.getString("tipo_empresa");
+                String cnpj = rs.getString("cnpj");
                 String nome = rs.getString("nome");
                 String cep = rs.getString("cep");
                 String rua = rs.getString("rua");

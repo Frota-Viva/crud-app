@@ -13,14 +13,25 @@ public class LoginServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String email = req.getParameter("email");
-        String cnpj = req.getParameter("cnpj");
         String senha = req.getParameter("senha");
 
-        if (EmpresaDAO.getEmpresa(cnpj, email, senha) != null) {
-            res.sendRedirect("/Frota-Viva/");
+        System.out.println(email);
+        System.out.println(senha);
+
+        if (EmpresaDAO.getEmpresa(email, senha) != null) {
+            res.sendRedirect("/");
+
+            System.out.println("Era pra dar certo");
         } else {
             req.setAttribute("erroLogin", "Empresa não cadastrada");
-            req.getRequestDispatcher("login.jsp").forward(req,res);
+            req.getRequestDispatcher("WEB-INF/view/login.jsp").forward(req,res);
+
+            System.out.println("Faiou");
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        req.getRequestDispatcher("WEB-INF/view/login.jsp").forward(req, res);
     }
 }
