@@ -23,6 +23,8 @@ import java.util.List;
  * atualizarTelefoneEmpresa
  * deletar
  * buscarPorId
+ * buscarPorIdEmpresa
+ * buscarTodos
  */
 
 public class TelefoneEmpresaDAO implements DAO<TelefoneEmpresa>{
