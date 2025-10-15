@@ -22,10 +22,11 @@ public class InformacoesDAO implements DAO<Informacoes>{
 
     /*
      * A classe InformacoesDAO conta com os métodos:
-     * cadastrarInformacoes
+     * inserir
      * atualizarInformacoes
-     * deletarInformacoes
-     * getInformacoes
+     * deletar
+     * buscarPorId
+     * buscarTodos
      */
 
     public int inserir(Informacoes informacoes) {
@@ -206,7 +207,7 @@ public class InformacoesDAO implements DAO<Informacoes>{
 
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 long idInformacoes = rs.getLong("id");
                 BigDecimal temp_ar_admissao = rs.getBigDecimal("temp_ar_admissao");
                 BigDecimal posicao_acelerador = rs.getBigDecimal("posicao_acelerador");
