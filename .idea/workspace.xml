@@ -9,12 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/CaminhaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/CaminhaoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/FiltrosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/FiltrosDAO.java" afterDir="false" />
-    </list>
+    <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -43,13 +39,11 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 6
-}</component>
   <component name="ProjectId" id="32s88QbKYNokaAmFhsdORrX8QpT" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -59,13 +53,10 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Java",
     "jdk.selected.JAVA_MODULE": "19",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/davifranco-ieg/Desktop/crud/crud-app",
+    "last_opened_file_path": "C:/Users/ricardojunior-ieg/OneDrive - Instituto J&F/Interdisciplinar/Frota Viva/Codigos/crud-app/src/main/webapp/WEB-INF/lib/postgresql-42.7.7.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -196,14 +187,6 @@
       </method>
     </configuration>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -224,8 +207,8 @@
       <workItem from="1759324104494" duration="655000" />
       <workItem from="1759327743419" duration="2083000" />
       <workItem from="1759402467895" duration="56000" />
-      <workItem from="1760444489465" duration="36000" />
-      <workItem from="1760453066018" duration="1462000" />
+      <workItem from="1759844680835" duration="1101000" />
+      <workItem from="1760314483607" duration="6919000" />
     </task>
     <servers />
   </component>

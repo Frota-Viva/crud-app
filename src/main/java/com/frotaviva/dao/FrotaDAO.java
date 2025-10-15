@@ -10,8 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class FrotaDAO {
+public class FrotaDAO implements DAO<Frota>{
 
     /*
      * Logger utilizado para rastreamento e diagnóstico de exceções.
@@ -20,13 +22,14 @@ public class FrotaDAO {
 
     /*
      * Métodos da classe FrotaDAO:
-     * cadastrarFrota
+     * inserir
      * atualizarTamanhoFrota|TipoFrota|Regiao
-     * deletarFrota
-     * getFrota
+     * deletar
+     * buscarPorId
+     * buscarTodos
      */
 
-    public static boolean cadastrarFrota(Frota frota) {
+    public int inserir(Frota frota) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -43,20 +46,20 @@ public class FrotaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle) {
             log.error("Erro ao cadastrar frota", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarTamanhoFrota(Frota frota) {
+    public int atualizarTamanhoFrota(Frota frota) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -71,19 +74,19 @@ public class FrotaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
         } catch (SQLException sqle) {
             log.error("Erro ao atualizar tamanho da frota", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarTipoFrota(Frota frota) {
+    public int atualizarTipoFrota(Frota frota) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -98,19 +101,19 @@ public class FrotaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
         } catch (SQLException sqle) {
             log.error("Erro ao atualizar tipo da frota", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarRegiao(Frota frota) {
+    public int atualizarRegiao(Frota frota) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -125,19 +128,19 @@ public class FrotaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
         } catch (SQLException sqle) {
             log.error("Erro ao atualizar região da frota", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean deletarFrota(Frota frota) {
+    public int deletar(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -147,24 +150,24 @@ public class FrotaDAO {
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            stmt.setLong(1, frota.getId());
+            stmt.setLong(1, id);
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle) {
             log.error("Erro ao deletar frota", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static Frota getFrota(long id) {
+    public Frota buscarPorId(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -190,6 +193,41 @@ public class FrotaDAO {
             }
 
             return null;
+
+        } catch (SQLException sqle) {
+            log.error("Erro ao buscar frota", sqle);
+            return null;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public List<Frota> buscarTodos() {
+        List<Frota> frotas = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        String sql = "SELECT * FROM frota";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                long idFrota = rs.getLong("id");
+                int tamanhoFrota = rs.getInt("tamanho_frota");
+                String tipoFrota = rs.getString("tipo_frota");
+                String regiao = rs.getString("regiao");
+                long idEmpresa = rs.getLong("id_empresa");
+
+                stmt.close();
+
+                Frota frota = new Frota(idFrota, tamanhoFrota, tipoFrota, regiao, idEmpresa);
+                frotas.add(frota);
+            }
+
+            return frotas;
 
         } catch (SQLException sqle) {
             log.error("Erro ao buscar frota", sqle);

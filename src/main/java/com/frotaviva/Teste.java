@@ -1,22 +1,28 @@
 package com.frotaviva;
 
+import com.frotaviva.dao.CaminhaoDAO;
 import com.frotaviva.dao.EmpresaDAO;
+import com.frotaviva.model.Caminhao;
 import com.frotaviva.model.Empresa;
 import com.frotaviva.util.Conexao;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Teste {
     public static void main(String[] args) {
-        Conexao conexao = new Conexao();
-        Connection conn = null;
 
-        conn = conexao.conectar();
+        CaminhaoDAO caminhaoDAO = new CaminhaoDAO();
 
-        System.out.println(conn);
-        
-        Empresa empresa = EmpresaDAO.getEmpresa("21403579000103", "nviana@mendonca.br",
-                "&KfYvsy@9v");
-        System.out.println(empresa);
+        List<Caminhao> caminhoes = new ArrayList<>();
+        caminhoes = caminhaoDAO.buscarTodos();
+
+        for (Caminhao caminhao :
+                caminhoes) {
+            System.out.println(caminhao);
+            System.out.println();
+        }
+
     }
 }

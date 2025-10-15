@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Logger está sendo usado para melhor tratamento e rastreamento de exceções.
@@ -17,17 +19,17 @@ import java.sql.SQLException;
 
 /*
  * A classe TelefoneEmpresaDAO conta com os métodos:
- * cadastrarTelefoneEmpresa
+ * inserir
  * atualizarTelefoneEmpresa
- * deletarTelefoneEmpresa
- * getTelefoneEmpresa
+ * deletar
+ * buscarPorId
  */
 
-public class TelefoneEmpresaDAO {
+public class TelefoneEmpresaDAO implements DAO<TelefoneEmpresa>{
 
     private static final Logger log = LoggerFactory.getLogger(TelefoneEmpresaDAO.class);
 
-    public static boolean cadastrarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa) {
+    public int inserir(TelefoneEmpresa telefoneEmpresa) {
         Conexao conexao = new Conexao();
         Connection conn = null;
         String sql = "INSERT INTO telefone_empresa(telefone_empresa, id_empresa) VALUES(?, ?)";
@@ -41,19 +43,19 @@ public class TelefoneEmpresaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao cadastrar telefone da empresa.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa) {
+    public int atualizarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa) {
         Conexao conexao = new Conexao();
         Connection conn = null;
         String sql = "UPDATE telefone_empresa SET telefone_empresa = ? WHERE id = ?";
@@ -67,19 +69,19 @@ public class TelefoneEmpresaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao atualizar telefone da empresa.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean deletarTelefoneEmpresa(TelefoneEmpresa telefoneEmpresa) {
+    public int deletar(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
         String sql = "DELETE FROM telefone_empresa WHERE id = ?";
@@ -88,23 +90,23 @@ public class TelefoneEmpresaDAO {
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            stmt.setLong(1, telefoneEmpresa.getId());
+            stmt.setLong(1, id);
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao deletar telefone da empresa.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static TelefoneEmpresa getTelefoneEmpresa(long id) {
+    public TelefoneEmpresa buscarPorId(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
         String sql = "SELECT * FROM telefone_empresa WHERE id = ?";
@@ -128,6 +130,66 @@ public class TelefoneEmpresaDAO {
 
         } catch (SQLException e) {
             log.error("Erro ao resgatar telefone da empresa.", e);
+            return null;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public List<TelefoneEmpresa> buscarPorIdEmpresa(long id_empresa) {
+        List<TelefoneEmpresa> telefones = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+        String sql = "SELECT * FROM telefone_empresa WHERE id_empresa = ?";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setLong(1, id_empresa);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                long idTelefoneEmpresa = rs.getLong("id");
+                String telefoneEmpresa = rs.getString("telefone_empresa");
+                long idEmpresa = rs.getLong("id_empresa");
+
+                TelefoneEmpresa telefone = new TelefoneEmpresa(idTelefoneEmpresa, telefoneEmpresa, idEmpresa);
+                telefones.add(telefone);
+            }
+            return telefones;
+
+        } catch (SQLException e) {
+            log.error("Erro ao resgatar os telefones da empresa.", e);
+            return null;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public List<TelefoneEmpresa> buscarTodos() {
+        List<TelefoneEmpresa> telefones = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+        String sql = "SELECT * FROM";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                long idTelefoneEmpresa = rs.getLong("id");
+                String telefoneEmpresa = rs.getString("telefone_empresa");
+                long idEmpresa = rs.getLong("id_empresa");
+
+                TelefoneEmpresa telefone = new TelefoneEmpresa(idTelefoneEmpresa, telefoneEmpresa, idEmpresa);
+                telefones.add(telefone);
+            }
+            return telefones;
+
+        } catch (SQLException e) {
+            log.error("Erro ao resgatar os telefones.", e);
             return null;
         } finally {
             conexao.desconectar(conn);

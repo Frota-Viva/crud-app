@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class InformacoesDAO {
+public class InformacoesDAO implements DAO<Informacoes>{
 
     /*
      * Logger está sendo usado para tratamento e rastreamento de exceções.
@@ -20,13 +22,14 @@ public class InformacoesDAO {
 
     /*
      * A classe InformacoesDAO conta com os métodos:
-     * cadastrarInformacoes
+     * inserir
      * atualizarInformacoes
-     * deletarInformacoes
-     * getInformacoes
+     * deletar
+     * buscarPorId
+     * buscarTodos
      */
 
-    public static boolean cadastrarInformacoes(Informacoes informacoes) {
+    public int inserir(Informacoes informacoes) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -54,20 +57,20 @@ public class InformacoesDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException sqle) {
             log.error("Erro ao cadastrar informações do caminhão.", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
 
-    public static boolean atualizarInformacoes(Informacoes informacoes) {
+    public int atualizarInformacoes(Informacoes informacoes) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -95,20 +98,20 @@ public class InformacoesDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException sqle) {
             log.error("Erro ao atualizar informações do caminhão.", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
 
-    public static boolean deletarInformacoes(Informacoes informacoes) {
+    public int deletar(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -118,24 +121,24 @@ public class InformacoesDAO {
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            stmt.setLong(1, informacoes.getId());
+            stmt.setLong(1, id);
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException sqle) {
             log.error("Erro ao deletar informações do caminhão.", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
 
-    public static Informacoes getInformacoes(long id) {
+    public Informacoes buscarPorId(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -183,6 +186,62 @@ public class InformacoesDAO {
                 );
             }
             return null;
+
+        } catch (SQLException sqle) {
+            log.error("Erro ao buscar informações do caminhão.", sqle);
+            return null;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public List<Informacoes> buscarTodos() {
+        List<Informacoes> informacoesList = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        String sql = "SELECT * FROM informacoes";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                long idInformacoes = rs.getLong("id");
+                BigDecimal temp_ar_admissao = rs.getBigDecimal("temp_ar_admissao");
+                BigDecimal posicao_acelerador = rs.getBigDecimal("posicao_acelerador");
+                Time tempo_motor_ligado = rs.getTime("tempo_motor_ligado");
+                BigDecimal carga_motor = rs.getBigDecimal("carga_motor");
+                BigDecimal rpm_motor = rs.getBigDecimal("rpm_motor");
+                Timestamp dt_hora_leitura = rs.getTimestamp("dt_hora_leitura");
+                BigDecimal pressao_pneu = rs.getBigDecimal("pressao_pneu");
+                BigDecimal sensores_oxigenio = rs.getBigDecimal("sensores_oxigenio");
+                BigDecimal qtd_combustivel = rs.getBigDecimal("qtd_combustivel");
+                BigDecimal temp_arrefecimento = rs.getBigDecimal("temp_arrefecimento");
+                BigDecimal pressao_coletor_admissao = rs.getBigDecimal("pressao_coletor_admissao");
+                long id_caminhao = rs.getLong("id_caminhao");
+
+                stmt.close();
+
+                Informacoes informacoes = new Informacoes(
+                        idInformacoes,
+                        temp_ar_admissao,
+                        posicao_acelerador,
+                        tempo_motor_ligado,
+                        carga_motor,
+                        rpm_motor,
+                        dt_hora_leitura,
+                        pressao_pneu,
+                        sensores_oxigenio,
+                        qtd_combustivel,
+                        temp_arrefecimento,
+                        pressao_coletor_admissao,
+                        id_caminhao
+                );
+                informacoesList.add(informacoes);
+            }
+            return informacoesList;
 
         } catch (SQLException sqle) {
             log.error("Erro ao buscar informações do caminhão.", sqle);

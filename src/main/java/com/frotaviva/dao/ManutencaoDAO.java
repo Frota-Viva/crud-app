@@ -8,16 +8,19 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ManutencaoDAO {
+public class ManutencaoDAO implements DAO<Manutencao>{
 
     /*
      * A classe ManutencaoDAO conta com os métodos:
-     * cadastrarManutencao
+     * inserir
      * inserirDtConclusao
      * alterarCusto|DescricaoServico
-     * deletarManutencao
-     * getManutencao
+     * deletar
+     * buscarPorId
+     * buscarTodos
      */
 
     private static final Logger log = LoggerFactory.getLogger(ManutencaoDAO.class);
@@ -27,7 +30,7 @@ public class ManutencaoDAO {
     * Ele registra mensagens de erro personalizadas com diagnóstico completo.
     */
 
-    public static boolean cadastrarManutencao(Manutencao manutencao) {
+    public int inserir(Manutencao manutencao) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -54,19 +57,19 @@ public class ManutencaoDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao cadastrar manutenção.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean inserirDtConclusao(Manutencao manutencao) {
+    public int inserirDtConclusao(Manutencao manutencao) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -81,19 +84,19 @@ public class ManutencaoDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao inserir data de conclusão da manutenção.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean alterarCusto(Manutencao manutencao) {
+    public int alterarCusto(Manutencao manutencao) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -108,19 +111,19 @@ public class ManutencaoDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao alterar custo da manutenção.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean alterarDescricaoServico(Manutencao manutencao) {
+    public int alterarDescricaoServico(Manutencao manutencao) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -135,19 +138,19 @@ public class ManutencaoDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao alterar descrição do serviço de manutenção.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean deletarManutencao(Manutencao manutencao) {
+    public int deletar(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -157,23 +160,23 @@ public class ManutencaoDAO {
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            stmt.setLong(1, manutencao.getId());
+            stmt.setLong(1, id);
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao deletar manutenção.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static Manutencao getManutencao(long id) {
+    public Manutencao buscarPorId(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -209,6 +212,50 @@ public class ManutencaoDAO {
                 );
             }
             return null;
+
+        } catch (SQLException e) {
+            log.error("Erro ao buscar manutenção pelo ID.", e);
+            return null;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public List<Manutencao> buscarTodos() {
+        List<Manutencao> manutencoes = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        String sql = "SELECT * FROM manutencao";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                long idManutencao = rs.getLong("id");
+                Date dt_cadastro = rs.getDate("dt_cadastro");
+                Date dt_conclusao = rs.getDate("dt_conclusao");
+                String tipo_manutencao = rs.getString("tipo_manutencao");
+                BigDecimal custo = rs.getBigDecimal("custo");
+                long ultimo_motorista = rs.getLong("ultimo_motorista");
+                String descricao_servico = rs.getString("descricao_servico");
+                long id_caminhao = rs.getLong("id_caminhao");
+
+                Manutencao manutencao = new Manutencao(
+                        idManutencao,
+                        dt_cadastro,
+                        dt_conclusao,
+                        tipo_manutencao,
+                        custo,
+                        ultimo_motorista,
+                        descricao_servico,
+                        id_caminhao
+                );
+                manutencoes.add(manutencao);
+            }
+            return manutencoes;
 
         } catch (SQLException e) {
             log.error("Erro ao buscar manutenção pelo ID.", e);

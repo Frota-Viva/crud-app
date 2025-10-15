@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +16,7 @@ import com.frotaviva.model.Endereco;
 import com.frotaviva.model.Entrega;
 import com.frotaviva.util.Conexao;
 
-public class EntregaDAO {
+public class EntregaDAO implements DAO<Entrega>{
 
     /*
      * Logger está sendo usado para melhor rastreamento e diagnóstico de exceções.
@@ -24,13 +26,14 @@ public class EntregaDAO {
 
     /*
      * Métodos da classe EntregaDAO:
-     * cadastrarEntrega
+     * inserir
      * atualizarDescricao|Datas|Endereco
-     * deletarEntrega
-     * getEntrega
+     * deletar
+     * buscarPorId
+     * buscarTodos
      */
 
-    public static boolean cadastrarEntrega(Entrega entrega) {
+    public int inserir(Entrega entrega){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -68,20 +71,20 @@ public class EntregaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle) {
             log.error("Erro ao cadastrar entrega", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarDescricao(Entrega entrega) {
+    public int atualizarDescricao(Entrega entrega) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -96,20 +99,20 @@ public class EntregaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle) {
             log.error("Erro ao atualizar descrição da entrega", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarDatas(Entrega entrega) {
+    public int atualizarDatas(Entrega entrega) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -131,20 +134,20 @@ public class EntregaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle) {
             log.error("Erro ao atualizar datas da entrega", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarEndereco(Entrega entrega) {
+    public int atualizarEndereco(Entrega entrega) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -173,20 +176,20 @@ public class EntregaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle) {
             log.error("Erro ao atualizar endereço da entrega", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean deletarEntrega(Entrega entrega) {
+    public int deletar(long cod_entrega) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -196,24 +199,24 @@ public class EntregaDAO {
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            stmt.setLong(1, entrega.getCod_entrega());
+            stmt.setLong(1, cod_entrega);
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle) {
             log.error("Erro ao deletar entrega", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static Entrega getEntrega(long cod_entrega) {
+    public Entrega buscarPorId(long cod_entrega) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -252,6 +255,53 @@ public class EntregaDAO {
             }
 
             return null;
+
+        } catch (SQLException sqle) {
+            log.error("Erro ao buscar entrega", sqle);
+            return null;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public List<Entrega> buscarTodos() {
+        List<Entrega> entregas = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        String sql = "SELECT * FROM entrega";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                long idEntrega = rs.getLong("cod_entrega");
+                String descricaoProduto = rs.getString("descricao_produto");
+                Date dtPedido = rs.getDate("dt_pedido");
+                Date dtEntrega = rs.getDate("dt_entrega");
+                String cep = rs.getString("cep");
+                String rua = rs.getString("rua");
+                String complemento = rs.getString("complemento");
+                int numero = rs.getInt("numero");
+                String pais = rs.getString("pais");
+                String estado = rs.getString("estado");
+                String cidade = rs.getString("cidade");
+                long idMotorista = rs.getLong("id_motorista");
+
+                Entrega entrega = new Entrega(
+                        idEntrega,
+                        descricaoProduto,
+                        dtPedido,
+                        dtEntrega,
+                        new Endereco(pais, cep, estado, cidade, rua, numero, complemento),
+                        idMotorista
+                );
+                entregas.add(entrega);
+            }
+
+            return entregas;
 
         } catch (SQLException sqle) {
             log.error("Erro ao buscar entrega", sqle);

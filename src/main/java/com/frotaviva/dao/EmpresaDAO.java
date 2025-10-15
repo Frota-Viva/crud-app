@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +16,7 @@ import com.frotaviva.model.Endereco;
 import com.frotaviva.util.Conexao;
 import com.frotaviva.util.Senhas;
 
-public class EmpresaDAO {
+public class EmpresaDAO implements DAO<Empresa>{
 
     /*
      * Logger está sendo usado para melhor tratamento e rastreamento de exceções.
@@ -23,15 +25,17 @@ public class EmpresaDAO {
 
     /*
      * A classe EmpresaDAO conta com os métodos:
-     * cadastrarEmpresa
+     * inserir
      * atualizarNome|Endereco|Email|Senha
-     * deletarEmpresa
+     * deletar
      * getEmpresa
+     * buscarPorId
+     * buscarTodos
      */
 
     private static final Logger log = LoggerFactory.getLogger(EmpresaDAO.class);
 
-    public static boolean cadastrarEmpresa(Empresa empresa){
+    public int inserir(Empresa empresa){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -65,20 +69,20 @@ public class EmpresaDAO {
 
             if (stmt.executeUpdate() > 0){
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle){
             log.error("Erro ao cadastrar empresa", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarNome(Empresa empresa){
+    public int atualizarNome(Empresa empresa){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -93,20 +97,20 @@ public class EmpresaDAO {
 
             if (stmt.executeUpdate() > 0){
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle){
             log.error("Erro ao atualizar nome da empresa", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarEndereco(Empresa empresa){
+    public int atualizarEndereco(Empresa empresa){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -135,20 +139,20 @@ public class EmpresaDAO {
 
             if (stmt.executeUpdate() > 0){
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle){
             log.error("Erro ao atualizar endereço da empresa", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarEmail(Empresa empresa){
+    public int atualizarEmail(Empresa empresa){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -163,25 +167,25 @@ public class EmpresaDAO {
 
             if (stmt.executeUpdate() > 0){
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle){
             log.error("Erro ao atualizar email da empresa", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarSenha(Empresa empresa){
+    public int atualizarSenha(Empresa empresa){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
         String senhaArmazenada = Senhas.getSenhaHash(empresa.getId());
-        if (Senhas.verificarSenha(empresa.getSenha(), senhaArmazenada)) return false;
+        if (Senhas.verificarSenha(empresa.getSenha(), senhaArmazenada)) return 0;
 
         String sql = "UPDATE empresa SET senha = ? WHERE id = ?";
 
@@ -195,20 +199,20 @@ public class EmpresaDAO {
 
             if (stmt.executeUpdate() > 0){
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle){
             log.error("Erro ao atualizar senha da empresa", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean deletarEmpresa(Empresa empresa){
+    public int deletar(long id){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -218,18 +222,18 @@ public class EmpresaDAO {
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            stmt.setLong(1, empresa.getId());
+            stmt.setLong(1, id);
 
             if (stmt.executeUpdate() > 0){
                 stmt.close();
-                return true;
+                return 1;
             }
 
-            return false;
+            return 0;
 
         } catch (SQLException sqle) {
             log.error("Erro ao deletar empresa", sqle);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
@@ -269,6 +273,91 @@ public class EmpresaDAO {
             
             return null;
             
+        } catch (SQLException sqle){
+            log.error("Erro ao buscar empresa", sqle);
+            return null;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public Empresa buscarPorId(long id){
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        String sql = "SELECT * FROM empresa WHERE id = ?";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setLong(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()){
+                long idEmpresa = rs.getLong("id");
+                String tipo_empresa = rs.getString("tipo_empresa");
+                String cnpj = rs.getString("cnpj");
+                String email = rs.getString("email");
+                String senha = rs.getString("senha");
+                String nome = rs.getString("nome");
+                String cep = rs.getString("cep");
+                String rua = rs.getString("rua");
+                String complemento = rs.getString("complemento");
+                int numero = rs.getInt("numero");
+                String pais = rs.getString("pais");
+                String estado = rs.getString("estado");
+                String cidade = rs.getString("cidade");
+
+                return new Empresa(idEmpresa, tipo_empresa, cnpj, email, senha, nome,
+                        new Endereco(pais, cep, estado, cidade, rua, numero, complemento));
+            }
+
+            return null;
+
+        } catch (SQLException sqle){
+            log.error("Erro ao buscar empresa", sqle);
+            return null;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public List<Empresa> buscarTodos(){
+        List<Empresa> empresas = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        String sql = "SELECT * FROM empresa";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                long idEmpresa = rs.getLong("id");
+                String tipo_empresa = rs.getString("tipo_empresa");
+                String cnpj = rs.getString("cnpj");
+                String email = rs.getString("email");
+                String senha = rs.getString("senha");
+                String nome = rs.getString("nome");
+                String cep = rs.getString("cep");
+                String rua = rs.getString("rua");
+                String complemento = rs.getString("complemento");
+                int numero = rs.getInt("numero");
+                String pais = rs.getString("pais");
+                String estado = rs.getString("estado");
+                String cidade = rs.getString("cidade");
+
+                Empresa empresa = new Empresa(idEmpresa, tipo_empresa, cnpj, email, senha, nome,
+                        new Endereco(pais, cep, estado, cidade, rua, numero, complemento));
+
+                empresas.add(empresa);
+            }
+
+            return empresas;
+
         } catch (SQLException sqle){
             log.error("Erro ao buscar empresa", sqle);
             return null;
