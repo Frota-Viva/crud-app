@@ -10,7 +10,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.frotaviva.exception.DAOException;
 import com.frotaviva.model.Caminhao;
 import com.frotaviva.util.Conexao;
 
@@ -32,7 +31,7 @@ public class CaminhaoDAO implements DAO<Caminhao>{
 
     private static final Logger log = LoggerFactory.getLogger(CaminhaoDAO.class);
 
-    public static boolean cadastrarCaminhao(Caminhao caminhao){
+    public int inserir(Caminhao caminhao){
         Conexao conexao = new Conexao();
         Connection con = null;
 
@@ -57,16 +56,17 @@ public class CaminhaoDAO implements DAO<Caminhao>{
             return 0;
 
         } 
+    
         catch (SQLException sqle){
             log.error("Erro ao cadastrar caminhão.", sqle);
-            return false;
+            return -1;
         } 
         finally{
             conexao.desconectar(con);
         }
     }
 
-    public static boolean atualizarPlaca(Caminhao caminhao){
+    public int atualizarPlaca(Caminhao caminhao){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -89,7 +89,7 @@ public class CaminhaoDAO implements DAO<Caminhao>{
         } 
         catch (SQLException sqle){
             log.error("Erro ao atualizar placa do caminhão", sqle);
-            return false;
+            return -1;
         } 
         finally {
             conexao.desconectar(conn);
@@ -97,7 +97,7 @@ public class CaminhaoDAO implements DAO<Caminhao>{
     }
 
 
-    public static boolean atualizarStatus(Caminhao caminhao){
+    public int atualizarStatus(Caminhao caminhao){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -118,7 +118,7 @@ public class CaminhaoDAO implements DAO<Caminhao>{
         } 
         catch (SQLException e){
             log.error("Erro ao atualizar o status do caminhão", e);
-            return false;
+            return -1;
         }
         finally{
             conexao.desconectar(conn);
@@ -126,7 +126,7 @@ public class CaminhaoDAO implements DAO<Caminhao>{
     }
 
 
-    public static boolean atualizarKmRodados(Caminhao caminhao){
+    public int atualizarKmRodados(Caminhao caminhao){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -146,15 +146,15 @@ public class CaminhaoDAO implements DAO<Caminhao>{
             return 0;
 
         } catch (SQLException sqle){
-            
-            return false;
+            log.error("Erro ao atualizar os kms_rodados.", sqle);
+            return -1;
         } 
         finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarIdFrota(Caminhao caminhao){
+    public static int atualizarIdFrota(Caminhao caminhao){
         Conexao conexao = new Conexao();
         Connection conn = null;
         
@@ -175,7 +175,7 @@ public class CaminhaoDAO implements DAO<Caminhao>{
 
         } catch (SQLException e){
             log.error("Erro ao atualizar o ID da frota.", e);
-            return false;
+            return -1;
         }
         finally {
             conexao.desconectar(conn);
@@ -183,7 +183,8 @@ public class CaminhaoDAO implements DAO<Caminhao>{
     }
 
 
-    public static boolean deletarCaminhao(Caminhao caminhao){
+
+    public int deletar(long id){
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -196,19 +197,24 @@ public class CaminhaoDAO implements DAO<Caminhao>{
 
             stmt.setLong(1, id);
 
-            if (stmt.executeUpdate() > 0) return true;
-            return false;
+
+            if (stmt.executeUpdate() > 0){
+                stmt.close();
+                return 1;
+            }
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao deletar caminhão. ",e);
-            return false;
+            return -1;
         }
         finally{
             conexao.desconectar(conn);
         }
     }
 
-    public static Caminhao getCaminhao(long id){
+
+    public Caminhao buscarPorId(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -242,7 +248,7 @@ public class CaminhaoDAO implements DAO<Caminhao>{
         } 
         catch (SQLException e){
             log.error("Erro ao recuperar o caminhão. ", e);
-            throw DAOException.erroAoConsultar( "caminhao", e);
+            return null;
         }
         finally{
             conexao.desconectar(conn);
