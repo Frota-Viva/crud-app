@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,17 +21,18 @@ import com.frotaviva.util.Senhas;
 
 /*
  * A classe MotoristaDAO conta com os métodos:
- * cadastrarMotorista
+ * inserir
  * atualizarNome|Email|Senha
- * deletarMotorista
- * getMotorista
+ * deletar
+ * buscarPorId
+ * buscarTodos
  */
 
-public class MotoristaDAO {
+public class MotoristaDAO implements DAO<Motorista>{
 
     private static final Logger log = LoggerFactory.getLogger(MotoristaDAO.class);
 
-    public static boolean cadastrarMotorista(Motorista motorista) {
+    public int inserir(Motorista motorista) {
         Conexao conexao = new Conexao();
         Connection conn = null;
         String sql = "INSERT INTO motorista(nome, email, cpf, senha, id_empresa) VALUES(?, ?, ?, ?, ?)";
@@ -46,19 +49,19 @@ public class MotoristaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao cadastrar motorista.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarNome(Motorista motorista) {
+    public int atualizarNome(Motorista motorista) {
         Conexao conexao = new Conexao();
         Connection conn = null;
         String sql = "UPDATE motorista SET nome = ? WHERE id = ?";
@@ -72,19 +75,19 @@ public class MotoristaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao atualizar nome do motorista.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarEmail(Motorista motorista) {
+    public int atualizarEmail(Motorista motorista) {
         Conexao conexao = new Conexao();
         Connection conn = null;
         String sql = "UPDATE motorista SET email = ? WHERE id = ?";
@@ -98,19 +101,19 @@ public class MotoristaDAO {
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao atualizar email do motorista.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean atualizarSenha(Motorista motorista) {
+    public int atualizarSenha(Motorista motorista) {
         Conexao conexao = new Conexao();
         Connection conn = null;
         String sql = "UPDATE motorista SET senha = ? WHERE id = ?";
@@ -120,26 +123,26 @@ public class MotoristaDAO {
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             String senhaArmazenada = Senhas.getSenhaHash(motorista.getId());
-            if (Senhas.verificarSenha(motorista.getSenha(), senhaArmazenada)) return false;
+            if (Senhas.verificarSenha(motorista.getSenha(), senhaArmazenada)) return 0;
 
             stmt.setString(1, Senhas.hashSenha(motorista.getSenha()));
             stmt.setLong(2, motorista.getId());
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao atualizar senha do motorista.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static boolean deletarMotorista(Motorista motorista) {
+    public int deletar(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
         String sql = "DELETE FROM motorista WHERE id = ?";
@@ -148,23 +151,23 @@ public class MotoristaDAO {
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            stmt.setLong(1, motorista.getId());
+            stmt.setLong(1, id);
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
-                return true;
+                return 1;
             }
-            return false;
+            return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao deletar motorista.", e);
-            return false;
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static Motorista getMotorista(long id) {
+    public Motorista buscarPorId(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
         String sql = "SELECT * FROM motorista WHERE id = ?";
@@ -187,6 +190,38 @@ public class MotoristaDAO {
                 return new Motorista(idMotorista, nome, email, cpf, senha, idEmpresa);
             }
             return null;
+
+        } catch (SQLException e) {
+            log.error("Erro ao resgatar motorista.", e);
+            return null;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public List<Motorista> buscarTodos() {
+        List<Motorista> motoristas = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+        String sql = "SELECT * FROM motorista";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                long idMotorista = rs.getLong("id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String cpf = rs.getString("cpf");
+                String senha = rs.getString("senha");
+                long idEmpresa = rs.getLong("id_empresa");
+
+                Motorista motorista = new Motorista(idMotorista, nome, email, cpf, senha, idEmpresa);
+                motoristas.add(motorista);
+            }
+            return motoristas;
 
         } catch (SQLException e) {
             log.error("Erro ao resgatar motorista.", e);
