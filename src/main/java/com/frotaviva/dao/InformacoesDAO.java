@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InformacoesDAO {
+public class InformacoesDAO implements DAO<Informacoes>{
 
     /*
      * Logger está sendo usado para tratamento e rastreamento de exceções.
@@ -110,7 +110,7 @@ public class InformacoesDAO {
     }
 
 
-    public int deletar(Informacoes informacoes) {
+    public int deletar(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -120,7 +120,7 @@ public class InformacoesDAO {
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            stmt.setLong(1, informacoes.getId());
+            stmt.setLong(1, id);
 
             if (stmt.executeUpdate() > 0) {
                 stmt.close();
