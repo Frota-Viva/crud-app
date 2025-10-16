@@ -9,7 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="" />
+    <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneMotoristaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneMotoristaDAO.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,11 +42,14 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
-        <option name="useMavenConfig" value="true" />
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="32s88QbKYNokaAmFhsdORrX8QpT" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -53,10 +59,13 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Java",
     "jdk.selected.JAVA_MODULE": "19",
-    "last_opened_file_path": "C:/Users/ricardojunior-ieg/OneDrive - Instituto J&F/Interdisciplinar/Frota Viva/Codigos/crud-app/src/main/webapp/WEB-INF/lib/postgresql-42.7.7.jar",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/davifranco-ieg/Desktop/crud/crud-app",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -187,6 +196,14 @@
       </method>
     </configuration>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -209,6 +226,8 @@
       <workItem from="1759402467895" duration="56000" />
       <workItem from="1759844680835" duration="1101000" />
       <workItem from="1760314483607" duration="6919000" />
+      <workItem from="1760536786655" duration="40000" />
+      <workItem from="1760536844951" duration="966000" />
     </task>
     <servers />
   </component>
