@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+/* Base */
+html {
+    font-size: 62.5%;
+    font-family: "Roboto", sans-serif;
+    scroll-behavior: smooth;
+}
+
+* {
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    display: flex;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.input-forms {
+    padding: 0.8rem;
+    border-radius: 8px;
+    height: 2.2rem;
+    border: none;
+    box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.5);
+}
+
+.botao-forms {
+    width: 100%;
+    cursor: pointer;
+    margin-block: 0.8rem;
+    padding-block: 0.8rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+    border-radius: 8px;
+    border: none;
+
+    /*     X | Y | embaçado | tamanho | cor */
+    box-shadow: 0px 2px 8px 2px rgba(32, 32, 32, 0.5);
+}
+
+/* Lado da imagem  */
+.img-section {
+    background-image: url('../../assets/imgs/img-login/imagem-caminhões-1.png');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    height: 100vh;
+    width: 46%;
+}
+
+#meio {
+    position: absolute;
+    right: 54vw;
+    transform: translateX(50%);
+    height: 100vh;
+}
+
+#logo-login {
+    margin: 0;
+    width: clamp(200px, 42%, 700px);
+}
+
+/* Lado do login */
+.login-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 54%;
+    height: 100%;
+    background-color: #202B45;
+    color: white;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: clamp(100px, 60%, 400px);
+}
+
+form>h1 {
+    width: 100%;
+    height: auto;
+    font-size: 3.2rem;
+    text-align: center;
+}
+
+form hr {
+    margin: 40px 0;
+    background-color: white;
+}
+
+form>div label {
+    display: flex;
+    flex-direction: column;
+    font-size: small;
+    font-weight: 600;
+}
+
+form>div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 48%;
+    gap: 2rem;
+
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: white transparent;
+}
+
+#botao1 {
+    background-color: #2F416B;
+    color: white;
+}
+
+/* Para inicio */
+#botoes-inicio {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    width: clamp(100px, 60%, 360px);
+}
+
+#botoes-inicio>h1 {
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+}
