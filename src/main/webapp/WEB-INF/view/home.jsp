@@ -1,17 +1,18 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funcionários - Frota Viva</title>
-    <link rel="stylesheet" href="../../CSS/homeStyle.css">
+    <link rel="stylesheet" href="../../assets/CSS/homeStyle.css">
 </head>
 
 <body>
     <aside class="menu-lateral">
         <img src="../../assets/imgs/img-home/logo2.png" alt="logo" class="logo">
         <nav>
-            <a href="home.html">
+            <a href="home.jsp">
                 <img src="../../assets/imgs/img-home/casa.png" alt="Pagina inicial">
                 Página Inicial
             </a>
@@ -39,15 +40,15 @@
 
                     <div class="descricao-grafco">
                         <div>
-                            <div class="cor-grafico" id="cor1"></div>
+                            <div class="cor-grafico cor1"></div>
                             <div>Ativos</div>
                         </div>
                         <div>
-                            <div class="cor-grafico" id="cor2"></div>
+                            <div class="cor-grafico cor2"></div>
                             <div>Manutenção</div>
                         </div>
                         <div>
-                            <div class="cor-grafico" id="cor3"></div>
+                            <div class="cor-grafico cor3"></div>
                             <div>inativos</div>
                         </div>
                     </div>
@@ -65,15 +66,15 @@
 
                     <div class="descricao-grafco">
                         <div>
-                            <div class="cor-grafico" id="cor1"></div>
+                            <div class="cor-grafico cor1"></div>
                             <div>Realizadas</div>
                         </div>
                         <div>
-                            <div class="cor-grafico" id="cor2"></div>
+                            <div class="cor-grafico cor2"></div>
                             <div>À Caminho</div>
                         </div>
                         <div>
-                            <div class="cor-grafico" id="cor3"></div>
+                            <div class="cor-grafico cor3"></div>
                             <div>Pendentes</div>
                         </div>
                     </div>

@@ -396,14 +396,14 @@ main {
     border: 1px solid #000;
 }
 
-#cor1 {
+.cor1 {
     background-color: #60F090;
 }
 
-#cor2 {
+.cor2 {
     background-color: #0B7FCC;
 }
 
-#cor3 {
+.cor3 {
     background-color: #F06060;
 }
