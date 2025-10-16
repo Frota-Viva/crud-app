@@ -80,15 +80,6 @@ main {
     background-color: #202B45;
     color: white;
 }
-.login-section .erro {
-    color: #ff3b3b !important;
-    font-size: 1.6rem;
-    font-weight: 700;
-    display: block;
-    margin-top: 1rem;
-    text-align: center;
-}
-
 
 form {
     display: flex;
@@ -126,7 +117,6 @@ form>div {
     scrollbar-width: thin;
     scrollbar-color: white transparent;
 }
-
 
 #botao1 {
     background-color: #2F416B;

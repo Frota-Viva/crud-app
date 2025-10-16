@@ -1,6 +1,5 @@
 package com.frotaviva.dao;
 
-import com.frotaviva.model.TelefoneEmpresa;
 import com.frotaviva.util.Conexao;
 import com.frotaviva.model.TelefoneMotorista;
 import org.slf4j.Logger;

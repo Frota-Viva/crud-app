@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionários - Frota Viva</title>
+    <link rel="stylesheet" href="../../CSS/homeStyle.css">
+</head>
+
+<body>
+    <aside class="menu-lateral">
+        <img src="../../assets/imgs/img-home/logo2.png" alt="logo" class="logo">
+        <nav>
+            <a href="home.html">
+                <img src="../../assets/imgs/img-home/casa.png" alt="Pagina inicial">
+                Página Inicial
+            </a>
+
+            <a href="funcionarios.html">
+                <img src="../../assets/imgs/img-home/pessoa.png" alt="Funcionários">
+                Funcionários
+            </a>
+        </nav>
+    </aside>
+
+    <main>
+        <section class="informacoes">
+            <h1>Seja bem-vindo "User"!</h1>
+            <section class="cards">
+                <article class="card-info" id="card-frota">
+                    <h2>Frota</h2>
+                    <div class="infos">
+                        <p>Total: <%= 0 %></p>
+                        <p>Inativos: <%= 0 %></p>
+                        <p>Manutenção: <%= 0 %></p>
+                        <p>Ativos: <%= 0 %></p>
+                    </div>
+                    <canvas id="#"></canvas>
+
+                    <div class="descricao-grafco">
+                        <div>
+                            <div class="cor-grafico" id="cor1"></div>
+                            <div>Ativos</div>
+                        </div>
+                        <div>
+                            <div class="cor-grafico" id="cor2"></div>
+                            <div>Manutenção</div>
+                        </div>
+                        <div>
+                            <div class="cor-grafico" id="cor3"></div>
+                            <div>inativos</div>
+                        </div>
+                    </div>
+                </article>
+                <article class="card-info" id="card-entregas">
+                    <h2>Entregas</h2>
+                    <div class="infos">
+                        <p>Total: <%= 0 %></p>
+                        <p>Pendentes: <%= 0 %></p>
+                        <p>Realizadas: <%= 0 %></p>
+                        <p>À Caminho: <%= 0 %></p>
+                    </div>
+
+                    <canvas id="#"></canvas>
+
+                    <div class="descricao-grafco">
+                        <div>
+                            <div class="cor-grafico" id="cor1"></div>
+                            <div>Realizadas</div>
+                        </div>
+                        <div>
+                            <div class="cor-grafico" id="cor2"></div>
+                            <div>À Caminho</div>
+                        </div>
+                        <div>
+                            <div class="cor-grafico" id="cor3"></div>
+                            <div>Pendentes</div>
+                        </div>
+                    </div>
+                </article>
+                <article class="card-info" id="card-meta">
+                    <h2>Meta de Entregas</h2>
+
+                    <canvas id="#"></canvas>
+
+                    <div class="descricao-grafco">
+                        <div>Tempo restante:
+                            08 D - 12 H - 22 M
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </section>
+    </main>
+</body>
+
+</html>

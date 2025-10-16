@@ -1,10 +1,5 @@
 package com.frotaviva.dao;
 
-import com.frotaviva.util.Conexao;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.frotaviva.util.Conexao;
 
 public class FiltrosDAO {
 
@@ -58,6 +58,7 @@ public class FiltrosDAO {
             }
 
             stmt.close();
+            rs.close();
             return motoristasCaminhoes;
 
         } catch (SQLException sqle) {

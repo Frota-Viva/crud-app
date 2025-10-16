@@ -1,11 +1,5 @@
 package com.frotaviva.dao;
 
-import com.frotaviva.util.Conexao;
-import com.frotaviva.model.Caminhao;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.frotaviva.model.Caminhao;
+import com.frotaviva.util.Conexao;
 
 public class CaminhaoDAO implements DAO<Caminhao>{
 
@@ -57,6 +56,7 @@ public class CaminhaoDAO implements DAO<Caminhao>{
             return 0;
 
         } 
+    
         catch (SQLException sqle){
             log.error("Erro ao cadastrar caminhão.", sqle);
             return -1;
@@ -183,6 +183,7 @@ public class CaminhaoDAO implements DAO<Caminhao>{
     }
 
 
+
     public int deletar(long id){
         Conexao conexao = new Conexao();
         Connection conn = null;
@@ -195,6 +196,7 @@ public class CaminhaoDAO implements DAO<Caminhao>{
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setLong(1, id);
+
 
             if (stmt.executeUpdate() > 0){
                 stmt.close();
@@ -211,7 +213,8 @@ public class CaminhaoDAO implements DAO<Caminhao>{
         }
     }
 
-    public Caminhao buscarPorId(long id){
+
+    public Caminhao buscarPorId(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
@@ -244,7 +247,7 @@ public class CaminhaoDAO implements DAO<Caminhao>{
 
         } 
         catch (SQLException e){
-            log.error("Erro ao resgatar o caminhão. ", e);
+            log.error("Erro ao recuperar o caminhão. ", e);
             return null;
         }
         finally{
