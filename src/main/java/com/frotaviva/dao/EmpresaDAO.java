@@ -239,7 +239,7 @@ public class EmpresaDAO implements DAO<Empresa>{
         }
     }
 
-    public static Empresa getEmpresa(String email, String senha){
+    public Empresa getEmpresa(String email, String senha){
         Conexao conexao = new Conexao();
         Connection conn = null;
 

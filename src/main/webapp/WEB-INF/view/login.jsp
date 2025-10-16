@@ -42,7 +42,7 @@
             </div>
             <hr>
             <button type="submit" class="botao-forms" id="botao1">Entrar</button>
-            <a href="inicio.html"><button class="botao-forms" id="botao2">Voltar</button></a>
+            <button class="botao-forms" id="botao2" onclick="window.location.href='inicio.html'">Voltar</button>
         </form>
     </section>
 
