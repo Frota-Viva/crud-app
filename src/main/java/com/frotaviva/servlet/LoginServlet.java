@@ -15,18 +15,13 @@ public class LoginServlet extends HttpServlet{
         String email = req.getParameter("email");
         String senha = req.getParameter("senha");
 
-        System.out.println(email);
-        System.out.println(senha);
-
         if (EmpresaDAO.getEmpresa(email, senha) != null) {
             res.sendRedirect("/");
 
-            System.out.println("Era pra dar certo");
         } else {
-            req.setAttribute("erroLogin", "Empresa não cadastrada");
-            req.getRequestDispatcher("WEB-INF/view/login.jsp").forward(req,res);
+            req.setAttribute("erro", "Email ou senha incorretas.");
+            req.getRequestDispatcher("WEB-INF/view/login.jsp").forward(req, res);
 
-            System.out.println("Faiou");
         }
     }
 

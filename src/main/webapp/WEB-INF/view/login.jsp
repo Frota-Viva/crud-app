@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
 <main>
 
     <section class="img-section">
@@ -35,8 +36,10 @@
                     <input placeholder="Digite aqui..." type="password" id="senha" name="senha" class="input-forms"
                            required>
                 </label>
+                <%if (request.getAttribute("erro") != null){%>
+                <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("erro")%></span>
+                <%}%>
             </div>
-
             <hr>
             <button type="submit" class="botao-forms" id="botao1">Entrar</button>
             <a href="inicio.html"><button class="botao-forms" id="botao2">Voltar</button></a>

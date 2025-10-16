@@ -10,28 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/CSS/homeStyle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/CSS/loginStyle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/caneta-edit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/casa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/editar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/lixo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/logo2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/lupa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/olho.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/perfil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/pessoa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/seta-dir-tabela.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-home/seta-esq-tabela.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-login/divisor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-login/imagem-caminhões-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/imgs/img-login/logo3.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EmpresaDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/CSS/loginStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/CSS/loginStyle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,26 +54,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "19",
-    "last_opened_file_path": "C:/Users/ricardojunior-ieg/OneDrive - Instituto J&F/Interdisciplinar/Frota Viva/Codigos/crud-app/src/main/webapp/assets/imgs",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ricardojunior-ieg/OneDrive - Instituto J&amp;F/Interdisciplinar/Frota Viva/Codigos/crud-app/src/main/webapp/assets/imgs&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\crud-app\src\main\webapp\assets\imgs" />
@@ -234,7 +216,8 @@
       <workItem from="1759402467895" duration="56000" />
       <workItem from="1759844680835" duration="1101000" />
       <workItem from="1760314483607" duration="6919000" />
-      <workItem from="1760443408429" duration="8431000" />
+      <workItem from="1760443408429" duration="8871000" />
+      <workItem from="1760612454197" duration="3186000" />
     </task>
     <servers />
   </component>
