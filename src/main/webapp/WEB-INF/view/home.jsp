@@ -1,4 +1,6 @@
+<%@ page import="com.frotaviva.model.Empresa" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%Empresa empresa = (Empresa) request.getAttribute("empresa");%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -26,15 +28,15 @@
 
     <main>
         <section class="informacoes">
-            <h1>Seja bem-vindo "User"!</h1>
+            <h1>Seja bem-vindo "<%=empresa.getNome()%>"!</h1>
             <section class="cards">
                 <article class="card-info" id="card-frota">
                     <h2>Frota</h2>
                     <div class="infos">
-                        <p>Total: <%= 0 %></p>
-                        <p>Inativos: <%= 0 %></p>
-                        <p>Manutenção: <%= 0 %></p>
-                        <p>Ativos: <%= 0 %></p>
+                        <p>Total:<br><%= 0 %></p>
+                        <p>Inativos:<br><%= 0 %></p>
+                        <p>Manutenção:<br><%= 0 %></p>
+                        <p>Ativos:<br><%= 0 %></p>
                     </div>
                     <canvas id="#"></canvas>
 
@@ -56,10 +58,10 @@
                 <article class="card-info" id="card-entregas">
                     <h2>Entregas</h2>
                     <div class="infos">
-                        <p>Total: <%= 0 %></p>
-                        <p>Pendentes: <%= 0 %></p>
-                        <p>Realizadas: <%= 0 %></p>
-                        <p>À Caminho: <%= 0 %></p>
+                        <p>Total:<br><%= 0 %></p>
+                        <p>Pendentes:<br><%= 0 %></p>
+                        <p>Realizadas:<br><%= 0 %></p>
+                        <p>À Caminho:<br><%= 0 %></p>
                     </div>
 
                     <canvas id="#"></canvas>
@@ -85,7 +87,7 @@
                     <canvas id="#"></canvas>
 
                     <div class="descricao-grafco">
-                        <div>Tempo restante:
+                        <div>Tempo restante:<br>
                             08 D - 12 H - 22 M
                         </div>
                     </div>

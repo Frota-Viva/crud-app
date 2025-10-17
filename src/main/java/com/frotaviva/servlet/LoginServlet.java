@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -13,15 +14,22 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+        HttpSession session = req.getSession(true);
+
         String email = req.getParameter("email");
         String senha = req.getParameter("senha");
+
         EmpresaDAO empresaDAO = new EmpresaDAO();
         Empresa empresa = empresaDAO.getEmpresa(email, senha);
 
         if (empresa != null) {
-            req.setAttribute("idEmpresa", empresa.getId());
-            req.getRequestDispatcher("/home").forward(req, res);
+
+            session.setAttribute("idEmpresa", empresa.getId());
+            res.sendRedirect("/home");
+
         } else {
+
             req.setAttribute("erro", "Email ou senha incorretas.");
             req.getRequestDispatcher("WEB-INF/view/login.jsp").forward(req, res);
 
