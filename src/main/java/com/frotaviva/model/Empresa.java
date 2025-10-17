@@ -63,7 +63,7 @@ public class Empresa {
         this.senha=senha;
     }
 
-    public String CnpjValidado(String cnpj){
+    public static String cnpjValidado(String cnpj){
         String regexCnpj = "^[0-9]{2}\\.?[0-9]{3}\\.?[0-9]{3}\\/?[0-9]{4}\\-?[0-9]{2}$"; //Regex para validar CNPJ
 
         if (! cnpj.matches(regexCnpj)) return null;
