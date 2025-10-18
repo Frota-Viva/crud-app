@@ -13,9 +13,16 @@ import java.util.List;
 public class Teste {
     public static void main(String[] args) {
 
-        String texto = "11.222.333/0001-45";
-        String regex = "^[A-Za-z].*";
-        System.out.println(texto.replaceAll("[^0-9]", ""));
+        CaminhaoDAO caminhaoDAO = new CaminhaoDAO();
+
+        List<Caminhao> caminhoes = new ArrayList<>();
+        caminhoes = caminhaoDAO.buscarTodos();
+
+        for (Caminhao caminhao :
+                caminhoes) {
+            System.out.println(caminhao);
+            System.out.println();
+        }
 
     }
 }

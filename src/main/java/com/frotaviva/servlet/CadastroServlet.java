@@ -2,6 +2,7 @@ package com.frotaviva.servlet;
 import com.frotaviva.dao.EmpresaDAO;
 import com.frotaviva.model.Empresa;
 import com.frotaviva.model.Endereco;
+import com.frotaviva.model.TelefoneEmpresa;
 import com.frotaviva.util.Validar;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,9 +23,13 @@ public class CadastroServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         boolean erro = false; //Variável de controle para erros
+        boolean dadoFaltando = false;
 
 //        Recebe os valores digitados pelo usuário e faz as verificações necessárias
+
+        //Faz a validação do tipo-empresa
         String tipoEmpresa = req.getParameter("tipoEmpresa");
+        if (tipoEmpresa == "" || tipoEmpresa == null) dadoFaltando = true;
 
         //Faz a validação do CNPJ
         String cnpj = req.getParameter("cnpj");
@@ -32,6 +37,13 @@ public class CadastroServlet extends HttpServlet{
         if (cnpj == null){
             req.setAttribute("erroCnpj", "Formato não compatível ou cnpj inválido.");
             erro = true;
+        }
+
+        //Faz a validação do telefone
+        String telefone = req.getParameter("telefone");
+        telefone = Validar.telefoneValidado(telefone);
+        if (telefone == null){
+            req.setAttribute("erroTelefone", "Formato não compatível");
         }
 
         //Faz a validação do email
@@ -44,11 +56,14 @@ public class CadastroServlet extends HttpServlet{
         //Faz a validação da senha
         String senha = req.getParameter("senha");
         if (! Validar.senha(senha)){
-            req.setAttribute("erroSenha", "");
+            req.setAttribute("erroSenha", "A senha deve conter no mínimo: 8 dígitos, 1 letra maiúscula," +
+                    " 1 letra minúscula, 1 número e 1 caractere especial ($*&@#!?)");
             erro = true;
         }
 
+        //Faz a validação do nome
         String nome = req.getParameter("nome");
+        if (nome == "" || nome == null) dadoFaltando = true;
 
         //Faz a validação do CEP
         String cep = req.getParameter("cep");
@@ -58,7 +73,11 @@ public class CadastroServlet extends HttpServlet{
             erro = true;
         }
 
+        //Faz a validação da rua
         String rua = req.getParameter("rua");
+        if (rua == "" || rua == null) dadoFaltando = true;
+
+        //Pega o complemento (pode ser nulo)
         String complemento = req.getParameter("complemento");
 
         //Faz a validação do número
@@ -70,16 +89,28 @@ public class CadastroServlet extends HttpServlet{
             erro = true;
         }
 
+        //Faz a validação do país
         String pais = req.getParameter("pais");
+        if (pais == "" || pais == null) dadoFaltando = true;
+
+        //Faz a validação do estado
         String estado = req.getParameter("estado");
+        if (estado == "" || estado == null) dadoFaltando = true;
+
+        //Faz a validação da cidade
         String cidade = req.getParameter("cidade");
+        if (cidade == "" || cidade == null) dadoFaltando = true;
 
-        //Verifica se possui algum erro e retorna ao usuário
-        if (erro) return;
 
-//        Instancia um objeto Empresa e um Endereco
+        //Verifica se possui algum erro ou dado faltando e retorna ao usuário
+        if (dadoFaltando) req.setAttribute("dadoFaltando", "Todas as informações com (*) devem ser preenchidas");
+        if (erro || dadoFaltando) req.getRequestDispatcher("WEB-INF/view/cadastro.jsp").forward(req, res);
+
+
+//        Instancia um objeto Empresa, um Endereco e um TelefoneEmpresa
         Endereco endereco = new Endereco(pais, cep, estado, cidade, rua, numero, complemento);
         Empresa empresa = new Empresa(tipoEmpresa, cnpj, email, senha, nome, endereco);
+        TelefoneEmpresa telefoneEmpresa = new TelefoneEmpresa(telefone);
 
 //        Insere a impresa no banco de dados e manda o usuário para o início
         EmpresaDAO empresaDAO = new EmpresaDAO();
