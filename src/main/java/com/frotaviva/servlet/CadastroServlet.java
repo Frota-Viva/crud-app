@@ -23,7 +23,8 @@ public class CadastroServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         boolean erro = false; //Variável de controle para erros
-        boolean dadoFaltando = false;
+        boolean dadoFaltando = false; //variável de controle para dados faltando
+        EmpresaDAO empresaDAO = new EmpresaDAO();
 
 //        Recebe os valores digitados pelo usuário e faz as verificações necessárias
 
@@ -88,7 +89,7 @@ public class CadastroServlet extends HttpServlet{
         try {
             numero = Integer.parseInt(req.getParameter("numero"));
         } catch (NumberFormatException e){
-            req.setAttribute("erroNumero", "Apenas valores números são permitidos");
+            req.setAttribute("erroNumero", "Apenas valores numéricos são permitidos");
             erro = true;
         }
 
@@ -107,7 +108,17 @@ public class CadastroServlet extends HttpServlet{
 
         //Verifica se possui algum erro ou dado faltando e retorna ao usuário
         if (dadoFaltando) req.setAttribute("dadoFaltando", "Todas as informações com (*) devem ser preenchidas");
-        if (erro || dadoFaltando) req.getRequestDispatcher("WEB-INF/view/cadastro.jsp").forward(req, res);
+        if (erro || dadoFaltando) {
+            req.getRequestDispatcher("WEB-INF/view/cadastro.jsp").forward(req, res);
+            return;
+        }
+
+        //Verifica se o email ou o cnpj já existem no banco de dados
+        if ( (empresaDAO.buscarPorEmail(email) == 1) || (empresaDAO.buscarPorCnpj(cnpj) == 1) ){
+            req.setAttribute("existeEmpresa", "Essa empresa já existe");
+            req.getRequestDispatcher("WEB-INF/view/cadastro.jsp").forward(req, res);
+            return;
+        }
 
 
 //        Instancia um objeto Empresa, um Endereco e um TelefoneEmpresa
@@ -115,15 +126,11 @@ public class CadastroServlet extends HttpServlet{
         Empresa empresa = new Empresa(tipoEmpresa, cnpj, email, senha, nome, endereco);
         TelefoneEmpresa telefoneEmpresa = new TelefoneEmpresa(telefone);
 
-//        Insere a impresa no banco de dados e manda o usuário para o início
-        EmpresaDAO empresaDAO = new EmpresaDAO();
-
+//        Insere a empresa no banco de dados e manda o usuário para o início
         switch (empresaDAO.inserir(empresa)){
             case 1 -> res.sendRedirect("/inicio");
             case 0 -> req.setAttribute("erroCadastrar", "Erro ao cadastrar empresa");
             default -> req.setAttribute("erroBD", "Erro no banco de dados");
         }
-
-
     }
 }

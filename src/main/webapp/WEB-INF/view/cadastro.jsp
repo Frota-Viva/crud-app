@@ -22,25 +22,19 @@
 
       <div>
         <label for="nome">
-          Nome da empresa:
+          Nome da empresa (*):
           <input placeholder="Digite aqui..." type="text" id="nome" name="nome" class="input-forms"
                  required>
-          <%if (request.getAttribute("dadoFaltando") != null){%>
-          <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("dadoFaltando")%></span>
-          <%}%>
         </label>
 
         <label for="tipoEmpresa">
-          Tipo da empresa:
+          Tipo da empresa (*):
           <input type="text" name="tipoEmpresa" placeholder="Digite aqui..." id="tipoEmpresa" class="input-forms"
                  required>
-          <%if (request.getAttribute("dadoFaltando") != null){%>
-          <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("dadoFaltando")%></span>
-          <%}%>
         </label>
 
         <label for="telefone">
-          Telefone:
+          Telefone (*):
           <input placeholder="Digite aqui..." type="tel" id="telefone" name="telefone" class="input-forms"
                  required>
           <%if (request.getAttribute("erroTelefone") != null){%>
@@ -49,7 +43,7 @@
         </label>
 
         <label for="email">
-          Email:
+          Email (*):
           <input placeholder="Digite aqui..." type="email" id="email" name="email" class="input-forms"
                  required>
           <%if (request.getAttribute("erroEmail") != null){%>
@@ -58,7 +52,7 @@
         </label>
 
         <label for="cnpj">
-          CNPJ:
+          CNPJ (*):
           <input placeholder="Digite aqui..." type="text" id="cnpj" name="cnpj" class="input-forms"
                  required>
           <%if (request.getAttribute("erroCnpj") != null){%>
@@ -67,7 +61,7 @@
         </label>
 
         <label for="cep">
-          CEP:
+          CEP (*):
           <input placeholder="Digite aqui..." type="text" id="cep" name="cep" class="input-forms"
                  required>
           <%if (request.getAttribute("erroCep") != null){%>
@@ -76,43 +70,32 @@
         </label>
 
         <label for="pais">
-          Pais:
+          Pais (*):
           <input placeholder="Digite aqui..." type="text" id="pais" name="pais" class="input-forms"
                  required>
-          <%if (request.getAttribute("dadoFaltando") != null){%>
-          <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("dadoFaltando")%></span>
-          <%}%>
+
         </label>
 
         <label for="estado">
-          Estado:
+          Estado (*):
           <input placeholder="Digite aqui..." type="text" id="estado" name="estado" class="input-forms"
                  required>
-          <%if (request.getAttribute("dadoFaltando") != null){%>
-          <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("dadoFaltando")%></span>
-          <%}%>
         </label>
 
         <label for="cidade">
-          Cidade:
+          Cidade (*):
           <input placeholder="Digite aqui..." type="text" id="cidade" name="cidade" class="input-forms"
                  required>
-          <%if (request.getAttribute("dadoFaltando") != null){%>
-          <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("dadoFaltando")%></span>
-          <%}%>
         </label>
 
         <label for="rua">
-          Rua:
+          Rua (*):
           <input placeholder="Digite aqui..." type="text" id="rua" name="rua" class="input-forms"
                  required>
-          <%if (request.getAttribute("dadoFaltando") != null){%>
-          <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("dadoFaltando")%></span>
-          <%}%>
         </label>
 
         <label for="numero">
-          Numero:
+          Numero (*):
           <input placeholder="Digite aqui..." type="text" id="numero" name="numero" class="input-forms"
                  required>
           <%if (request.getAttribute("erroNumero") != null){%>
@@ -127,7 +110,7 @@
         </label>
 
         <label for="senha">
-          Senha:
+          Senha (*):
           <input placeholder="Digite aqui..." type="password" id="senha" name="senha" class="input-forms"
                  required>
           <%if (request.getAttribute("erroSenha") != null){%>
@@ -135,6 +118,9 @@
           <%}%>
         </label>
       </div>
+        <%if (request.getAttribute("dadoFaltando") != null){%>
+        <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("dadoFaltando")%></span>
+        <%}%>
 
       <!-- Enviando / voltando -->
       <hr>
