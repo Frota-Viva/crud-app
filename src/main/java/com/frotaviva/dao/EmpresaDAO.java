@@ -249,8 +249,11 @@ public class EmpresaDAO implements DAO<Empresa>{
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
+            String hashSenha = Senhas.getSenhaHash(email);
+            if (! Senhas.verificarSenha(senha, hashSenha)) return null;
+
             stmt.setString(1, email);
-            stmt.setString(2, senha);
+            stmt.setString(2, hashSenha);
 
             ResultSet rs = stmt.executeQuery();
 

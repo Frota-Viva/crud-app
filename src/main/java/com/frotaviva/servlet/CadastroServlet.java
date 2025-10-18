@@ -29,7 +29,9 @@ public class CadastroServlet extends HttpServlet{
 
         //Faz a validação do tipo-empresa
         String tipoEmpresa = req.getParameter("tipoEmpresa");
-        if (tipoEmpresa == "" || tipoEmpresa == null) dadoFaltando = true;
+        if ((tipoEmpresa == null) || tipoEmpresa.equals("")) {
+            dadoFaltando = true;
+        }
 
         //Faz a validação do CNPJ
         String cnpj = req.getParameter("cnpj");
@@ -44,6 +46,7 @@ public class CadastroServlet extends HttpServlet{
         telefone = Validar.telefoneValidado(telefone);
         if (telefone == null){
             req.setAttribute("erroTelefone", "Formato não compatível");
+            erro = true;
         }
 
         //Faz a validação do email
@@ -63,7 +66,7 @@ public class CadastroServlet extends HttpServlet{
 
         //Faz a validação do nome
         String nome = req.getParameter("nome");
-        if (nome == "" || nome == null) dadoFaltando = true;
+        if (nome == null || nome.equals("")) dadoFaltando = true;
 
         //Faz a validação do CEP
         String cep = req.getParameter("cep");
@@ -75,7 +78,7 @@ public class CadastroServlet extends HttpServlet{
 
         //Faz a validação da rua
         String rua = req.getParameter("rua");
-        if (rua == "" || rua == null) dadoFaltando = true;
+        if (rua == null || rua.equals("")) dadoFaltando = true;
 
         //Pega o complemento (pode ser nulo)
         String complemento = req.getParameter("complemento");
@@ -91,15 +94,15 @@ public class CadastroServlet extends HttpServlet{
 
         //Faz a validação do país
         String pais = req.getParameter("pais");
-        if (pais == "" || pais == null) dadoFaltando = true;
+        if (pais == null || pais.equals("")) dadoFaltando = true;
 
         //Faz a validação do estado
         String estado = req.getParameter("estado");
-        if (estado == "" || estado == null) dadoFaltando = true;
+        if (estado == null || estado.equals("")) dadoFaltando = true;
 
         //Faz a validação da cidade
         String cidade = req.getParameter("cidade");
-        if (cidade == "" || cidade == null) dadoFaltando = true;
+        if (cidade == null || cidade.equals("")) dadoFaltando = true;
 
 
         //Verifica se possui algum erro ou dado faltando e retorna ao usuário
@@ -114,8 +117,13 @@ public class CadastroServlet extends HttpServlet{
 
 //        Insere a impresa no banco de dados e manda o usuário para o início
         EmpresaDAO empresaDAO = new EmpresaDAO();
-        empresaDAO.inserir(empresa);
-        res.sendRedirect("/inicio");
+
+        switch (empresaDAO.inserir(empresa)){
+            case 1 -> res.sendRedirect("/inicio");
+            case 0 -> req.setAttribute("erroCadastrar", "Erro ao cadastrar empresa");
+            default -> req.setAttribute("erroBD", "Erro no banco de dados");
+        }
+
 
     }
 }
