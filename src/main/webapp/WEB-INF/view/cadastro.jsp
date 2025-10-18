@@ -120,6 +120,8 @@
       </div>
         <%if (request.getAttribute("dadoFaltando") != null){%>
         <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("dadoFaltando")%></span>
+        <%} else if (request.getAttribute("existeEmpresa") != null) {%>
+        <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("existeEmpresa")%></span>
         <%}%>
 
       <!-- Enviando / voltando -->

@@ -38,7 +38,7 @@ public class CadastroServlet extends HttpServlet{
         String cnpj = req.getParameter("cnpj");
         cnpj = Empresa.cnpjValidado(cnpj);
         if (cnpj == null){
-            req.setAttribute("erroCnpj", "Formato não compatível ou cnpj inválido.");
+            req.setAttribute("erroCnpj", "Formato não compatível ou cnpj inválido!");
             erro = true;
         }
 
@@ -46,14 +46,14 @@ public class CadastroServlet extends HttpServlet{
         String telefone = req.getParameter("telefone");
         telefone = Validar.telefoneValidado(telefone);
         if (telefone == null){
-            req.setAttribute("erroTelefone", "Formato não compatível");
+            req.setAttribute("erroTelefone", "Formato não compatível!");
             erro = true;
         }
 
         //Faz a validação do email
         String email = req.getParameter("email");
         if (! Validar.email(email)){
-            req.setAttribute("erroEmail", "Formato não compatível");
+            req.setAttribute("erroEmail", "Formato não compatível!");
             erro = true;
         }
 
@@ -61,7 +61,7 @@ public class CadastroServlet extends HttpServlet{
         String senha = req.getParameter("senha");
         if (! Validar.senha(senha)){
             req.setAttribute("erroSenha", "A senha deve conter no mínimo: 8 dígitos, 1 letra maiúscula," +
-                    " 1 letra minúscula, 1 número e 1 caractere especial ($*&@#!?)");
+                    " 1 letra minúscula, 1 número e 1 caractere especial ($*&@#!?)!");
             erro = true;
         }
 
@@ -73,7 +73,7 @@ public class CadastroServlet extends HttpServlet{
         String cep = req.getParameter("cep");
         cep = Validar.cepValidado(cep);
         if (cep == null){
-            req.setAttribute("erroCep", "");
+            req.setAttribute("erroCep", "Formato não compatível!");
             erro = true;
         }
 
@@ -89,7 +89,7 @@ public class CadastroServlet extends HttpServlet{
         try {
             numero = Integer.parseInt(req.getParameter("numero"));
         } catch (NumberFormatException e){
-            req.setAttribute("erroNumero", "Apenas valores numéricos são permitidos");
+            req.setAttribute("erroNumero", "Apenas valores numéricos são permitidos!");
             erro = true;
         }
 
@@ -107,7 +107,7 @@ public class CadastroServlet extends HttpServlet{
 
 
         //Verifica se possui algum erro ou dado faltando e retorna ao usuário
-        if (dadoFaltando) req.setAttribute("dadoFaltando", "Todas as informações com (*) devem ser preenchidas");
+        if (dadoFaltando) req.setAttribute("dadoFaltando", "Todas as informações com (*) devem ser preenchidas!");
         if (erro || dadoFaltando) {
             req.getRequestDispatcher("WEB-INF/view/cadastro.jsp").forward(req, res);
             return;
@@ -115,7 +115,7 @@ public class CadastroServlet extends HttpServlet{
 
         //Verifica se o email ou o cnpj já existem no banco de dados
         if ( (empresaDAO.buscarPorEmail(email) == 1) || (empresaDAO.buscarPorCnpj(cnpj) == 1) ){
-            req.setAttribute("existeEmpresa", "Essa empresa já existe");
+            req.setAttribute("existeEmpresa", "Essa empresa já existe!");
             req.getRequestDispatcher("WEB-INF/view/cadastro.jsp").forward(req, res);
             return;
         }
