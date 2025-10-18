@@ -1,6 +1,6 @@
 package com.frotaviva.servlet;
-import com.frotaviva.dao.EmpresaDAO;
-import com.frotaviva.model.Empresa;
+import com.frotaviva.dao.FiltrosDAO;
+import com.frotaviva.model.InformacoesHome;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,18 +17,17 @@ public class HomeServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession(true);
 
-        EmpresaDAO empresaDAO = new EmpresaDAO();
-        Empresa empresa;
+        InformacoesHome informacoesHome;
 
         Object id = session.getAttribute("idEmpresa");
 
         if (id != null) {
 
-            empresa = empresaDAO.buscarPorId((long) id);
+            informacoesHome = FiltrosDAO.informacoesHome((long) id);
 
-            if (empresa != null) {
+            if (informacoesHome != null) {
 
-                req.setAttribute("empresa", empresa);
+                req.setAttribute("informacoesHome", informacoesHome);
                 req.getRequestDispatcher("WEB-INF/view/home.jsp").forward(req, res);
                 return;
 
