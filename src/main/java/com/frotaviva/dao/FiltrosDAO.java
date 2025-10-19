@@ -15,13 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.frotaviva.util.Conexao;
 
-public class FiltrosDAO {
-
-    /*
-     * Logger utilizado para rastreamento e diagnóstico de exceções.
-     */
-
-    private static final Logger log = LoggerFactory.getLogger(FiltrosDAO.class);
+public class FiltrosDAO extends AbstractDAO {
 
     /*
      * Métodos da classe FiltrosDAO:

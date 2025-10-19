@@ -38,9 +38,9 @@
                 Página Inicial
             </a>
 
-            <a href="home/funcionarios">
-                <img src="../../assets/imgs/img-home/pessoa.png" alt="Funcionários">
-                Funcionários
+            <a href="home/perfis">
+                <img src="../../assets/imgs/img-home/pessoa.png" alt="Perfis">
+                Perfis
             </a>
         </nav>
     </aside>
@@ -109,7 +109,7 @@
                 <!-- Mudança de pagina (Barra inferior) -->
                 <div class="inf-bar">
                     <%if (paginaAtual > 1){%>
-                    <button class="bt-prev" onclick="window.location.href='/home/funcionarios?pagina=<%=paginaAtual - 1%>'">
+                    <button class="bt-prev" onclick="window.location.href='/home/perfis?pagina=<%=paginaAtual - 1%>'">
                         <img src="../../assets/imgs/img-home/seta-esq-tabela.png" alt="Anterior" class="icon-in-table">
                         Anterior
                     </button>
@@ -126,10 +126,14 @@
                         <% } %>
                     </div>
 
-                    <button class="bt-prox" onclick="window.location.href='/home/funcionarios?pagina=<%=paginaAtual + 1%>'">
+                    <%if (paginaAtual < totalPaginas){%>
+                    <button class="bt-prox" onclick="window.location.href='/home/perfis?pagina=<%=paginaAtual + 1%>'">
                         Próxima
                         <img src="../../assets/imgs/img-home/seta-dir-tabela.png" alt="Próxima" class="icon-seta">
                     </button>
+                    <%} else {%>
+                    <div></div>
+                    <%}%>
                 </div>
                 <!-- ------------------ -->
 

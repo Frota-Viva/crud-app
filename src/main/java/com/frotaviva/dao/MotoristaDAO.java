@@ -14,23 +14,19 @@ import com.frotaviva.model.Motorista;
 import com.frotaviva.util.Conexao;
 import com.frotaviva.util.Senhas;
 
-/*
- * Logger está sendo usado para melhor tratamento e rastreamento de exceções.
- * Ele registra mensagens de erro personalizadas com diagnóstico completo.
- */
 
-/*
- * A classe MotoristaDAO conta com os métodos:
- * inserir
- * atualizarNome|Email|Senha
- * deletar
- * buscarPorId
- * buscarTodos
- */
 
-public class MotoristaDAO implements DAO<Motorista>{
 
-    private static final Logger log = LoggerFactory.getLogger(MotoristaDAO.class);
+public class MotoristaDAO extends AbstractDAO implements DAO<Motorista>{
+
+    /*
+     * A classe MotoristaDAO conta com os métodos:
+     * inserir
+     * atualizarNome|Email|Senha
+     * deletar
+     * buscarPorId
+     * buscarTodos
+     */
 
     public int inserir(Motorista motorista) {
         Conexao conexao = new Conexao();

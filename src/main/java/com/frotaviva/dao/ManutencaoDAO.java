@@ -11,19 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManutencaoDAO implements DAO<Manutencao>{
-
-    /*
-     * A classe ManutencaoDAO conta com os métodos:
-     * inserir
-     * inserirDtConclusao
-     * alterarCusto|DescricaoServico
-     * deletar
-     * buscarPorId
-     * buscarTodos
-     */
-
-    private static final Logger log = LoggerFactory.getLogger(ManutencaoDAO.class);
+public class ManutencaoDAO extends AbstractDAO implements DAO<Manutencao>{
 
     /*
     * Logger está sendo usado para melhor tratamento e rastreamento de exceções.

@@ -12,24 +12,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * Logger está sendo usado para melhor tratamento e rastreamento de exceções.
- * Ele registra mensagens de erro personalizadas com diagnóstico completo.
- */
 
-/*
- * A classe TelefoneEmpresaDAO conta com os métodos:
- * inserir
- * atualizarTelefoneEmpresa
- * deletar
- * buscarPorId
- * buscarPorIdEmpresa
- * buscarTodos
- */
 
-public class TelefoneEmpresaDAO implements DAO<TelefoneEmpresa>{
 
-    private static final Logger log = LoggerFactory.getLogger(TelefoneEmpresaDAO.class);
+public class TelefoneEmpresaDAO extends AbstractDAO implements DAO<TelefoneEmpresa>{
+
+    /*
+     * A classe TelefoneEmpresaDAO conta com os métodos:
+     * inserir
+     * atualizarTelefoneEmpresa
+     * deletar
+     * buscarPorId
+     * buscarPorIdEmpresa
+     * buscarTodos
+     */
 
     public int inserir(TelefoneEmpresa telefoneEmpresa) {
         Conexao conexao = new Conexao();

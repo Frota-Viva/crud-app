@@ -13,12 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FrotaDAO implements DAO<Frota>{
-
-    /*
-     * Logger utilizado para rastreamento e diagnóstico de exceções.
-     */
-    private static final Logger log = LoggerFactory.getLogger(FrotaDAO.class);
+public class FrotaDAO extends AbstractDAO implements DAO<Frota>{
 
     /*
      * Métodos da classe FrotaDAO:

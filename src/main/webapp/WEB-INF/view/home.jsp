@@ -1,7 +1,14 @@
 <%@ page import="com.frotaviva.model.Empresa" %>
 <%@ page import="com.frotaviva.model.InformacoesHome" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%InformacoesHome informacoesHome = (InformacoesHome) request.getAttribute("informacoesHome");%>
+<%
+    Object reqInformacoesHome = request.getAttribute("informacoesHome");
+    InformacoesHome informacoesHome = null;
+    Empresa empresa = (Empresa) request.getAttribute("empresa");
+    if (reqInformacoesHome != null){
+        informacoesHome = (InformacoesHome) reqInformacoesHome;
+    }
+%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,24 +27,24 @@
             Página Inicial
         </a>
 
-        <a href="home/funcionarios">
+        <a href="home/perfis">
             <img src="../../assets/imgs/img-home/pessoa.png" alt="Funcionários">
-            Funcionários
+            Perfis
         </a>
     </nav>
 </aside>
 
 <main>
     <section class="informacoes">
-        <h1>Seja bem-vindo "<%=informacoesHome.getNome()%>"!</h1>
+        <h1>Seja bem-vindo "<%=informacoesHome != null ? informacoesHome.getNome() : empresa.getNome()%>"!</h1>
         <section class="cards">
             <article class="card-info" id="card-frota">
                 <h2>Caminhões</h2>
                 <div class="infos">
-                    <p>Total:<br><%= informacoesHome.getTamanhoFrota() %></p>
-                    <p>Inativos:<br><%= informacoesHome.getInativos() %></p>
-                    <p>Manutenção:<br><%= informacoesHome.getManutecao() %></p>
-                    <p>Ativos:<br><%= informacoesHome.getAtivos() %></p>
+                    <p>Total:<br><%= informacoesHome != null ? informacoesHome.getTamanhoFrota() : 0%></p>
+                    <p>Inativos:<br><%= informacoesHome != null ? informacoesHome.getInativos() : 0 %></p>
+                    <p>Manutenção:<br><%= informacoesHome != null ? informacoesHome.getManutecao() : 0 %></p>
+                    <p>Ativos:<br><%= informacoesHome != null ? informacoesHome.getAtivos() : 0 %></p>
                 </div>
                 <canvas id="#"></canvas>
 
@@ -59,9 +66,9 @@
             <article class="card-info" id="card-entregas">
                 <h2>Entregas</h2>
                 <div class="infos">
-                    <p>Total:<br><%= informacoesHome.getQtEntrega() %></p>
-                    <p>À Caminho:<br><%= informacoesHome.getPendente() %></p>
-                    <p>Atrasadas:<br><%= informacoesHome.getAtrasadas()%></p>
+                    <p>Total:<br><%= informacoesHome != null ? informacoesHome.getQtEntrega() : 0 %></p>
+                    <p>À Caminho:<br><%= informacoesHome != null ? informacoesHome.getPendente() : 0 %></p>
+                    <p>Atrasadas:<br><%= informacoesHome != null ? informacoesHome.getAtrasadas() : 0%></p>
                 </div>
 
                 <canvas id="#"></canvas>

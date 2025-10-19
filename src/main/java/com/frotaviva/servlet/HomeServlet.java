@@ -32,19 +32,20 @@ public class HomeServlet extends HttpServlet{
         }
         long idNum = (long) id;
 
-        //Pega a empresa e as informações da home pelo id
+        //Pega a empresa pelo id
         empresa = empresaDAO.buscarPorId(idNum);
-        informacoesHome = FiltrosDAO.informacoesHome(idNum);
 
         //Se a empresa for nula retorna pra Landing
         if (empresa == null){
             res.sendRedirect("/");
             return;
         }
-
         session.setAttribute("empresa", empresa); //Seta um atributo empresa na sessão com o objeto da empresa
 
-        //Se as informações da home não forem nulas seta o atributo
+        //Pega as informações da home pelo id
+        informacoesHome = FiltrosDAO.informacoesHome(idNum);
+
+        //Se as informações da home não forem nulas seta o atributo, senão seta um atributo de erro
         if (informacoesHome != null) {
             req.setAttribute("informacoesHome", informacoesHome);
         }

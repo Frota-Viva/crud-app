@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/home/funcionarios")
-public class FuncionariosServlet extends HttpServlet {
+@WebServlet("/home/perfis")
+public class PerfisServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession(true); //Pega a sessão
@@ -37,7 +37,7 @@ public class FuncionariosServlet extends HttpServlet {
         int paginaAtual = Integer.parseInt(pagina);
         //Verifica se o valor recebido é menor que 1
         if (paginaAtual < 1){
-            res.sendRedirect("/home/funcionarios");
+            res.sendRedirect("/home/perfis");
             return;
         }
 
@@ -52,6 +52,6 @@ public class FuncionariosServlet extends HttpServlet {
         req.setAttribute("paginaAtual", paginaAtual);
 
 
-        req.getRequestDispatcher("/WEB-INF/view/funcionarios.jsp").forward(req, res);
+        req.getRequestDispatcher("/WEB-INF/view/perfis.jsp").forward(req, res);
     }
 }
