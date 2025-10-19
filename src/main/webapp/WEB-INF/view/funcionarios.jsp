@@ -1,6 +1,9 @@
 <%@ page import="com.frotaviva.dao.MotoristaDAO" %>
 <%@ page import="com.frotaviva.model.Motorista" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.frotaviva.model.TelefoneMotorista" %>
+<%@ page import="com.frotaviva.dao.TelefoneMotoristaDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <head>
     <meta charset="UTF-8">
@@ -53,121 +56,89 @@
                     <!-- Cabeçalho da tabela -->
                     <div class="table-header">
 
-                        <%
-                            PrintWriter writer = null;
-                            MotoristaDAO dao = new MotoristaDAO();
-
-                            for(Motorista m : dao.buscarTodos()){
-                                writer.println("<div>" + m.getId() + "</div>");
-                                writer.println("<div>" + m.getNome() + "</div>");
-                                writer.println("<div>" + m.getEmail() + "</div>");
-                                writer.println("<div>" + m.getCpf() + "</div>");
-                                writer.println("<div>" + m.getSenha() + "</div>");
-                                writer.println("<div>" + m.getIdEmpresa() + "</div>");
-                            }
-                        %>
-
-                        <div>Placa</div>
+                        <div>ID</div>
                         <div>Nome</div>
                         <div>E-mail</div>
+                        <div>CPF</div>
+                        <div>Senha</div>
                         <div>Telefone</div>
-                        <div>Frota</div>
+                        <div>ID Empresa</div>
+                        <div>Telefone</div>
+
                         <div>
                             <button class="add-user">+ Adicionar Usuário</button>
                         </div>
                     </div>
 
+                    <%
+                        List<Motorista> motoristas = (List<Motorista>) request.getAttribute("motoristas");
+                        //List<TelefoneMotorista> telefones = (List<TelefoneMotorista>) request.getAttribute("telefones")
+                        TelefoneMotoristaDAO teleDao = new TelefoneMotoristaDAO();
+
+                        if (motoristas != null && !motoristas.isEmpty()){
+                            for (Motorista m : motoristas) {
+                                List<TelefoneMotorista> telefones = teleDao.buscarPorIdMotorista(m.getId());
+                                if ( telefones == null || telefones.isEmpty()){
+                    %>
+
+                        <!-- Linhas da tabela -->
+                        <div class="table-row">
+                            <div class="table-left-row">
+                                <div> <%= m.getId() %></div>
+                                <div><%= m.getNome() %></div>
+                                <div><%= m.getEmail() %></div>
+                                <div><%= m.getCpf()%></div>
+                                <div><%= m.getSenha()%></div>
+                                <div><%= m.getIdEmpresa()%></div>
+                                <div> Sem telefone</div>
+                            </div>
+                            <div class="actions">
+                                <button title="Visualizar"><img src="../../assets/imgs/img-home/olho.png" alt=""
+                                        class="icon-eye"></button>
+                                <button title="Editar"><img src="../../assets/imgs/img-home/editar.png" alt=""
+                                        class="icon-edit"></button>
+                                <button title="Excluir"><img src="../../assets/imgs/img-home/lixo.png" alt=""
+                                        class="icon-trash"></button>
+                            </div>
+                        </div>
+                <% } else{ for(TelefoneMotorista t : telefones){
+                %>
+                    <div class="table-row">
+                        <div class="table-left-row">
+                            <div> <%= m.getId() %></div>
+                            <div><%= m.getNome() %></div>
+                            <div><%= m.getEmail() %></div>
+                            <div><%= m.getCpf()%></div>
+                            <div><%= m.getSenha()%></div>
+                            <div><%= m.getIdEmpresa()%></div>
+                            <div> <%= t.getTelefoneMotorista()%></div>
+                        </div>
+                        <div class="actions">
+                            <button title="Visualizar"><img src="../../assets/imgs/img-home/olho.png" alt=""
+                                                            class="icon-eye"></button>
+                            <button title="Editar"><img src="../../assets/imgs/img-home/editar.png" alt=""
+                                                        class="icon-edit"></button>
+                            <button title="Excluir"><img src="../../assets/imgs/img-home/lixo.png" alt=""
+                                                         class="icon-trash"></button>
+                        </div>
+                    </div>
+                    <%
+                            }
+                        }
+                    %>
+                    <%}
+                        } else {
+                %>
                     <!-- Linhas da tabela -->
                     <div class="table-row">
                         <div class="table-left-row">
-                            <div>BEE 4R22</div>
-                            <div>Mauricio</div>
-                            <div>Maur1c10@gmail.com</div>
-                            <div>11 98765-0476</div>
-                            <div>NO-CARBON</div>
-                        </div>
-                        <div class="actions">
-                            <button title="Visualizar"><img src="../../assets/imgs/img-home/olho.png" alt=""
-                                    class="icon-eye"></button>
-                            <button title="Editar"><img src="../../assets/imgs/img-home/editar.png" alt=""
-                                    class="icon-edit"></button>
-                            <button title="Excluir"><img src="../../assets/imgs/img-home/lixo.png" alt=""
-                                    class="icon-trash"></button>
+                            <p>Nenhum motorista encontrado</p>
                         </div>
                     </div>
+                    <%
+                        }
+                    %>
 
-                    <div class="table-row">
-                        <div class="table-left-row">
-                            <div>BEE 4R22</div>
-                            <div>Mauricio</div>
-                            <div>Maur1c10@gmail.com</div>
-                            <div>11 98765-0476</div>
-                            <div>NO-CARBON</div>
-                        </div>
-                        <div class="actions">
-                            <button title="Visualizar"><img src="../../assets/imgs/img-home/olho.png" alt=""
-                                    class="icon-eye"></button>
-                            <button title="Editar"><img src="../../assets/imgs/img-home/editar.png" alt=""
-                                    class="icon-edit"></button>
-                            <button title="Excluir"><img src="../../assets/imgs/img-home/lixo.png" alt=""
-                                    class="icon-trash"></button>
-                        </div>
-                    </div>
-
-                    <div class="table-row">
-                        <div class="table-left-row">
-                            <div>BEE 4R22</div>
-                            <div>Mauricio</div>
-                            <div>Maur1c10@gmail.com</div>
-                            <div>11 98765-0476</div>
-                            <div>NO-CARBON</div>
-                        </div>
-                        <div class="actions">
-                            <button title="Visualizar"><img src="../../assets/imgs/img-home/olho.png" alt=""
-                                    class="icon-eye"></button>
-                            <button title="Editar"><img src="../../assets/imgs/img-home/editar.png" alt=""
-                                    class="icon-edit"></button>
-                            <button title="Excluir"><img src="../../assets/imgs/img-home/lixo.png" alt=""
-                                    class="icon-trash"></button>
-                        </div>
-                    </div>
-
-                    <div class="table-row">
-                        <div class="table-left-row">
-                            <div>BEE 4R22</div>
-                            <div>Mauricio</div>
-                            <div>Maur1c10@gmail.com</div>
-                            <div>11 98765-0476</div>
-                            <div>NO-CARBON</div>
-                        </div>
-                        <div class="actions">
-                            <button title="Visualizar"><img src="../../assets/imgs/img-home/olho.png" alt=""
-                                    class="icon-eye"></button>
-                            <button title="Editar"><img src="../../assets/imgs/img-home/editar.png" alt=""
-                                    class="icon-edit"></button>
-                            <button title="Excluir"><img src="../../assets/imgs/img-home/lixo.png" alt=""
-                                    class="icon-trash"></button>
-                        </div>
-                    </div>
-
-                    <div class="table-row">
-                        <div class="table-left-row">
-                            <div>BEE 4R22</div>
-                            <div>Mauricio</div>
-                            <div>Maur1c10@gmail.com</div>
-                            <div>11 98765-0476</div>
-                            <div>NO-CARBON</div>
-                        </div>
-                        <div class="actions">
-                            <button title="Visualizar"><img src="../../assets/imgs/img-home/olho.png" alt=""
-                                    class="icon-eye"></button>
-                            <button title="Editar"><img src="../../assets/imgs/img-home/editar.png" alt=""
-                                    class="icon-edit"></button>
-                            <button title="Excluir"><img src="../../assets/imgs/img-home/lixo.png" alt=""
-                                    class="icon-trash"></button>
-                        </div>
-                    </div>
-                </article>
                 <!-- ------------ -->
 
                 <!-- Mudança de pagina (Barra inferior) -->
@@ -191,9 +162,6 @@
                         <img src="../../assets/imgs/img-home/seta-dir-tabela.png" alt="Próxima" class="icon-seta">
                     </button>
                 </div>
-                <!-- ------------------ -->
-
-            </article>
             <!-- ------ -->
         </section>
     </main>
