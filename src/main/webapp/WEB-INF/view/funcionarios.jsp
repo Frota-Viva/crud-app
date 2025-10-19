@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<%@ page import="com.frotaviva.dao.MotoristaDAO" %>
+<%@ page import="com.frotaviva.model.Motorista" %>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Inicial - Frota Viva</title>
-    <link rel="stylesheet" href="../../CSS/homeStyle.css">
+    <link rel="stylesheet" href="../../assets/CSS/homeStyle.css">
 </head>
 
 <body>
@@ -16,7 +18,7 @@
                 Página Inicial
             </a>
 
-            <a href="funcionarios.html">
+            <a href="funcionarios.jsp">
                 <img src="../../assets/imgs/img-home/pessoa.png" alt="Funcionários">
                 Funcionários
             </a>
@@ -50,6 +52,21 @@
                 <article class="table-users">
                     <!-- Cabeçalho da tabela -->
                     <div class="table-header">
+
+                        <%
+                            PrintWriter writer = null;
+                            MotoristaDAO dao = new MotoristaDAO();
+
+                            for(Motorista m : dao.buscarTodos()){
+                                writer.println("<div>" + m.getId() + "</div>");
+                                writer.println("<div>" + m.getNome() + "</div>");
+                                writer.println("<div>" + m.getEmail() + "</div>");
+                                writer.println("<div>" + m.getCpf() + "</div>");
+                                writer.println("<div>" + m.getSenha() + "</div>");
+                                writer.println("<div>" + m.getIdEmpresa() + "</div>");
+                            }
+                        %>
+
                         <div>Placa</div>
                         <div>Nome</div>
                         <div>E-mail</div>
@@ -183,5 +200,3 @@
 </body>
 <style>
 </style>
-
-</html>

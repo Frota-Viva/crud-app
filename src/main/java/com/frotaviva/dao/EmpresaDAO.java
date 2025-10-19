@@ -16,12 +16,7 @@ import com.frotaviva.model.Endereco;
 import com.frotaviva.util.Conexao;
 import com.frotaviva.util.Senhas;
 
-public class EmpresaDAO implements DAO<Empresa>{
-
-    /*
-     * Logger está sendo usado para melhor tratamento e rastreamento de exceções.
-     * Ele registra mensagens de erro personalizadas com diagnóstico completo.
-     */
+public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
 
     /*
      * A classe EmpresaDAO conta com os métodos:
@@ -32,8 +27,6 @@ public class EmpresaDAO implements DAO<Empresa>{
      * buscarPorId
      * buscarTodos
      */
-
-    private static final Logger log = LoggerFactory.getLogger(EmpresaDAO.class);
 
     public int inserir(Empresa empresa){
         Conexao conexao = new Conexao();

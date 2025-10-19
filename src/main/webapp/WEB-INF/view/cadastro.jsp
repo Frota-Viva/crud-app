@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Frota Viva</title>
-    <link rel="stylesheet" href="../../CSS/loginStyle.css">
+    <link rel="stylesheet" href="../../assets/CSS/loginStyle.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
         </section>
 
         <section class="login-section">
-            <form action="cadastro" method="post" class="cadastro-forms">
+            <form action="cadastro.jsp" method="post" class="cadastro-forms">
                 <h1>Cadastro da Empresa</h1>
 
                 <div>

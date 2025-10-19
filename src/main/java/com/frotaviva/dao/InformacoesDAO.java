@@ -11,14 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InformacoesDAO implements DAO<Informacoes>{
-
-    /*
-     * Logger está sendo usado para tratamento e rastreamento de exceções.
-     * Ele permite registrar mensagens de erro detalhadas com diagnóstico completo.
-     */
-
-    private static final Logger log = LoggerFactory.getLogger(InformacoesDAO.class);
+public class InformacoesDAO extends AbstractDAO implements DAO<Informacoes>{
 
     /*
      * A classe InformacoesDAO conta com os métodos:

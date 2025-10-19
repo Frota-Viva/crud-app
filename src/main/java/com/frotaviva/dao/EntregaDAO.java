@@ -16,13 +16,7 @@ import com.frotaviva.model.Endereco;
 import com.frotaviva.model.Entrega;
 import com.frotaviva.util.Conexao;
 
-public class EntregaDAO implements DAO<Entrega>{
-
-    /*
-     * Logger está sendo usado para melhor rastreamento e diagnóstico de exceções.
-     */
-
-    private static final Logger log = LoggerFactory.getLogger(EntregaDAO.class);
+public class EntregaDAO extends AbstractDAO implements DAO<Entrega>{
 
     /*
      * Métodos da classe EntregaDAO:

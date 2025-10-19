@@ -7,18 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.frotaviva.exception.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.frotaviva.model.Caminhao;
 import com.frotaviva.util.Conexao;
 
-public class CaminhaoDAO implements DAO<Caminhao>{
-
-    /*
-    * Logger está sendo usado para melhor tratamento e rastreamento de exceções.
-    * Ele registra mensagens de erro personalizadas com diagnóstico completo.
-    */
+public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
 
     /*
      * A classe CaminhaoDAO conta com os métodos:
@@ -29,14 +25,13 @@ public class CaminhaoDAO implements DAO<Caminhao>{
      * buscarTodos
     */
 
-    private static final Logger log = LoggerFactory.getLogger(CaminhaoDAO.class);
+    public static final String ENTIDADE = "caminhao";
 
     public int inserir(Caminhao caminhao){
         Conexao conexao = new Conexao();
         Connection con = null;
 
-        String sql = "INSERT INTO caminhao(placa, status, km_rodados, modelo, capacidade, id_frota) " +
-                "VALUES(?, ?, ?, ?, ? ,?)";
+        String sql = "INSERT INTO caminhao(placa, status, km_rodados, modelo, capacidade, id_frota) VALUES(?, ?, ?, ?, ? ,?)";
 
         try {
             con = conexao.conectar();
@@ -55,12 +50,14 @@ public class CaminhaoDAO implements DAO<Caminhao>{
             } 
             return 0;
 
-        } 
-    
-        catch (SQLException sqle){
-            log.error("Erro ao cadastrar caminhão.", sqle);
-            return -1;
-        } 
+        }
+        catch (SQLException e){
+            log.error("Erro ao inserir caminhão", e);
+            throw new ErroAoInserir(e, ENTIDADE);
+        } catch (Exception e){
+            log.error("Erro na conexão com o banco de dados", e);
+            throw new ErroAoConectar(e);
+        }
         finally{
             conexao.desconectar(con);
         }
@@ -87,10 +84,13 @@ public class CaminhaoDAO implements DAO<Caminhao>{
             return 0;
 
         } 
-        catch (SQLException sqle){
-            log.error("Erro ao atualizar placa do caminhão", sqle);
-            return -1;
-        } 
+        catch (SQLException e){
+            log.error("Erro ao atualizar placa do caminhão", e);
+            throw new ErroAoAtualizar(e, ENTIDADE);
+        } catch (Exception e){
+            log.error("Erro na conexão com o banco de dados", e);
+            throw new ErroAoConectar(e);
+        }
         finally {
             conexao.desconectar(conn);
         }
@@ -115,10 +115,13 @@ public class CaminhaoDAO implements DAO<Caminhao>{
                 return 1;
             } 
             return 0;
-        } 
+        }
         catch (SQLException e){
-            log.error("Erro ao atualizar o status do caminhão", e);
-            return -1;
+            log.error("Erro ao atualizar status do caminhão", e);
+            throw new ErroAoAtualizar(e, ENTIDADE);
+        } catch (Exception e){
+            log.error("Erro na conexão", e);
+            throw new ErroAoConectar(e);
         }
         finally{
             conexao.desconectar(conn);
@@ -145,16 +148,19 @@ public class CaminhaoDAO implements DAO<Caminhao>{
             }
             return 0;
 
-        } catch (SQLException sqle){
-            log.error("Erro ao atualizar os kms_rodados.", sqle);
-            return -1;
-        } 
+        } catch (SQLException e){
+            log.error("Erro ao atualizar kilometragem do caminhão", e);
+            throw new ErroAoAtualizar(e, ENTIDADE);
+        } catch (Exception e){
+            log.error("Erro na conexão", e);
+            throw new ErroAoConectar(e);
+        }
         finally {
             conexao.desconectar(conn);
         }
     }
 
-    public static int atualizarIdFrota(Caminhao caminhao){
+    public int atualizarIdFrota(Caminhao caminhao){
         Conexao conexao = new Conexao();
         Connection conn = null;
         
@@ -174,8 +180,11 @@ public class CaminhaoDAO implements DAO<Caminhao>{
             return 0;
 
         } catch (SQLException e){
-            log.error("Erro ao atualizar o ID da frota.", e);
-            return -1;
+            log.error("Erro ao atualizar frota do caminhão", e);
+            throw new ErroAoAtualizar(e, ENTIDADE);
+        } catch (Exception e){
+            log.error("Erro na conexão com o banco de dados", e);
+            throw new ErroAoConectar(e);
         }
         finally {
             conexao.desconectar(conn);
@@ -204,9 +213,11 @@ public class CaminhaoDAO implements DAO<Caminhao>{
             }
             return 0;
 
-        } catch (SQLException e) {
-            log.error("Erro ao deletar caminhão. ",e);
-            return -1;
+        } catch (SQLException e){
+            log.error("Erro ao deletar caminhão", e);
+            throw new ErroAoDeletar(e, ENTIDADE);
+        } catch (Exception e){
+            throw new ErroAoConectar(e);
         }
         finally{
             conexao.desconectar(conn);
@@ -245,10 +256,12 @@ public class CaminhaoDAO implements DAO<Caminhao>{
             }
             return null;
 
-        } 
-        catch (SQLException e){
-            log.error("Erro ao recuperar o caminhão. ", e);
-            return null;
+        } catch (SQLException e){
+            log.error("Erro ao inserir caminhão", e);
+            throw new ErroAoConsultar(e, ENTIDADE);
+        } catch (Exception e){
+            log.error("Erro na conexão com o banco de dados", e);
+            throw new ErroAoConectar(e);
         }
         finally{
             conexao.desconectar(conn);
@@ -273,12 +286,12 @@ public class CaminhaoDAO implements DAO<Caminhao>{
                 long idCaminhao = rs.getLong("id");
                 String placa = rs.getString("placa");
                 String status = rs.getString("status");
-                int km_rodados = rs.getInt("kms_rodados");
+                int kms_rodados = rs.getInt("kms_rodados");
                 String modelo = rs.getString("modelo");
                 int capacidade = rs.getInt("capacidade");
                 long id_frota = rs.getLong("id_frota");
 
-                Caminhao caminhao = new Caminhao(idCaminhao, placa, status, km_rodados, modelo,
+                Caminhao caminhao = new Caminhao(idCaminhao, placa, status, kms_rodados, modelo,
                         capacidade, id_frota);
                 caminhoes.add(caminhao);
             }
@@ -288,12 +301,13 @@ public class CaminhaoDAO implements DAO<Caminhao>{
 
             return caminhoes;
 
-        }
-        catch (SQLException e){
-            log.error("Erro ao resgatar o caminhão. ", e);
-            return null;
-        }
-        finally{
+        } catch (SQLException e){
+            log.error("Erro ao consultar caminhão", e);
+            throw new ErroAoConsultar(e, ENTIDADE);
+        } catch (Exception e){
+            log.error("Erro na conexão com o banco de dados", e);
+            throw new ErroAoConectar(e);
+        } finally{
             conexao.desconectar(conn);
         }
 
