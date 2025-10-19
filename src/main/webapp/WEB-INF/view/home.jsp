@@ -15,12 +15,12 @@
 <aside class="menu-lateral">
     <img src="../../assets/imgs/img-home/logo2.png" alt="logo" class="logo">
     <nav>
-        <a href="home.jsp">
+        <a href="home">
             <img src="../../assets/imgs/img-home/casa.png" alt="Pagina inicial">
             Página Inicial
         </a>
 
-        <a href="funcionarios.html">
+        <a href="home/funcionarios">
             <img src="../../assets/imgs/img-home/pessoa.png" alt="Funcionários">
             Funcionários
         </a>
@@ -32,7 +32,7 @@
         <h1>Seja bem-vindo "<%=informacoesHome.getNome()%>"!</h1>
         <section class="cards">
             <article class="card-info" id="card-frota">
-                <h2>Frota</h2>
+                <h2>Caminhões</h2>
                 <div class="infos">
                     <p>Total:<br><%= informacoesHome.getTamanhoFrota() %></p>
                     <p>Inativos:<br><%= informacoesHome.getInativos() %></p>
@@ -61,7 +61,7 @@
                 <div class="infos">
                     <p>Total:<br><%= informacoesHome.getQtEntrega() %></p>
                     <p>À Caminho:<br><%= informacoesHome.getPendente() %></p>
-                    <p>Atrasadas:<br><%= informacoesHome.getAtrasadas() %></p>
+                    <p>Atrasadas:<br><%= informacoesHome.getAtrasadas()%></p>
                 </div>
 
                 <canvas id="#"></canvas>
