@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.frotaviva.model.InformacoesHome;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,7 +75,7 @@ public class FiltrosDAO extends AbstractDAO {
             JOIN caminhao c ON m.id = c.id_motorista
             ORDER BY m.nome
             """
-        ;
+                ;
 
         try {
             conn = conexao.conectar();
@@ -95,6 +96,40 @@ public class FiltrosDAO extends AbstractDAO {
             return motoristasCaminhoes;
 
         } catch (SQLException sqle) {
+            log.error("Erro ao buscar informações do caminhão", sqle);
+            return null;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public static InformacoesHome informacoesHome(long idEmpresa){
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        String sql = "select * from informacoesHome where id_empresa=?";
+
+        try {
+            conn = conexao.conectar();
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setLong(1,idEmpresa);
+
+            ResultSet rset = stmt.executeQuery();
+
+            if (rset.next()){
+                return new InformacoesHome(rset.getString("nome"),
+                        rset.getLong("id_empresa"),
+                        rset.getInt("tamanho_frota"),
+                        rset.getInt("ativos"),
+                        rset.getInt("inativos"),
+                        rset.getInt("manutencao"),
+                        rset.getInt("atrasadas"),
+                        rset.getInt("pendente"),
+                        rset.getInt("qt_entrega"));
+            }
+            return null;
+
+        } catch (SQLException sqle){
             log.error("Erro ao buscar informações do caminhão", sqle);
             return null;
         } finally {

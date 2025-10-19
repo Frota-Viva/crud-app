@@ -242,8 +242,11 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
 
+            String hashSenha = Senhas.getSenhaHash(email);
+            if (! Senhas.verificarSenha(senha, hashSenha)) return null;
+
             stmt.setString(1, email);
-            stmt.setString(2, senha);
+            stmt.setString(2, hashSenha);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -354,6 +357,60 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
         } catch (SQLException sqle){
             log.error("Erro ao buscar empresa", sqle);
             return null;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public int buscarPorEmail(String email){
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        String sql = "SELECT * FROM empresa WHERE email = ?";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, email);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()){
+                return 1;
+            }
+
+            return 0;
+
+        } catch (SQLException sqle){
+            log.error("Erro ao buscar empresa", sqle);
+            return -1;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public int buscarPorCnpj(String cnpj){
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        String sql = "SELECT * FROM empresa WHERE email = ?";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, cnpj);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()){
+                return 1;
+            }
+
+            return 0;
+
+        } catch (SQLException sqle){
+            log.error("Erro ao buscar empresa", sqle);
+            return -1;
         } finally {
             conexao.desconectar(conn);
         }

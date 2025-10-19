@@ -10,6 +10,13 @@ public class TelefoneEmpresa {
         this.telefoneEmpresa = telefoneEmpresa;
         this.idEmpresa=idEmpresa;
     }
+    public TelefoneEmpresa(String telefoneEmpresa){
+        this.telefoneEmpresa = telefoneEmpresa;
+    }
+    public TelefoneEmpresa(String telefoneEmpresa, long idEmpresa){
+        this.telefoneEmpresa = telefoneEmpresa;
+        this.idEmpresa = idEmpresa;
+    }
     public long getId(){
         return this.id;
     }

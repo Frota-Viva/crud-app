@@ -45,4 +45,31 @@ public class Senhas {
         }
         return null;
     }
+    public static String getSenhaHash(String email){
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        String sql = "SELECT senha FROM empresa WHERE email = ?";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, email);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()){
+                return rs.getString("senha");
+            }
+            return "";
+        }
+        catch (SQLException sqle){
+            log.error("Erro ao recuperar senha", sqle);
+        }
+        finally{
+            conexao.desconectar(conn);
+        }
+        return null;
+    }
 }

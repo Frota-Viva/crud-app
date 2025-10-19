@@ -21,6 +21,7 @@ public class LoginServlet extends HttpServlet{
         String senha = req.getParameter("senha");
 
         EmpresaDAO empresaDAO = new EmpresaDAO();
+
         Empresa empresa = empresaDAO.getEmpresa(email, senha);
 
         if (empresa != null) {
