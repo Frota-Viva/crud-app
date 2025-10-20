@@ -33,7 +33,7 @@
     <aside class="menu-lateral">
         <img src="../../assets/imgs/img-home/logo2.png" alt="logo" class="logo">
         <nav>
-            <a href="home">
+            <a href="/home">
                 <img src="../../assets/imgs/img-home/casa.png" alt="Pagina inicial">
                 Página Inicial
             </a>

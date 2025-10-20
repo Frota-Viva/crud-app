@@ -16,6 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funcionários - Frota Viva</title>
     <link rel="stylesheet" href="../../assets/CSS/homeStyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../assets/JS/graficos.js"></script>
 </head>
 
 <body>
@@ -41,12 +43,12 @@
             <article class="card-info" id="card-frota">
                 <h2>Caminhões</h2>
                 <div class="infos">
-                    <p>Total:<br><%= informacoesHome != null ? informacoesHome.getTamanhoFrota() : 0%></p>
-                    <p>Inativos:<br><%= informacoesHome != null ? informacoesHome.getInativos() : 0 %></p>
-                    <p>Manutenção:<br><%= informacoesHome != null ? informacoesHome.getManutecao() : 0 %></p>
-                    <p>Ativos:<br><%= informacoesHome != null ? informacoesHome.getAtivos() : 0 %></p>
+                    <p id="totalCaminhoes">Total:<br><%= informacoesHome != null ? informacoesHome.getTamanhoFrota() : 0%></p>
+                    <p id="inativosCaminhoes">Inativos:<br><%= informacoesHome != null ? informacoesHome.getInativos() : 0 %></p>
+                    <p id="manutencaoCaminhoes">Manutenção:<br><%= informacoesHome != null ? informacoesHome.getManutecao() : 0 %></p>
+                    <p id="ativosCaminhoes">Ativos:<br><%= informacoesHome != null ? informacoesHome.getAtivos() : 0 %></p>
                 </div>
-                <canvas id="#"></canvas>
+                <canvas id="graficoCaminhoes"></canvas>
 
                 <div class="descricao-grafco">
                     <div>
@@ -62,16 +64,17 @@
                         <div>inativos</div>
                     </div>
                 </div>
+                </div>
             </article>
             <article class="card-info" id="card-entregas">
                 <h2>Entregas</h2>
                 <div class="infos">
-                    <p>Total:<br><%= informacoesHome != null ? informacoesHome.getQtEntrega() : 0 %></p>
-                    <p>À Caminho:<br><%= informacoesHome != null ? informacoesHome.getPendente() : 0 %></p>
-                    <p>Atrasadas:<br><%= informacoesHome != null ? informacoesHome.getAtrasadas() : 0%></p>
+                    <p id="totalEntregas">Total:<br><%= informacoesHome != null ? informacoesHome.getQtEntrega() : 0 %></p>
+                    <p id="aCaminhoEntregas">À Caminho:<br><%= informacoesHome != null ? informacoesHome.getPendente() : 0 %></p>
+                    <p id="realizadasEntregas">Realizadas:<br><%= informacoesHome != null ? informacoesHome.getAtrasadas() : 0%></p>
                 </div>
 
-                <canvas id="#"></canvas>
+                <canvas id="graficoEntregas"></canvas>
 
                 <div class="descricao-grafco">
                     <div>
