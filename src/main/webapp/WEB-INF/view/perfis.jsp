@@ -90,7 +90,7 @@
                             <div><%=perfil.get("nome")%></div>
                             <div><%=perfil.get("email")%></div>
                             <div><%=perfil.get("telefone_principal")%></div>
-                            <div>NO-CARBON</div>
+                            <div><%=perfil.get("tipo_frota")%></div>
                         </div>
                         <div class="actions">
                             <button title="Visualizar"><img src="../../assets/imgs/img-home/olho.png" alt=""
