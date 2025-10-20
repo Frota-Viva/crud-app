@@ -10,7 +10,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/AbstractDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/ErroAoAtualizar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/ErroAoConectar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/ErroAoConsultar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/ErroAoDeletar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/ErroAoInserir.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/MotoristasServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/CaminhaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/CaminhaoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EmpresaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EntregaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EntregaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/FiltrosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/FiltrosDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/FrotaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/FrotaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/InformacoesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/InformacoesDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/ManutencaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/ManutencaoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/MotoristaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/MotoristaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneEmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneEmpresaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneMotoristaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneMotoristaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/DAOException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/DAOException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/FuncionariosServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/PerfisServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/HomeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/HomeServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/funcionarios.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/perfis.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/home.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +48,6 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
-        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -47,44 +68,46 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="32s88QbKYNokaAmFhsdORrX8QpT" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Maven.Frota-Viva [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Frota-Viva [org.apache.maven.plugins:maven-install-plugin:2.4:install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Frota-Viva [org.apache.maven.plugins:maven-war-plugin:3.3.2:exploded].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Frota-Viva [org.apache.maven.plugins:maven-war-plugin:3.3.2:war].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Tomcat Server.Tomcat 11.0.11.executor&quot;: &quot;Run&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Java&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/ricardojunior-ieg/OneDrive - Instituto J&amp;F/Interdisciplinar/Frota Viva/Codigos/crud-app/src/main/webapp/assets/imgs&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\crud-app\src\main\webapp\assets\imgs" />

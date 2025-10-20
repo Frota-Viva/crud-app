@@ -8,11 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.frotaviva.exception.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.frotaviva.model.Caminhao;
 import com.frotaviva.util.Conexao;
+
+import static com.frotaviva.dao.AbstractDAO.Operacao.*;
 
 public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
 
@@ -21,13 +20,11 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
      * inserir
      * atualizarPlaca|KmRodados|Status|idFrota
      * deletar
-     * buscarPorId
-     * buscarTodos
+     * buscarPorId|Todos
     */
 
-    public static final String ENTIDADE = "caminhao";
-
     public int inserir(Caminhao caminhao){
+        PreparedStatement stmt = null;
         Conexao conexao = new Conexao();
         Connection con = null;
 
@@ -35,7 +32,7 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
 
         try {
             con = conexao.conectar();
-            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt = con.prepareStatement(sql);
             
             stmt.setString(1, caminhao.getPlaca());
             stmt.setString(2, caminhao.getStatus());
@@ -44,27 +41,23 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
             stmt.setInt(5, caminhao.getCapacidade());
             stmt.setLong(6, caminhao.getIdFrota());
 
-            if (stmt.executeUpdate() > 0){
-                stmt.close(); 
-                return 1;
-            } 
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
         }
         catch (SQLException e){
             log.error("Erro ao inserir caminhão", e);
-            throw new ErroAoInserir(e, ENTIDADE);
-        } catch (Exception e){
-            log.error("Erro na conexão com o banco de dados", e);
-            throw new ErroAoConectar(e);
+            throw throwDAOException(e, INSERT);
         }
         finally{
+            fechar(stmt);
             conexao.desconectar(con);
         }
     }
 
     public int atualizarPlaca(Caminhao caminhao){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "UPDATE caminhao SET placa = ? WHERE id = ?";
@@ -72,26 +65,21 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
         try {
             
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             
             stmt.setString(1, caminhao.getPlaca());
             stmt.setLong(2, caminhao.getId());
 
-            if (stmt.executeUpdate() > 0){
-                stmt.close(); 
-                return 1;
-            } 
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } 
+        }
         catch (SQLException e){
             log.error("Erro ao atualizar placa do caminhão", e);
-            throw new ErroAoAtualizar(e, ENTIDADE);
-        } catch (Exception e){
-            log.error("Erro na conexão com o banco de dados", e);
-            throw new ErroAoConectar(e);
+            throw throwDAOException(e, UPDATE);
         }
         finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
@@ -99,31 +87,27 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
 
     public int atualizarStatus(Caminhao caminhao){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "UPDATE caminhao SET status = ? WHERE id = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             
             stmt.setString(1, caminhao.getStatus());
             stmt.setLong(2, caminhao.getId());
 
-            if (stmt.executeUpdate() > 0){
-                stmt.close(); 
-                return 1;
-            } 
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
         }
         catch (SQLException e){
             log.error("Erro ao atualizar status do caminhão", e);
-            throw new ErroAoAtualizar(e, ENTIDADE);
-        } catch (Exception e){
-            log.error("Erro na conexão", e);
-            throw new ErroAoConectar(e);
+            throw throwDAOException(e, UPDATE);
         }
         finally{
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
@@ -131,62 +115,54 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
 
     public int atualizarKmRodados(Caminhao caminhao){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "UPDATE caminhao SET kms_rodados = ? WHERE id = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             
             stmt.setInt(1, caminhao.getKmRodados());
             stmt.setLong(2, caminhao.getId());
 
-            if (stmt.executeUpdate() > 0){
-                stmt.close();
-                return 1;
-            }
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
         } catch (SQLException e){
             log.error("Erro ao atualizar kilometragem do caminhão", e);
-            throw new ErroAoAtualizar(e, ENTIDADE);
-        } catch (Exception e){
-            log.error("Erro na conexão", e);
-            throw new ErroAoConectar(e);
+            throw throwDAOException(e, UPDATE);
         }
         finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
 
     public int atualizarIdFrota(Caminhao caminhao){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
         
         String sql = "UPDATE caminhao SET id_frota = ? WHERE id = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             
             stmt.setLong(1, caminhao.getIdFrota());
             stmt.setLong(2, caminhao.getId());
 
-            if (stmt.executeUpdate() > 0){
-                stmt.close(); 
-                return 1;
-            } 
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
         } catch (SQLException e){
             log.error("Erro ao atualizar frota do caminhão", e);
-            throw new ErroAoAtualizar(e, ENTIDADE);
-        } catch (Exception e){
-            log.error("Erro na conexão com o banco de dados", e);
-            throw new ErroAoConectar(e);
+            throw throwDAOException(e, UPDATE);
         }
         finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
@@ -195,6 +171,7 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
 
     public int deletar(long id){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "DELETE FROM caminhao WHERE id = ?";
@@ -202,24 +179,20 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
         try {
             
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setLong(1, id);
 
 
-            if (stmt.executeUpdate() > 0){
-                stmt.close();
-                return 1;
-            }
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
         } catch (SQLException e){
             log.error("Erro ao deletar caminhão", e);
-            throw new ErroAoDeletar(e, ENTIDADE);
-        } catch (Exception e){
-            throw new ErroAoConectar(e);
+            throw throwDAOException(e, DELETE);
         }
         finally{
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
@@ -227,17 +200,19 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
 
     public Caminhao buscarPorId(long id) {
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         Connection conn = null;
 
         String sql = "SELECT * FROM caminhao WHERE id = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             
             stmt.setLong(1, id);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             if (rs.next()){
 
@@ -249,21 +224,16 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
                 int capacidade = rs.getInt("capacidade");
                 long id_frota = rs.getLong("id_frota");
 
-                stmt.close();
-                rs.close();
-
                 return new Caminhao(idCaminhao, placa, status, km_rodados, modelo, capacidade, id_frota);
             }
             return null;
 
         } catch (SQLException e){
-            log.error("Erro ao inserir caminhão", e);
-            throw new ErroAoConsultar(e, ENTIDADE);
-        } catch (Exception e){
-            log.error("Erro na conexão com o banco de dados", e);
-            throw new ErroAoConectar(e);
+            log.error("Erro ao consultar caminhão", e);
+            throw throwDAOException(e, SELECT);
         }
         finally{
+            fechar(stmt, rs);
             conexao.desconectar(conn);
         }
     }
@@ -271,15 +241,17 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
     public List<Caminhao> buscarTodos() {
         List<Caminhao> caminhoes = new ArrayList<>();
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         Connection conn = null;
 
         String sql = "SELECT * FROM caminhao";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             while (rs.next()){
 
@@ -295,19 +267,13 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
                         capacidade, id_frota);
                 caminhoes.add(caminhao);
             }
-
-            stmt.close();
-            rs.close();
-
             return caminhoes;
 
         } catch (SQLException e){
             log.error("Erro ao consultar caminhão", e);
-            throw new ErroAoConsultar(e, ENTIDADE);
-        } catch (Exception e){
-            log.error("Erro na conexão com o banco de dados", e);
-            throw new ErroAoConectar(e);
+            throw throwDAOException(e, SELECT);
         } finally{
+            fechar(stmt, rs);
             conexao.desconectar(conn);
         }
 

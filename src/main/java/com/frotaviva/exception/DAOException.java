@@ -6,6 +6,10 @@ public abstract class DAOException extends RuntimeException {
         super(message);
     }
 
+    public DAOException(Throwable cause) {
+        super(cause);
+    }
+
     public DAOException(String message, Throwable cause) {
         super(message, cause);
     }

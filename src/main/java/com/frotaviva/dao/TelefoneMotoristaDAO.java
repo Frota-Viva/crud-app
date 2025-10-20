@@ -1,18 +1,15 @@
 package com.frotaviva.dao;
 
-import com.frotaviva.util.Conexao;
 import com.frotaviva.model.TelefoneMotorista;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.frotaviva.util.Conexao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TelefoneMotoristaDAO extends AbstractDAO implements DAO<TelefoneMotorista>{
+import static com.frotaviva.dao.AbstractDAO.Operacao.*;
+
+public class TelefoneMotoristaDAO extends AbstractDAO implements DAO<TelefoneMotorista> {
 
     /*
      * A classe TelefoneMotoristaDAO conta com os métodos:
@@ -25,170 +22,172 @@ public class TelefoneMotoristaDAO extends AbstractDAO implements DAO<TelefoneMot
      */
 
     public int inserir(TelefoneMotorista telefoneMotorista) {
+        PreparedStatement stmt = null;
+        Connection con = null;
         Conexao conexao = new Conexao();
-        Connection conn = null;
-        
         String sql = "INSERT INTO telefone_motorista(telefone_motorista, id_motorista) VALUES(?, ?)";
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
 
             stmt.setString(1, telefoneMotorista.getTelefoneMotorista());
             stmt.setLong(2, telefoneMotorista.getIdMotorista());
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
         } catch (SQLException e) {
-            log.error("Erro ao cadastrar telefone do motorista.", e);
-            return -1;
+            log.error("Erro ao inserir telefone do motorista", e);
+            throw throwDAOException(e, INSERT);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt);
+            conexao.desconectar(con);
         }
     }
 
     public int atualizarTelefoneMotorista(TelefoneMotorista telefoneMotorista) {
+        PreparedStatement stmt = null;
+        Connection con = null;
         Conexao conexao = new Conexao();
-        Connection conn = null;
         String sql = "UPDATE telefone_motorista SET telefone_motorista = ? WHERE id = ?";
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
 
             stmt.setString(1, telefoneMotorista.getTelefoneMotorista());
             stmt.setLong(2, telefoneMotorista.getId());
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
         } catch (SQLException e) {
-            log.error("Erro ao atualizar telefone do motorista.", e);
-            return -1;
+            log.error("Erro ao atualizar telefone do motorista", e);
+            throw throwDAOException(e, UPDATE);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt);
+            conexao.desconectar(con);
         }
     }
 
     public int deletar(long id) {
+        PreparedStatement stmt = null;
+        Connection con = null;
         Conexao conexao = new Conexao();
-        Connection conn = null;
         String sql = "DELETE FROM telefone_motorista WHERE id = ?";
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
 
             stmt.setLong(1, id);
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
         } catch (SQLException e) {
-            log.error("Erro ao deletar telefone do motorista.", e);
-            return -1;
+            log.error("Erro ao deletar telefone do motorista", e);
+            throw throwDAOException(e, DELETE);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt);
+            conexao.desconectar(con);
         }
     }
 
     public TelefoneMotorista buscarPorId(long id) {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
         Conexao conexao = new Conexao();
-        Connection conn = null;
         String sql = "SELECT * FROM telefone_motorista WHERE id = ?";
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
-
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
             stmt.setLong(1, id);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             if (rs.next()) {
-                long idTelefoneMotorista = rs.getLong("id");
-                String telefoneMotorista = rs.getString("telefone_motorista");
-                long idMotorista = rs.getLong("id_motorista");
-
-                return new TelefoneMotorista(idTelefoneMotorista, telefoneMotorista, idMotorista);
+                return new TelefoneMotorista(
+                        rs.getLong("id"),
+                        rs.getString("telefone_motorista"),
+                        rs.getLong("id_motorista")
+                );
             }
             return null;
 
         } catch (SQLException e) {
-            log.error("Erro ao resgatar telefone do motorista.", e);
-            return null;
+            log.error("Erro ao buscar telefone do motorista por ID", e);
+            throw throwDAOException(e, SELECT);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt, rs);
+            conexao.desconectar(con);
         }
     }
-    public List<TelefoneMotorista> buscarPorIdMotorista(long id_motorista) {
-        List<TelefoneMotorista> motoristas = new ArrayList<>();
+
+    public List<TelefoneMotorista> buscarPorIdMotorista(long idMotorista) {
+        List<TelefoneMotorista> telefones = new ArrayList<>();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
         Conexao conexao = new Conexao();
-        Connection conn = null;
-        String sql = "SELECT * FROM telefone_empresa WHERE id_motorista = ?";
+        String sql = "SELECT * FROM telefone_motorista WHERE id_motorista = ?";
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
+            stmt.setLong(1, idMotorista);
 
-            stmt.setLong(1, id_motorista);
-
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
-                long idTelefoneMotorista = rs.getLong("id");
-                String telefoneMotorista = rs.getString("telefone_motorista");
-                long idMotorista = rs.getLong("id_motorista");
-
-                TelefoneMotorista telefone = new TelefoneMotorista(idTelefoneMotorista, telefoneMotorista, idMotorista);
-                motoristas.add(telefone);
+                telefones.add(new TelefoneMotorista(
+                        rs.getLong("id"),
+                        rs.getString("telefone_motorista"),
+                        rs.getLong("id_motorista")
+                ));
             }
-            return motoristas;
+            return telefones;
 
         } catch (SQLException e) {
-            log.error("Erro ao resgatar os telefones do motorista.", e);
-            return null;
+            log.error("Erro ao buscar telefones do motorista", e);
+            throw throwDAOException(e, SELECT);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt, rs);
+            conexao.desconectar(con);
         }
     }
+
     public List<TelefoneMotorista> buscarTodos() {
-        List<TelefoneMotorista> motoristas = new ArrayList<>();
+        List<TelefoneMotorista> telefones = new ArrayList<>();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
         Conexao conexao = new Conexao();
-        Connection conn = null;
-        String sql = "SELECT * FROM telefone_empresa";
+        String sql = "SELECT * FROM telefone_motorista";
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
-
-            ResultSet rs = stmt.executeQuery();
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
-                long idTelefoneMotorista = rs.getLong("id");
-                String telefoneMotorista = rs.getString("telefone_motorista");
-                long idMotorista = rs.getLong("id_motorista");
-
-                TelefoneMotorista telefone = new TelefoneMotorista(idTelefoneMotorista, telefoneMotorista, idMotorista);
-                motoristas.add(telefone);
+                telefones.add(new TelefoneMotorista(
+                        rs.getLong("id"),
+                        rs.getString("telefone_motorista"),
+                        rs.getLong("id_motorista")
+                ));
             }
-            return motoristas;
+            return telefones;
 
         } catch (SQLException e) {
-            log.error("Erro ao resgatar os telefones.", e);
-            return null;
+            log.error("Erro ao buscar todos os telefones", e);
+            throw throwDAOException(e, SELECT);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt, rs);
+            conexao.desconectar(con);
         }
     }
 }

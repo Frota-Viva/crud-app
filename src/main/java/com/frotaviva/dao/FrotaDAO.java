@@ -1,17 +1,17 @@
 package com.frotaviva.dao;
 
-import com.frotaviva.model.Frota;
-import com.frotaviva.util.Conexao;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.frotaviva.exception.*;
+import com.frotaviva.model.Frota;
+import com.frotaviva.util.Conexao;
+
+import static com.frotaviva.dao.AbstractDAO.Operacao.*;
 
 public class FrotaDAO extends AbstractDAO implements DAO<Frota>{
 
@@ -20,160 +20,155 @@ public class FrotaDAO extends AbstractDAO implements DAO<Frota>{
      * inserir
      * atualizarTamanhoFrota|TipoFrota|Regiao
      * deletar
-     * buscarPorId
-     * buscarTodos
+     * buscarPorId|Todos
      */
 
     public int inserir(Frota frota) {
+        PreparedStatement stmt = null;
         Conexao conexao = new Conexao();
-        Connection conn = null;
+        Connection con = null;
 
         String sql = "INSERT INTO frota(tamanho_frota, tipo_frota, regiao, id_empresa) VALUES(?, ?, ?, ?)";
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, frota.getTamanhoFrota());
             stmt.setString(2, frota.getTipoFrota());
             stmt.setString(3, frota.getRegiao());
             stmt.setLong(4, frota.getIdEmpresa());
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle) {
-            log.error("Erro ao cadastrar frota", sqle);
-            return -1;
+        } catch (SQLException e) {
+            log.error("Erro ao cadastrar frota", e);
+            throw throwDAOException(e, INSERT);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt);
+            conexao.desconectar(con);
         }
     }
 
     public int atualizarTamanhoFrota(Frota frota) {
         Conexao conexao = new Conexao();
-        Connection conn = null;
+        PreparedStatement stmt = null;
+        Connection con = null;
 
         String sql = "UPDATE frota SET tamanho_frota = ? WHERE id = ?";
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, frota.getTamanhoFrota());
             stmt.setLong(2, frota.getId());
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
-        } catch (SQLException sqle) {
-            log.error("Erro ao atualizar tamanho da frota", sqle);
-            return -1;
+
+        } catch (SQLException e) {
+            log.error("Erro ao atualizar tamanho da frota", e);
+            throw throwDAOException(e, UPDATE);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt);
+            conexao.desconectar(con);
         }
     }
 
     public int atualizarTipoFrota(Frota frota) {
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "UPDATE frota SET tipo_frota = ? WHERE id = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, frota.getTipoFrota());
             stmt.setLong(2, frota.getId());
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
-        } catch (SQLException sqle) {
-            log.error("Erro ao atualizar tipo da frota", sqle);
-            return -1;
+
+        } catch (SQLException e) {
+            log.error("Erro ao atualizar tipo da frota", e);
+            throw throwDAOException(e, UPDATE);
         } finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
 
     public int atualizarRegiao(Frota frota) {
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "UPDATE frota SET regiao = ? WHERE id = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, frota.getRegiao());
             stmt.setLong(2, frota.getId());
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
-        } catch (SQLException sqle) {
-            log.error("Erro ao atualizar região da frota", sqle);
-            return -1;
+
+        } catch (SQLException e) {
+            log.error("Erro ao atualizar região da frota", e);
+            throw throwDAOException(e, UPDATE);
         } finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
 
     public int deletar(long id) {
         Conexao conexao = new Conexao();
-        Connection conn = null;
+        PreparedStatement stmt = null;
+        Connection con = null;
 
         String sql = "DELETE FROM frota WHERE id = ?";
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
 
             stmt.setLong(1, id);
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle) {
-            log.error("Erro ao deletar frota", sqle);
-            return -1;
+        } catch (SQLException e) {
+            log.error("Erro ao deletar frota", e);
+            throw throwDAOException(e, DELETE);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt);
+            conexao.desconectar(con);
         }
     }
 
     public Frota buscarPorId(long id) {
         Conexao conexao = new Conexao();
-        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
 
         String sql = "SELECT * FROM frota WHERE id = ?";
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
+
             stmt.setLong(1, id);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             if (rs.next()) {
                 long idFrota = rs.getLong("id");
@@ -181,42 +176,42 @@ public class FrotaDAO extends AbstractDAO implements DAO<Frota>{
                 String tipoFrota = rs.getString("tipo_frota");
                 String regiao = rs.getString("regiao");
                 long idEmpresa = rs.getLong("id_empresa");
-
-                stmt.close();
 
                 return new Frota(idFrota, tamanhoFrota, tipoFrota, regiao, idEmpresa);
             }
 
             return null;
 
-        } catch (SQLException sqle) {
-            log.error("Erro ao buscar frota", sqle);
-            return null;
+        } catch (SQLException e) {
+            log.error("Erro ao buscar frota", e);
+            throw throwDAOException(e, SELECT);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt, rs);
+            conexao.desconectar(con);
         }
     }
+
     public List<Frota> buscarTodos() {
         List<Frota> frotas = new ArrayList<>();
         Conexao conexao = new Conexao();
-        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
 
         String sql = "SELECT * FROM frota";
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 long idFrota = rs.getLong("id");
                 int tamanhoFrota = rs.getInt("tamanho_frota");
                 String tipoFrota = rs.getString("tipo_frota");
                 String regiao = rs.getString("regiao");
                 long idEmpresa = rs.getLong("id_empresa");
-
-                stmt.close();
 
                 Frota frota = new Frota(idFrota, tamanhoFrota, tipoFrota, regiao, idEmpresa);
                 frotas.add(frota);
@@ -224,11 +219,12 @@ public class FrotaDAO extends AbstractDAO implements DAO<Frota>{
 
             return frotas;
 
-        } catch (SQLException sqle) {
-            log.error("Erro ao buscar frota", sqle);
-            return null;
+        } catch (SQLException e) {
+            log.error("Erro ao buscar frota", e);
+            throw throwDAOException(e, SELECT);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt, rs);
+            conexao.desconectar(con);
         }
     }
 }

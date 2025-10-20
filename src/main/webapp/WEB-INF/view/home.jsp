@@ -1,5 +1,5 @@
-<%@ page import="com.frotaviva.model.Empresa" %>
 <%@ page import="com.frotaviva.model.InformacoesHome" %>
+<%@ page import="com.frotaviva.model.Empresa" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Object reqInformacoesHome = request.getAttribute("informacoesHome");
