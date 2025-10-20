@@ -27,7 +27,7 @@ public class MotoristasServlet extends HttpServlet {
 
             request.setAttribute("motoristas", motoristas);
 
-            request.getRequestDispatcher("WEB-INF/view/funcionarios.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/motoristas.jsp").forward(request, response);
 
         } catch (Exception e){ // ainda nao tem a pagina de erro
             request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
