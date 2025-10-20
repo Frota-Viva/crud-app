@@ -3,9 +3,6 @@ package com.frotaviva.dao;
 import com.frotaviva.util.Conexao;
 import com.frotaviva.model.Informacoes;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;

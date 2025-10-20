@@ -8,13 +8,13 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.frotaviva.exception.*;
 import com.frotaviva.model.Empresa;
 import com.frotaviva.model.Endereco;
 import com.frotaviva.util.Conexao;
 import com.frotaviva.util.Senhas;
+
+import static com.frotaviva.dao.AbstractDAO.Operacao.*;
 
 public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
 
@@ -24,22 +24,23 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
      * atualizarNome|Endereco|Email|Senha
      * deletar
      * getEmpresa
-     * buscarPorId
-     * buscarTodos
+     * buscarPorId|Todos|Email|Cnpj
      */
 
     public int inserir(Empresa empresa){
+        PreparedStatement stmt = null;
         Conexao conexao = new Conexao();
-        Connection conn = null;
+        Connection con = null;
 
         String sql = "INSERT INTO empresa(tipo_empresa, cnpj, email, senha, nome, cep, rua, complemento, numero, pais," +
                 " estado, cidade) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        String senhaHash = Senhas.hashSenha(empresa.getSenha());
-        Endereco endereco = empresa.getEndereco();
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
+
+            String senhaHash = Senhas.hashSenha(empresa.getSenha());
+            Endereco endereco = empresa.getEndereco();
 
             stmt.setString(1, empresa.getTipoEmpresa());
             stmt.setString(2, empresa.getCnpj());
@@ -60,60 +61,57 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
             stmt.setString(11, endereco.getEstado());
             stmt.setString(12, endereco.getCidade());
 
-            if (stmt.executeUpdate() > 0){
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle){
-            log.error("Erro ao cadastrar empresa", sqle);
-            return -1;
+        } catch (SQLException e){
+            log.error("Erro ao cadastrar empresa", e);
+            throw throwDAOException(e, INSERT);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt);
+            conexao.desconectar(con);
         }
     }
 
     public int atualizarNome(Empresa empresa){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "UPDATE empresa SET nome = ? WHERE id = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, empresa.getNome());
             stmt.setLong(2, empresa.getId());
 
-            if (stmt.executeUpdate() > 0){
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle){
-            log.error("Erro ao atualizar nome da empresa", sqle);
-            return -1;
+        } catch (SQLException e){
+            log.error("Erro ao atualizar nome da empresa", e);
+            throw throwDAOException(e, UPDATE);
         } finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
 
     public int atualizarEndereco(Empresa empresa){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "UPDATE empresa SET pais = ?, cep = ?, estado = ?, cidade = ?, rua = ?, numero = ?," +
                 " complemento = ? WHERE id = ?";
-        Endereco endereco = empresa.getEndereco();
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
+
+            Endereco endereco = empresa.getEndereco();
 
             stmt.setString(1, endereco.getPais());
             stmt.setString(2, endereco.getCep());
@@ -130,51 +128,47 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
 
             stmt.setLong(8, empresa.getId());
 
-            if (stmt.executeUpdate() > 0){
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle){
-            log.error("Erro ao atualizar endereço da empresa", sqle);
-            return -1;
+        } catch (SQLException e){
+            log.error("Erro ao atualizar endereço da empresa", e);
+            throw throwDAOException(e, UPDATE);
         } finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
 
     public int atualizarEmail(Empresa empresa){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "UPDATE empresa SET email = ? WHERE id = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, empresa.getEmail());
             stmt.setLong(2, empresa.getId());
 
-            if (stmt.executeUpdate() > 0){
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle){
-            log.error("Erro ao atualizar email da empresa", sqle);
-            return -1;
+        } catch (SQLException e){
+            log.error("Erro ao atualizar email da empresa", e);
+            throw throwDAOException(e, UPDATE);
         } finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
 
     public int atualizarSenha(Empresa empresa){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String senhaArmazenada = Senhas.getSenhaHash(empresa.getId());
@@ -184,63 +178,60 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             String senhaHash = Senhas.hashSenha(empresa.getSenha());
             stmt.setString(1, senhaHash);
             stmt.setLong(2, empresa.getId());
 
-            if (stmt.executeUpdate() > 0){
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle){
-            log.error("Erro ao atualizar senha da empresa", sqle);
-            return -1;
+        } catch (SQLException e){
+            log.error("Erro ao atualizar senha da empresa", e);
+            throw throwDAOException(e, UPDATE);
         } finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
 
     public int deletar(long id){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "DELETE FROM empresa WHERE id = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setLong(1, id);
 
-            if (stmt.executeUpdate() > 0){
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle) {
-            log.error("Erro ao deletar empresa", sqle);
-            return -1;
+        } catch (SQLException e) {
+            log.error("Erro ao deletar empresa", e);
+            throw throwDAOException(e, DELETE);
         } finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
 
     public Empresa getEmpresa(String email, String senha){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         Connection conn = null;
 
         String sql = "SELECT * FROM empresa WHERE email = ? and senha = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             String hashSenha = Senhas.getSenhaHash(email);
             if (! Senhas.verificarSenha(senha, hashSenha)) return null;
@@ -248,7 +239,7 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
             stmt.setString(1, email);
             stmt.setString(2, hashSenha);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             if (rs.next()){
                 long idEmpresa = rs.getLong("id");
@@ -266,29 +257,33 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
                 return new Empresa(idEmpresa, tipo_empresa, cnpj, email, senha, nome,
                         new Endereco(pais, cep, estado, cidade, rua, numero, complemento));
             }
-            
+
             return null;
-            
-        } catch (SQLException sqle){
-            log.error("Erro ao buscar empresa", sqle);
-            return null;
+
+        } catch (SQLException e){
+            log.error("Erro ao buscar empresa", e);
+            throw throwDAOException(e, SELECT);
         } finally {
+            fechar(stmt, rs);
             conexao.desconectar(conn);
         }
     }
+
     public Empresa buscarPorId(long id){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         Connection conn = null;
 
         String sql = "SELECT * FROM empresa WHERE id = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setLong(1, id);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             if (rs.next()){
                 long idEmpresa = rs.getLong("id");
@@ -311,25 +306,29 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
 
             return null;
 
-        } catch (SQLException sqle){
-            log.error("Erro ao buscar empresa", sqle);
-            return null;
+        } catch (SQLException e){
+            log.error("Erro ao buscar empresa", e);
+            throw throwDAOException(e, SELECT);
         } finally {
+            fechar(stmt, rs);
             conexao.desconectar(conn);
         }
     }
+
     public List<Empresa> buscarTodos(){
         List<Empresa> empresas = new ArrayList<>();
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         Connection conn = null;
 
         String sql = "SELECT * FROM empresa";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             while (rs.next()){
                 long idEmpresa = rs.getLong("id");
@@ -354,26 +353,30 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
 
             return empresas;
 
-        } catch (SQLException sqle){
-            log.error("Erro ao buscar empresa", sqle);
-            return null;
+        } catch (SQLException e){
+            log.error("Erro ao buscar empresa", e);
+            throw throwDAOException(e, SELECT);
         } finally {
+            fechar(stmt, rs);
             conexao.desconectar(conn);
         }
     }
+
     public int buscarPorEmail(String email){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         Connection conn = null;
 
         String sql = "SELECT * FROM empresa WHERE email = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, email);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             if (rs.next()){
                 return 1;
@@ -381,26 +384,30 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
 
             return 0;
 
-        } catch (SQLException sqle){
-            log.error("Erro ao buscar empresa", sqle);
-            return -1;
+        } catch (SQLException e){
+            log.error("Erro ao buscar empresa", e);
+            throw throwDAOException(e, SELECT);
         } finally {
+            fechar(stmt, rs);
             conexao.desconectar(conn);
         }
     }
+
     public int buscarPorCnpj(String cnpj){
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         Connection conn = null;
 
-        String sql = "SELECT * FROM empresa WHERE email = ?";
+        String sql = "SELECT * FROM empresa WHERE cnpj = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, cnpj);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             if (rs.next()){
                 return 1;
@@ -408,10 +415,11 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
 
             return 0;
 
-        } catch (SQLException sqle){
-            log.error("Erro ao buscar empresa", sqle);
-            return -1;
+        } catch (SQLException e){
+            log.error("Erro ao buscar empresa", e);
+            throw throwDAOException(e, SELECT);
         } finally {
+            fechar(stmt, rs);
             conexao.desconectar(conn);
         }
     }

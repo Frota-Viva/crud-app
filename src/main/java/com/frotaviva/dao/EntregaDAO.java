@@ -9,12 +9,12 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.frotaviva.exception.*;
 import com.frotaviva.model.Endereco;
 import com.frotaviva.model.Entrega;
 import com.frotaviva.util.Conexao;
+
+import static com.frotaviva.dao.AbstractDAO.Operacao.*;
 
 public class EntregaDAO extends AbstractDAO implements DAO<Entrega>{
 
@@ -23,21 +23,22 @@ public class EntregaDAO extends AbstractDAO implements DAO<Entrega>{
      * inserir
      * atualizarDescricao|Datas|Endereco
      * deletar
-     * buscarPorId
-     * buscarTodos
+     * buscarPorId|Todos
      */
 
     public int inserir(Entrega entrega){
+        PreparedStatement stmt = null;
         Conexao conexao = new Conexao();
-        Connection conn = null;
+        Connection con = null;
 
         String sql = "INSERT INTO entrega(descricao_produto, dt_pedido, dt_entrega, cep, rua, complemento, numero, " +
                 "pais, estado, cidade, id_motorista) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        Endereco endereco = entrega.getEndereco();
 
         try {
-            conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
+
+            Endereco endereco = entrega.getEndereco();
 
             stmt.setString(1, entrega.getDescricaoProduto());
             stmt.setDate(2, entrega.getDtPedido());
@@ -63,58 +64,54 @@ public class EntregaDAO extends AbstractDAO implements DAO<Entrega>{
             stmt.setString(10, endereco.getCidade());
             stmt.setLong(11, entrega.getIdMotorista());
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle) {
-            log.error("Erro ao cadastrar entrega", sqle);
-            return -1;
+        } catch (SQLException e) {
+            log.error("Erro ao cadastrar entrega", e);
+            throw throwDAOException(e, INSERT);
         } finally {
-            conexao.desconectar(conn);
+            fechar(stmt);
+            conexao.desconectar(con);
         }
     }
 
     public int atualizarDescricao(Entrega entrega) {
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "UPDATE entrega SET descricao_produto = ? WHERE cod_entrega = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, entrega.getDescricaoProduto());
             stmt.setLong(2, entrega.getCod_entrega());
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle) {
-            log.error("Erro ao atualizar descrição da entrega", sqle);
-            return -1;
+        } catch (SQLException e) {
+            log.error("Erro ao atualizar descrição da entrega", e);
+            throw throwDAOException(e, UPDATE);
         } finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
 
     public int atualizarDatas(Entrega entrega) {
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "UPDATE entrega SET dt_pedido = ?, dt_entrega = ? WHERE cod_entrega = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setDate(1, entrega.getDtPedido());
 
@@ -126,32 +123,31 @@ public class EntregaDAO extends AbstractDAO implements DAO<Entrega>{
 
             stmt.setLong(3, entrega.getCod_entrega());
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle) {
-            log.error("Erro ao atualizar datas da entrega", sqle);
-            return -1;
+        } catch (SQLException e) {
+            log.error("Erro ao atualizar datas da entrega", e);
+            throw throwDAOException(e, UPDATE);
         } finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
 
     public int atualizarEndereco(Entrega entrega) {
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "UPDATE entrega SET pais = ?, cep = ?, estado = ?, cidade = ?, rua = ?, numero = ?, " +
                 "complemento = ? WHERE cod_entrega = ?";
-        Endereco endereco = entrega.getEndereco();
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
+
+            Endereco endereco = entrega.getEndereco();
 
             stmt.setString(1, endereco.getPais());
             stmt.setString(2, endereco.getCep());
@@ -168,61 +164,58 @@ public class EntregaDAO extends AbstractDAO implements DAO<Entrega>{
 
             stmt.setLong(8, entrega.getCod_entrega());
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle) {
-            log.error("Erro ao atualizar endereço da entrega", sqle);
-            return -1;
+        } catch (SQLException e) {
+            log.error("Erro ao atualizar endereço da entrega", e);
+            throw throwDAOException(e, UPDATE);
         } finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
 
     public int deletar(long cod_entrega) {
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
         Connection conn = null;
 
         String sql = "DELETE FROM entrega WHERE cod_entrega = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setLong(1, cod_entrega);
 
-            if (stmt.executeUpdate() > 0) {
-                stmt.close();
-                return 1;
-            }
-
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
-        } catch (SQLException sqle) {
-            log.error("Erro ao deletar entrega", sqle);
-            return -1;
+        } catch (SQLException e) {
+            log.error("Erro ao deletar entrega", e);
+            throw throwDAOException(e, DELETE);
         } finally {
+            fechar(stmt);
             conexao.desconectar(conn);
         }
     }
 
     public Entrega buscarPorId(long cod_entrega) {
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         Connection conn = null;
 
         String sql = "SELECT * FROM entrega WHERE cod_entrega = ?";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
             stmt.setLong(1, cod_entrega);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             if (rs.next()) {
                 long idEntrega = rs.getLong("cod_entrega");
@@ -239,36 +232,40 @@ public class EntregaDAO extends AbstractDAO implements DAO<Entrega>{
                 long idMotorista = rs.getLong("id_motorista");
 
                 return new Entrega(
-                    idEntrega,
-                    descricaoProduto,
-                    dtPedido,
-                    dtEntrega,
-                    new Endereco(pais, cep, estado, cidade, rua, numero, complemento),
-                    idMotorista
+                        idEntrega,
+                        descricaoProduto,
+                        dtPedido,
+                        dtEntrega,
+                        new Endereco(pais, cep, estado, cidade, rua, numero, complemento),
+                        idMotorista
                 );
             }
 
             return null;
 
-        } catch (SQLException sqle) {
-            log.error("Erro ao buscar entrega", sqle);
-            return null;
+        } catch (SQLException e) {
+            log.error("Erro ao buscar entrega", e);
+            throw throwDAOException(e, SELECT);
         } finally {
+            fechar(stmt, rs);
             conexao.desconectar(conn);
         }
     }
+
     public List<Entrega> buscarTodos() {
         List<Entrega> entregas = new ArrayList<>();
         Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         Connection conn = null;
 
         String sql = "SELECT * FROM entrega";
 
         try {
             conn = conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
                 long idEntrega = rs.getLong("cod_entrega");
@@ -297,10 +294,11 @@ public class EntregaDAO extends AbstractDAO implements DAO<Entrega>{
 
             return entregas;
 
-        } catch (SQLException sqle) {
-            log.error("Erro ao buscar entrega", sqle);
-            return null;
+        } catch (SQLException e) {
+            log.error("Erro ao buscar entrega", e);
+            throw throwDAOException(e, SELECT);
         } finally {
+            fechar(stmt, rs);
             conexao.desconectar(conn);
         }
     }

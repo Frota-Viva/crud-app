@@ -10,12 +10,15 @@ import java.util.List;
 import java.util.Map;
 
 import com.frotaviva.model.InformacoesHome;
+
+import com.frotaviva.util.Conexao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.frotaviva.util.Conexao;
+public class FiltrosDAO {
 
-public class FiltrosDAO extends AbstractDAO {
+    private static final Logger log = LoggerFactory.getLogger(FiltrosDAO.class); // pega a classe usada
+
 
     /*
      * Métodos da classe FiltrosDAO:
