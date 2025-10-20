@@ -133,8 +133,8 @@ public class FiltrosDAO extends AbstractDAO {
                         rset.getInt("ativos"),
                         rset.getInt("inativos"),
                         rset.getInt("manutencao"),
-                        rset.getInt("atrasadas"),
-                        rset.getInt("pendente"),
+                        rset.getInt("entregue"),
+                        rset.getInt("a_caminho"),
                         rset.getInt("qt_entrega"));
             }
             return null;

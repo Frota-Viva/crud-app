@@ -1,4 +1,5 @@
 <%@ page import="com.frotaviva.model.InformacoesHome" %>
+<%@ page import="com.frotaviva.model.Empresa" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Object reqInformacoesHome = request.getAttribute("informacoesHome");
@@ -67,7 +68,7 @@
                 <div class="infos">
                     <p>Total:<br><%= informacoesHome != null ? informacoesHome.getQtEntrega() : 0 %></p>
                     <p>À Caminho:<br><%= informacoesHome != null ? informacoesHome.getaCaminho() : 0 %></p>
-                    <p>Atrasadas:<br><%= informacoesHome != null ? informacoesHome.getEntregue() : 0%></p>
+                    <p>Entregues:<br><%= informacoesHome != null ? informacoesHome.getEntregue() : 0%></p>
                 </div>
 
                 <canvas id="#"></canvas>
