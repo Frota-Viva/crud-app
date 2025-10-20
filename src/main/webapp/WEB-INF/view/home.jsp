@@ -1,4 +1,3 @@
-<%@ page import="com.frotaviva.model.Empresa" %>
 <%@ page import="com.frotaviva.model.InformacoesHome" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
@@ -67,8 +66,8 @@
                 <h2>Entregas</h2>
                 <div class="infos">
                     <p>Total:<br><%= informacoesHome != null ? informacoesHome.getQtEntrega() : 0 %></p>
-                    <p>À Caminho:<br><%= informacoesHome != null ? informacoesHome.getPendente() : 0 %></p>
-                    <p>Atrasadas:<br><%= informacoesHome != null ? informacoesHome.getAtrasadas() : 0%></p>
+                    <p>À Caminho:<br><%= informacoesHome != null ? informacoesHome.getaCaminho() : 0 %></p>
+                    <p>Atrasadas:<br><%= informacoesHome != null ? informacoesHome.getEntregue() : 0%></p>
                 </div>
 
                 <canvas id="#"></canvas>
