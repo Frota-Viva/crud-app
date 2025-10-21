@@ -1,72 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="crud-app:war exploded" />
-    </artifacts-to-build>
-  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/AbstractDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/ErroAoAtualizar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/ErroAoConectar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/ErroAoConsultar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/ErroAoDeletar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/ErroAoInserir.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/MotoristasServlet.java" afterDir="false" />
+    <list default="true" id="0c41fccd-b723-45c9-9725-ba32c6686e86" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/CaminhaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/CaminhaoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EmpresaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EntregaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/EntregaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/FiltrosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/FiltrosDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/FrotaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/FrotaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/InformacoesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/InformacoesDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/ManutencaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/ManutencaoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/MotoristaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/MotoristaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneEmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneEmpresaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneMotoristaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/dao/TelefoneMotoristaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/DAOException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/exception/DAOException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/FuncionariosServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/PerfisServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/HomeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frotaviva/servlet/HomeServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/funcionarios.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/perfis.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/home.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="96" />
-    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="KubernetesApiPersistence">{}</component>
-  <component name="KubernetesApiProvider">{
-  &quot;isMigrated&quot;: true
-}</component>
-  <component name="LogFilters">
-    <option name="FILTER_ERRORS" value="false" />
-    <option name="FILTER_WARNINGS" value="false" />
-    <option name="FILTER_INFO" value="true" />
-    <option name="FILTER_DEBUG" value="true" />
-    <option name="CUSTOM_FILTER" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -76,223 +25,42 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 6
-}</component>
-  <component name="ProjectId" id="32s88QbKYNokaAmFhsdORrX8QpT" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="34LvOp7j50IKsvkaexKUF65L2nN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ricardojunior-ieg/OneDrive - Instituto J&amp;F/Interdisciplinar/Frota Viva/Codigos/crud-app/src/main/webapp/assets/imgs&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/lucasporto-ieg/OneDrive - Instituto J&F/Área de Trabalho/Trabalho Interdisclinar/Repositorio/crud-app",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\crud-app\src\main\webapp\assets\imgs" />
-      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\crud-app\src\main\webapp\assets\CSS" />
-      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\crud-app\src\main\webapp" />
-      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\crud-app\src\main\webapp\WEB-INF" />
-      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\crud-app\src\main\webapp\WEB-INF\view" />
-      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva\src\main\webapp" />
-      <recent name="C:\Users\ricardojunior-ieg\OneDrive - Instituto J&amp;F\Interdisciplinar\Frota Viva\Codigos\Frota-Viva\src\main\webapp\WEB-INF\lib" />
-    </key>
-  </component>
-  <component name="RunAnythingCache">
-    <option name="myCommands">
-      <command value="mvn clean" />
-      <command value="mvn clean install" />
-    </option>
-  </component>
-  <component name="RunDashboard">
-    <option name="configurationStatuses">
-      <map>
-        <entry key="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
-          <value>
-            <map>
-              <entry key="Tomcat 11.0.11" value="STOPPED" />
-            </map>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="RunManager">
-    <configuration name="Tomcat 11.0.11" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 11.0.11" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080" />
-      <option name="UPDATING_POLICY" value="restart-server" />
-      <deployment>
-        <artifact name="crud-app:war exploded">
-          <settings>
-            <option name="CONTEXT_PATH" value="/" />
-          </settings>
-        </artifact>
-      </deployment>
-      <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="8f9c764e-a0de-4363-b55a-0c51ecd7e084" />
-      </server-settings>
-      <predefined_log_file enabled="true" id="Tomcat" />
-      <predefined_log_file enabled="true" id="Tomcat Catalina" />
-      <predefined_log_file id="Tomcat Manager" />
-      <predefined_log_file id="Tomcat Host Manager" />
-      <predefined_log_file id="Tomcat Localhost Access" />
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="54947" />
-      </RunnerSettings>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method v="2">
-        <option name="Make" enabled="true" />
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="crud-app:war exploded" />
-          <artifact name="Frota-Viva:war exploded" />
-        </option>
-      </method>
-    </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-30f59d01ecdd-cffe25b9f5b3-intellij.indexing.shared.core-IU-253.27642.30" />
-        <option value="bundled-js-predefined-d6986cc7102b-75c7c973e13d-JavaScript-IU-253.27642.30" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="bd32450e-53e3-4deb-a811-e531fb5eed1d" name="Changes" comment="" />
-      <created>1758197763063</created>
+      <changelist id="0c41fccd-b723-45c9-9725-ba32c6686e86" name="Changes" comment="" />
+      <created>1761005636143</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1758197763063</updated>
-      <workItem from="1758197766018" duration="29000" />
-      <workItem from="1758197886558" duration="2394000" />
-      <workItem from="1758292087043" duration="1136000" />
-      <workItem from="1758295735168" duration="20000" />
-      <workItem from="1758548367297" duration="14000" />
-      <workItem from="1758719397384" duration="2324000" />
-      <workItem from="1758724657075" duration="6194000" />
-      <workItem from="1758812415110" duration="15457000" />
-      <workItem from="1759241362149" duration="759000" />
-      <workItem from="1759324104494" duration="655000" />
-      <workItem from="1759327743419" duration="2083000" />
-      <workItem from="1759402467895" duration="56000" />
-      <workItem from="1759844680835" duration="1101000" />
-      <workItem from="1760314483607" duration="6919000" />
-      <workItem from="1760443408429" duration="8871000" />
-      <workItem from="1760612454197" duration="3186000" />
-      <workItem from="1760828542535" duration="10046000" />
-      <workItem from="1760888105647" duration="4188000" />
-      <workItem from="1760965505478" duration="2011000" />
-      <workItem from="1760972981180" duration="1210000" />
+      <updated>1761005636143</updated>
+      <workItem from="1761005637331" duration="195000" />
+      <workItem from="1761008892291" duration="955000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>
