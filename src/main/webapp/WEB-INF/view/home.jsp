@@ -71,7 +71,7 @@
                 <div class="infos">
                     <p id="totalEntregas">Total:<br><%= informacoesHome != null ? informacoesHome.getQtEntrega() : 0 %></p>
                     <p id="aCaminhoEntregas">À Caminho:<br><%= informacoesHome != null ? informacoesHome.getPendente() : 0 %></p>
-                    <p id="realizadasEntregas">Realizadas:<br><%= informacoesHome != null ? informacoesHome.getAtrasadas() : 0%></p>
+                    <p id="realizadasEntregas">Realizadas:<br><%= informacoesHome != null ? informacoesHome.getRealizada() : 0%></p>
                 </div>
 
                 <canvas id="graficoEntregas"></canvas>
@@ -91,16 +91,40 @@
                     </div>
                 </div>
             </article>
-            <article class="card-info" id="card-meta">
-                <h2>Meta de Entregas</h2>
+            <article class="card-info" id="card-manu">
+                <h2>Manutenção</h2>
+                <p>Tipos</p>
+                <section class="infos-manu">
+                    <canvas class="graficos-manu"></canvas>
+                    <div id="infos-tipo-manu">
+                        <div class="descricao-grafico-manu">
+                            <div class="cor-grafico cor3 cor-manu"></div>
+                            <p>Corretivas: <%= informacoesHome != null?informacoesHome.getCorretivas():0%></p>
+                        </div>
+                        <div class="descricao-grafico-manu">
+                            <div class="cor-grafico cor1 cor-manu"></div>
+                            <p>Preventivas: <%= informacoesHome != null?informacoesHome.getPreventivas():0%></p>
+                        </div>
+                        <p>Total: <%= informacoesHome != null?informacoesHome.getCorretivas()+ informacoesHome.getPreventivas():0%></p>
 
-                <canvas id="#"></canvas>
-
-                <div class="descricao-grafco">
-                    <div>Tempo restante:<br>
-                        08 D - 12 H - 22 M
                     </div>
-                </div>
+                </section>
+                <p>Custos</p>
+                <section class="infos-manu">
+                    <canvas class="graficos-manu"></canvas>
+                    <div id="infos-custos-manu">
+                        <div class="descricao-grafico-manu">
+                            <div class="cor-grafico cor3 cor-manu-custos"></div>
+                            <p>Corretivas:<br>R$<%= informacoesHome != null?informacoesHome.getCustoCorretivas():0%></p>
+                        </div>
+                        <div class="descricao-grafico-manu">
+                            <div class="cor-grafico cor1 cor-manu-custos"></div>
+                            <p>Preventivas:<br>R$<%= informacoesHome != null?informacoesHome.getCustoPreventivas():0%></p>
+                        </div>
+                        <p>Total: R$<%= informacoesHome != null?informacoesHome.getCustoCorretivas()+informacoesHome.getCustoPreventivas():0%></p>
+
+                    </div>
+                </section>
             </article>
         </section>
     </section>

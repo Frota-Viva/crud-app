@@ -408,3 +408,30 @@ main {
 .cor3 {
     background-color: #F06060;
 }
+.infos-manu{
+    display: flex;
+    width: 16.1em;
+    border: 1px solid black;
+}
+#card-manu section>canvas{
+    width: 11rem;
+    height: 11rem;
+    margin-right: 1rem;
+}
+.descricao-grafico-manu{
+    display: flex;
+}
+.cor-manu{
+    margin-top: 0.9rem;
+    margin-right: 1rem;
+}
+.cor-manu-custos{
+    margin-top: 1.6rem;
+    margin-right: 1.1rem;
+}
+#infos-tipo-manu{
+    margin-top: 2.3rem;
+}
+#infos-custos-manu{
+    margin-top: 0.4rem;
+}

@@ -138,7 +138,11 @@ public class FiltrosDAO {
                         rset.getInt("manutencao"),
                         rset.getInt("entregue"),
                         rset.getInt("a_caminho"),
-                        rset.getInt("qt_entrega"));
+                        rset.getInt("qt_entrega"),
+                        rset.getInt("preventivas"),
+                        rset.getInt("corretivas"),
+                        rset.getDouble("custo_preventivas"),
+                        rset.getDouble("custo_corretivas"));
             }
             return null;
 
