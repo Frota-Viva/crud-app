@@ -15,6 +15,7 @@ public class Teste {
     public static void main(String[] args) {
 
         System.out.println(Senhas.hashSenha("&KfYvsy@9v"));
+        System.out.println(Senhas.hashSenha("P3W1@@Ix%e"));
 
     }
 }

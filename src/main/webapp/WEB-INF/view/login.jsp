@@ -20,7 +20,7 @@
     </section>
 
     <section class="login-section">
-        <form action="login" method="post" class="login-form">
+        <form action="login" method="post" class="cadastro-forms">
             <h1>Login</h1>
 
             <div>

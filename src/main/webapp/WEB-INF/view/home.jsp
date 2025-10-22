@@ -43,85 +43,82 @@
             <article class="card-info" id="card-frota">
                 <h2>Caminhões</h2>
                 <div class="infos">
-                    <p id="totalCaminhoes">Total:<br><%= informacoesHome != null ? informacoesHome.getTamanhoFrota() : 0%></p>
-                    <p id="inativosCaminhoes">Inativos:<br><%= informacoesHome != null ? informacoesHome.getInativos() : 0 %></p>
-                    <p id="manutencaoCaminhoes">Manutenção:<br><%= informacoesHome != null ? informacoesHome.getManutecao() : 0 %></p>
-                    <p id="ativosCaminhoes">Ativos:<br><%= informacoesHome != null ? informacoesHome.getAtivos() : 0 %></p>
+                    <p>Total:<br><span id="totalCaminhoes"><%= informacoesHome != null ? informacoesHome.getTamanhoFrota() : 0 %></span></p>
+                    <p>Inativos:<br><span id="inativosCaminhoes"><%= informacoesHome != null ? informacoesHome.getInativos() : 0 %></span></p>
+                    <p>Manutenção:<br><span id="manutencaoCaminhoes"><%= informacoesHome != null ? informacoesHome.getManutecao() : 0 %></span></p>
+                    <p>Ativos:<br><span id="ativosCaminhoes"><%= informacoesHome != null ? informacoesHome.getAtivos() : 0 %></span></p>
+
                 </div>
                 <canvas id="graficoCaminhoes"></canvas>
 
-                <div class="descricao-grafco">
-                    <div>
-                        <div class="cor-grafico cor1"></div>
-                        <div>Ativos</div>
-                    </div>
-                    <div>
-                        <div class="cor-grafico cor2"></div>
-                        <div>Manutenção</div>
-                    </div>
-                    <div>
-                        <div class="cor-grafico cor3"></div>
-                        <div>inativos</div>
-                    </div>
-                </div>
-                </div>
+<%--                <div class="descricao-grafco">--%>
+<%--                    <div>--%>
+<%--                        <div class="cor-grafico cor1"></div>--%>
+<%--                        <div>Ativos</div>--%>
+<%--                    </div>--%>
+<%--                    <div>--%>
+<%--                        <div class="cor-grafico cor2"></div>--%>
+<%--                        <div>Manutenção</div>--%>
+<%--                    </div>--%>
+<%--                    <div>--%>
+<%--                        <div class="cor-grafico cor3"></div>--%>
+<%--                        <div>inativos</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </article>
             <article class="card-info" id="card-entregas">
                 <h2>Entregas</h2>
                 <div class="infos">
-                    <p id="totalEntregas">Total:<br><%= informacoesHome != null ? informacoesHome.getQtEntrega() : 0 %></p>
-                    <p id="aCaminhoEntregas">À Caminho:<br><%= informacoesHome != null ? informacoesHome.getPendente() : 0 %></p>
-                    <p id="realizadasEntregas">Realizadas:<br><%= informacoesHome != null ? informacoesHome.getRealizada() : 0%></p>
+                    <p>Total:<br><span id="totalEntregas"><%= informacoesHome != null ? informacoesHome.getQtEntrega() : 0 %></span></p>
+                    <p>À Caminho:<br><span id="aCaminhoEntregas"><%= informacoesHome != null ? informacoesHome.getPendente() : 0 %></span></p>
+                    <p>Realizadas:<br><span id="realizadasEntregas"><%= informacoesHome != null ? informacoesHome.getRealizada() : 0 %></span></p>
                 </div>
+
 
                 <canvas id="graficoEntregas"></canvas>
 
-                <div class="descricao-grafco">
-                    <div>
-                        <div class="cor-grafico cor1"></div>
-                        <div>Realizadas</div>
-                    </div>
-                    <div>
-                        <div class="cor-grafico cor2"></div>
-                        <div>À Caminho</div>
-                    </div>
-                    <div>
-                        <div class="cor-grafico cor3"></div>
-                        <div>Pendentes</div>
-                    </div>
-                </div>
+<%--                <div class="descricao-grafco">--%>
+<%--                    <div>--%>
+<%--                        <div class="cor-grafico cor1"></div>--%>
+<%--                        <div>Realizadas</div>--%>
+<%--                    </div>--%>
+<%--                    <div>--%>
+<%--                        <div class="cor-grafico cor2"></div>--%>
+<%--                        <div>À Caminho</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </article>
             <article class="card-info" id="card-manu">
                 <h2>Manutenção</h2>
                 <p>Tipos</p>
                 <section class="infos-manu">
-                    <canvas class="graficos-manu"></canvas>
+                    <canvas class="graficos-manu" id="graficoManutencao"></canvas>
                     <div id="infos-tipo-manu">
                         <div class="descricao-grafico-manu">
                             <div class="cor-grafico cor3 cor-manu"></div>
-                            <p>Corretivas: <%= informacoesHome != null?informacoesHome.getCorretivas():0%></p>
+                            <p>Corretivas: <span id="corretivasManutencao"><%= informacoesHome != null?informacoesHome.getCorretivas():0%></span></p>
                         </div>
                         <div class="descricao-grafico-manu">
                             <div class="cor-grafico cor1 cor-manu"></div>
-                            <p>Preventivas: <%= informacoesHome != null?informacoesHome.getPreventivas():0%></p>
+                            <p>Preventivas: <span id="preventivasManutencao"><%= informacoesHome != null?informacoesHome.getPreventivas():0%></span></p>
                         </div>
-                        <p>Total: <%= informacoesHome != null?informacoesHome.getCorretivas()+ informacoesHome.getPreventivas():0%></p>
+                        <p>Total: <span id="totalManutencao"><%= informacoesHome != null?informacoesHome.getCorretivas()+ informacoesHome.getPreventivas():0%></span></p>
 
                     </div>
                 </section>
                 <p>Custos</p>
                 <section class="infos-manu">
-                    <canvas class="graficos-manu"></canvas>
+                    <canvas class="graficos-manu" id="graficosPrecosManutencoes"></canvas>
                     <div id="infos-custos-manu">
                         <div class="descricao-grafico-manu">
                             <div class="cor-grafico cor3 cor-manu-custos"></div>
-                            <p>Corretivas:<br>R$<%= informacoesHome != null?informacoesHome.getCustoCorretivas():0%></p>
+                            <p>Corretivas:<br>R$<span id="corretivasPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoCorretivas():0%></span></p>
                         </div>
                         <div class="descricao-grafico-manu">
                             <div class="cor-grafico cor1 cor-manu-custos"></div>
-                            <p>Preventivas:<br>R$<%= informacoesHome != null?informacoesHome.getCustoPreventivas():0%></p>
+                            <p>Preventivas:<br>R$<span id="preventivasPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoPreventivas():0%></span></p>
                         </div>
-                        <p>Total: R$<%= informacoesHome != null?informacoesHome.getCustoCorretivas()+informacoesHome.getCustoPreventivas():0%></p>
+                        <p>Total: R$<span id="totalPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoCorretivas()+informacoesHome.getCustoPreventivas():0%></span></p>
 
                     </div>
                 </section>
