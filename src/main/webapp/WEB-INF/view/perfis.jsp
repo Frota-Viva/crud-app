@@ -77,12 +77,10 @@
                         <div>E-mail</div>
                         <div>Telefone</div>
                         <div>Frota</div>
-                        <div>
-                            <button class="add-user">+ Adicionar Usuário</button>
-                        </div>
                     </div>
 
                     <!-- Linhas da tabela -->
+                    <%if (! perfisMotoristas.isEmpty()){%>
                     <%for (Map<String, String> perfil : perfisMotoristas) {%>
                     <div class="table-row">
                         <div class="table-left-row">
@@ -92,13 +90,16 @@
                             <div><%=perfil.get("telefone_principal")%></div>
                             <div><%=perfil.get("tipo_frota")%></div>
                         </div>
-                        <div class="actions">
-                            <button title="Visualizar"><img src="../../assets/imgs/img-home/olho.png" alt=""
-                                    class="icon-eye"></button>
-                            <button title="Editar"><img src="../../assets/imgs/img-home/editar.png" alt=""
-                                    class="icon-edit"></button>
-                            <button title="Excluir"><img src="../../assets/imgs/img-home/lixo.png" alt=""
-                                    class="icon-trash"></button>
+                    </div>
+                    <%}%>
+                    <%}else {%>
+                    <div class="table-row">
+                        <div class="table-left-row">
+                            <div></div>
+                            <div></div>
+                            <div>Nenhum usuário foi encontrado</div>
+                            <div></div>
+                            <div></div>
                         </div>
                     </div>
                     <%}%>

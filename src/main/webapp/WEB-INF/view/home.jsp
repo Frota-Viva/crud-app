@@ -15,7 +15,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funcionários - Frota Viva</title>
-    <link rel="stylesheet" href="../../assets/CSS/homeStyle.css">
+    <link rel="stylesheet" href="../../assets/CSS/homeStyle.css?<%=System.currentTimeMillis()%>">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../../assets/JS/graficos.js"></script>
 </head>
@@ -90,38 +90,12 @@
             </article>
             <article class="card-info" id="card-manu">
                 <h2>Manutenção</h2>
-                <p>Tipos</p>
-                <section class="infos-manu">
-                    <canvas class="graficos-manu" id="graficoManutencao"></canvas>
-                    <div id="infos-tipo-manu">
-                        <div class="descricao-grafico-manu">
-                            <div class="cor-grafico cor3 cor-manu"></div>
-                            <p>Corretivas: <span id="corretivasManutencao"><%= informacoesHome != null?informacoesHome.getCorretivas():0%></span></p>
-                        </div>
-                        <div class="descricao-grafico-manu">
-                            <div class="cor-grafico cor1 cor-manu"></div>
-                            <p>Preventivas: <span id="preventivasManutencao"><%= informacoesHome != null?informacoesHome.getPreventivas():0%></span></p>
-                        </div>
-                        <p>Total: <span id="totalManutencao"><%= informacoesHome != null?informacoesHome.getCorretivas()+ informacoesHome.getPreventivas():0%></span></p>
-
-                    </div>
-                </section>
-                <p>Custos</p>
-                <section class="infos-manu">
-                    <canvas class="graficos-manu" id="graficosPrecosManutencoes"></canvas>
-                    <div id="infos-custos-manu">
-                        <div class="descricao-grafico-manu">
-                            <div class="cor-grafico cor3 cor-manu-custos"></div>
-                            <p>Corretivas:<br>R$<span id="corretivasPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoCorretivas():0%></span></p>
-                        </div>
-                        <div class="descricao-grafico-manu">
-                            <div class="cor-grafico cor1 cor-manu-custos"></div>
-                            <p>Preventivas:<br>R$<span id="preventivasPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoPreventivas():0%></span></p>
-                        </div>
-                        <p>Total: R$<span id="totalPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoCorretivas()+informacoesHome.getCustoPreventivas():0%></span></p>
-
-                    </div>
-                </section>
+                <div class="infos">
+                    <p>Corretivas:<br>R$<span id="corretivasPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoCorretivas():0%></span></p>
+                    <p>Preventivas:<br>R$<span id="preventivasPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoPreventivas():0%></span></p>
+                    <p>Total: R$<span id="totalPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoCorretivas()+informacoesHome.getCustoPreventivas():0%></span></p>
+                </div>
+                <canvas id="graficosPrecosManutencoes"></canvas>
             </article>
         </section>
     </section>

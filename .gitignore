@@ -41,5 +41,5 @@ build/
 
 #env
 src/main/resources/.env
->>>>>>> b184a95e398f743bc2d57c9c1bcfe92aa41843e5
+
 *.env

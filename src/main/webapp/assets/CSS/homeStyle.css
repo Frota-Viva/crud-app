@@ -186,7 +186,7 @@ main {
     font-size: 1.2rem;
     background-color: #202B45;
     color: white;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 0.5rem;
     margin-bottom: 1rem;
     min-height: 46px;
@@ -204,7 +204,7 @@ main {
 
 .table-row {
     display: grid;
-    grid-template-columns: 5fr;
+    grid-template-columns: 5fr 1fr;
 }
 
 .table-left-row {
@@ -259,7 +259,6 @@ main {
 /* FUNCIONARIOS >  Barra inferior */
 .inf-bar {
     width: clamp(300px, 33%, 800px);
-    width: 300px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -341,6 +340,7 @@ main {
     flex-direction: column;
     align-items: center;
     color: white;
+    font-size: 1.6rem;
 
     background: var(--box-gradient);
     border-radius: 18px;
@@ -364,26 +364,15 @@ main {
 .infos {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    text-align: justify;
-    margin: 0.5rem 0px;
+    width: 90%;
+    text-align: center;
 }
 
 /* BEM-VINDO > cards > grafico */
-#graficos-manutencao {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-content: center;
-    padding: 0.4rem;
-
-    max-height: 80%;
-    max-width: 96%;
-    gap: 0.4rem;
-}
-.g {
-    /* border: 1px solid red; */
-    max-width: 100%;
-    max-height: 100%;
+.card-info canvas {
+    width: 100%;
+    height: 80%;
+    margin-block: 1rem;
 }
 
 /* BEM-VINDO > cards > descricao-grafico */
@@ -391,7 +380,7 @@ main {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    margin: 1rem 0px;
+    flex-wrap: wrap;
 }
 
 .descricao-grafco div {
@@ -417,4 +406,31 @@ main {
 
 .cor3 {
     background-color: #F06060;
+}
+.infos-manu{
+    display: flex;
+    width: 16.1em;
+    border: 1px solid black;
+}
+#card-manu section>canvas{
+    width: 11rem;
+    height: 11rem;
+    margin-right: 1rem;
+}
+.descricao-grafico-manu{
+    display: flex;
+}
+.cor-manu{
+    margin-top: 0.9rem;
+    margin-right: 1rem;
+}
+.cor-manu-custos{
+    margin-top: 1.6rem;
+    margin-right: 1.1rem;
+}
+#infos-tipo-manu{
+    margin-top: 2.3rem;
+}
+#infos-custos-manu{
+    margin-top: 0.4rem;
 }
