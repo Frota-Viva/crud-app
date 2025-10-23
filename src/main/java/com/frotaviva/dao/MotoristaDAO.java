@@ -40,6 +40,35 @@ public class MotoristaDAO extends AbstractDAO implements DAO<Motorista> {
         }
     }
 
+    public int atualizar(Motorista motorista) {
+        PreparedStatement stmt = null;
+        Connection conn = null;
+        Conexao conexao = new Conexao();
+        String sql = "UPDATE motorista SET nome = ?, email = ?, cpf = ?, senha = ?, id_empresa = ?  WHERE id = ?";
+
+        try {
+            conn = conexao.conectar();
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, motorista.getNome());
+            stmt.setString(2, motorista.getEmail());
+            stmt.setString(3, motorista.getCpf());
+            stmt.setString(4, Senhas.hashSenha(motorista.getSenha()));
+            stmt.setLong(5, motorista.getIdEmpresa());
+            stmt.setLong(6, motorista.getId());
+
+            if (stmt.executeUpdate() > 0) return 1;
+            return 0;
+
+        } catch (SQLException e) {
+            log.error("Erro ao atualizar motorista", e);
+            throw throwDAOException(e, UPDATE);
+        } finally {
+            fechar(stmt);
+            conexao.desconectar(conn);
+        }
+    }
+
     public int atualizarNome(Motorista motorista) {
         PreparedStatement stmt = null;
         Connection conn = null;
