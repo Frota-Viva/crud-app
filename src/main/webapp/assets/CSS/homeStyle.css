@@ -331,7 +331,7 @@ main {
     align-items: center;
     gap: 2rem;
 
-    width: 80%;
+    width: 90%;
     height: 100%;
 }
 
@@ -346,8 +346,8 @@ main {
     border-radius: 18px;
     padding: 1rem 2rem;
 
-    height: 48vh;
-    width: 24rem;
+    height: 60vh;
+    width: 28rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
