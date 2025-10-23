@@ -84,50 +84,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     //Fazendo os gráficos das manutenções
-    const ctxManutencao = document.getElementById("graficoManutencao");
-    let corretivasManutencao = document.getElementById("corretivasManutencao").textContent;
-    let preventivasManutencao = document.getElementById("preventivasManutencao").textContent;
-
-    new Chart(ctxManutencao, {
-        type: 'doughnut',
-        data: {
-            labels: ['Corretivas', 'Preventivas'],
-            datasets: [{
-                data: [corretivasManutencao, preventivasManutencao],
-                backgroundColor: ['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)'],
-                borderWidth: 2,
-                borderColor: ['rgba(0, 255, 102, 1)',
-                    'rgba(0, 123, 255, 1)'
-                ],
-                spacing: 4
-            }]
-        },
-        options: {
-            cutout: '70%', // deixa o "buraco" no meio maior
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    align: 'center',
-                    labels: {
-                        color: 'white',
-                        boxWidth: 10,
-                        boxHeight: 5,
-                        usePointStyle : true,
-                        pointStyle: 'rounded',
-                        font: {
-                            size: 16
-                        }
-                    }
-                }
-            }
-        }
-    });
+    // const ctxManutencao = document.getElementById("graficoManutencao");
+    // let corretivasManutencao = document.getElementById("corretivasManutencao").textContent;
+    // let preventivasManutencao = document.getElementById("preventivasManutencao").textContent;
+    //
+    // new Chart(ctxManutencao, {
+    //     type: 'doughnut',
+    //     data: {
+    //         labels: ['Corretivas', 'Preventivas'],
+    //         datasets: [{
+    //             data: [corretivasManutencao, preventivasManutencao],
+    //             backgroundColor: ['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)'],
+    //             borderWidth: 2,
+    //             borderColor: ['rgba(0, 255, 102, 1)',
+    //                 'rgba(0, 123, 255, 1)'
+    //             ],
+    //             spacing: 4
+    //         }]
+    //     },
+    //     options: {
+    //         cutout: '70%', // deixa o "buraco" no meio maior
+    //         plugins: {
+    //             legend: {
+    //                 position: 'bottom',
+    //                 align: 'center',
+    //                 labels: {
+    //                     color: 'white',
+    //                     boxWidth: 10,
+    //                     boxHeight: 5,
+    //                     usePointStyle : true,
+    //                     pointStyle: 'rounded',
+    //                     font: {
+    //                         size: 16
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
 
     //Fazendo o gráfico dos preços das manutenções
-    const ctxPrecos = document.getElementById("graficoPrecos");
+    const ctxPrecos = document.getElementById("graficoPrecosManutencoes");
     let corretivasPrecos = document.getElementById("corretivasPrecoManutencao").textContent;
     let preventivasPrecos = document.getElementById("preventivasPrecoManutencao").textContent;
 
+    console.log(ctxPrecos + " " + corretivasPrecos + " " + preventivasPrecos);
     new Chart(ctxPrecos, {
         type: 'doughnut',
         data: {
@@ -136,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 data: [corretivasPrecos, preventivasPrecos],
                 backgroundColor: ['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)'],
                 borderWidth: 2,
-                borderColor: ['rgba(0, 255, 102, 1)',
+                borderColor: ['rgba(255, 51, 51, 1)',
                     'rgba(0, 123, 255, 1)'
                 ],
                 spacing: 4
