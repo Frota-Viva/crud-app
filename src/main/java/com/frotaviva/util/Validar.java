@@ -1,5 +1,9 @@
 package com.frotaviva.util;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Validar {
     public Validar(){}
 
@@ -42,5 +46,14 @@ public class Validar {
         if (! Validar.cep(cep)) return null;
 
         return cep.replaceAll("[^0-9]", "");
+    }
+    public static boolean data(String data){
+        try {
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate.parse(data, formato);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 }

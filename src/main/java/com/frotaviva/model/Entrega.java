@@ -38,6 +38,26 @@ public class Entrega {
         return this.idMotorista;
     }
 
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setIdMotorista(long idMotorista) {
+        this.idMotorista = idMotorista;
+    }
+
+    public void setDescricaoProduto(String descricaoProduto) {
+        this.descricaoProduto = descricaoProduto;
+    }
+
+    public void setDtEntrega(Date dtEntrega){
+        this.dtEntrega=dtEntrega;
+    }
+
+    public void setDtPedido(Date dtPedido) {
+        this.dtPedido = dtPedido;
+    }
+
     public String toString(){
         return "Codigo Entrega: "+this.cod_entrega+"\nData Pedido: "+this.dtPedido+"\nData Entrega: "+this.dtEntrega+
                 "\nEndereço: "+this.endereco+"\nDescrição do Produto: "+this.descricaoProduto+"\n Motorista: "+this.idMotorista;
