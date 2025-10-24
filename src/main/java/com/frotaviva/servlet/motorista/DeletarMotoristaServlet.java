@@ -7,7 +7,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -24,14 +23,13 @@ public class DeletarMotoristaServlet extends HttpServlet {
             id = Long.parseLong(request.getParameter("id"));
             MotoristaDAO dao = new MotoristaDAO();
 
-            if (dao.deletar(id) == 1){
-                response.sendRedirect("/lista-motorista");
+            if (dao.deletar(id) == 1) {
+                response.sendRedirect("listar-motoristas");
+                return;
             }
-            else{
-                response.sendRedirect("/erro.jsp");
-            }
+            request.setAttribute("erro", "Motorista não encontrado!");
 
-        } catch (Exception e){ // ainda nao tem a pagina de erro
+        } catch (Exception e){
             request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
         }
     }

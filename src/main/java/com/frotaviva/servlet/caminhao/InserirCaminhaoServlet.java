@@ -24,12 +24,12 @@ public class InserirCaminhaoServlet extends HttpServlet {
 
             CaminhaoDAO dao = new CaminhaoDAO();
 
-            String placa = (String)request.getAttribute("placa");
-            String status = (String)request.getAttribute("status");
-            int kmRodados = (int)request.getAttribute("kmRodados");
-            String modelo = (String)request.getAttribute("modelo");
-            int capacidade = (int)request.getAttribute("capacidade");
-            long idFrota = (long)request.getAttribute("idFrota");
+            String placa = request.getParameter("placa");
+            String status = request.getParameter("status");
+            int kmRodados = Integer.parseInt(request.getParameter("kmRodados"));
+            String modelo = request.getParameter("modelo");
+            int capacidade = Integer.parseInt(request.getParameter("capacidade"));
+            long idFrota = Long.parseLong(request.getParameter("idFrota"));
 
 
             if (!Validar.placa(placa)){

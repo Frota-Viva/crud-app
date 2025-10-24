@@ -20,7 +20,7 @@ public class Validar {
     public static boolean telefone(String telefone){
         if (telefone == null) return false;
 
-        String regex = "^(\\(?\\d{2}\\)?\\s?)(\\d{4,5}\\-?\\d{4})$";
+        String regex = "^(\\(?\\d{2}\\)?\\s?)(\\d{4,5}-?\\d{4})$";
         return telefone.matches(regex);
     }
 

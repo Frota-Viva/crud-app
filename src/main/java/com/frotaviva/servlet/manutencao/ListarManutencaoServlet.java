@@ -25,10 +25,9 @@ public class ListarManutencaoServlet extends HttpServlet {
             List<Manutencao> manutencao = dao.buscarTodos();
 
             request.setAttribute("manutencao", manutencao);
-
             request.getRequestDispatcher("WEB-INF/view/listar-motoristas.jsp").forward(request, response);
 
-        } catch (Exception e){ // ainda nao tem a pagina de erro
+        } catch (Exception e){
             request.getRequestDispatcher("WEB-INF/view/listar-motoristas.jsp").forward(request, response);
         }
     }

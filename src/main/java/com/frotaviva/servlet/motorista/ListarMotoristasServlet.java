@@ -1,7 +1,6 @@
 package com.frotaviva.servlet.motorista;
 
 import com.frotaviva.dao.MotoristaDAO;
-import com.frotaviva.dao.TelefoneMotoristaDAO;
 import com.frotaviva.model.Motorista;
 
 import jakarta.servlet.ServletException;
@@ -23,17 +22,15 @@ public class ListarMotoristasServlet extends HttpServlet {
         try{
 
             MotoristaDAO dao = new MotoristaDAO();
-            TelefoneMotoristaDAO telefoneDAO = new TelefoneMotoristaDAO();
 
             List<Motorista> motoristas = dao.buscarTodos();
 
             request.setAttribute("motoristas", motoristas);
-            request.setAttribute("telefones", telefoneDAO);
-
             request.getRequestDispatcher("WEB-INF/view/listar-motoristas.jsp").forward(request, response);
 
         } catch (Exception e){ // ainda nao tem a pagina de erro
-            request.getRequestDispatcher("WEB-INF/view/listar-motoristas.jsp").forward(request, response);
+            request.setAttribute("erro", "Erro ao tentar buscar motoristas");
+            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 }

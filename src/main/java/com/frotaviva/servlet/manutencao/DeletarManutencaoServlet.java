@@ -21,14 +21,13 @@ public class DeletarManutencaoServlet extends HttpServlet {
             long id = Long.parseLong(request.getParameter("id"));
             ManutencaoDAO dao = new ManutencaoDAO();
 
-            if (dao.deletar(id) == 1){
-                response.sendRedirect("/lista-motorista");
+            if (dao.deletar(id) == 1) {
+                response.sendRedirect("listar-motoristas");
+                return;
             }
-            else{
-                response.sendRedirect("/erro.jsp");
-            }
+            request.setAttribute("erro", "Manutenção não encontrada...");
 
-        } catch (Exception e){ // ainda nao tem a pagina de erro
+        } catch (Exception e){
             request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
         }
     }

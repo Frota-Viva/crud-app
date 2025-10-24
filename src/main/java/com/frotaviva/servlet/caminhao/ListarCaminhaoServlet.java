@@ -22,6 +22,7 @@ public class ListarCaminhaoServlet extends HttpServlet {
         CaminhaoDAO dao = new CaminhaoDAO();
 
         try{
+
             List<Caminhao> caminhoes = dao.buscarTodos();
 
             request.setAttribute("caminhoes", caminhoes);
