@@ -5,6 +5,15 @@ public class TelefoneEmpresa {
     private long id;
     private String telefoneEmpresa;
     private long idEmpresa;
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setIdEmpresa(long idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
     public TelefoneEmpresa(long id, String telefoneEmpresa, long idEmpresa){
         this.id=id;
         this.telefoneEmpresa = telefoneEmpresa;

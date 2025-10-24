@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 public class Manutencao {
+
     private long id;
     private Date dtCadastro;
     private Date dtConclusao;
@@ -13,6 +14,7 @@ public class Manutencao {
     private long ultimoMotorista;
     private String descricaoServico;
     private long idCaminhao;
+
     public Manutencao(long id, Date dataCadastro, Date dataConclusao,String tipoManutencao,BigDecimal custo,
                       long ultimoMotorista,String descricaoServico,long idCaminhao){
         this.id=id;
@@ -60,5 +62,29 @@ public class Manutencao {
         return "Id: "+this.id+"\nData Cadastro: "+this.dtCadastro +"\nData Conclusão: "+this.dtConclusao +"\nCusto: "+this.custo+
                 "\nTipo Manutenção: "+this.tipoManutencao+"\nUltimo Motorista: "+this.ultimoMotorista+
                 "\nDescrição do Serviço: "+this.descricaoServico+"Id Caminhão: "+this.idCaminhao;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
+    }
+
+    public void setDtConclusao(Date dtConclusao) {
+        this.dtConclusao = dtConclusao;
+    }
+
+    public void setTipoManutencao(String tipoManutencao) {
+        this.tipoManutencao = tipoManutencao;
+    }
+
+    public void setUltimoMotorista(long ultimoMotorista) {
+        this.ultimoMotorista = ultimoMotorista;
+    }
+
+    public void setIdCaminhao(long idCaminhao) {
+        this.idCaminhao = idCaminhao;
     }
 }

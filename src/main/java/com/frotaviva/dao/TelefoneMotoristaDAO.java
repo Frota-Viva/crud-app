@@ -46,6 +46,33 @@ public class TelefoneMotoristaDAO extends AbstractDAO implements DAO<TelefoneMot
         }
     }
 
+    public int atualizar(TelefoneMotorista telefoneMotorista) {
+        PreparedStatement stmt = null;
+        Connection con = null;
+        Conexao conexao = new Conexao();
+
+        String sql = "UPDATE telefone_motorista SET telefone_motorista = ?, id_motorista = ? WHERE id = ?";
+
+        try {
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
+
+            stmt.setString(1, telefoneMotorista.getTelefoneMotorista());
+            stmt.setLong(2, telefoneMotorista.getIdMotorista());
+            stmt.setLong(3, telefoneMotorista.getId());
+
+            if (stmt.executeUpdate() > 0) return 1;
+            return 0;
+
+        } catch (SQLException e) {
+            log.error("Erro ao atualizar telefone do motorista", e);
+            throw throwDAOException(e, UPDATE);
+        } finally {
+            fechar(stmt);
+            conexao.desconectar(con);
+        }
+    }
+
     public int atualizarTelefoneMotorista(TelefoneMotorista telefoneMotorista) {
         PreparedStatement stmt = null;
         Connection con = null;

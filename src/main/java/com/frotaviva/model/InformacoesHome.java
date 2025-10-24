@@ -88,4 +88,64 @@ public class InformacoesHome {
                 ", qtEntrega=" + qtEntrega +
                 '}';
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setIdEmpresa(long idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public void setTamanhoFrota(int tamanhoFrota) {
+        this.tamanhoFrota = tamanhoFrota;
+    }
+
+    public void setAtivos(int ativos) {
+        this.ativos = ativos;
+    }
+
+    public void setInativos(int inativos) {
+        this.inativos = inativos;
+    }
+
+    public void setManutecao(int manutecao) {
+        this.manutecao = manutecao;
+    }
+
+    public int getRealizadas() {
+        return realizadas;
+    }
+
+    public void setRealizadas(int realizadas) {
+        this.realizadas = realizadas;
+    }
+
+    public int getPendentes() {
+        return pendentes;
+    }
+
+    public void setPendentes(int pendentes) {
+        this.pendentes = pendentes;
+    }
+
+    public void setQtEntrega(int qtEntrega) {
+        this.qtEntrega = qtEntrega;
+    }
+
+    public void setPreventivas(int preventivas) {
+        this.preventivas = preventivas;
+    }
+
+    public void setCorretivas(int corretivas) {
+        this.corretivas = corretivas;
+    }
+
+    public void setCustoPreventivas(double custoPreventivas) {
+        this.custoPreventivas = custoPreventivas;
+    }
+
+    public void setCustoCorretivas(double custoCorretivas) {
+        this.custoCorretivas = custoCorretivas;
+    }
 }

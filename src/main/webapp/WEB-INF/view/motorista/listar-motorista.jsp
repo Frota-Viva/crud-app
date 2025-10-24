@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Inicial - Frota Viva</title>
-    <link rel="stylesheet" href="../../assets/CSS/homeStyle.css">
+    <link rel="stylesheet" href="../../assets/CSS/homeStyle.css<%=System.currentTimeMillis()%>">
 </head>
 
 <body>
@@ -61,7 +61,6 @@
                     <div>Senha</div>
                     <div>Telefone</div>
                     <div>ID Empresa</div>
-                    <div>Telefone</div>
 
                     <div>
                         <button class="add-user" value="inserir-motorista.jsp">+ Adicionar Usuário</button>
@@ -71,12 +70,9 @@
                     <%
                         List<Motorista> motoristas = (List<Motorista>) request.getAttribute("motoristas");
                         //List<TelefoneMotorista> telefones = (List<TelefoneMotorista>) request.getAttribute("telefones")
-                        TelefoneMotoristaDAO teleDao = (TelefoneMotoristaDAO) request.getAttribute("telefones");
 
                         if (motoristas != null && !motoristas.isEmpty()){
                             for (Motorista m : motoristas) {
-                                List<TelefoneMotorista> telefones = teleDao.buscarPorIdMotorista(m.getId());
-                                if ( telefones == null || telefones.isEmpty()){
                     %>
 
                 <!-- Linhas da tabela -->
@@ -88,7 +84,6 @@
                         <div><%= m.getCpf()%></div>
                         <div><%= m.getSenha()%></div>
                         <div><%= m.getIdEmpresa()%></div>
-                        <div> Sem telefone</div>
                     </div>
                     <div class="actions">
                         <button title="Editar"><img src="../../assets/imgs/img-home/editar.png" alt=""
@@ -97,33 +92,6 @@
                                                      class="icon-trash"></button>
                     </div>
                 </div>
-                    <% } else{
-                          for(TelefoneMotorista t : telefones){
-                %>
-                <div class="table-row">
-                    <div class="table-left-row">
-                        <div> <%= m.getId() %></div>
-                        <div><%= m.getNome() %></div>
-                        <div><%= m.getEmail() %></div>
-                        <div><%= m.getCpf()%></div>
-                        <div><%= m.getSenha()%></div>
-                        <div><%= m.getIdEmpresa()%></div>
-                        <div> <%= t.getTelefoneMotorista()%></div>
-                    </div>
-                    <div class="actions">
-                        <a href="atualizar-motorista.jsp?id=<%=m.getId()%>">
-                            <button title="Editar" ><img src="../../assets/imgs/img-home/editar.png" alt="" class="icon-edit"></button>
-
-                        </a>
-                        <a href="deletar-motorista.jsp?id=<%=m.getId()%>">
-                            <button title="Excluir"><img src="../../assets/imgs/img-home/lixo.png" alt="" class="icon-trash"></button>
-                        </a>
-                    </div>
-                </div>
-                    <%
-                            }
-                        }
-                    %>
                     <%}
                         } else {
                 %>

@@ -55,6 +55,40 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
         }
     }
 
+    public int atualizar(Caminhao caminhao){
+        Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        Connection conn = null;
+
+        String sql = "UPDATE caminhao SET placa = ?, status = ?, km_rodados - ?, modelo = ?, capacidade = ?, idFrota = ? WHERE id = ?";
+
+        try {
+
+            conn = conexao.conectar();
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, caminhao.getPlaca());
+            stmt.setString(2, caminhao.getStatus());
+            stmt.setInt(3, caminhao.getKmRodados());
+            stmt.setString(4, caminhao.getModelo());
+            stmt.setInt(5, caminhao.getCapacidade());
+            stmt.setLong(6, caminhao.getIdFrota());
+            stmt.setLong(7, caminhao.getId());
+
+            if (stmt.executeUpdate() > 0) return 1;
+            return 0;
+
+        }
+        catch (SQLException e){
+            log.error("Erro ao atualizar caminhão", e);
+            throw throwDAOException(e, UPDATE);
+        }
+        finally {
+            fechar(stmt);
+            conexao.desconectar(conn);
+        }
+    }
+
     public int atualizarPlaca(Caminhao caminhao){
         Conexao conexao = new Conexao();
         PreparedStatement stmt = null;

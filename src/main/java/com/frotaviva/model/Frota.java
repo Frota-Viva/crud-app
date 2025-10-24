@@ -41,4 +41,8 @@ public class Frota {
     public String toString(){
         return "Id: "+this.id+"\nTamanho da Frota: "+this.tamanhoFrota+"\nTipo da Frota: "+this.tipoFrota+"\nRegião: "+this.regiao;
     }
+
+    public void setIdEmpresa(long idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
 }

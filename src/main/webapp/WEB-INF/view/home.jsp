@@ -91,7 +91,7 @@
             <article class="card-info" id="card-manu">
                 <h2>Manutenção</h2>
                 <div class="infos">
-                    <p>Total: R$<span id="totalPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoCorretivas()+informacoesHome.getCustoPreventivas(): 0.0%></span></p>
+                    <p>Total:<br>R$<span id="totalPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoCorretivas()+informacoesHome.getCustoPreventivas(): 0.0%></span></p>
                     <p>Corretivas:<br>R$<span id="corretivasPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoCorretivas():0.0%></span></p>
                     <p>Preventivas:<br>R$<span id="preventivasPrecoManutencao"><%= informacoesHome != null?informacoesHome.getCustoPreventivas():0.0%></span></p>
                 </div>

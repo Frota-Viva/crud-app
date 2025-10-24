@@ -47,6 +47,32 @@ public class ManutencaoDAO extends AbstractDAO implements DAO<Manutencao> {
         }
     }
 
+    public int atualizar(Manutencao manutencao) {
+        PreparedStatement stmt = null;
+        Connection conn = null;
+        Conexao conexao = new Conexao();
+
+        String sql = "UPDATE manutencao SET custo = ?, dt_conclusao = ?, dt_cadastro = ?, tipo_manutencao = ?, id_caminhao = ?, descricao_servico = ?, ultimo_motorista = ? WHERE id = ?";
+
+        try {
+            conn = conexao.conectar();
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setBigDecimal(1, manutencao.getCusto());
+            stmt.setLong(2, manutencao.getId());
+
+            if (stmt.executeUpdate() > 0) return 1;
+            return 0;
+
+        } catch (SQLException e) {
+            log.error("Erro ao atualizar custo da manutenção", e);
+            throw throwDAOException(e, UPDATE);
+        } finally {
+            fechar(stmt);
+            conexao.desconectar(conn);
+        }
+    }
+
     public int atualizarCusto(Manutencao manutencao) {
         PreparedStatement stmt = null;
         Connection conn = null;
