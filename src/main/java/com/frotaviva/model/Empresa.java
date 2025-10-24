@@ -104,4 +104,12 @@ public class Empresa {
         return "Id: "+this.id+"\nNome: "+this.nome+"\nEndereco: "+this.endereco+"\nEmail: "+this.email+
                 "\nCnpj: "+this.cnpj+"\nTipo da Empresa: "+this.tipoEmpresa;
     }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public void setTipoEmpresa(String tipoEmpresa) {
+        this.tipoEmpresa = tipoEmpresa;
+    }
 }

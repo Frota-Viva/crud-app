@@ -25,4 +25,12 @@ public class TelefoneMotorista {
     public String toString(){
         return "Id: "+this.idMotorista +"\nTelefone: "+this.telefoneMotorista +"\nId Empresa: "+this.idMotorista;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setIdMotorista(long idMotorista) {
+        this.idMotorista = idMotorista;
+    }
 }

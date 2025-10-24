@@ -18,6 +18,16 @@ public class Caminhao {
         this.capacidade=capacidade;
         this.idFrota=idFrota;
     }
+
+    public Caminhao(String placa,String status,int kmRodados,String modelo,int capacidade, long idFrota){
+        this.status=status;
+        this.modelo=modelo;
+        this.placa=placa;
+        this.kmRodados=kmRodados;
+        this.capacidade=capacidade;
+        this.idFrota=idFrota;
+    }
+
     public long getId(){
         return this.id;
     }
@@ -66,5 +76,13 @@ public class Caminhao {
                 ", capacidade=" + capacidade +
                 ", idFrota=" + idFrota +
                 '}';
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
     }
 }

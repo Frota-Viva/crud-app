@@ -17,8 +17,7 @@ public class TelefoneEmpresaDAO extends AbstractDAO implements DAO<TelefoneEmpre
      * inserir
      * atualizarTelefoneEmpresa
      * deletar
-     * buscarPorId
-     * buscarPorIdEmpresa
+     * buscarPorId|IdEmpresa
      * buscarTodos
      */
 

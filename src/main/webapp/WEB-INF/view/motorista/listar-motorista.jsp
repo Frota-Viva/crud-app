@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Inicial - Frota Viva</title>
-    <link rel="stylesheet" href="../../assets/CSS/homeStyle.css">
+    <link rel="stylesheet" href="../../assets/CSS/homeStyle.css<%=System.currentTimeMillis()%>">
 </head>
 
 <body>

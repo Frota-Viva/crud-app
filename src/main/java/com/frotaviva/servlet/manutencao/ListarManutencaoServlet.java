@@ -1,8 +1,7 @@
-package com.frotaviva.servlet.motorista;
+package com.frotaviva.servlet.manutencao;
 
-import com.frotaviva.dao.MotoristaDAO;
-import com.frotaviva.dao.TelefoneMotoristaDAO;
-import com.frotaviva.model.Motorista;
+import com.frotaviva.dao.ManutencaoDAO;
+import com.frotaviva.model.Manutencao;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,22 +12,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ListaMotoristas", value = "/listar-motoristas")
-public class ListarMotoristasServlet extends HttpServlet {
+@WebServlet(name = "ListaManutencao", value = "/listar-manutencao")
+public class ListarManutencaoServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         try{
+            ManutencaoDAO dao = new ManutencaoDAO();
 
-            MotoristaDAO dao = new MotoristaDAO();
-            TelefoneMotoristaDAO telefoneDAO = new TelefoneMotoristaDAO();
+            List<Manutencao> manutencao = dao.buscarTodos();
 
-            List<Motorista> motoristas = dao.buscarTodos();
-
-            request.setAttribute("motoristas", motoristas);
-            request.setAttribute("telefones", telefoneDAO);
+            request.setAttribute("manutencao", manutencao);
 
             request.getRequestDispatcher("WEB-INF/view/listar-motoristas.jsp").forward(request, response);
 
@@ -37,3 +33,4 @@ public class ListarMotoristasServlet extends HttpServlet {
         }
     }
 }
+
