@@ -24,7 +24,7 @@
 <aside class="menu-lateral">
     <img src="../../assets/imgs/img-home/logo2.png" alt="Frota Viva" id="logo">
     <nav>
-        <a href="home.html">
+        <a href="/home">
             <img src="../../assets/imgs/img-home/casa.png" alt="Pagina Inicial" class="icones-aside">
             Pagina Inicial
         </a>
@@ -58,7 +58,7 @@
         </a>
     </nav>
 
-    <a href="perfil.jsp">
+    <a href="home/perfil">
         <div class="perfil-menu">
             <img src="../../assets/icons/icon-perfil-empresa.svg" alt="Perfil" class="icon-perfil">
             Perfil

@@ -33,11 +33,11 @@
 <aside class="menu-lateral">
     <img src="../../assets/imgs/img-home/logo2.png" alt="Frota Viva" id="logo">
     <nav>
-        <a href="home.html">
+        <a href="/home">
             <img src="../../assets/imgs/img-home/casa.png" alt="Pagina Inicial" class="icones-aside">
             Pagina Inicial
         </a>
-        <a href="">
+        <a href="/home/perfis">
             <img src="../../assets/icons/icon-perfis.svg" alt="" class="icones-aside">
             Perfis
         </a>
@@ -61,13 +61,13 @@
             Motorista
         </a>
 
-        <a href="entregas.html">
+        <a href="entregas.html">/
             <img src="../../assets/icons/icon-entregas.svg" alt="Entregas" class="icones-aside">
             Entregas
         </a>
     </nav>
 
-    <a href="perfil.jsp">
+    <a href="/home/perfil">
         <div class="perfil-menu">
             <img src="../../assets/icons/icon-perfil-empresa.svg" alt="Perfil" class="icon-perfil">
             Perfil

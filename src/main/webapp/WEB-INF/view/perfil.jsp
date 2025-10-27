@@ -5,23 +5,26 @@
   Time: 17:22
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="com.frotaviva.model.Empresa" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%Object reqEmpresa = request.getAttribute("empresa");
+Empresa empresa = (Empresa) reqEmpresa;%>
 <html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frota Viva - Perfil</title>
-  <link rel="stylesheet" href="../../assets/CSS/perfilStyle.css">
+    <link rel="stylesheet" href="../../assets/CSS/perfilStyle.css?<%=System.currentTimeMillis()%>">
 </head>
 <body>
   <aside class="menu-lateral">
         <img src="../../assets/imgs/img-home/logo2.png" alt="Frota Viva" id="logo">
         <nav>
-            <a href="home.html">
+            <a href="/home">
                 <img src="../../assets/imgs/img-home/casa.png" alt="Pagina Inicial" class="icones-aside">
                 Pagina Inicial
             </a>
-            <a href="">
+            <a href="/home/perfis">
                 <img src="../../assets/icons/icon-perfis.svg" alt="" class="icones-aside">
                 Perfis
             </a>
@@ -51,7 +54,7 @@
             </a>
         </nav>
 
-        <a href="perfil.jsp">
+        <a href="/home/perfil">
             <div class="perfil-menu">
                 <img src="../../assets/icons/icon-perfil-empresa.svg" alt="Perfil" class="icon-perfil">
                 Perfil
@@ -63,8 +66,8 @@
         <section id="infos-inicial">
             <img src="../../assets/icons/icon-perfil-empresa.svg" alt="" id="perfil-main">
             <div>
-                <h1>Teixeira Macedo - ME</h1>
-                <h2>Transportadora</h2>
+                <h1><%=empresa.getNome()%></h1>
+                <h2><%=empresa.getTipoEmpresa()%></h2>
             </div>
         </section>
         <form action="editar-perfil">
@@ -72,70 +75,68 @@
                 <section class="conjunto-input">
                     <div class="div-inputs">
                         <label for="email">Email:</label>
-                        <input type="text" value="" id="email" name="email" required>
+                        <input type="text" value="<%=empresa.getEmail()%>" id="email" name="email" required>
                     </div>
                     <div class="div-inputs">
-                        <label for="telefone">Telefone:</label>
-                        <input type="text" value="" id="telefone" name="telefone" required>
+                        <label for="telefone">Tipo:</label>
+                        <input type="text" value="<%=empresa.getTipoEmpresa()%>" id="telefone" name="telefone" required>
                     </div>
                     <div class="div-inputs">
                         <label for="cnpj">CNPJ:</label>
-                        <input type="text" value="" id="cnpj" name="cnpj" required>
+                        <input type="text" value="<%=empresa.getCnpj()%>" id="cnpj" name="cnpj" required>
                     </div>
                 </section>
                 <section class="conjunto-input">
                     <div class="div-inputs">
                         <label for="cep">CEP:</label>
-                        <input type="text" value="" id="cep" name="cep" required>
+                        <input type="text" value="<%=empresa.getEndereco().getCep()%>" id="cep" name="cep" required>
                     </div>
                     <div class="div-inputs">
                         <label for="rua">Rua:</label>
-                        <input type="text" value="" id="rua" name="rua" required>
+                        <input type="text" value="<%=empresa.getEndereco().getRua()%>" id="rua" name="rua" required>
                     </div>
                     <div class="div-inputs">
                         <label for="complemento">Complemento:</label>
-                        <input type="text" value="" id="complemento" name="complemento">
+                        <input type="text" value="<%=empresa.getEndereco().getComplemento()%>" id="complemento" name="complemento">
                     </div>
                 </section>
                 <section class="conjunto-input">
                     <div class="div-inputs">
                         <label for="pais">País:</label>
-                        <input type="text" value="" id="pais" name="pais" required>
+                        <input type="text" value="<%=empresa.getEndereco().getPais()%>" id="pais" name="pais" required>
                     </div>
                     <div class="div-inputs">
                         <label for="cidade">Cidade:</label>
-                        <input type="text" value="" id="cidade" name="cidade" required>
+                        <input type="text" value="<%=empresa.getEndereco().getCidade()%>" id="cidade" name="cidade" required>
                     </div>
                     <div class="div-inputs">
                         <label for="estado">Estado:</label>
-                        <input type="text" value="" id="estado" name="estado" required>
+                        <input type="text" value="<%=empresa.getEndereco().getEstado()%>" id="estado" name="estado" required>
                     </div>
                 </section>
                 <section class="conjunto-input">
                     <div class="div-inputs">
                         <label for="numero">Número:</label>
-                        <input type="text" value="" id="numero" name="numero" required>
+                        <input type="text" value="<%=empresa.getEndereco().getNumero()%>" id="numero" name="numero" required>
                     </div>
                     <div class="div-inputs">
                         <label for="nome">Nome:</label>
-                        <input type="text" value="" id="nome" name="nome" required>
-                    </div>
-                    <div class="div-inputs">
-                        <label for="tipo">Tipo:</label>
-                        <input type="text" value="" id="tipo" name="tipo" required>
+                        <input type="text" value="<%=empresa.getNome()%>" id="nome" name="nome" required>
                     </div>
                 </section>
             </article>
             <section id="ultima-linha">
-                <div class="div-inputs">
-                    <label for="senha">Senha:</label>
-                    <input type="text" value="" id="senha" name="senha" required>
+                <div id="caixa-alterarSenha">
+                    <a>Alterar senha</a>
                 </div>
                 <section id="botoes">
-                    <button id="button-cancelar" type="button">
-                        <img src="../../assets/icons/icon-cancelar.svg" alt="" class="icones-botao">
-                        <p><b>Cancelar</b></p>
-                    </button>
+                    <a href="/home">
+                        <button id="button-cancelar" type="button">
+                            <img src="../../assets/icons/icon-cancelar.svg" alt="" class="icones-botao">
+                            <p><b>Cancelar</b></p>
+                        </button>
+                    </a>
+
                     <button id="button-confirmar" type="submit">
                         <img src="../../assets/icons/icon-confirmar.svg" alt="" class="icones-botao">
                         <p><b>Confirmar</b></p>

@@ -1,0 +1,176 @@
+/* Importando a fonte Roboto do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+/* Determinando a base */
+:root {
+    --body-gradient: linear-gradient(130deg, rgba(0, 0, 0, 1) 10%, rgba(0, 24, 51, 1) 34%, rgba(3, 39, 79, 1) 52%, rgba(16, 88, 137, 1) 83%);
+    --footer-gradient: linear-gradient(to left, rgba(30, 30, 30, 1), rgba(68, 68, 68, 1));
+    --box-gradient: linear-gradient(to right, rgba(16, 88, 137, 0.5), rgba(4, 22, 35, 0.5));
+}
+
+html {
+    font-size: 62.5%;
+    font-family: "Roboto", sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Principal */
+body {
+    background: var(--body-gradient);
+    min-height: 100dvh;
+    min-width: 100dvw;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+}
+button {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#logo {
+    width: clamp(94px, 94%, 188px);
+    height: auto;
+    margin-left: 3rem;
+}
+
+/* Lateral */
+.menu-lateral{
+    width: 17vw;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.menu-lateral > nav {
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem;
+    gap: 1rem;
+}
+
+.menu-lateral > nav > a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.perfil-menu {
+    margin: 0 0 0 1.4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.6rem;
+    color: white;
+}
+
+.perfil-menu img {
+    width: 5rem;
+}
+.icones-aside {
+    width: 3rem;
+}
+.menu-lateral a{
+    margin: 0.4rem 0rem;
+}
+main{
+    background-color: white;
+    width: 80vw;
+    margin: 2rem;
+    border-radius: 1rem;
+}
+#infos-inicial{
+    display: flex;
+    padding: 2rem;
+    align-items: center;
+}
+#infos-inicial h1{
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+#infos-inicial h2{
+    margin-top: 0.5rem;
+    font-size: 2rem;
+    font-weight: normal;
+}
+#perfil-main{
+    width: 9rem;
+    margin: 0 2rem;
+}
+.div-inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+.conjunto-input{
+    display: flex;
+    gap: 15rem;
+    margin: 1.3rem 7rem;
+}
+.div-inputs input{
+    width: 25rem;
+    height: 4.5rem;
+    border: 0;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+    opacity: 0.97;
+    padding: 1.5rem;
+    font-size: 1.5rem;
+}
+.div-inputs label{
+    font-size: 2rem;
+}
+#button-cancelar{
+    background-color: #D1D5DB;
+}
+.icones-botao{
+    width: 2.3rem;
+    margin-bottom: 0;
+}
+#button-confirmar{
+    background-color: #2F416B;
+    color: white;
+}
+#botoes{
+    display: flex;
+    justify-content: right;
+    gap: 3.5rem;
+    margin-top: 2rem;
+}
+#botoes button{
+    display: flex;
+    flex-direction: column;
+    width: 14rem;
+    border: 0;
+    border-radius: 0.8rem;
+    align-items: center;
+    padding: 1rem 0 0 0;
+}
+#botoes button p{
+    margin-top: 0.7rem;
+    font-size: 1.5rem;
+}
+#ultima-linha{
+    display: flex;
+    justify-content: space-between;
+    margin: 1.3rem 7rem;
+    align-items: center;
+}
+#caixa-alterarSenha a{
+    font-size: 1.8rem;
+}
