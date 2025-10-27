@@ -5,21 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Inicial - Frota Viva</title>
-    <link rel="stylesheet" href="../../assets/CSS/tabelasStyle.css?<%=System.currentTimeMillis()%>"
+    <link rel="stylesheet" href="../../../assets/CSS/tabelasStyle.css?<%=System.currentTimeMillis()%>"
 
 </head>
 
 <body>
 <aside class="menu-lateral">
-    <img src="../../assets/imgs/img-home/logo2.png" alt="logo" class="logo">
+    <img src="../../../assets/imgs/img-home/logo2.png" alt="logo" class="logo">
     <nav>
-        <a href="home.jsp">
-            <img src="../../assets/imgs/img-home/casa.png" alt="Pagina inicial">
+        <a href="../home.jsp">
+            <img src="../../../assets/imgs/img-home/casa.png" alt="Pagina inicial">
             Página Inicial
         </a>
 
         <a href="listar-motoristas.jsp">
-            <img src="../../assets/imgs/img-home/pessoa.png" alt="Funcionários">
+            <img src="../../../assets/imgs/img-home/pessoa.png" alt="Funcionários">
             Funcionários
         </a>
     </nav>
@@ -31,16 +31,16 @@
         <!-- Barra superior -->
         <header class="top-bar">
             <div class="procurar-container">
-                <img src="../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
+                <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
                 <input type="text" placeholder="Buscar Usuario" class="input-search">
             </div>
 
             <div class="perfil-container">
                 <button class="bt-edit-perfil">
-                    <img src="../../assets/imgs/img-home/caneta-edit.png" alt="Editar" class="icon-acomp">
+                    <img src="../../../assets/imgs/img-home/caneta-edit.png" alt="Editar" class="icon-acomp">
                     Personalizar Perfil
                 </button>
-                <img src="../../assets/imgs/img-home/perfil.png" alt="Usuário" class="icon-user">
+                <img src="../../../assets/imgs/img-home/perfil.png" alt="Usuário" class="icon-user">
             </div>
         </header>
         <!-- -------------- -->
@@ -84,9 +84,9 @@
                         <div><%= m.getIdEmpresa()%></div>
                     </div>
                     <div class="actions">
-                        <button title="Editar"><img src="../../assets/imgs/img-home/editar.png" alt=""
+                        <button title="Editar"><img src="../../../assets/imgs/img-home/editar.png" alt=""
                                                     class="icon-edit"></button>
-                        <button title="Excluir"><img src="../../assets/imgs/img-home/lixo.png" alt=""
+                        <button title="Excluir"><img src="../../../assets/imgs/img-home/lixo.png" alt=""
                                                      class="icon-trash"></button>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                 <!-- Mudança de pagina (Barra inferior) -->
                 <div class="inf-bar">
                     <button class="bt-prev">
-                        <img src="../../assets/imgs/img-home/seta-esq-tabela.png" alt="Anterior" class="icon-in-table">
+                        <img src="../../../assets/imgs/img-home/seta-esq-tabela.png" alt="Anterior" class="icon-in-table">
                         Anterior
                     </button>
 
@@ -123,7 +123,7 @@
 
                     <button class="bt-prox">
                         Próxima
-                        <img src="../../assets/imgs/img-home/seta-dir-tabela.png" alt="Próxima" class="icon-seta">
+                        <img src="../../../assets/imgs/img-home/seta-dir-tabela.png" alt="Próxima" class="icon-seta">
                     </button>
                 </div>
                 <!-- ------ -->
