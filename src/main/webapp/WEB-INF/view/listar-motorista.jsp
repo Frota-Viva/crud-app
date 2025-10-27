@@ -1,13 +1,12 @@
 <%@ page import="com.frotaviva.model.Motorista" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.frotaviva.model.TelefoneMotorista" %>
-<%@ page import="com.frotaviva.dao.TelefoneMotoristaDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Inicial - Frota Viva</title>
-    <link rel="stylesheet" href="../../assets/CSS/homeStyle.css<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="../../assets/CSS/tabelasStyle.css?<%=System.currentTimeMillis()%>"
+
 </head>
 
 <body>
@@ -69,7 +68,6 @@
 
                     <%
                         List<Motorista> motoristas = (List<Motorista>) request.getAttribute("motoristas");
-                        //List<TelefoneMotorista> telefones = (List<TelefoneMotorista>) request.getAttribute("telefones")
 
                         if (motoristas != null && !motoristas.isEmpty()){
                             for (Motorista m : motoristas) {
