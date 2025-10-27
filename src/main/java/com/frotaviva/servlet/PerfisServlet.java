@@ -27,7 +27,6 @@ public class PerfisServlet extends HttpServlet {
         }
 
         String pagina = req.getParameter("pagina"); //Pega a página como parâmetro da URL
-        System.out.println(pagina);
 
         //Verifica se a página está na URL
         if (pagina == null){
@@ -43,8 +42,6 @@ public class PerfisServlet extends HttpServlet {
 
         long idEmpresa = (long) id;
         int offset = ( paginaAtual - 1 ) * 9;
-
-        System.out.println(paginaAtual);
 
         //Monta os perfis de cada motorista da empresa e seta o atributo na request
         List<Map<String, String>> perfisMotoristas = FiltrosDAO.perfisMotoristas(idEmpresa, offset);
