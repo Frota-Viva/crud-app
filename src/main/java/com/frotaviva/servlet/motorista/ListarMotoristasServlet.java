@@ -26,7 +26,7 @@ public class ListarMotoristasServlet extends HttpServlet {
             List<Motorista> motoristas = dao.buscarTodos();
 
             request.setAttribute("motoristas", motoristas);
-            request.getRequestDispatcher("WEB-INF/view/listar-motoristas.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/listar-motorista.jsp").forward(request, response);
 
         } catch (Exception e){ // ainda nao tem a pagina de erro
             request.setAttribute("erro", "Erro ao tentar buscar motoristas");

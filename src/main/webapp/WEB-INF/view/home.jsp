@@ -47,12 +47,12 @@
             Frota
         </a>
 
-        <a href="motorista.html">
+        <a href="/listar-motoristas">
             <img src="../../assets/icons/icon-motorista.svg" alt="Motorista" class="icones-aside">
             Motorista
         </a>
 
-        <a href="entregas.html">
+        <a href="entregas.jsp">
             <img src="../../assets/icons/icon-entregas.svg" alt="Entregas" class="icones-aside">
             Entregas
         </a>
