@@ -19,6 +19,15 @@ public class Empresa {
         this.tipoEmpresa=tipoEmpresa;
         this.senha=senha;
     }
+    public Empresa(long id,String tipoEmpresa,String cnpj,String email,String nome,
+                   Endereco endereco){
+        this.id=id;
+        this.nome=nome;
+        this.email=email;
+        this.cnpj=cnpj;
+        this.endereco =endereco;
+        this.tipoEmpresa=tipoEmpresa;
+    }
     public Empresa(String tipoEmpresa,String cnpj,String email,String senha,String nome,
                    Endereco endereco){
         this.nome=nome;

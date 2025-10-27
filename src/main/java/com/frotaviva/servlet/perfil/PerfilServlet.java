@@ -15,31 +15,24 @@ public class PerfilServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession(true);
 
-        Object empresaSession = session.getAttribute("empresa");
-        if (empresaSession != null){
-            Empresa empresa = (Empresa) empresaSession;
-            req.setAttribute("empresa",empresa);
+        Empresa empresa;
+        EmpresaDAO empresaDAO = new EmpresaDAO();
+
+        Object idSession = session.getAttribute("idEmpresa");
+
+        if (idSession == null){
+            res.sendRedirect("/");
+            return;
         }
-        else {
-            Empresa empresa;
-            EmpresaDAO empresaDAO = new EmpresaDAO();
+        long idEmpresa = (long) idSession;
 
-            Object idSession = session.getAttribute("idEmpresa");
+        empresa = empresaDAO.buscarPorId(idEmpresa);
 
-            if (idSession == null){
-                res.sendRedirect("/");
-                return;
-            }
-            long idEmpresa = (long) idSession;
-
-            empresa = empresaDAO.buscarPorId(idEmpresa);
-
-            if (empresa == null){
-                res.sendRedirect("/");
-                return;
-            }
-            req.setAttribute("empresa",empresa);
+        if (empresa == null){
+            res.sendRedirect("/");
+            return;
         }
+        req.setAttribute("empresa",empresa);
         req.getRequestDispatcher("/WEB-INF/view/perfil.jsp").forward(req, res);
 
 
