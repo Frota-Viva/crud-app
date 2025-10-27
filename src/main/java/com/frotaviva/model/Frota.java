@@ -7,6 +7,7 @@ public class Frota {
     private String tipoFrota;
     private String regiao;
     private long idEmpresa;
+
     public Frota(long id,int tamanhoFrota,String tipoFrota,String regiao,long idEmpresa){
         this.id=id;
         this.tamanhoFrota=tamanhoFrota;
@@ -14,6 +15,14 @@ public class Frota {
         this.regiao=regiao;
         this.idEmpresa=idEmpresa;
     }
+
+    public Frota(int tamanhoFrota,String tipoFrota,String regiao,long idEmpresa){
+        this.tamanhoFrota=tamanhoFrota;
+        this.tipoFrota=tipoFrota;
+        this.regiao=regiao;
+        this.idEmpresa=idEmpresa;
+    }
+
     public long getId(){
         return this.id;
     }
@@ -38,6 +47,10 @@ public class Frota {
     public void setTipoFrota(String tipoFrota){
         this.tipoFrota=tipoFrota;
     }
+    public void setIdEmpresa(int idEmpresa){
+        this.idEmpresa =idEmpresa;
+    }
+
     public String toString(){
         return "Id: "+this.id+"\nTamanho da Frota: "+this.tamanhoFrota+"\nTipo da Frota: "+this.tipoFrota+"\nRegião: "+this.regiao;
     }

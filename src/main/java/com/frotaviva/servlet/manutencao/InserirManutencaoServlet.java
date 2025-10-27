@@ -1,8 +1,6 @@
 package com.frotaviva.servlet.manutencao;
 
 import com.frotaviva.dao.ManutencaoDAO;
-
-import com.frotaviva.model.Caminhao;
 import com.frotaviva.model.Manutencao;
 
 import jakarta.servlet.ServletException;
@@ -49,9 +47,9 @@ public class InserirManutencaoServlet extends HttpServlet {
                     custo, ultimoMotorista, descricao, idCaminhao);
 
             if (dao.inserir(manutencao) == 1){
-                response.sendRedirect("listar-caminhao");
+                response.sendRedirect("listar-manutencao");
             }
-            response.sendRedirect("listar-caminhao");
+            response.sendRedirect("listar-manutencao");
 
         } catch (Exception e){ // ainda nao tem a pagina de erro
             request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
