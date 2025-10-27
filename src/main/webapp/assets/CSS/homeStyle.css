@@ -203,7 +203,7 @@ main {
     font-size: 1.2rem;
     background-color: #202B45;
     color: white;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 0.5rem;
     margin-bottom: 1rem;
     min-height: 46px;
@@ -219,10 +219,10 @@ main {
     font-size: 1.2rem;
 }
 
-.table-row {
-    display: grid;
-    grid-template-columns: 5fr 1fr;
-}
+/*.table-row {*/
+/*    display: grid;*/
+/*    grid-template-columns: 5fr 1fr;*/
+/*}*/
 
 .table-left-row {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
