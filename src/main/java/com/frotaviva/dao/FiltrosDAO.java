@@ -31,21 +31,59 @@ public class FiltrosDAO {
         Connection conn = null;
 
         List<Map<String, String>> perfisMotoristas = new ArrayList<>();
-        String sql = "select c.placa, m.nome, m.email, MIN(tm.telefone_motorista) as telefone_principal, f.tipo_frota from motorista m " +
-                "join caminhao_motorista cm on cm.id_motorista = m.id " +
-                "join caminhao c on cm.id_caminhao = c.id " +
-                "join telefone_motorista tm on tm.id_motorista = m.id " +
-                "join empresa e on e.id = m.id_empresa " +
-                "join frota f on f.id_empresa = e.id " +
-                "where e.id = ? " +
-                "group by c.placa, m.nome, m.email, f.tipo_frota " +
-                "limit 9 offset ?";
+        String sql = "SELECT * FROM perfismotoristas WHERE id_empresa = ? " +
+                " LIMIT 9 OFFSET ?";
 
         try {
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setLong(1, id);
             stmt.setInt(2, offset);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String placa = rs.getString("placa");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String telefonePrincipal = rs.getString("telefone_principal");
+                String tipoFrota = rs.getString("tipo_frota");
+
+                Map<String, String> perfilMotorista = new HashMap<>();
+                perfilMotorista.put("placa", placa);
+                perfilMotorista.put("nome", nome);
+                perfilMotorista.put("email", email);
+                perfilMotorista.put("telefone_principal", telefonePrincipal);
+                perfilMotorista.put("tipo_frota", tipoFrota);
+
+                perfisMotoristas.add(perfilMotorista);
+            }
+
+            stmt.close();
+            rs.close();
+            return perfisMotoristas;
+
+        } catch (SQLException sqle) {
+            log.error("Erro ao buscar perfis de motoristas", sqle);
+            return null;
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+    public static List<Map<String, String>> buscarPerfisPorNome(long id, String nomeBuscar, int offset) {
+        Conexao conexao = new Conexao();
+        Connection conn = null;
+
+        List<Map<String, String>> perfisMotoristas = new ArrayList<>();
+        String sql = "SELECT * FROM perfismotoristas WHERE id_empresa = ? AND nome LIKE ?" +
+                " LIMIT 9 OFFSET ?";
+
+        try {
+            conn = conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setLong(1, id);
+            stmt.setString(2, "%"+nomeBuscar+"%");
+            stmt.setInt(3, offset);
+
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {

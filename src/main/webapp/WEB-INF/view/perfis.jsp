@@ -37,8 +37,10 @@
         <!-- Barra superior -->
         <header class="top-bar">
             <div class="procurar-container">
-                <img src="../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
-                <input type="text" placeholder="Buscar Usuario" class="input-search">
+                <form action="/home/perfis" style="display: flex; align-items: center;">
+                    <img src="../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
+                    <input type="text" placeholder="Buscar Usuario" class="input-search" name="buscar">
+                </form>
             </div>
 
             <div class="perfil-container">

@@ -17,6 +17,7 @@ public class Teste {
 
         System.out.println(Senhas.hashSenha("&KfYvsy@9v"));
         System.out.println(Senhas.hashSenha("P3W1@@Ix%e"));
+        System.out.println(Senhas.hashSenha("l6RkPWlZ(1"));
 
     }
 }
