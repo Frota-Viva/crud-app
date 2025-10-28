@@ -76,20 +76,30 @@ Empresa empresa = (Empresa) reqEmpresa;%>
                     <div class="div-inputs">
                         <label for="email">Email:</label>
                         <input type="text" value="<%=empresa.getEmail()%>" id="email" name="email" required>
+                        <%if (request.getAttribute("erroEmail") != null){;%>
+                        <span class="erro" style="color: red;font-size: small; "><%=request.getAttribute("erroEmail")%></span>
+                        <%}%>
+
                     </div>
                     <div class="div-inputs">
-                        <label for="telefone">Tipo:</label>
-                        <input type="text" value="<%=empresa.getTipoEmpresa()%>" id="telefone" name="telefone" required>
+                        <label for="tipo">Tipo:</label>
+                        <input type="text" value="<%=empresa.getTipoEmpresa()%>" id="tipo" name="tipo" required>
                     </div>
                     <div class="div-inputs">
                         <label for="cnpj">CNPJ:</label>
                         <input type="text" value="<%=empresa.getCnpj()%>" id="cnpj" name="cnpj" required>
+                        <%if(request.getAttribute("erroCnpj")!=null){%>
+                        <span class="erro" style="color: red; font-size: small; "><%=request.getAttribute("erroCnpj")%></span>
+                        <%}%>
                     </div>
                 </section>
                 <section class="conjunto-input">
                     <div class="div-inputs">
                         <label for="cep">CEP:</label>
                         <input type="text" value="<%=empresa.getEndereco().getCep()%>" id="cep" name="cep" required>
+                        <%if(request.getAttribute("erroCep")!=null){%>
+                        <span class="erro" style="color: red; font-size: small;"><%=request.getAttribute("erroCep")%></span>
+                        <%}%>
                     </div>
                     <div class="div-inputs">
                         <label for="rua">Rua:</label>
@@ -117,7 +127,10 @@ Empresa empresa = (Empresa) reqEmpresa;%>
                 <section class="conjunto-input">
                     <div class="div-inputs">
                         <label for="numero">Número:</label>
-                        <input type="text" value="<%=empresa.getEndereco().getNumero()%>" id="numero" name="numero" required>
+                        <input type="number" value="<%=empresa.getEndereco().getNumero()%>" id="numero" name="numero" required min="1">
+                        <%if(request.getAttribute("erroNumero")!=null){%>
+                        <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("erroNumero")%></span>
+                        <%}%>
                     </div>
                     <div class="div-inputs">
                         <label for="nome">Nome:</label>
@@ -128,6 +141,17 @@ Empresa empresa = (Empresa) reqEmpresa;%>
             <section id="ultima-linha">
                 <div id="caixa-alterarSenha">
                     <a>Alterar senha</a>
+                </div>
+                    <% if (request.getAttribute("erroIgualdade") != null) { %>
+                    <div id="erroIgualdade">
+                        <span><%= request.getAttribute("erroIgualdade") %></span>
+                    </div>
+                    <% } else if (request.getAttribute("realizado") != null) { %>
+                    <div id="realizado">
+                        <span><%= request.getAttribute("realizado") %></span>
+                    </div>
+                    <% } %>
+
                 </div>
                 <section id="botoes">
                     <a href="/home">

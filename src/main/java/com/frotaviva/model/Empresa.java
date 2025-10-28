@@ -109,9 +109,18 @@ public class Empresa {
 
         return digitos.equals("" + digito1 + digito2) ? cnpj : null;
     }
-    public String toString(){
-        return "Id: "+this.id+"\nNome: "+this.nome+"\nEndereco: "+this.endereco+"\nEmail: "+this.email+
-                "\nCnpj: "+this.cnpj+"\nTipo da Empresa: "+this.tipoEmpresa;
+
+    @Override
+    public String toString() {
+        return "Empresa{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", endereco=" + endereco +
+                ", email='" + email + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                ", tipoEmpresa='" + tipoEmpresa + '\'' +
+                ", senha='" + senha + '\'' +
+                '}';
     }
 
     public void setCnpj(String cnpj) {
@@ -120,5 +129,13 @@ public class Empresa {
 
     public void setTipoEmpresa(String tipoEmpresa) {
         this.tipoEmpresa = tipoEmpresa;
+    }
+    public boolean equals(Empresa empresa){
+        return (empresa.getTipoEmpresa().equals(this.tipoEmpresa) &&
+                this.endereco.equals(empresa.getEndereco()) &&
+                empresa.getCnpj().equals(this.cnpj) &&
+                empresa.getId() == this.id &&
+                empresa.getEmail().equals(this.email) &&
+                empresa.getNome().equals(this.nome));
     }
 }

@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(value = "/editar-perfil")
+@WebServlet(value = "/home/editar-perfil")
 public class EditarPerfilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -40,27 +40,37 @@ public class EditarPerfilServlet extends HttpServlet {
 
             if (Empresa.cnpjValidado(cnpj) == null) {
                 req.setAttribute("erroCnpj", "CNPJ invalido!");
-                res.sendRedirect("/home/perfil");
             } else {
                 cnpjBD = Empresa.cnpjValidado(cnpj);
             }
 
             if (!Validar.email(email)) {
                 req.setAttribute("erroEmail", "Email Invalido!");
-                res.sendRedirect("/home/perfil");
             }
             if (Validar.cepValidado(cep) == null) {
                 req.setAttribute("erroCep", "CEP Invalido!");
-                res.sendRedirect("/home/perfil");
             } else {
                 cepBD = Validar.cepValidado(cep);
             }
+            if ((req.getAttribute("erroCep") != null) || (req.getAttribute("erroEmail") != null) || (req.getAttribute("erroCnpj") != null)){
+                req.getRequestDispatcher("/home/perfil").forward(req, res);
+                return;
+            }
+
+            Empresa empresaDB = empresaDAO.buscarPorIdNotSenha(idEmpresa);
             Empresa empresa = new Empresa(idEmpresa,tipo,cnpjBD,
                     email,nome,new Endereco(pais,cepBD,estado,cidade,rua,numero,complemento));
 
-            empresaDAO.atualizar(empresa);
-
-
+            if (empresaDB.equals(empresa)){
+                req.setAttribute("erroIgualdade", "Nenhum campo foi modificado!");
+                req.getRequestDispatcher("/home/perfil").forward(req, res);
+                return;
+            } else {
+                    req.setAttribute("realizado", "Mudança realizada com sucesso!");
+                empresaDAO.atualizar(empresa);
+                req.getRequestDispatcher("/home/perfil").forward(req, res);
+                return;
+            }
 
         }catch (NumberFormatException nfe){
             req.setAttribute("erroNumero", "Digite apenas números inteiros!");
@@ -68,6 +78,7 @@ public class EditarPerfilServlet extends HttpServlet {
         } catch (Exception e){
             res.sendRedirect("/");
         }
+
 
 
     }

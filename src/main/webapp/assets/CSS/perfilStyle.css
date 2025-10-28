@@ -174,3 +174,16 @@ main{
 #caixa-alterarSenha a{
     font-size: 1.8rem;
 }
+#erroIgualdade{
+    padding: 1rem;
+    background-color: #F06060;
+    font-size: medium;
+    border-radius: 0.8rem;
+}
+#realizado{
+    padding: 1rem;
+    color: white;
+    background-color: #1F2A44;
+    font-size: medium;
+    border-radius: 0.8rem;
+}
