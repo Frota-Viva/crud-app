@@ -8,7 +8,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.frotaviva.exception.*;
 import com.frotaviva.model.Empresa;
 import com.frotaviva.model.Endereco;
 import com.frotaviva.util.Conexao;
@@ -350,51 +349,6 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
             conexao.desconectar(conn);
         }
     }
-    public Empresa buscarPorIdNotSenha(long id){
-        Conexao conexao = new Conexao();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        Connection conn = null;
-
-        String sql = "SELECT * FROM empresa WHERE id = ?";
-
-        try {
-            conn = conexao.conectar();
-            stmt = conn.prepareStatement(sql);
-
-            stmt.setLong(1, id);
-
-            rs = stmt.executeQuery();
-
-            if (rs.next()){
-                long idEmpresa = rs.getLong("id");
-                String tipo_empresa = rs.getString("tipo_empresa");
-                String cnpj = rs.getString("cnpj");
-                String email = rs.getString("email");
-                String nome = rs.getString("nome");
-                String cep = rs.getString("cep");
-                String rua = rs.getString("rua");
-                String complemento = rs.getString("complemento");
-                int numero = rs.getInt("numero");
-                String pais = rs.getString("pais");
-                String estado = rs.getString("estado");
-                String cidade = rs.getString("cidade");
-
-                return new Empresa(idEmpresa, tipo_empresa, cnpj, email, nome,
-                        new Endereco(pais, cep, estado, cidade, rua, numero, complemento));
-            }
-
-            return null;
-
-        } catch (SQLException e){
-            log.error("Erro ao buscar empresa", e);
-            throw throwDAOException(e, SELECT);
-        } finally {
-            fechar(stmt, rs);
-            conexao.desconectar(conn);
-        }
-    }
-
     public List<Empresa> buscarTodos(){
         List<Empresa> empresas = new ArrayList<>();
         Conexao conexao = new Conexao();

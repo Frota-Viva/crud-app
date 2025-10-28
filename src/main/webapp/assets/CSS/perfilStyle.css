@@ -164,6 +164,7 @@ main{
 #botoes button p{
     margin-top: 0.7rem;
     font-size: 1.5rem;
+    cursor: pointer;
 }
 #ultima-linha{
     display: flex;
@@ -174,7 +175,7 @@ main{
 #caixa-alterarSenha a{
     font-size: 1.8rem;
 }
-#erroIgualdade{
+.erroCaixa{
     padding: 1rem;
     background-color: #F06060;
     font-size: medium;
@@ -186,4 +187,8 @@ main{
     background-color: #1F2A44;
     font-size: medium;
     border-radius: 0.8rem;
+}
+.erro{
+    color: red;
+    font-size: small;
 }
