@@ -68,8 +68,26 @@ public class Endereco {
     }
 
 // Método toString
-    public String toString(){
-        return "País: "+this.pais+"\nCEP: "+this.cep+"\nEstado: "+this.estado+"\nCidade: "+this.cidade+"\nRua: "+this.rua+
-                "\nNúmero: "+this.numero;
+
+    @Override
+    public String toString() {
+        return "Endereco{" +
+                "cep='" + cep + '\'' +
+                ", rua='" + rua + '\'' +
+                ", complemento='" + complemento + '\'' +
+                ", numero=" + numero +
+                ", pais='" + pais + '\'' +
+                ", estado='" + estado + '\'' +
+                ", cidade='" + cidade + '\'' +
+                '}';
+    }
+    public boolean equals(Endereco endereco){
+        return (endereco.getNumero()==this.numero &&
+                endereco.getPais().equals(this.pais) &&
+                endereco.getEstado().equals(this.estado) &&
+                endereco.getCidade().equals(this.cidade) &&
+                endereco.getComplemento().equals(this.complemento) &&
+                endereco.getCep().equals(this.cep)) &&
+                endereco.getRua().equals(this.rua);
     }
 }

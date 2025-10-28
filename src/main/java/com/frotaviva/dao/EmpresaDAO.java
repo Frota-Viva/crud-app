@@ -8,7 +8,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.frotaviva.exception.*;
 import com.frotaviva.model.Empresa;
 import com.frotaviva.model.Endereco;
 import com.frotaviva.util.Conexao;
@@ -70,6 +69,42 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
         } finally {
             fechar(stmt);
             conexao.desconectar(con);
+        }
+    }
+
+    public int atualizar(Empresa empresa){
+        Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        Connection conn = null;
+
+        String sql = "UPDATE empresa SET nome = ?, email = ?, cnpj = ?, tipo_empresa = ?, rua = ?, cep = ?, complemento = ?, numero = ?, pais = ?, estado = ? , cidade = ? WHERE id = ?";
+
+        try {
+            conn = conexao.conectar();
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, empresa.getNome());
+            stmt.setString(2, empresa.getEmail());
+            stmt.setString(3, empresa.getCnpj());
+            stmt.setString(4, empresa.getTipoEmpresa());
+            stmt.setString(5, empresa.getEndereco().getRua());
+            stmt.setString(6, empresa.getEndereco().getCep());
+            stmt.setString(7, empresa.getEndereco().getComplemento());
+            stmt.setInt(8, empresa.getEndereco().getNumero());
+            stmt.setString(9, empresa.getEndereco().getPais());
+            stmt.setString(10, empresa.getEndereco().getEstado());
+            stmt.setString(11, empresa.getEndereco().getCidade());
+            stmt.setLong(12, empresa.getId());
+
+            if (stmt.executeUpdate() > 0) return 1;
+            return 0;
+
+        } catch (SQLException e){
+            log.error("Erro ao atualizar empresa", e);
+            throw throwDAOException(e, UPDATE);
+        } finally {
+            fechar(stmt);
+            conexao.desconectar(conn);
         }
     }
 
@@ -314,7 +349,6 @@ public class EmpresaDAO extends AbstractDAO implements DAO<Empresa>{
             conexao.desconectar(conn);
         }
     }
-
     public List<Empresa> buscarTodos(){
         List<Empresa> empresas = new ArrayList<>();
         Conexao conexao = new Conexao();

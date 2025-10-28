@@ -4,6 +4,7 @@ import com.frotaviva.dao.CaminhaoDAO;
 import com.frotaviva.dao.EmpresaDAO;
 import com.frotaviva.model.Caminhao;
 import com.frotaviva.model.Empresa;
+import com.frotaviva.model.Endereco;
 import com.frotaviva.util.Conexao;
 import com.frotaviva.util.Senhas;
 

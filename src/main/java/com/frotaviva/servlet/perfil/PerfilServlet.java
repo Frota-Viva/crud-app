@@ -14,14 +14,10 @@ public class PerfilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession(true);
+        Empresa empresa;
 
-        Object empresaSession = session.getAttribute("empresa");
-        if (empresaSession != null){
-            Empresa empresa = (Empresa) empresaSession;
-            req.setAttribute("empresa",empresa);
-        }
-        else {
-            Empresa empresa;
+        Object empresaSession = req.getAttribute("empresa");
+        if (empresaSession == null){
             EmpresaDAO empresaDAO = new EmpresaDAO();
 
             Object idSession = session.getAttribute("idEmpresa");
@@ -39,7 +35,11 @@ public class PerfilServlet extends HttpServlet {
                 return;
             }
             req.setAttribute("empresa",empresa);
+        } else {
+            empresa = (Empresa) empresaSession;
+            req.setAttribute("empresa",empresa);
         }
+
         req.getRequestDispatcher("/WEB-INF/view/perfil.jsp").forward(req, res);
 
 

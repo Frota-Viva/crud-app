@@ -74,22 +74,29 @@ Empresa empresa = (Empresa) reqEmpresa;%>
             <article id="edicoes">
                 <section class="conjunto-input">
                     <div class="div-inputs">
+                        <label for="nome">Nome:</label>
+                        <input type="text" value="<%=empresa.getNome()%>" id="nome" name="nome" required>
+                    </div>
+                    <div class="div-inputs">
                         <label for="email">Email:</label>
-                        <input type="text" value="<%=empresa.getEmail()%>" id="email" name="email" required>
+                        <input type="email" value="<%=empresa.getEmail()%>" id="email" name="email" required>
+                        <%if (request.getAttribute("erroEmail") != null){;%>
+                        <span class="erro"><%=request.getAttribute("erroEmail")%></span>
+                        <%}%>
+
                     </div>
                     <div class="div-inputs">
-                        <label for="telefone">Tipo:</label>
-                        <input type="text" value="<%=empresa.getTipoEmpresa()%>" id="telefone" name="telefone" required>
-                    </div>
-                    <div class="div-inputs">
-                        <label for="cnpj">CNPJ:</label>
-                        <input type="text" value="<%=empresa.getCnpj()%>" id="cnpj" name="cnpj" required>
+                        <label for="tipo">Tipo:</label>
+                        <input type="text" value="<%=empresa.getTipoEmpresa()%>" id="tipo" name="tipo" required>
                     </div>
                 </section>
                 <section class="conjunto-input">
                     <div class="div-inputs">
                         <label for="cep">CEP:</label>
                         <input type="text" value="<%=empresa.getEndereco().getCep()%>" id="cep" name="cep" required>
+                        <%if(request.getAttribute("erroCep")!=null){%>
+                        <span class="erro"><%=request.getAttribute("erroCep")%></span>
+                        <%}%>
                     </div>
                     <div class="div-inputs">
                         <label for="rua">Rua:</label>
@@ -117,17 +124,31 @@ Empresa empresa = (Empresa) reqEmpresa;%>
                 <section class="conjunto-input">
                     <div class="div-inputs">
                         <label for="numero">Número:</label>
-                        <input type="text" value="<%=empresa.getEndereco().getNumero()%>" id="numero" name="numero" required>
-                    </div>
-                    <div class="div-inputs">
-                        <label for="nome">Nome:</label>
-                        <input type="text" value="<%=empresa.getNome()%>" id="nome" name="nome" required>
+                        <input type="number" value="<%=empresa.getEndereco().getNumero()%>" id="numero" name="numero" required min="1">
+                        <%if(request.getAttribute("erroNumero")!=null){%>
+                        <span class="erro"><%= request.getAttribute("erroNumero") %></span>
+                        <%}%>
                     </div>
                 </section>
             </article>
             <section id="ultima-linha">
                 <div id="caixa-alterarSenha">
                     <a>Alterar senha</a>
+                </div>
+                    <% if (request.getAttribute("erroIgualdade") != null) { %>
+                    <div class="erroCaixa">
+                        <span><%= request.getAttribute("erroIgualdade") %></span>
+                    </div>
+                    <% } else if (request.getAttribute("realizado") != null) { %>
+                    <div id="realizado">
+                        <span><%= request.getAttribute("realizado") %></span>
+                    </div>
+                    <% } else if (request.getAttribute("erroVazio") != null) { %>
+                    <div class="erroCaixa">
+                        <span><%= request.getAttribute("erroVazio") %></span>
+                    </div>
+                    <% } %>
+
                 </div>
                 <section id="botoes">
                     <a href="/home">
