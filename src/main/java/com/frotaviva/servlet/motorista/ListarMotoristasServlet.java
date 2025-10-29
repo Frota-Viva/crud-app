@@ -25,6 +25,8 @@ public class ListarMotoristasServlet extends HttpServlet {
             HttpSession session = request.getSession(true); //Pega a sessão
             Object id = session.getAttribute("idEmpresa"); //Pega o id da empresa na sessão
 
+            String buscar = request.getParameter("buscar");
+
             //Verifica se o id existe
             if (id == null){
                 response.sendRedirect("/");
@@ -34,7 +36,12 @@ public class ListarMotoristasServlet extends HttpServlet {
             long idEmpresa = (long) id;
 
             MotoristaDAO dao = new MotoristaDAO();
-            List<Motorista> motoristas = dao.buscarPorEmpresa(idEmpresa);
+            List<Motorista> motoristas;
+            if (buscar != null && !buscar.isBlank()){
+                motoristas = dao.buscarPorEmpresaComNome(idEmpresa, buscar);
+            } else {
+                motoristas = dao.buscarPorEmpresa(idEmpresa);
+            }
 
             request.setAttribute("motoristas", motoristas);
             request.getRequestDispatcher("WEB-INF/view/motorista/listar-motorista.jsp").forward(request, response);

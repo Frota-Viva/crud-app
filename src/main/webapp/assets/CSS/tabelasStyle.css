@@ -126,6 +126,20 @@ main * {
     gap: 0.6rem;
 }
 
+.form-buscar{
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.bt-buscar {
+    background-color: transparent;
+    border: none;
+    display: inline-block;
+    cursor: pointer;
+    align-items: center;
+}
+
 .input-search {
     padding: 0.4rem 0.8rem;
     font-size: 1.4rem;

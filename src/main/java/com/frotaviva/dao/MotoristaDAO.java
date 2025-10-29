@@ -300,6 +300,42 @@ public class MotoristaDAO extends AbstractDAO implements DAO<Motorista> {
             conexao.desconectar(conn);
         }
     }
+    public List<Motorista> buscarPorEmpresaComNome(long idEmpresa, String nome) {
+        List<Motorista> motoristas = new ArrayList<>();
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        Conexao conexao = new Conexao();
+        String sql = "SELECT * FROM motorista WHERE id_empresa = ? AND nome ILIKE ?";
+
+        try {
+            conn = conexao.conectar();
+            stmt = conn.prepareStatement(sql);
+            stmt.setLong(1, idEmpresa);
+            stmt.setString(2, "%" + nome + "%");
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                motoristas.add(new Motorista(
+                        rs.getLong("id"),
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getString("cpf"),
+                        rs.getString("senha")
+                ));
+            }
+            return motoristas;
+
+        } catch (SQLException e) {
+            log.error("Erro ao buscar os motoristas por empresa", e);
+            throw throwDAOException(e, SELECT);
+        } finally {
+            fechar(stmt, rs);
+            conexao.desconectar(conn);
+        }
+    }
 
 
 }
