@@ -52,7 +52,7 @@ public class PerfisServlet extends HttpServlet {
             if (buscar != null){
                 perfisMotoristas = FiltrosDAO.buscarPerfisPorNome(idEmpresa, buscar, offset);
             } else {
-                perfisMotoristas = FiltrosDAO.perfisMotoristas(idEmpresa, offset);
+                perfisMotoristas = FiltrosDAO.perfisMotoristas(idEmpresa);
             }
             req.setAttribute("perfisMotoristas", perfisMotoristas);
             req.setAttribute("paginaAtual", paginaAtual);

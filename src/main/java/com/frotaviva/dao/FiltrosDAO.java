@@ -26,19 +26,17 @@ public class FiltrosDAO {
      * informacoesCaminhao
      */
 
-    public static List<Map<String, String>> perfisMotoristas(long id, int offset) {
+    public static List<Map<String, String>> perfisMotoristas(long id) {
         Conexao conexao = new Conexao();
         Connection conn = null;
 
         List<Map<String, String>> perfisMotoristas = new ArrayList<>();
-        String sql = "SELECT * FROM perfismotoristas WHERE id_empresa = ? " +
-                " LIMIT 9 OFFSET ?";
+        String sql = "SELECT * FROM perfismotoristas WHERE id_empresa = ? ";
 
         try {
             conn = conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setLong(1, id);
-            stmt.setInt(2, offset);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {

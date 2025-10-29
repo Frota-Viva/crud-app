@@ -5,20 +5,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
   List<Map<String, String>> perfisMotoristas = (List<Map<String, String>>) request.getAttribute("perfisMotoristas");
-  int paginaAtual = (int) request.getAttribute("paginaAtual");
-  int totalPaginas = 10;
-
-  int maxBotoes = 5;
-  int inicio, fim;
-
-  if (totalPaginas <= maxBotoes) {
-      inicio = 1;
-      fim = totalPaginas;
-  } else {
-      inicio = Math.max(1, paginaAtual - 2);
-      fim = Math.min(totalPaginas, inicio + maxBotoes - 1);
-      inicio = Math.max(1, fim - maxBotoes + 1);
-}
 %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -85,38 +71,6 @@
                 <%}%>
 
             </article>
-            <!-- ------------ -->
-
-            <!-- Mudança de pagina (Barra inferior) -->
-            <div class="inf-bar">
-                <%if (paginaAtual > 1){%>
-                <button class="bt-prev" onclick="window.location.href='/home/perfis?pagina=<%=paginaAtual - 1%>'">
-                    <img src="../../assets/imgs/img-home/seta-esq-tabela.png" alt="Anterior" class="icon-in-table">
-                    Anterior
-                </button>
-                <%}%>
-
-                <div class="paginas">
-                    <% for (int i = inicio; i <= fim; i++) { %>
-                    <button class="<%= (i == paginaAtual) ? "pag-active" : "pag" %>">
-                        <%= i %>
-                    </button>
-                    <% } %>
-                    <% if (fim < totalPaginas) { %>
-                    <span>...</span>
-                    <% } %>
-                </div>
-
-                <%if (paginaAtual < totalPaginas){%>
-                <button class="bt-prox" onclick="window.location.href='/home/perfis?pagina=<%=paginaAtual + 1%>'">
-                    Próxima
-                    <img src="../../assets/imgs/img-home/seta-dir-tabela.png" alt="Próxima" class="icon-seta">
-                </button>
-                <%} else {%>
-                <div></div>
-                <%}%>
-            </div>
-            <!-- ------------------ -->
 
         </article>
         <!-- ------ -->
