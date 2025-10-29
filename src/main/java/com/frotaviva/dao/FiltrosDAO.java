@@ -168,7 +168,7 @@ public class FiltrosDAO {
             if (rset.next()){
                 return new InformacoesHome(rset.getString("nome"),
                         rset.getLong("id_empresa"),
-                        rset.getInt("tamanho_frota"),
+                        rset.getInt("ativos")+rset.getInt("inativos")+rset.getInt("manutencao"),
                         rset.getInt("ativos"),
                         rset.getInt("inativos"),
                         rset.getInt("manutencao"),
@@ -181,6 +181,8 @@ public class FiltrosDAO {
                         rset.getDouble("custo_corretivas"));
             }
             return null;
+
+
 
         } catch (SQLException sqle){
             log.error("Erro ao buscar informações do caminhão", sqle);
