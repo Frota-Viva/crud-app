@@ -30,10 +30,14 @@ Empresa empresa = (Empresa) reqEmpresa;%>
             <article id="edicoes">
                 <section class="conjunto-input">
                     <div class="div-inputs">
+                        <label for="nome">Nome:</label>
+                        <input type="text" value="<%=empresa.getNome()%>" id="nome" name="nome" required>
+                    </div>
+                    <div class="div-inputs">
                         <label for="email">Email:</label>
-                        <input type="text" value="<%=empresa.getEmail()%>" id="email" name="email" required>
+                        <input type="email" value="<%=empresa.getEmail()%>" id="email" name="email" required>
                         <%if (request.getAttribute("erroEmail") != null){;%>
-                        <span class="erro" style="color: red;font-size: small; "><%=request.getAttribute("erroEmail")%></span>
+                        <span class="erro"><%=request.getAttribute("erroEmail")%></span>
                         <%}%>
 
                     </div>
@@ -41,20 +45,13 @@ Empresa empresa = (Empresa) reqEmpresa;%>
                         <label for="tipo">Tipo:</label>
                         <input type="text" value="<%=empresa.getTipoEmpresa()%>" id="tipo" name="tipo" required>
                     </div>
-                    <div class="div-inputs">
-                        <label for="cnpj">CNPJ:</label>
-                        <input type="text" value="<%=empresa.getCnpj()%>" id="cnpj" name="cnpj" required>
-                        <%if(request.getAttribute("erroCnpj")!=null){%>
-                        <span class="erro" style="color: red; font-size: small; "><%=request.getAttribute("erroCnpj")%></span>
-                        <%}%>
-                    </div>
                 </section>
                 <section class="conjunto-input">
                     <div class="div-inputs">
                         <label for="cep">CEP:</label>
                         <input type="text" value="<%=empresa.getEndereco().getCep()%>" id="cep" name="cep" required>
                         <%if(request.getAttribute("erroCep")!=null){%>
-                        <span class="erro" style="color: red; font-size: small;"><%=request.getAttribute("erroCep")%></span>
+                        <span class="erro"><%=request.getAttribute("erroCep")%></span>
                         <%}%>
                     </div>
                     <div class="div-inputs">
@@ -85,12 +82,8 @@ Empresa empresa = (Empresa) reqEmpresa;%>
                         <label for="numero">Número:</label>
                         <input type="number" value="<%=empresa.getEndereco().getNumero()%>" id="numero" name="numero" required min="1">
                         <%if(request.getAttribute("erroNumero")!=null){%>
-                        <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("erroNumero")%></span>
+                        <span class="erro"><%= request.getAttribute("erroNumero") %></span>
                         <%}%>
-                    </div>
-                    <div class="div-inputs">
-                        <label for="nome">Nome:</label>
-                        <input type="text" value="<%=empresa.getNome()%>" id="nome" name="nome" required>
                     </div>
                 </section>
             </article>
@@ -99,12 +92,16 @@ Empresa empresa = (Empresa) reqEmpresa;%>
                     <a>Alterar senha</a>
                 </div>
                     <% if (request.getAttribute("erroIgualdade") != null) { %>
-                    <div id="erroIgualdade">
+                    <div class="erroCaixa">
                         <span><%= request.getAttribute("erroIgualdade") %></span>
                     </div>
                     <% } else if (request.getAttribute("realizado") != null) { %>
                     <div id="realizado">
                         <span><%= request.getAttribute("realizado") %></span>
+                    </div>
+                    <% } else if (request.getAttribute("erroVazio") != null) { %>
+                    <div class="erroCaixa">
+                        <span><%= request.getAttribute("erroVazio") %></span>
                     </div>
                     <% } %>
 

@@ -12,22 +12,23 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(value = "/home/editar-perfil")
+@WebServlet(name = "EditarPerfilServlet", value = "/home/editar-perfil")
 public class EditarPerfilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         try {
+            boolean testeVazio = false;
             HttpSession session = req.getSession(true);
-            Object idEmpresaSession = session.getAttribute("idEmpresa");
 
-            Long idEmpresa = (long) idEmpresaSession;
+            Object empresaSession = session.getAttribute("empresa");
+
+            Empresa empresaSalva = (Empresa) empresaSession;
             EmpresaDAO empresaDAO = new EmpresaDAO();
 
             String cepBD = "";
-            String cnpjBD = "";
+            String numForms = req.getParameter("numero");
             String email = req.getParameter("email");
             String tipo = req.getParameter("tipo");
-            String cnpj = req.getParameter("cnpj");
             String cep = req.getParameter("cep");
             String rua = req.getParameter("rua");
             String complemento = req.getParameter("complemento");
@@ -36,15 +37,42 @@ public class EditarPerfilServlet extends HttpServlet {
             String estado  = req.getParameter("estado");
             String nome = req.getParameter("nome");
 
-            int numero = Integer.parseInt(req.getParameter("numero"));
 
-            if (Empresa.cnpjValidado(cnpj) == null) {
-                req.setAttribute("erroCnpj", "CNPJ invalido!");
-            } else {
-                cnpjBD = Empresa.cnpjValidado(cnpj);
+            if (Validar.testeVazio(email)){
+                testeVazio=true;
+            } else if (Validar.testeVazio(tipo)) {
+                testeVazio=true;
+            } else if (Validar.testeVazio(cep)) {
+                testeVazio=true;
+            }else if (Validar.testeVazio(rua)) {
+                testeVazio=true;
+            } else if (Validar.testeVazio(pais)) {
+                testeVazio=true;
+            }else if (Validar.testeVazio(cidade)) {
+                testeVazio=true;
+            } else if (Validar.testeVazio(estado)) {
+                testeVazio=true;
+            }else if (Validar.testeVazio(nome)) {
+                testeVazio=true;
+            } else if (Validar.testeVazio(numForms)){
+                testeVazio=true;
+            }
+            if (Validar.testeVazio(complemento)){
+                complemento = "Complemento não informado";
             }
 
-            if (!Validar.email(email)) {
+            if (testeVazio){
+                req.setAttribute("erroVazio","Não deixe campos vazios!");
+                req.getRequestDispatcher("/home/perfil").forward(req, res);
+                return;
+            }
+
+            int num = Integer.parseInt(numForms);
+
+            if (num<=0){
+                req.setAttribute("erroNumero", "Digite apenas números inteiros!");
+            }
+            if ((!Validar.email(email))) {
                 req.setAttribute("erroEmail", "Email Invalido!");
             }
             if (Validar.cepValidado(cep) == null) {
@@ -52,29 +80,30 @@ public class EditarPerfilServlet extends HttpServlet {
             } else {
                 cepBD = Validar.cepValidado(cep);
             }
-            if ((req.getAttribute("erroCep") != null) || (req.getAttribute("erroEmail") != null) || (req.getAttribute("erroCnpj") != null)){
+            if ((req.getAttribute("erroCep") != null) || (req.getAttribute("erroEmail") != null) || req.getAttribute("erroNumero") != null){
                 req.getRequestDispatcher("/home/perfil").forward(req, res);
                 return;
             }
 
-            Empresa empresaDB = empresaDAO.buscarPorIdNotSenha(idEmpresa);
-            Empresa empresa = new Empresa(idEmpresa,tipo,cnpjBD,
-                    email,nome,new Endereco(pais,cepBD,estado,cidade,rua,numero,complemento));
+            Empresa empresa = new Empresa(empresaSalva.getId(),tipo,empresaSalva.getCnpj(),email,
+                    empresaSalva.getSenha(),nome,new Endereco(pais,cepBD,estado,cidade,rua,num,complemento));
 
-            if (empresaDB.equals(empresa)){
+            if (empresaSalva.equals(empresa)){
                 req.setAttribute("erroIgualdade", "Nenhum campo foi modificado!");
                 req.getRequestDispatcher("/home/perfil").forward(req, res);
-                return;
-            } else {
-                    req.setAttribute("realizado", "Mudança realizada com sucesso!");
+            } else if (empresaSalva.getEmail().equals(empresa.getEmail()) || (empresaDAO.buscarPorEmail(email) == 0)){
+                req.setAttribute("realizado", "Mudança realizada com sucesso!");
                 empresaDAO.atualizar(empresa);
+                session.setAttribute("empresa",empresa);
                 req.getRequestDispatcher("/home/perfil").forward(req, res);
-                return;
+            } else if ((empresaDAO.buscarPorEmail(email) == 1)) {
+                req.setAttribute("erroEmail", "Email Invalido!");
+                req.getRequestDispatcher("/home/perfil").forward(req, res);
             }
 
         }catch (NumberFormatException nfe){
             req.setAttribute("erroNumero", "Digite apenas números inteiros!");
-            res.sendRedirect("/home/perfil");
+            req.getRequestDispatcher("/home/perfil").forward(req, res);
         } catch (Exception e){
             res.sendRedirect("/");
         }

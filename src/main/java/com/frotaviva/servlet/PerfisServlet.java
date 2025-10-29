@@ -27,28 +27,42 @@ public class PerfisServlet extends HttpServlet {
         }
 
         String pagina = req.getParameter("pagina"); //Pega a página como parâmetro da URL
+        String buscar = req.getParameter("buscar");
 
         //Verifica se a página está na URL
         if (pagina == null){
             pagina = "1";
         }
 
-        int paginaAtual = Integer.parseInt(pagina);
-        //Verifica se o valor recebido é menor que 1
-        if (paginaAtual < 1){
+        try {
+            int paginaAtual = Integer.parseInt(pagina);
+
+            //Verifica se o valor recebido é menor que 1
+            if (paginaAtual < 1){
+                res.sendRedirect("/home/perfis");
+                return;
+            }
+
+            long idEmpresa = (long) id;
+            int offset = ( paginaAtual - 1 ) * 9;
+
+            //Monta os perfis de cada motorista da empresa e seta o atributo na request
+            List<Map<String, String>> perfisMotoristas;
+
+            if (buscar != null && !buscar.isBlank()){
+                perfisMotoristas = FiltrosDAO.buscarPerfisPorNome(idEmpresa, buscar, offset);
+            } else {
+                perfisMotoristas = FiltrosDAO.perfisMotoristas(idEmpresa);
+            }
+            req.setAttribute("perfisMotoristas", perfisMotoristas);
+            req.setAttribute("paginaAtual", paginaAtual);
+
+
+            req.getRequestDispatcher("/WEB-INF/view/perfis.jsp").forward(req, res);
+
+        } catch (NumberFormatException e){
             res.sendRedirect("/home/perfis");
-            return;
         }
 
-        long idEmpresa = (long) id;
-        int offset = ( paginaAtual - 1 ) * 9;
-
-        //Monta os perfis de cada motorista da empresa e seta o atributo na request
-        List<Map<String, String>> perfisMotoristas = FiltrosDAO.perfisMotoristas(idEmpresa, offset);
-        req.setAttribute("perfisMotoristas", perfisMotoristas);
-        req.setAttribute("paginaAtual", paginaAtual);
-
-
-        req.getRequestDispatcher("/WEB-INF/view/perfis.jsp").forward(req, res);
     }
 }
