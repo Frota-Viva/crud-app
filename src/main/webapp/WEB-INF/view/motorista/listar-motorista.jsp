@@ -11,7 +11,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frota Viva - Motoristas</title>
-    <link rel="stylesheet" href="../../assets/CSS/tabelasStyle.css?<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="../../../assets/CSS/tabelasStyle.css?<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="../../../assets/CSS/pop-up-excluir.css?<%=System.currentTimeMillis()%>">
+    <script src="../../../assets/JS/pop-up-excluir.js?<%=System.currentTimeMillis()%>"></script>
 </head>
 
 <body>
@@ -23,9 +25,9 @@
             <div class="procurar-container">
                 <form action="listar-motoristas" class="form-buscar">
                     <button type="submit" class="bt-buscar">
-                        <img src="../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
+                        <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
                     </button>
-                    <input type="text" placeholder="Buscar nome ou placa" class="input-search" name="buscar">
+                    <input type="text" placeholder="Buscar nome" class="input-search" name="buscar">
                 </form>
             </div>
         </header>
@@ -40,7 +42,7 @@
                     </div>
                     <div class="header-cell header-action">
                         <button class="bt-adicionar">
-                            <img src="../../assets/imgs/img-home/mais.png" alt="Adicionar">
+                            <img src="../../../assets/imgs/img-home/mais.png" alt="Adicionar">
                             Adicionar Usuário
                         </button>
                     </div>
@@ -59,11 +61,11 @@
                     </div>
                     <div class="table-cell cell table-actions">
                         <button class="bt-editar">
-                            <img src="../../assets/icons/icon-editar.svg" alt="Editar">
+                            <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
                             Editar
                         </button>
-                        <button class="bt-excluir">
-                            <img src="../../assets/icons/icon-excluir.svg" alt="Excluir">
+                        <button class="bt-excluir" data-id="<%=motorista.getId()%>">
+                            <img src="../../../assets/icons/icon-excluir.svg" alt="Excluir">
                             Excluir
                         </button>
                     </div>
@@ -78,6 +80,9 @@
                 <%}%>
             </article>
     </section>
+    <jsp:include page="../componentes/pop-up-excluir.jsp">
+        <jsp:param name="servletExclusao" value="/deletar-motorista"/>
+    </jsp:include>
 </main>
 </body>
 </html>

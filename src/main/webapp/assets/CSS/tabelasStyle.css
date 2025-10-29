@@ -265,7 +265,6 @@ main * {
 .table-actions {
     height: 100%;
     display: flex;
-    flex-wrap: wrap;
     border-radius: 8px;
     gap: 10px;
     align-items: center;
@@ -285,7 +284,7 @@ main * {
 .bt-editar:hover,
 .bt-excluir:hover {
     opacity: 0.5;
-    transition: proptime;
+    transition: prop time;
 }
 
 .bt-editar img,
