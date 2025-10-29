@@ -1,79 +1,56 @@
 <%@ page import="com.frotaviva.model.Motorista" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%
+    List<Motorista> motoristas = (List<Motorista>) request.getAttribute("motoristas");
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina Inicial - Frota Viva</title>
-    <link rel="stylesheet" href="../../../assets/CSS/tabelasStyle.css?<%=System.currentTimeMillis()%>"
-
+    <title>Frota Viva - Motoristas</title>
+    <link rel="stylesheet" href="../../assets/CSS/tabelasStyle.css">
 </head>
 
 <body>
-<aside class="menu-lateral">
-    <img src="../../../assets/imgs/img-home/logo2.png" alt="logo" class="logo">
-    <nav>
-        <a href="../home.jsp">
-            <img src="../../../assets/imgs/img-home/casa.png" alt="Pagina inicial">
-            Página Inicial
-        </a>
-
-        <a href="listar-motoristas.jsp">
-            <img src="../../../assets/imgs/img-home/pessoa.png" alt="Funcionários">
-            Funcionários
-        </a>
-    </nav>
-</aside>
-
+<jsp:include page="../componentes/aside.jsp"/>
 <main>
-    <section class="motoristas-container">
+    <section class="conteudo-container">
 
-        <!-- Barra superior -->
         <header class="top-bar">
             <div class="procurar-container">
-                <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
-                <input type="text" placeholder="Buscar Usuario" class="input-search">
-            </div>
-
-            <div class="perfil-container">
-                <button class="bt-edit-perfil">
-                    <img src="../../../assets/imgs/img-home/caneta-edit.png" alt="Editar" class="icon-acomp">
-                    Personalizar Perfil
-                </button>
-                <img src="../../../assets/imgs/img-home/perfil.png" alt="Usuário" class="icon-user">
+                <img src="../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
+                <input type="text" placeholder="Buscar nome ou placa" class="input-search">
             </div>
         </header>
-        <!-- -------------- -->
 
-        <!-- Tabela -->
         <article class="table-container">
 
-            <!-- Tabela mesmo -->
-            <article class="table-users">
-                <!-- Cabeçalho da tabela -->
+            <article class="tabela">
                 <div class="table-header">
-
                     <div>ID</div>
                     <div>Nome</div>
                     <div>E-mail</div>
                     <div>CPF</div>
                     <div>Senha</div>
-                    <div>Telefone</div>
-                    <div>ID Empresa</div>
-
                     <div>
-                        <button class="add-user" value="inserir-motorista.jsp">+ Adicionar Usuário</button>
+                        <a href="inserir-motorista.jsp" methods="post">
+                            <button class="bt-adicionar">
+                                <img src="../../assets/imgs/img-home/" alt="Adicionar" >
+                                Adicionar Usuário
+                            </button>
+                        </a>
+
                     </div>
                 </div>
 
-                    <%
-                        List<Motorista> motoristas = (List<Motorista>) request.getAttribute("motoristas");
+                <%
+                    if (motoristas != null && !motoristas.isEmpty()){
+                        for (Motorista m : motoristas) {
+                %>
 
-                        if (motoristas != null && !motoristas.isEmpty()){
-                            for (Motorista m : motoristas) {
-                    %>
-
-                <!-- Linhas da tabela -->
                 <div class="table-row">
                     <div class="table-left-row">
                         <div> <%= m.getId() %></div>
@@ -81,17 +58,28 @@
                         <div><%= m.getEmail() %></div>
                         <div><%= m.getCpf()%></div>
                         <div><%= m.getSenha()%></div>
-                        <div><%= m.getIdEmpresa()%></div>
                     </div>
-                    <div class="actions">
-                        <button title="Editar"><img src="../../../assets/imgs/img-home/editar.png" alt=""
-                                                    class="icon-edit"></button>
-                        <button title="Excluir"><img src="../../../assets/imgs/img-home/lixo.png" alt=""
-                                                     class="icon-trash"></button>
+
+                    <div class="table-right-row">
+                        <a href="atualizar-motorista.jsp">
+                            <button class="bt-editar">
+                                <img src="../../assets/imgs/img-home/caneta-edit.png" alt="Editar">
+                                Editar
+                            </button>
+                        </a>
+
+                        <a href="deletar-motorista.jsp">
+                            <button class="bt-excluir">
+                                <img src="../../assets/imgs/img-home/lixo.png" alt="Excluir">
+                                Excluir
+                            </button>
+                        </a>
+
                     </div>
                 </div>
-                    <%}
-                        } else {
+
+                <%}
+                } else {
                 %>
                 <!-- Linhas da tabela -->
                 <div class="table-row">
@@ -99,36 +87,13 @@
                         <p>Nenhum motorista encontrado</p>
                     </div>
                 </div>
-                    <%
-                        }
-                    %>
+                <%
+                    }
+                %>
 
-                <!-- ------------ -->
-
-                <!-- Mudança de pagina (Barra inferior) -->
-                <div class="inf-bar">
-                    <button class="bt-prev">
-                        <img src="../../../assets/imgs/img-home/seta-esq-tabela.png" alt="Anterior" class="icon-in-table">
-                        Anterior
-                    </button>
-
-                    <div class="paginas">
-                        <button class="pag-active">1</button>
-                        <button class="pag">2</button>
-                        <button class="pag">3</button>
-                        <button class="pag">4</button>
-                        <button class="pag">5</button>
-                        <span>...</span>
-                    </div>
-
-                    <button class="bt-prox">
-                        Próxima
-                        <img src="../../../assets/imgs/img-home/seta-dir-tabela.png" alt="Próxima" class="icon-seta">
-                    </button>
-                </div>
-                <!-- ------ -->
+            </article>
+        </article>
     </section>
 </main>
 </body>
-<style>
-</style>
+</html>

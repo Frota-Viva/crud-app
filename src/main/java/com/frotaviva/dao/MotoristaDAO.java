@@ -159,11 +159,35 @@ public class MotoristaDAO extends AbstractDAO implements DAO<Motorista> {
 
             stmt.setLong(1, id);
 
-            if (stmt.executeUpdate() > 0) return 1;
+            if (stmt.executeUpdate() > 0 && deletarRelacao(id) > 1) return 1;
             return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao deletar motorista", e);
+            throw throwDAOException(e, DELETE);
+        } finally {
+            fechar(stmt);
+            conexao.desconectar(conn);
+        }
+    }
+
+    public int deletarRelacao(long idMotorista) {
+        PreparedStatement stmt = null;
+        Connection conn = null;
+        Conexao conexao = new Conexao();
+        String sql = "DELETE FROM caminhao_motorista WHERE id_motorista = ?";
+
+        try {
+            conn = conexao.conectar();
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setLong(1, idMotorista);
+
+            if (stmt.executeUpdate() > 0) return 1;
+            return 0;
+
+        } catch (SQLException e) {
+            log.error("Erro ao deletar relacao do motorista", e);
             throw throwDAOException(e, DELETE);
         } finally {
             fechar(stmt);
@@ -219,6 +243,7 @@ public class MotoristaDAO extends AbstractDAO implements DAO<Motorista> {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
+
             while (rs.next()) {
                 motoristas.add(new Motorista(
                         rs.getLong("id"),
@@ -239,4 +264,42 @@ public class MotoristaDAO extends AbstractDAO implements DAO<Motorista> {
             conexao.desconectar(conn);
         }
     }
+
+    public List<Motorista> buscarPorEmpresa(long idEmpresa) {
+        List<Motorista> motoristas = new ArrayList<>();
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        Conexao conexao = new Conexao();
+        String sql = "SELECT * FROM motorista where id_empresa = ?";
+
+        try {
+            conn = conexao.conectar();
+            stmt = conn.prepareStatement(sql);
+            stmt.setLong(1, idEmpresa);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                motoristas.add(new Motorista(
+                        rs.getLong("id"),
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getString("cpf"),
+                        rs.getString("senha")
+                ));
+            }
+            return motoristas;
+
+        } catch (SQLException e) {
+            log.error("Erro ao buscar os motoristas por empresa", e);
+            throw throwDAOException(e, SELECT);
+        } finally {
+            fechar(stmt, rs);
+            conexao.desconectar(conn);
+        }
+    }
+
+
 }

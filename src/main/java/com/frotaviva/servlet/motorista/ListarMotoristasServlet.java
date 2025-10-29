@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,16 +22,27 @@ public class ListarMotoristasServlet extends HttpServlet {
 
         try{
 
-            MotoristaDAO dao = new MotoristaDAO();
+            HttpSession session = request.getSession(true); //Pega a sessão
+            Object id = session.getAttribute("idEmpresa"); //Pega o id da empresa na sessão
 
-            List<Motorista> motoristas = dao.buscarTodos();
+            //Verifica se o id existe
+            if (id == null){
+                response.sendRedirect("/");
+                return;
+            }
+
+            long idEmpresa = (long) id;
+
+            MotoristaDAO dao = new MotoristaDAO();
+            List<Motorista> motoristas = dao.buscarPorEmpresa(idEmpresa);
 
             request.setAttribute("motoristas", motoristas);
-            request.getRequestDispatcher("WEB-INF/view/listar-motorista.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/motorista/listar-motorista.jsp").forward(request, response);
 
-        } catch (Exception e){ // ainda nao tem a pagina de erro
+        } catch (Exception e){
             request.setAttribute("erro", "Erro ao tentar buscar motoristas");
             request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
         }
+
     }
 }
