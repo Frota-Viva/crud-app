@@ -42,14 +42,6 @@
                     <input type="text" placeholder="Buscar Usuario" class="input-search" name="buscar">
                 </form>
             </div>
-
-            <div class="perfil-container">
-                <button class="bt-edit-perfil">
-                    <img src="../../assets/imgs/img-home/caneta-edit.png" alt="Editar" class="icon-acomp">
-                    Personalizar Perfil
-                </button>
-                <img src="../../assets/imgs/img-home/perfil.png" alt="Usuário" class="icon-user">
-            </div>
         </header>
         <!-- -------------- -->
 
@@ -68,7 +60,7 @@
                 </div>
 
                 <!-- Linhas da tabela -->
-                <%if (! perfisMotoristas.isEmpty()){%>
+                <%if (! perfisMotoristas.isEmpty() || perfisMotoristas != null){%>
                 <%for (Map<String, String> perfil : perfisMotoristas) {%>
                 <div class="table-row">
                     <div class="table-left-row">
