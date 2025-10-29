@@ -49,7 +49,7 @@ public class PerfisServlet extends HttpServlet {
             //Monta os perfis de cada motorista da empresa e seta o atributo na request
             List<Map<String, String>> perfisMotoristas;
 
-            if (buscar != null){
+            if (buscar != null && !buscar.isBlank()){
                 perfisMotoristas = FiltrosDAO.buscarPerfisPorNome(idEmpresa, buscar, offset);
             } else {
                 perfisMotoristas = FiltrosDAO.perfisMotoristas(idEmpresa);

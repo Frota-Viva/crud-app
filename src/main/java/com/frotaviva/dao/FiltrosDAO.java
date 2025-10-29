@@ -72,7 +72,7 @@ public class FiltrosDAO {
         Connection conn = null;
 
         List<Map<String, String>> perfisMotoristas = new ArrayList<>();
-        String sql = "SELECT * FROM perfismotoristas WHERE id_empresa = ? AND nome LIKE ?" +
+        String sql = "SELECT * FROM perfismotoristas WHERE id_empresa = ? AND nome ILIKE ?" +
                 " LIMIT 9 OFFSET ?";
 
         try {
