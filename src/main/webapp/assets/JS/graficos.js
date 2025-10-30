@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let totalEntregas = document.getElementById("totalEntregas").textContent;
     let realizadasEntregas = parseInt(document.getElementById("realizadasEntregas").textContent);
     let aCaminhoEntregas = parseInt(document.getElementById("aCaminhoEntregas").textContent);
-    console.log(aCaminhoEntregas);
 
     new Chart(ctxEntregas, {
         type: 'doughnut',
@@ -128,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let corretivasPrecos = document.getElementById("corretivasPrecoManutencao").textContent;
     let preventivasPrecos = document.getElementById("preventivasPrecoManutencao").textContent;
 
-    console.log(ctxPrecos + " " + corretivasPrecos + " " + preventivasPrecos);
     new Chart(ctxPrecos, {
         type: 'doughnut',
         data: {

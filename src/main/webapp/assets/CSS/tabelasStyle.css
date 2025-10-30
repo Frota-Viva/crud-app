@@ -259,6 +259,7 @@ main * {
 .table-cell {
     display: flex;
     align-items: center;
+    padding: 0 1rem;
 }
 
 /* Coluna de Ações */
@@ -284,7 +285,7 @@ main * {
 .bt-editar:hover,
 .bt-excluir:hover {
     opacity: 0.5;
-    transition: prop time;
+    transition: proptime;
 }
 
 .bt-editar img,
