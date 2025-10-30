@@ -13,6 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfis - Frota Viva</title>
     <link rel="stylesheet" href="../../assets/CSS/homeStyle.css?<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="../../assets/CSS/perfilStyle.css?<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="../../assets/CSS/tabelasStyle.css?<%=System.currentTimeMillis()%>">
 </head>
 
 <body>
