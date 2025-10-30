@@ -1,6 +1,7 @@
 package com.frotaviva.servlet.caminhao;
 
 import com.frotaviva.dao.CaminhaoDAO;
+import com.frotaviva.exception.ErroAoDeletar;
 import com.frotaviva.model.Caminhao;
 
 import com.frotaviva.util.Validar;
@@ -26,26 +27,27 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
         int capacidade;
         long idFrota;
 
+        id = Long.parseLong(request.getParameter("id"));
+        placa = request.getParameter("placa");
+        status = request.getParameter("status");
+        kmRodados = Integer.parseInt(request.getParameter("kmRodados"));
+        modelo = request.getParameter("modelo");
+        capacidade = Integer.parseInt(request.getParameter("capacidade"));
+        idFrota = Long.parseLong(request.getParameter("idFrota"));
+
+        if (!Validar.placa(placa)){
+            request.setAttribute("erro", "Placa inválida! Deve seguir o padrão XXX1X11");
+        }
+
+        if (!Validar.status(status)){
+            request.setAttribute("erro", "Status inválido! Deve ser 'I' (Inativo), 'A' (Ativo) ou 'M'(Em manutenção).");
+        }
+
+        if (modelo ==  null || modelo.isEmpty()){
+            request.setAttribute("erro", "Modelo inválido! Não pode ser nulo.");
+        }
+
         try{
-            id = Long.parseLong(request.getParameter("id"));
-            placa = request.getParameter("placa");
-            status = request.getParameter("status");
-            kmRodados = Integer.parseInt(request.getParameter("kmRodados"));
-            modelo = request.getParameter("modelo");
-            capacidade = Integer.parseInt(request.getParameter("capacidade"));
-            idFrota = Long.parseLong(request.getParameter("idFrota"));
-
-            if (!Validar.placa(placa)){
-                request.setAttribute("erro", "Placa inválida! Deve seguir o padrão XXX1X11");
-            }
-
-            if (!Validar.status(status)){
-                request.setAttribute("erro", "Status inválido! Deve ser 'I' (Inativo), 'A' (Ativo) ou 'M'(Em manutenção).");
-            }
-
-            if (modelo ==  null || modelo.isEmpty()){
-                request.setAttribute("erro", "Modelo inválido! Não pode ser nulo.");
-            }
 
             CaminhaoDAO dao = new CaminhaoDAO();
             Caminhao caminhao = dao.buscarPorId(id);
@@ -58,13 +60,18 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
             caminhao.setIdFrota(idFrota);
 
             if (dao.atualizar(caminhao) == 1) {
-                response.sendRedirect("/lista-motorista?msg=Sucesso");
-            } else{
-                response.sendRedirect("/erro.jsp");
+                response.sendRedirect("/lista-motorista.jsp");
             }
 
-        } catch (Exception e){ // ainda nao tem a pagina de erro
-            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+            request.setAttribute("mensagem", "Erro ao atualizar caminhao. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+
+        } catch (ErroAoDeletar e) {
+            request.setAttribute("mensagem", "Erro ao atualizar caminhao. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 }

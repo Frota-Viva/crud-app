@@ -2,6 +2,8 @@ package com.frotaviva.servlet.motorista;
 
 import com.frotaviva.dao.MotoristaDAO;
 
+import com.frotaviva.exception.ErroAoConsultar;
+import com.frotaviva.exception.ErroAoDeletar;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,23 +16,29 @@ import java.io.IOException;
 public class DeletarMotoristaServlet extends HttpServlet {
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         long id;
 
-        try{
+        id = Long.parseLong(request.getParameter("id"));
+        MotoristaDAO dao = new MotoristaDAO();
 
-            id = Long.parseLong(request.getParameter("id"));
-            MotoristaDAO dao = new MotoristaDAO();
+        try{
 
             if (dao.deletar(id) == 1) {
                 response.sendRedirect("listar-motoristas");
                 return;
             }
-            request.setAttribute("erro", "Motorista não encontrado!");
 
-        } catch (Exception e){
-            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+            request.setAttribute("mensagem", "Erro ao deletar motoristas. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+
+        } catch (ErroAoDeletar e) {
+            request.setAttribute("mensagem", "Erro ao deletar motoristas. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 

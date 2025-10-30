@@ -1,6 +1,8 @@
 package com.frotaviva.servlet.manutencao;
 
 import com.frotaviva.dao.ManutencaoDAO;
+import com.frotaviva.exception.ErroAoConsultar;
+import com.frotaviva.exception.ErroAoInserir;
 import com.frotaviva.model.Manutencao;
 
 import jakarta.servlet.ServletException;
@@ -48,11 +50,17 @@ public class InserirManutencaoServlet extends HttpServlet {
 
             if (dao.inserir(manutencao) == 1){
                 response.sendRedirect("listar-manutencao");
+                return;
             }
-            response.sendRedirect("listar-manutencao");
+            request.setAttribute("mensagem", "Erro ao inserir manutenções. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
 
-        } catch (Exception e){ // ainda nao tem a pagina de erro
-            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (ErroAoInserir e) {
+            request.setAttribute("mensagem", "Erro ao inserir manutenções. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 }

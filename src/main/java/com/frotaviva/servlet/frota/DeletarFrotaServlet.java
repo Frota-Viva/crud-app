@@ -1,6 +1,7 @@
 package com.frotaviva.servlet.frota;
 
 import com.frotaviva.dao.FrotaDAO;
+import com.frotaviva.exception.ErroAoDeletar;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,21 +15,27 @@ import java.io.IOException;
 public class DeletarFrotaServlet extends HttpServlet {
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        long id = Long.parseLong(request.getParameter("id"));
 
         try{
-
-            long id = Long.parseLong(request.getParameter("id"));
             FrotaDAO dao = new FrotaDAO();
 
             if (dao.deletar(id) == 1) {
-                response.sendRedirect("listar-frota");
+                response.sendRedirect("/listar-frota");
                 return;
             }
-            request.setAttribute("erro", "Frota não encontrada...");
 
-        } catch (Exception e){
-            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+            request.setAttribute("mensagem", "Erro ao deletar frota. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+
+        } catch (ErroAoDeletar e) {
+            request.setAttribute("mensagem", "Erro ao deletar frota. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 

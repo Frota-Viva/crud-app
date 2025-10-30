@@ -1,6 +1,8 @@
 package com.frotaviva.servlet.telefone;
 
 import com.frotaviva.dao.TelefoneMotoristaDAO;
+import com.frotaviva.exception.ErroAoConsultar;
+import com.frotaviva.exception.ErroAoInserir;
 import com.frotaviva.model.TelefoneMotorista;
 import com.frotaviva.util.Validar;
 
@@ -45,13 +47,18 @@ public class InserirTelefoneServlet extends HttpServlet {
 
             if (dao.inserir(telefoneMotorista) == 1){
                 response.sendRedirect("listar-motoristas");
+                return;
             }
 
-            request.setAttribute("erro", "Erro ao inserir Telefone inválido!");
-            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+            request.setAttribute("mensagem", "Erro ao encontrar telefones. Tente novamente mais tarde.");
+            request.getRequestDispatcher("WEB-INF/view/motorista/listar-telefones.jsp").forward(request, response);
 
-        } catch (Exception e){
-            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (ErroAoInserir e) {
+            request.setAttribute("mensagem", "Erro ao encontrar telefones. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 }

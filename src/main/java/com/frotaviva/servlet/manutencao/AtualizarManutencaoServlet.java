@@ -1,6 +1,7 @@
 package com.frotaviva.servlet.manutencao;
 
 import com.frotaviva.dao.ManutencaoDAO;
+import com.frotaviva.exception.ErroAoAtualizar;
 import com.frotaviva.model.Manutencao;
 
 import jakarta.servlet.ServletException;
@@ -63,13 +64,19 @@ public class AtualizarManutencaoServlet extends HttpServlet {
             manutecao.setDtConclusao((java.sql.Date) dtConclusao);
 
             if (dao.atualizar(manutecao) == 1) {
-                response.sendRedirect("/lista-manutencao?msg=Sucesso");
-            } else{
-                response.sendRedirect("/erro.jsp");
+                response.sendRedirect("/listar-manutencao");
+                return;
             }
 
-        } catch (Exception e){ // ainda nao tem a pagina de erro
-            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+            request.setAttribute("mensagem", "Erro ao atualizar manutenção. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+
+        } catch (ErroAoAtualizar e) {
+            request.setAttribute("mensagem", "Erro ao atualizar manutenção. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 }

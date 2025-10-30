@@ -250,4 +250,49 @@ public class ManutencaoDAO extends AbstractDAO implements DAO<Manutencao> {
             conexao.desconectar(conn);
         }
     }
+
+    public List<Manutencao> buscarPorEmpresa(long id_empresa) {
+        List<Manutencao> manutencoes = new ArrayList<>();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        Conexao conexao = new Conexao();
+
+        String sql = """
+                    SELECT * FROM manutencao m 
+                    JOIN caminhao c ON m.id_caminhao = c.id 
+                    JOIN motorista m2 ON m.ultimo_motorista = m2.id 
+                    JOIN caminhao_motorista cm ON cm.id_caminhao = c.id 
+                    JOIN empresa e ON m2.id_empresa = e.id 
+                    WHERE e.id = ?""";
+
+        try {
+            conn = conexao.conectar();
+            stmt = conn.prepareStatement(sql);
+            stmt.setLong(1, id_empresa);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                manutencoes.add(new Manutencao(
+                        rs.getLong("id"),
+                        rs.getDate("dt_cadastro"),
+                        rs.getDate("dt_conclusao"),
+                        rs.getString("tipo_manutencao"),
+                        rs.getBigDecimal("custo"),
+                        rs.getLong("ultimo_motorista"),
+                        rs.getString("descricao_servico"),
+                        rs.getLong("id_caminhao")
+                ));
+            }
+            return manutencoes;
+
+        } catch (SQLException e) {
+            log.error("Erro ao buscar todas as manutenções", e);
+            throw throwDAOException(e, SELECT);
+        } finally {
+            fechar(stmt, rs);
+            conexao.desconectar(conn);
+        }
+    }
 }

@@ -4,13 +4,11 @@
 <%
     List<Motorista> motoristas = (List<Motorista>) request.getAttribute("motoristas");
 %>
-<!DOCTYPE html>
-<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frota Viva - Motoristas</title>
+    <title>Frota Viva - Motorista</title>
     <link rel="stylesheet" href="../../assets/CSS/tabelasStyle.css">
 </head>
 
@@ -21,78 +19,75 @@
 
         <header class="top-bar">
             <div class="procurar-container">
-                <img src="../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
-                <input type="text" placeholder="Buscar nome ou placa" class="input-search">
+                <form action="">
+                    <img src="../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
+                    <input type="text" placeholder="Buscar nome ou placa" class="input-search">
+                </form>
             </div>
         </header>
 
-        <article class="table-container">
 
             <article class="tabela">
                 <div class="table-header">
-                    <div>ID</div>
-                    <div>Nome</div>
-                    <div>E-mail</div>
-                    <div>CPF</div>
-                    <div>Senha</div>
-                    <div>
-                        <a href="inserir-motorista.jsp" methods="post">
+                    <div class="th-esquerda">
+                        <div class="header-cell">ID</div>
+                        <div class="header-cell">Nome</div>
+                        <div class="header-cell">CPF</div>
+                        <div class="header-cell">Email</div>
+                    </div>
+                    <div class="header-cell header-action">
+                        <a href="inserir-motorista.jsp">
                             <button class="bt-adicionar">
-                                <img src="../../assets/imgs/img-home/" alt="Adicionar" >
+                                <img src="../../assets/imgs/img-home/mais.png" alt="Adicionar">
                                 Adicionar Usuário
                             </button>
                         </a>
-
                     </div>
                 </div>
 
                 <%
                     if (motoristas != null && !motoristas.isEmpty()){
-                        for (Motorista m : motoristas) {
+                        for(Motorista m : motoristas){
                 %>
 
                 <div class="table-row">
-                    <div class="table-left-row">
-                        <div> <%= m.getId() %></div>
-                        <div><%= m.getNome() %></div>
-                        <div><%= m.getEmail() %></div>
-                        <div><%= m.getCpf()%></div>
-                        <div><%= m.getSenha()%></div>
+                    <div class="t-esquerda">
+                        <div class="table-cell cell"><%=m.getId()%></div>
+                        <div class="table-cell cell"><%=m.getNome()%></div>
+                        <div class="table-cell cell"><%=m.getCpf()%></div>
+                        <div class="table-cell cell"><%=m.getEmail()%></div>
                     </div>
-
-                    <div class="table-right-row">
-                        <a href="atualizar-motorista.jsp">
+                    <div class="table-cell cell table-actions">
+                        <a href="atualizar-motorista.jsp?id=<%=m.getId()%>">
                             <button class="bt-editar">
-                                <img src="../../assets/imgs/img-home/caneta-edit.png" alt="Editar">
+                                <img src="../../assets/icons/icon-editar.svg" alt="Editar">
                                 Editar
                             </button>
                         </a>
 
-                        <a href="deletar-motorista.jsp">
+                        <a href="deletar-motorista.jsp?id=<%=m.getId()%>">
                             <button class="bt-excluir">
-                                <img src="../../assets/imgs/img-home/lixo.png" alt="Excluir">
+                                <img src="../../assets/icons/icon-excluir.svg" alt="Excluir">
                                 Excluir
                             </button>
                         </a>
 
                     </div>
                 </div>
+            </article>
 
-                <%}
-                } else {
-                %>
-                <!-- Linhas da tabela -->
+            <%
+                    }
+                }  else{
+            %>
                 <div class="table-row">
-                    <div class="table-left-row">
-                        <p>Nenhum motorista encontrado</p>
+                    <div class="t-esquerda">
+                        <div class="table-cell cell"> Nenhum motorista encontrado</div>
                     </div>
                 </div>
-                <%
+            <%
                     }
-                %>
-
-            </article>
-        </article>
+            %>
     </section>
 </main>
 </body>
