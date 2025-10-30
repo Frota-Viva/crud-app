@@ -44,7 +44,7 @@ public class InserirTelefoneServlet extends HttpServlet {
             TelefoneMotorista telefoneMotorista = new TelefoneMotorista(telefone, idMotorista);
 
             if (dao.inserir(telefoneMotorista) == 1){
-                response.sendRedirect("listar-motoristas");
+                response.sendRedirect("/listar-motoristas");
             }
 
             request.setAttribute("erro", "Erro ao inserir Telefone inválido!");

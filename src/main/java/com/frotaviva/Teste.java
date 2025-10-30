@@ -15,9 +15,12 @@ import java.util.List;
 public class Teste {
     public static void main(String[] args) {
 
-        System.out.println(Senhas.hashSenha("&KfYvsy@9v"));
-        System.out.println(Senhas.hashSenha("P3W1@@Ix%e"));
-        System.out.println(Senhas.hashSenha("l6RkPWlZ(1"));
+        System.out.println(Senhas.hashSenha("elsEN2Yi+s"));
+        System.out.println(Senhas.hashSenha("((0CeuE4d#"));
+        System.out.println(Senhas.hashSenha("Af2JIMepC@"));
+        System.out.println(Senhas.hashSenha("#8N*qtunu5"));
+        System.out.println(Senhas.hashSenha("2*1WK1_o4S"));
+
 
     }
 }

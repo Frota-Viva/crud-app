@@ -58,7 +58,7 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
             caminhao.setIdFrota(idFrota);
 
             if (dao.atualizar(caminhao) == 1) {
-                response.sendRedirect("/lista-motorista?msg=Sucesso");
+                response.sendRedirect("/listar-motorista?msg=Sucesso");
             } else{
                 response.sendRedirect("/erro.jsp");
             }

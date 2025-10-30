@@ -159,7 +159,7 @@ public class MotoristaDAO extends AbstractDAO implements DAO<Motorista> {
 
             stmt.setLong(1, id);
 
-            if (stmt.executeUpdate() > 0 && deletarRelacao(id) > 1) return 1;
+            if (stmt.executeUpdate() > 0) return 1;
             return 0;
 
         } catch (SQLException e) {

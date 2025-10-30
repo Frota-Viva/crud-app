@@ -22,7 +22,7 @@ public class DeletarCaminhaoServlet extends HttpServlet {
         try{
 
             if (dao.deletar(id) == 1) {
-                response.sendRedirect("listar-caminhoes");
+                response.sendRedirect("/listar-caminhoes");
                 return;
             }
             request.setAttribute("erro", "Caminhoes não encontrado...");

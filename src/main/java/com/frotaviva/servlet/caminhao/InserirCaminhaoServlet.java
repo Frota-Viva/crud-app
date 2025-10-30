@@ -48,9 +48,9 @@ public class InserirCaminhaoServlet extends HttpServlet {
             Caminhao caminhao = new Caminhao(placa, status, kmRodados, modelo, capacidade, idFrota);
 
             if (dao.inserir(caminhao) == 1){
-                response.sendRedirect("listar-caminhao");
+                response.sendRedirect("/listar-caminhao");
             }
-            response.sendRedirect("listar-caminhao");
+            response.sendRedirect("/listar-caminhao");
 
         } catch (Exception e){ // ainda nao tem a pagina de erro
             request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);

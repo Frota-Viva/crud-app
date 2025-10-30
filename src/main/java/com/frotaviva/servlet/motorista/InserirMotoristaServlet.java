@@ -70,9 +70,9 @@ public class InserirMotoristaServlet extends HttpServlet {
             Motorista motorista = new Motorista(nome, email, cpf, senha, idEmpresa);
 
             if (dao.inserir(motorista) != 1){
-                response.sendRedirect("listar-motoristas");
+                response.sendRedirect("/listar-motoristas");
             }
-            response.sendRedirect("listar-motoristas");
+            response.sendRedirect("/listar-motoristas");
 
 
         } catch (Exception e){

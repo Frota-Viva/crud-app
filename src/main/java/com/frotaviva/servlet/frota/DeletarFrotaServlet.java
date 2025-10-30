@@ -22,7 +22,7 @@ public class DeletarFrotaServlet extends HttpServlet {
             FrotaDAO dao = new FrotaDAO();
 
             if (dao.deletar(id) == 1) {
-                response.sendRedirect("listar-frota");
+                response.sendRedirect("/listar-frota");
                 return;
             }
             request.setAttribute("erro", "Frota não encontrada...");

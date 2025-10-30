@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
 import java.io.IOException;
 
 @WebServlet(name = "DeleteMotorista", value = "/deletar-motorista")
@@ -23,11 +24,17 @@ public class DeletarMotoristaServlet extends HttpServlet {
             id = Long.parseLong(request.getParameter("id"));
             MotoristaDAO dao = new MotoristaDAO();
 
+            System.out.println("Id recebido: " + id);
+
             if (dao.deletar(id) == 1) {
-                response.sendRedirect("listar-motoristas");
+                System.out.println("Deu certo deletar");
+                response.sendRedirect("/listar-motoristas?msg=Motorista+deletado+com+sucesso");
                 return;
             }
+
+            System.out.println("Não deu certo");
             request.setAttribute("erro", "Motorista não encontrado!");
+            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
 
         } catch (Exception e){
             request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
