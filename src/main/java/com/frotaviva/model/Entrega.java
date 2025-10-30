@@ -4,12 +4,14 @@ package com.frotaviva.model;
 import java.sql.Date;
 
 public class Entrega {
+
     private long cod_entrega;
     private String descricaoProduto;
     private Date dtPedido;
     private Date dtEntrega;
     private Endereco endereco;
     private long idMotorista;
+
     public Entrega(long cod_entrega,String descricaoProduto,Date dtPedido,Date dtEntrega,Endereco endereco,long idMotorista){
         this.cod_entrega=cod_entrega;
         this.dtPedido=dtPedido;
@@ -22,18 +24,23 @@ public class Entrega {
     public long getCod_entrega(){
         return this.cod_entrega;
     }
+
     public String getDescricaoProduto(){
         return this.descricaoProduto;
     }
+
     public Date getDtPedido(){
         return this.dtPedido;
     }
+
     public Date getDtEntrega(){
         return this.dtEntrega;
     }
+
     public Endereco getEndereco(){
         return this.endereco;
     }
+
     public long getIdMotorista(){
         return this.idMotorista;
     }

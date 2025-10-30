@@ -15,17 +15,17 @@
             <img src="../../assets/icons/icon-perfis.svg" alt="" class="icones-aside">
             Perfis
         </a>
-        <a href="manutencoes.html">
+        <a href="/listar-caminhao">
             <img src="../../assets/icons/icon-manutencao.svg" alt="Manutenções" class="icones-aside">
             Manutenções
         </a>
 
-        <a href="caminhoes.html">
+        <a href="/listar-caminhao">
             <img src="../../assets/icons/icon-caminhao.svg" alt="Caminhões" class="icones-aside">
             Caminhões
         </a>
 
-        <a href="frota.html">
+        <a href="/listar-frota">
             <img src="../../assets/icons/icon-frota.svg" alt="Frota" class="icones-aside">
             Frota
         </a>
@@ -35,7 +35,7 @@
             Motoristas
         </a>
 
-        <a href="entregas.html">
+        <a href="/listar-entregas">
             <img src="../../assets/icons/icon-entregas.svg" alt="Entregas" class="icones-aside">
             Entregas
         </a>
