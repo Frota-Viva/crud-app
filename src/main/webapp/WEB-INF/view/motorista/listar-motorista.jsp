@@ -4,12 +4,16 @@
 <%
     List<Motorista> motoristas = (List<Motorista>) request.getAttribute("motoristas");
 %>
+<!DOCTYPE html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frota Viva - Motorista</title>
-    <link rel="stylesheet" href="../../assets/CSS/tabelasStyle.css">
+    <title>Frota Viva - Motoristas</title>
+    <link rel="stylesheet" href="../../../assets/CSS/tabelasStyle.css?<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="../../../assets/CSS/pop-up-excluir.css?<%=System.currentTimeMillis()%>">
+    <script src="../../../assets/JS/pop-up-excluir.js?<%=System.currentTimeMillis()%>"></script>
 </head>
 
 <body>
@@ -19,13 +23,14 @@
 
         <header class="top-bar">
             <div class="procurar-container">
-                <form action="">
-                    <img src="../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
-                    <input type="text" placeholder="Buscar nome ou placa" class="input-search">
+                <form action="listar-motoristas" class="form-buscar">
+                    <button type="submit" class="bt-buscar">
+                        <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
+                    </button>
+                    <input type="text" placeholder="Buscar nome" class="input-search" name="buscar">
                 </form>
             </div>
         </header>
-
 
             <article class="tabela">
                 <div class="table-header">
@@ -36,59 +41,48 @@
                         <div class="header-cell">Email</div>
                     </div>
                     <div class="header-cell header-action">
-                        <a href="inserir-motorista.jsp">
-                            <button class="bt-adicionar">
-                                <img src="../../assets/imgs/img-home/mais.png" alt="Adicionar">
-                                Adicionar Usuário
-                            </button>
-                        </a>
+                        <button class="bt-adicionar">
+                            <img src="../../../assets/imgs/img-home/mais.png" alt="Adicionar">
+                            Adicionar Usuário
+                        </button>
                     </div>
                 </div>
 
                 <%
-                    if (motoristas != null && !motoristas.isEmpty()){
-                        for(Motorista m : motoristas){
+                    if ( (motoristas != null) && (! motoristas.isEmpty()) ) {
+                    for (Motorista motorista : motoristas){
                 %>
-
                 <div class="table-row">
                     <div class="t-esquerda">
-                        <div class="table-cell cell"><%=m.getId()%></div>
-                        <div class="table-cell cell"><%=m.getNome()%></div>
-                        <div class="table-cell cell"><%=m.getCpf()%></div>
-                        <div class="table-cell cell"><%=m.getEmail()%></div>
+                        <div class="table-cell cell"><%=motorista.getId()%></div>
+                        <div class="table-cell cell"><%=motorista.getNome()%></div>
+                        <div class="table-cell cell"><%=motorista.getCpf()%></div>
+                        <div class="table-cell cell"><%=motorista.getEmail()%></div>
                     </div>
                     <div class="table-cell cell table-actions">
-                        <a href="atualizar-motorista.jsp?id=<%=m.getId()%>">
-                            <button class="bt-editar">
-                                <img src="../../assets/icons/icon-editar.svg" alt="Editar">
-                                Editar
-                            </button>
-                        </a>
-
-                        <a href="deletar-motorista.jsp?id=<%=m.getId()%>">
-                            <button class="bt-excluir">
-                                <img src="../../assets/icons/icon-excluir.svg" alt="Excluir">
-                                Excluir
-                            </button>
-                        </a>
-
+                        <button class="bt-editar">
+                            <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
+                            Editar
+                        </button>
+                        <button class="bt-excluir" data-id="<%=motorista.getId()%>">
+                            <img src="../../../assets/icons/icon-excluir.svg" alt="Excluir">
+                            Excluir
+                        </button>
                     </div>
                 </div>
-            </article>
-
-            <%
-                    }
-                }  else{
-            %>
+                <%}
+                } else {%>
                 <div class="table-row">
                     <div class="t-esquerda">
-                        <div class="table-cell cell"> Nenhum motorista encontrado</div>
+                        <td class="table-cell cell">Nenhum motorista encontrado</td>
                     </div>
                 </div>
-            <%
-                    }
-            %>
+                <%}%>
+            </article>
     </section>
+    <jsp:include page="../componentes/pop-up-excluir.jsp">
+        <jsp:param name="servletExclusao" value="/deletar-motorista"/>
+    </jsp:include>
 </main>
 </body>
 </html>

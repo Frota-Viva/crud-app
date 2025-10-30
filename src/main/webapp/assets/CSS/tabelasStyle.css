@@ -126,6 +126,20 @@ main * {
     gap: 0.6rem;
 }
 
+.form-buscar{
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.bt-buscar {
+    background-color: transparent;
+    border: none;
+    display: inline-block;
+    cursor: pointer;
+    align-items: center;
+}
+
 .input-search {
     padding: 0.4rem 0.8rem;
     font-size: 1.4rem;
@@ -137,15 +151,14 @@ main * {
 }
 
 /* tabela */
-.table-container{
-    overflow: auto;
-}
 /* Estilos da Tabela */
 .tabela {
     min-width: 100%;
     font-family: Arial, sans-serif;
     border-collapse: collapse;
     overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #202B45 transparent;
 }
 
 /* Header da Tabela */
@@ -155,13 +168,14 @@ main * {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #2c3e50;
     padding: 15px 20px;
+    background-color: #202B45;
     border-radius: 8px;
 }
 
 .th-esquerda {
     width: 82%;
+    margin: 0 1rem 0 0;
 
     display: grid;
     align-items: center;
@@ -245,13 +259,13 @@ main * {
 .table-cell {
     display: flex;
     align-items: center;
+    padding: 0 1rem;
 }
 
 /* Coluna de Ações */
 .table-actions {
     height: 100%;
     display: flex;
-    flex-wrap: wrap;
     border-radius: 8px;
     gap: 10px;
     align-items: center;
@@ -271,7 +285,7 @@ main * {
 .bt-editar:hover,
 .bt-excluir:hover {
     opacity: 0.5;
-    transition: prop time;
+    transition: proptime;
 }
 
 .bt-editar img,

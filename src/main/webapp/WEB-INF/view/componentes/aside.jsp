@@ -32,7 +32,7 @@
 
         <a href="/listar-motoristas">
             <img src="../../assets/icons/icon-motorista.svg" alt="Motorista" class="icones-aside">
-            Motorista
+            Motoristas
         </a>
 
         <a href="entregas.html">
