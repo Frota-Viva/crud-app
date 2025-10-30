@@ -1,6 +1,7 @@
 package com.frotaviva.servlet.caminhao;
 
 import com.frotaviva.dao.CaminhaoDAO;
+import com.frotaviva.exception.ErroAoDeletar;
 import com.frotaviva.model.Caminhao;
 
 import com.frotaviva.util.Validar;
@@ -58,13 +59,19 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
             caminhao.setIdFrota(idFrota);
 
             if (dao.atualizar(caminhao) == 1) {
-                response.sendRedirect("/listar-motorista?msg=Sucesso");
+                response.sendRedirect("/listar-motorista?msg=Motorista+deletado+com+sucesso");
             } else{
-                response.sendRedirect("/erro.jsp");
+                request.setAttribute("mensagem", "Erro ao atualizar caminhao. Tente novamente mais tarde.");
+                request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
             }
 
-        } catch (Exception e){ // ainda nao tem a pagina de erro
-            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+
+        } catch (ErroAoDeletar e) {
+            request.setAttribute("mensagem", "Erro ao atualizar caminhao. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 }

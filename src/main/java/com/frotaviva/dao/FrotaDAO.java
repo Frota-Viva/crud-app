@@ -217,6 +217,45 @@ public class FrotaDAO extends AbstractDAO implements DAO<Frota>{
         }
     }
 
+    public List<Frota> buscarPorEmpresa(long id_empresa) {
+        List<Frota> frotas = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+
+        String sql = "SELECT * FROM frota WHERE id_empresa = ?";
+
+        try {
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
+
+            stmt.setLong(1, id_empresa);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                long idFrota = rs.getLong("id");
+                int tamanhoFrota = rs.getInt("tamanho_frota");
+                String tipoFrota = rs.getString("tipo_frota");
+                String regiao = rs.getString("regiao");
+                long idEmpresa = rs.getLong("id_empresa");
+
+                Frota frota = new Frota(idFrota, tamanhoFrota, tipoFrota, regiao, idEmpresa);
+                frotas.add(frota);
+            }
+
+            return frotas;
+
+        } catch (SQLException e) {
+            log.error("Erro ao buscar frota", e);
+            throw throwDAOException(e, SELECT);
+        } finally {
+            fechar(stmt, rs);
+            conexao.desconectar(con);
+        }
+    }
+
     public List<Frota> buscarTodos() {
         List<Frota> frotas = new ArrayList<>();
         Conexao conexao = new Conexao();

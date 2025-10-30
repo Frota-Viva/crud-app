@@ -2,6 +2,8 @@ package com.frotaviva.servlet.caminhao;
 
 import com.frotaviva.dao.CaminhaoDAO;
 
+import com.frotaviva.exception.ErroAoConsultar;
+import com.frotaviva.exception.ErroAoDeletar;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +16,7 @@ import java.io.IOException;
 public class DeletarCaminhaoServlet extends HttpServlet {
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         long id = Long.parseLong(request.getParameter("id"));
         CaminhaoDAO dao = new CaminhaoDAO();
@@ -25,10 +27,16 @@ public class DeletarCaminhaoServlet extends HttpServlet {
                 response.sendRedirect("/listar-caminhoes");
                 return;
             }
-            request.setAttribute("erro", "Caminhoes não encontrado...");
 
-        } catch (Exception e){ // ainda nao tem a pagina de erro
-            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+            request.setAttribute("mensagem", "Erro ao deletar caminhao. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+
+        } catch (ErroAoDeletar e) {
+            request.setAttribute("mensagem", "Erro ao deletar caminhao. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 

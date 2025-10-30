@@ -2,6 +2,7 @@ package com.frotaviva.servlet.caminhao;
 
 import com.frotaviva.dao.CaminhaoDAO;
 
+import com.frotaviva.exception.ErroAoInserir;
 import com.frotaviva.model.Caminhao;
 
 import com.frotaviva.util.Validar;
@@ -49,11 +50,18 @@ public class InserirCaminhaoServlet extends HttpServlet {
 
             if (dao.inserir(caminhao) == 1){
                 response.sendRedirect("/listar-caminhao");
+                return;
             }
-            response.sendRedirect("/listar-caminhao");
 
-        } catch (Exception e){ // ainda nao tem a pagina de erro
-            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+            request.setAttribute("mensagem", "Erro ao inserir caminhao. Tente novamente mais tarde.");
+            request.getRequestDispatcher("WEB-INF/view/listar-caminhao.jsp").forward(request, response);
+
+        } catch (ErroAoInserir e) {
+            request.setAttribute("mensagem", "Erro ao inserir caminhao. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 }

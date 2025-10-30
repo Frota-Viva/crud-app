@@ -217,4 +217,36 @@ public class TelefoneMotoristaDAO extends AbstractDAO implements DAO<TelefoneMot
             conexao.desconectar(con);
         }
     }
+
+    public List<TelefoneMotorista> buscarPorEmpresa(long idEmpresa) {
+        List<TelefoneMotorista> telefones = new ArrayList<>();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+        Conexao conexao = new Conexao();
+        String sql = "SELECT * FROM telefone_motorista WHERE id_empresa = ?";
+
+        try {
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
+            stmt.setLong(1, idEmpresa);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                telefones.add(new TelefoneMotorista(
+                        rs.getLong("id"),
+                        rs.getString("telefone_motorista"),
+                        rs.getLong("id_motorista")
+                ));
+            }
+            return telefones;
+
+        } catch (SQLException e) {
+            log.error("Erro ao buscar todos os telefones", e);
+            throw throwDAOException(e, SELECT);
+        } finally {
+            fechar(stmt, rs);
+            conexao.desconectar(con);
+        }
+    }
 }

@@ -1,6 +1,8 @@
 package com.frotaviva.servlet.frota;
 
 import com.frotaviva.dao.FrotaDAO;
+import com.frotaviva.exception.ErroAoConsultar;
+import com.frotaviva.exception.ErroAoInserir;
 import com.frotaviva.model.Frota;
 
 import jakarta.servlet.ServletException;
@@ -8,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -22,7 +25,17 @@ public class InserirFrotaServlet extends HttpServlet {
         int tamanhoFrota;
         String tipoFrota;
         String regiao;
-        long idEmpresa;
+
+        HttpSession session = request.getSession(true); //Pega a sessão
+        Object id = session.getAttribute("idEmpresa"); //Pega o id da empresa na sessão
+
+        //Verifica se o id existe
+        if (id == null){
+            response.sendRedirect("/");
+            return;
+        }
+
+        long idEmpresa = (long) id;
 
         try{
 
@@ -31,17 +44,22 @@ public class InserirFrotaServlet extends HttpServlet {
             tamanhoFrota = Integer.parseInt(request.getParameter("tamanhoFrota"));
             tipoFrota = request.getParameter("tipoFrota");
             regiao = request.getParameter("regiao");
-            idEmpresa = Long.parseLong(request.getParameter("idEmpresa"));
 
             Frota frota = new Frota(tamanhoFrota, tipoFrota, regiao, idEmpresa);
 
             if (dao.inserir(frota) == 1){
                 response.sendRedirect("/listar-frota");
+                return;
             }
-            response.sendRedirect("/listar-frota");
+            request.setAttribute("mensagem", "Erro ao inserir frota. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
 
-        } catch (Exception e){ // ainda nao tem a pagina de erro
-            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (ErroAoInserir e) {
+            request.setAttribute("mensagem", "Erro ao inserir frota. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 }

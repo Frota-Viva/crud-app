@@ -1,6 +1,7 @@
 package com.frotaviva.servlet.entrega;
 
 import com.frotaviva.dao.EntregaDAO;
+import com.frotaviva.exception.ErroAoConsultar;
 import com.frotaviva.model.Entrega;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,7 +17,7 @@ import java.util.List;
 public class ListarEntregas extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //Pega o id da empresa e verifica se existe
+
         HttpSession session = req.getSession(true);
         Object id = session.getAttribute("idEmpresa");
 
@@ -33,8 +34,12 @@ public class ListarEntregas extends HttpServlet {
 
             req.setAttribute("entregas", entregas);
             req.getRequestDispatcher("/WEB-INF/entrega/listar-entregas.jsp").forward(req, resp);
-        } catch (Exception e) { //Ainda não tem a página de erro
-
+        } catch (ErroAoConsultar e) {
+            req.setAttribute("mensagem", "Erro ao acessar o encontrar motoristas. Tente novamente mais tarde.");
+            req.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(req, resp);
+        } catch (Exception e) {
+            req.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            req.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(req, resp);
         }
 
 

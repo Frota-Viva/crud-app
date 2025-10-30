@@ -1,6 +1,7 @@
 package com.frotaviva.servlet.caminhao;
 
 import com.frotaviva.dao.CaminhaoDAO;
+import com.frotaviva.exception.ErroAoConsultar;
 import com.frotaviva.model.Caminhao;
 
 import jakarta.servlet.ServletException;
@@ -8,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,18 +21,32 @@ public class ListarCaminhaoServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        HttpSession session = request.getSession(true); //Pega a sessão
+        Object id = session.getAttribute("idEmpresa"); //Pega o id da empresa na sessão
+
+        //Verifica se o id existe
+        if (id == null){
+            response.sendRedirect("/");
+            return;
+        }
+
+        long idEmpresa = (long) id;
+
         CaminhaoDAO dao = new CaminhaoDAO();
 
         try{
 
-            List<Caminhao> caminhoes = dao.buscarTodos();
+            List<Caminhao> caminhoes = dao.buscarPorEmpresa(idEmpresa);
 
             request.setAttribute("caminhoes", caminhoes);
+            request.getRequestDispatcher("WEB-INF/view/listar-frota.jsp").forward(request, response);
 
-            request.getRequestDispatcher("WEB-INF/view/listar-caminhoes.jsp").forward(request, response);
-
-        } catch (Exception e){ // ainda nao tem a pagina de erro
-            request.getRequestDispatcher("WEB-INF/view/listar-caminhoes.jsp").forward(request, response);
+        } catch (ErroAoConsultar e) {
+            request.setAttribute("mensagem", "Erro ao listar caminhao. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 }

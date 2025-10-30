@@ -159,35 +159,11 @@ public class MotoristaDAO extends AbstractDAO implements DAO<Motorista> {
 
             stmt.setLong(1, id);
 
-            if (stmt.executeUpdate() > 0) return 1;
+            if (stmt.executeUpdate() > 0 ) return 1;
             return 0;
 
         } catch (SQLException e) {
             log.error("Erro ao deletar motorista", e);
-            throw throwDAOException(e, DELETE);
-        } finally {
-            fechar(stmt);
-            conexao.desconectar(conn);
-        }
-    }
-
-    public int deletarRelacao(long idMotorista) {
-        PreparedStatement stmt = null;
-        Connection conn = null;
-        Conexao conexao = new Conexao();
-        String sql = "DELETE FROM caminhao_motorista WHERE id_motorista = ?";
-
-        try {
-            conn = conexao.conectar();
-            stmt = conn.prepareStatement(sql);
-
-            stmt.setLong(1, idMotorista);
-
-            if (stmt.executeUpdate() > 0) return 1;
-            return 0;
-
-        } catch (SQLException e) {
-            log.error("Erro ao deletar relacao do motorista", e);
             throw throwDAOException(e, DELETE);
         } finally {
             fechar(stmt);

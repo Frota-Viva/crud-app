@@ -1,6 +1,8 @@
 package com.frotaviva.servlet.motorista;
 
 import com.frotaviva.dao.MotoristaDAO;
+import com.frotaviva.exception.ErroAoConsultar;
+import com.frotaviva.exception.ErroAoInserir;
 import com.frotaviva.model.Motorista;
 
 import com.frotaviva.util.Validar;
@@ -72,11 +74,16 @@ public class InserirMotoristaServlet extends HttpServlet {
             if (dao.inserir(motorista) != 1){
                 response.sendRedirect("/listar-motoristas");
             }
-            response.sendRedirect("/listar-motoristas");
 
+            request.setAttribute("mensagem", "Erro ao inserir motoristas. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
 
-        } catch (Exception e){
-            request.getRequestDispatcher("WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (ErroAoInserir e) {
+            request.setAttribute("mensagem", "Erro ao encontrar motoristas. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }
 }

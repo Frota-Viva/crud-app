@@ -30,7 +30,7 @@
                     </button>
                     <input type="text" placeholder="Buscar nome" class="input-search" name="buscar">
                 </form>
-                <div class="mensagem-sucesso">
+                <div class="mensagem">
                     <%if (msg != null){%>
                     <p><%=msg%></p>
                     <%}%>
