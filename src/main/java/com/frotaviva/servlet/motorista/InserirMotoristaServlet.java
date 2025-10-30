@@ -27,18 +27,17 @@ public class InserirMotoristaServlet extends HttpServlet {
         String cpf;
         String senha;
 
-
-        HttpSession session = request.getSession(true);
-        Object idSession = session.getAttribute("idEmpresa");
-
-        if (idSession == null){
-            response.sendRedirect("/");
-            return;
-        }
-
-        long idEmpresa = (long) idSession;
-
         try{
+
+            HttpSession session = request.getSession(true);
+            Object idSession = session.getAttribute("idEmpresa");
+
+            if (idSession == null){
+                response.sendRedirect("/");
+                return;
+            }
+
+            long idEmpresa = (long) idSession;
 
             MotoristaDAO dao = new MotoristaDAO();
 
@@ -73,14 +72,14 @@ public class InserirMotoristaServlet extends HttpServlet {
             Motorista motorista = new Motorista(nome, email, cpf, senha, idEmpresa);
 
             if (dao.inserir(motorista) != 1){
-                response.sendRedirect("listar-motoristas");
+                response.sendRedirect("/listar-motoristas");
             }
 
             request.setAttribute("mensagem", "Erro ao inserir motoristas. Tente novamente mais tarde.");
             request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
 
         } catch (ErroAoInserir e) {
-            request.setAttribute("mensagem", "Erro ao acessar o encontrar motoristas. Tente novamente mais tarde.");
+            request.setAttribute("mensagem", "Erro ao encontrar motoristas. Tente novamente mais tarde.");
             request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");

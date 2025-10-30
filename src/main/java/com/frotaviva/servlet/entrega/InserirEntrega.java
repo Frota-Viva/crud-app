@@ -139,7 +139,7 @@ public class InserirEntrega extends HttpServlet {
                 }
             }
         } catch (ErroAoConsultar e) {
-            request.setAttribute("mensagem", "Erro ao acessar o encontrar motoristas. Tente novamente mais tarde.");
+            request.setAttribute("mensagem", "Erro ao encontrar motoristas. Tente novamente mais tarde.");
             request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");

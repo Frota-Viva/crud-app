@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%
     List<Motorista> motoristas = (List<Motorista>) request.getAttribute("motoristas");
+    String msg = request.getParameter("msg");
     request.setAttribute("tabela","motorista");
 %>
 <!DOCTYPE html>
@@ -30,6 +31,11 @@
                     </button>
                     <input type="text" placeholder="Buscar nome" class="input-search" name="buscar">
                 </form>
+                <div class="mensagem">
+                    <%if (msg != null){%>
+                    <p><%=msg%></p>
+                    <%}%>
+                </div>
             </div>
         </header>
 

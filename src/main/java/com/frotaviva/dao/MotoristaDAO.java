@@ -151,7 +151,7 @@ public class MotoristaDAO extends AbstractDAO implements DAO<Motorista> {
         PreparedStatement stmt = null;
         Connection conn = null;
         Conexao conexao = new Conexao();
-        String sql = "DELETE  FROM motorista WHERE id = ? ";
+        String sql = "DELETE FROM motorista WHERE id = ?";
 
         try {
             conn = conexao.conectar();

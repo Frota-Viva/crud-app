@@ -21,38 +21,40 @@ public class InserirCaminhaoServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String placa = request.getParameter("placa");
-        String status = request.getParameter("status");
-        int kmRodados = Integer.parseInt(request.getParameter("kmRodados"));
-        String modelo = request.getParameter("modelo");
-        int capacidade = Integer.parseInt(request.getParameter("capacidade"));
-        long idFrota = Long.parseLong(request.getParameter("idFrota"));
-
-        if (!Validar.placa(placa)){
-            request.setAttribute("erro", "Placa inválida! Deve seguir o padrão XXX1X11");
-        }
-
-        if (!Validar.status(status)){
-            request.setAttribute("erro", "Status inválido! Deve ser 'I' (Inativo), 'A' (Ativo) ou 'M'(Em manutenção).");
-        }
-
-        if (modelo ==  null || modelo.isEmpty()){
-            request.setAttribute("erro", "Modelo inválido! Não pode ser nulo.");
-        }
-
-
         try{
 
             CaminhaoDAO dao = new CaminhaoDAO();
+
+            String placa = request.getParameter("placa");
+            String status = request.getParameter("status");
+            int kmRodados = Integer.parseInt(request.getParameter("kmRodados"));
+            String modelo = request.getParameter("modelo");
+            int capacidade = Integer.parseInt(request.getParameter("capacidade"));
+            long idFrota = Long.parseLong(request.getParameter("idFrota"));
+
+
+            if (!Validar.placa(placa)){
+                request.setAttribute("erro", "Placa inválida! Deve seguir o padrão XXX1X11");
+            }
+
+            if (!Validar.status(status)){
+                request.setAttribute("erro", "Status inválido! Deve ser 'I' (Inativo), 'A' (Ativo) ou 'M'(Em manutenção).");
+            }
+
+            if (modelo ==  null || modelo.isEmpty()){
+                request.setAttribute("erro", "Modelo inválido! Não pode ser nulo.");
+            }
+
+
             Caminhao caminhao = new Caminhao(placa, status, kmRodados, modelo, capacidade, idFrota);
 
             if (dao.inserir(caminhao) == 1){
-                response.sendRedirect("listar-caminhao");
+                response.sendRedirect("/listar-caminhao");
                 return;
             }
 
             request.setAttribute("mensagem", "Erro ao inserir caminhao. Tente novamente mais tarde.");
-            request.getRequestDispatcher("WEB-INF/view/listar-frota.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/listar-caminhao.jsp").forward(request, response);
 
         } catch (ErroAoInserir e) {
             request.setAttribute("mensagem", "Erro ao inserir caminhao. Tente novamente mais tarde.");

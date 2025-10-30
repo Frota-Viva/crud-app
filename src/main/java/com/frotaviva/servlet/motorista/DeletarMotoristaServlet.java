@@ -20,13 +20,14 @@ public class DeletarMotoristaServlet extends HttpServlet {
 
         long id;
 
-        id = Long.parseLong(request.getParameter("id"));
-        MotoristaDAO dao = new MotoristaDAO();
-
         try{
 
+            id = Long.parseLong(request.getParameter("id"));
+            MotoristaDAO dao = new MotoristaDAO();
+
             if (dao.deletar(id) == 1) {
-                response.sendRedirect("listar-motoristas");
+                System.out.println("Deu certo deletar");
+                response.sendRedirect("/listar-motoristas?msg=Motorista+deletado+com+sucesso");
                 return;
             }
 
