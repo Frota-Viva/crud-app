@@ -38,7 +38,7 @@ public class ListarManutencaoServlet extends HttpServlet {
             List<Manutencao> manutencao = dao.buscarPorEmpresa(idEmpresa);
 
             request.setAttribute("manutencao", manutencao);
-            request.getRequestDispatcher("WEB-INF/view/listar-motoristas.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/manutencao/listar-manutencao.jsp").forward(request, response);
 
         } catch (ServletException e) {
             request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");

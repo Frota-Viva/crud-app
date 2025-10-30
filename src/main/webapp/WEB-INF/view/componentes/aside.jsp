@@ -15,7 +15,7 @@
             <img src="../../assets/icons/icon-perfis.svg" alt="" class="icones-aside">
             Perfis
         </a>
-        <a href="/listar-caminhao">
+        <a href="/listar-manutencao">
             <img src="../../assets/icons/icon-manutencao.svg" alt="Manutenções" class="icones-aside">
             Manutenções
         </a>
@@ -38,6 +38,11 @@
         <a href="/listar-entregas">
             <img src="../../assets/icons/icon-entregas.svg" alt="Entregas" class="icones-aside">
             Entregas
+        </a>
+
+        <a href="/listar-telefones">
+            <img src="" alt="Telefones" class="icones-aside">
+            Telefones
         </a>
     </nav>
 

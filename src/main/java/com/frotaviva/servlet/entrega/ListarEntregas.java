@@ -33,7 +33,7 @@ public class ListarEntregas extends HttpServlet {
             List<Entrega> entregas = entregaDAO.buscarPorIdEmpresa(idEmpresa);
 
             req.setAttribute("entregas", entregas);
-            req.getRequestDispatcher("/WEB-INF/entrega/listar-entregas.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/view/entrega/listar-entrega.jsp").forward(req, resp);
 
         } catch (ErroAoConsultar e) {
             req.setAttribute("mensagem", "Erro ao acessar o encontrar entregas. Tente novamente mais tarde.");

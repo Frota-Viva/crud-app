@@ -39,7 +39,7 @@ public class ListarCaminhaoServlet extends HttpServlet {
             List<Caminhao> caminhoes = dao.buscarPorEmpresa(idEmpresa);
 
             request.setAttribute("caminhoes", caminhoes);
-            request.getRequestDispatcher("WEB-INF/view/listar-frota.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/caminhao/listar-caminhao.jsp").forward(request, response);
 
         } catch (ErroAoConsultar e) {
             request.setAttribute("mensagem", "Erro ao listar caminhao. Tente novamente mais tarde.");

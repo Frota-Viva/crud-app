@@ -52,7 +52,7 @@ public class InserirCaminhaoServlet extends HttpServlet {
             }
 
             request.setAttribute("mensagem", "Erro ao inserir caminhao. Tente novamente mais tarde.");
-            request.getRequestDispatcher("WEB-INF/view/listar-frota.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/caminhao/listar-caminhao.jsp").forward(request, response);
 
         } catch (ErroAoInserir e) {
             request.setAttribute("mensagem", "Erro ao inserir caminhao. Tente novamente mais tarde.");

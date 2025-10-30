@@ -22,7 +22,7 @@
         <header class="top-bar">
             <div class="procurar-container">
                 <form action="">
-                    <img src="../../../assets/icons/icon-lupa.svg" alt="Buscar" class="icon-acomp">
+                    <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
                     <input type="text" placeholder="Buscar nome ou placa" class="input-search">
                 </form>
             </div>

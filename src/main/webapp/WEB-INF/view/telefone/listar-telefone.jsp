@@ -80,7 +80,7 @@
         </article>
     </section>
     <jsp:include page="../componentes/pop-up-excluir.jsp">
-        <jsp:param name="servletExclusao" value="/deletar-motorista"/>
+        <jsp:param name="servletExclusao" value="/deletar-telefone"/>
     </jsp:include>
 </main>
 </body>
