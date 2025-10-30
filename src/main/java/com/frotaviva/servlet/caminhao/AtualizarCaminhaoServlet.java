@@ -59,7 +59,7 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
             caminhao.setIdFrota(idFrota);
 
             if (dao.atualizar(caminhao) == 1) {
-                response.sendRedirect("/listar-motorista?msg=Motorista+deletado+com+sucesso");
+                response.sendRedirect("/listar-caminhao?msg=Caminhão+atualizado+com+sucesso");
             } else{
                 request.setAttribute("mensagem", "Erro ao atualizar caminhao. Tente novamente mais tarde.");
                 request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);

@@ -38,7 +38,7 @@ public class ListarFrotaServlet extends HttpServlet {
             List<Frota> frota = dao.buscarPorEmpresa(idEmpresa);
 
             request.setAttribute("frota", frota);
-            request.getRequestDispatcher("WEB-INF/view/listar-frota.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/frota/listar-frota.jsp").forward(request, response);
 
         } catch (ErroAoConsultar e) {
             request.setAttribute("mensagem", "Erro ao listar frotas. Tente novamente mais tarde.");

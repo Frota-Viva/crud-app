@@ -1,14 +1,9 @@
-<%@ page import="com.frotaviva.model.Motorista" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.frotaviva.model.Frota" %>
 <%
-    List<Motorista> motoristas = (List<Motorista>) request.getAttribute("motoristas");
-    String msg = request.getParameter("msg");
-    request.setAttribute("tabela","motorista");
+    List<Frota> frotas = (List<Frota>) request.getAttribute("frotas");
 %>
-<!DOCTYPE html>
-<html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,22 +15,16 @@
 
 <body>
 <jsp:include page="../componentes/aside.jsp"/>
+
 <main>
     <section class="conteudo-container">
 
         <header class="top-bar">
             <div class="procurar-container">
-                <form action="listar-motoristas" class="form-buscar">
-                    <button type="submit" class="bt-buscar">
-                        <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
-                    </button>
-                    <input type="text" placeholder="Buscar nome" class="input-search" name="buscar">
+                <form action="">
+                    <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
+                    <input type="text" placeholder="Buscar nome ou placa" class="input-search">
                 </form>
-                <div class="mensagem">
-                    <%if (msg != null){%>
-                    <p><%=msg%></p>
-                    <%}%>
-                </div>
             </div>
         </header>
 
@@ -43,53 +32,54 @@
                 <div class="table-header">
                     <div class="th-esquerda">
                         <div class="header-cell">ID</div>
-                        <div class="header-cell">Nome</div>
-                        <div class="header-cell">CPF</div>
-                        <div class="header-cell">Email</div>
+                        <div class="header-cell">Tamanho da frota</div>
+                        <div class="header-cell">Tipo da frota</div>
+                        <div class="header-cell">Região de atuaçao</div>
                     </div>
                     <div class="header-cell header-action">
                         <button class="bt-adicionar">
                             <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
-                            Adicionar Usuário
+                            Adicionar Frota
                         </button>
                     </div>
                 </div>
 
                 <%
-                    if ( (motoristas != null) && (! motoristas.isEmpty()) ) {
-                    for (Motorista motorista : motoristas){
+                    if ( (frotas != null) && (! frotas.isEmpty()) ) {
+                        for (Frota f : frotas){
                 %>
+
                 <div class="table-row">
                     <div class="t-esquerda">
-                        <div class="table-cell cell"><%=motorista.getId()%></div>
-                        <div class="table-cell cell"><%=motorista.getNome()%></div>
-                        <div class="table-cell cell"><%=motorista.getCpf()%></div>
-                        <div class="table-cell cell"><%=motorista.getEmail()%></div>
+                        <div class="table-cell cell"><%=f.getId()%></div>
+                        <div class="table-cell cell"><%=f.getTamanhoFrota()%></div>
+                        <div class="table-cell cell"><%=f.getTipoFrota()%></div>
+                        <div class="table-cell cell"><%=f.getRegiao()%></div>
                     </div>
                     <div class="table-cell cell table-actions">
                         <button class="bt-editar">
                             <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
                             Editar
                         </button>
-                        <button class="bt-excluir" data-id="<%=motorista.getId()%>">
+                        <button class="bt-excluir">
                             <img src="../../../assets/icons/icon-excluir.svg" alt="Excluir">
                             Excluir
                         </button>
                     </div>
                 </div>
                 <%}
-                } else {%>
-                <div class="table-row">
-                    <div class="t-esquerda">
-                        <td class="table-cell cell">Nenhum motorista encontrado</td>
+                    } else {%>
+                    <div class="table-row">
+                        <div class="t-esquerda">
+                            <td class="table-cell cell">Nenhuma frota encontrado</td>
+                        </div>
                     </div>
-                </div>
-                <%}%>
+                    <%}%>
             </article>
     </section>
     <jsp:include page="../componentes/pop-up-excluir.jsp">
-        <jsp:param name="servletExclusao" value="/deletar-motorista"/>
+        <jsp:param name="servletExclusao" value="/deletar-frota"/>
     </jsp:include>
+
 </main>
 </body>
-</html>
