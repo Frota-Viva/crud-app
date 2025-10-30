@@ -1,4 +1,3 @@
-/* Importando a fonte Roboto do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 /* Determinando a base */
@@ -12,16 +11,18 @@ html {
     font-size: 62.5%;
     font-family: "Roboto", sans-serif;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 /* Principal */
 body {
     background: var(--body-gradient);
     min-height: 100dvh;
-    min-width: 100dvw;
+    max-width: 100dvw;
     margin: 0;
     padding: 0;
     display: flex;
+    overflow-x: hidden;
 }
 
 * {
@@ -39,17 +40,16 @@ button {
 #logo {
     width: clamp(94px, 94%, 188px);
     height: auto;
+    margin-left: 1.6rem;
 }
 
 /* Lateral */
 .menu-lateral {
     width: 17vw;
     padding: 1rem;
-
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
 }
 
 .menu-lateral>nav {
@@ -64,13 +64,14 @@ button {
     flex-direction: row;
     align-items: center;
     gap: 1rem;
-
     color: white;
     font-size: 1.5rem;
     font-weight: 500;
+    margin: 0.4rem 0rem;
 }
 
 .perfil-menu {
+    margin: 0 0 0 1.4rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -87,11 +88,7 @@ button {
     width: 3rem;
 }
 
-.menu-lateral a {
-    margin: 0.4rem 0rem;
-}
-
-/* principal */
+/* Principal */
 main {
     height: 100dvh;
     width: 80%;
@@ -113,36 +110,40 @@ main * {
     border-radius: 1rem;
 }
 
-/* Parte das informações */
-.cabecalho-info {
+/* Header da Tabela */
+.table-header {
     width: 100%;
-    height: auto;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: 0.8rem;
-}
-
-.infos,
-.fd-right,
-.info-dados {
-    display: grid;
-    padding: 0.5rem;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+    background-color: #202B45;
+    padding: 15px 20px;
+    border-radius: 8px;
 }
 
-.infos {
-    grid-template-columns: repeat(6, 1fr);
-    background-color: #202B45;
-    border-radius: 0.8rem;
-    height: 6rem;
+.th-esquerda {
+    width: 82%;
+    margin: 0 1rem 0 0;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 4rem repeat(auto-fit, minmax(5rem, 1fr));
     color: white;
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 14px;
 }
 
-.infos button {
+.header-cell {
+    display: flex;
+    align-items: center;
+}
+
+.header-action {
+    justify-content: flex-end;
+    width: 20rem;
+    height: 4.2rem;
+}
+
+.table-header button {
     width: 90%;
     height: 100%;
     border-radius: 5px;
@@ -154,16 +155,21 @@ main * {
     cursor: pointer;
 }
 
-.infos button:hover {
+.table-header button:hover {
     background-color: #D1D5DB;
 }
 
-.info-dados {
-    grid-template-columns: 5fr 1fr;
-    gap: 1rem;
+.table-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+    font-size: 14px;
+    height: 60px;
+    width: 100%;
 }
 
-.info-dados>* {
+.table-row>* {
     background-color: #D1D5DB;
     border-radius: 0.8rem;
     border: none;
@@ -174,24 +180,68 @@ main * {
     justify-content: center;
 }
 
-.info-dados button {
-    cursor: pointer;
+.t-esquerda {
+    width: 82%;
+    margin: 0 1rem 0 0;
+    display: grid;
+    grid-template-columns: 4rem repeat(auto-fit, minmax(5rem, 1fr));
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 0 20px;
+    height: 100%;
+    border-radius: 8px;
 }
 
-.info-dados button:hover {
+.table-cell {
+    display: flex;
+    align-items: center;
+}
+
+.table-row button {
+    cursor: pointer;
+    background-color: #D1D5DB;
+    border-radius: 0.8rem;
+    border: none;
+    height: 6rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+    width: 20rem;
+}
+
+.table-row button:hover {
     background-color: #B0B7C3;
 }
 
-.fd-right {
-    grid-template-columns: repeat(5, 1fr);
+.btn-sair {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20rem;
+    border: none;
+    background: none;
+    gap: 4px;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
 }
 
-/* Parte de edição */
+#sair-edicao {
+    width: 3.5rem;
+    margin-right: 1rem;
+}
+
+#salvar-edicao {
+    width: 2.5rem;
+    margin-right: 0.7rem;
+}
+
+/* Área de Edição */
 .area-edicao {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 4rem;
     align-self: center;
     justify-self: center;
 }
@@ -200,7 +250,7 @@ main * {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin: 1rem 0rem;
+    margin: 0.4rem 0rem;
 }
 
 .campo-edicao label {
@@ -208,11 +258,10 @@ main * {
     font-weight: 500;
 }
 
-.campo-edicao input,
-.campo-edicao textarea {
+.campo-edicao input {
     width: 100%;
-    height: 4rem;
-    padding: 1rem;
+    height: 4.7rem;
+    padding: 1.5rem;
     font-size: 1.6rem;
     border-radius: 0.5rem;
     border: none;
@@ -220,7 +269,66 @@ main * {
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
 }
 
-.campo-edicao textarea {
-    max-width: 36rem;
-    transition: 0.05s;
+.campo-edicao input[type="date"] {
+    cursor: pointer;
+}
+
+/* Media Queries */
+@media (max-width: 800px) {
+    * {
+        border: none;
+        box-sizing: border-box;
+    }
+
+    body {
+        flex-direction: column;
+        width: clamp(100px, 100%, 100dvw);
+        min-height: 100dvh;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .menu-lateral {
+        width: 100%;
+        height: 20vh;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 1rem 0.5rem;
+    }
+
+    .menu-lateral>nav {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0;
+        gap: 1rem;
+        max-width: 50%;
+    }
+
+    .menu-lateral>nav>a {
+        font-size: 1.2rem;
+        gap: 0.5rem;
+    }
+
+    .perfil-menu {
+        margin: 0;
+        font-size: 1.2rem;
+        gap: 0.5rem;
+    }
+
+    #logo {
+        height: 70px;
+        width: 120px;
+    }
+
+    main {
+        width: 92%;
+        height: auto;
+        padding: 1rem 0;
+    }
+
+    .campo-edicao label {
+        font-size: 1.6rem;
+    }
 }

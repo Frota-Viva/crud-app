@@ -6,11 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%request.setAttribute("tabela","motorista");%>
 <html>
 <head>
-    <title>Title</title>
+    <title>Iserir Motorista - Frota Viva</title>
 </head>
 <body>
-
+    <jsp:include page="../componentes/aside.jsp"/>
 </body>
 </html>

@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%
     List<Motorista> motoristas = (List<Motorista>) request.getAttribute("motoristas");
+    request.setAttribute("tabela","motorista");
 %>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -42,7 +43,7 @@
                     </div>
                     <div class="header-cell header-action">
                         <button class="bt-adicionar">
-                            <img src="../../../assets/imgs/img-home/mais.png" alt="Adicionar">
+                            <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
                             Adicionar Usuário
                         </button>
                     </div>
