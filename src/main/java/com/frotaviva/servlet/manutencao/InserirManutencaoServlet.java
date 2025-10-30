@@ -49,11 +49,11 @@ public class InserirManutencaoServlet extends HttpServlet {
                     custo, ultimoMotorista, descricao, idCaminhao);
 
             if (dao.inserir(manutencao) == 1){
-                response.sendRedirect("listar-manutencao");
+                response.sendRedirect("/listar-manutencao");
                 return;
             }
             request.setAttribute("mensagem", "Erro ao inserir manutenções. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/listar-manutencao.jsp").forward(request, response);
 
         } catch (ErroAoInserir e) {
             request.setAttribute("mensagem", "Erro ao inserir manutenções. Tente novamente mais tarde.");

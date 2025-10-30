@@ -25,7 +25,7 @@ public class DeletarManutencaoServlet extends HttpServlet {
             ManutencaoDAO dao = new ManutencaoDAO();
 
             if (dao.deletar(id) == 1) {
-                response.sendRedirect("listar-motoristas");
+                response.sendRedirect("/listar-motoristas");
                 return;
             }
 

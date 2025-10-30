@@ -48,7 +48,7 @@ public class InserirFrotaServlet extends HttpServlet {
             Frota frota = new Frota(tamanhoFrota, tipoFrota, regiao, idEmpresa);
 
             if (dao.inserir(frota) == 1){
-                response.sendRedirect("listar-frota");
+                response.sendRedirect("/listar-frota");
                 return;
             }
             request.setAttribute("mensagem", "Erro ao inserir frota. Tente novamente mais tarde.");

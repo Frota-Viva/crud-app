@@ -8,6 +8,7 @@
     if (reqInformacoesHome != null){
         informacoesHome = (InformacoesHome) reqInformacoesHome;
     }
+    request.setAttribute("tabela","home");
 %>
 <!DOCTYPE html>
 <html lang="pt-br">

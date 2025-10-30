@@ -3,7 +3,12 @@
 <%@ page import="java.util.List" %>
 <%
     List<Motorista> motoristas = (List<Motorista>) request.getAttribute("motoristas");
+    String msg = request.getParameter("msg");
+    request.setAttribute("tabela","motorista");
 %>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,6 +31,11 @@
                     </button>
                     <input type="text" placeholder="Buscar nome" class="input-search" name="buscar">
                 </form>
+                <div class="mensagem">
+                    <%if (msg != null){%>
+                    <p><%=msg%></p>
+                    <%}%>
+                </div>
             </div>
         </header>
 
@@ -39,8 +49,8 @@
                     </div>
                     <div class="header-cell header-action">
                         <button class="bt-adicionar">
-                            <img src="../../../assets/imgs/img-home/mais.png" alt="Adicionar">
-                            Adicionar Motorista
+                            <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
+                            Adicionar Usuário
                         </button>
                     </div>
                 </div>
@@ -82,3 +92,4 @@
     </jsp:include>
 </main>
 </body>
+</html>

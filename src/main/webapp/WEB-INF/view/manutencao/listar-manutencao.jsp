@@ -4,6 +4,7 @@
 <%@ page import="com.frotaviva.model.Manutencao" %>
 <%
     List<Manutencao> manutencoes = (List<Manutencao>) request.getAttribute("manutencoes");
+    request.setAttribute("tabela","manutencao");
 %>
 <head>
     <meta charset="UTF-8">

@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
   List<Map<String, String>> perfisMotoristas = (List<Map<String, String>>) request.getAttribute("perfisMotoristas");
+    request.setAttribute("tabela","perfis");
 %>
 <!DOCTYPE html>
 <html lang="pt-br">

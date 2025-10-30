@@ -18,6 +18,14 @@ public class Senhas {
     }
 
     public static boolean verificarSenha(String senhaDigitada,String hash){
+
+        if (hash == null || hash.isEmpty()) {
+            return false;
+        }
+        if (senhaDigitada == null || senhaDigitada.isEmpty()) {
+            return false;
+        }
+
         return BCrypt.checkpw(senhaDigitada, hash);
     }
 

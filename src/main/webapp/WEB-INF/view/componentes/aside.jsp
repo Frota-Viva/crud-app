@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%Object tabelaReq = request.getAttribute("tabela");
+    String tabela = "nada";
+if (tabelaReq!=null){
+    tabela =(String) tabelaReq;
+}%>
 <html>
 <head>
     <link rel="stylesheet" href="../../../assets/CSS/aside.css?<%=System.currentTimeMillis()%>">
@@ -8,41 +13,71 @@
     <img src="../../assets/imgs/img-home/logo2.png" alt="Frota Viva" id="logo">
     <nav>
         <a href="/home">
+            <%if (tabela=="home"){%>
+            <div id="barra-indicacao"></div>
+            <%}else {%>
+            <div id="espaco"></div>
+            <%}%>
             <img src="../../assets/imgs/img-home/casa.png" alt="Pagina Inicial" class="icones-aside">
             Pagina Inicial
         </a>
         <a href="/home/perfis">
+            <%if (tabela=="perfis"){%>
+            <div id="barra-indicacao"></div>
+            <%}else {%>
+            <div id="espaco"></div>
+            <%}%>
             <img src="../../assets/icons/icon-perfis.svg" alt="" class="icones-aside">
             Perfis
         </a>
-        <a href="/listar-manutencao">
+        <a href="manutencoes.html">
+            <%if (tabela=="manutencao"){%>
+            <div id="barra-indicacao"></div>
+            <%}else {%>
+            <div id="espaco"></div>
+            <%}%>
             <img src="../../assets/icons/icon-manutencao.svg" alt="Manutenções" class="icones-aside">
             Manutenções
         </a>
 
-        <a href="/listar-caminhao">
+        <a href="caminhoes.html">
+            <%if (tabela=="caminhao"){%>
+            <div id="barra-indicacao"></div>
+            <%}else {%>
+            <div id="espaco"></div>
+            <%}%>
             <img src="../../assets/icons/icon-caminhao.svg" alt="Caminhões" class="icones-aside">
             Caminhões
         </a>
 
-        <a href="/listar-frota">
+        <a href="frota.html">
+            <%if (tabela=="frota"){%>
+            <div id="barra-indicacao"></div>
+            <%}else {%>
+            <div id="espaco"></div>
+            <%}%>
             <img src="../../assets/icons/icon-frota.svg" alt="Frota" class="icones-aside">
             Frota
         </a>
 
         <a href="/listar-motoristas">
+            <%if (tabela=="motorista"){%>
+            <div id="barra-indicacao"></div>
+            <%}else {%>
+            <div id="espaco"></div>
+            <%}%>
             <img src="../../assets/icons/icon-motorista.svg" alt="Motorista" class="icones-aside">
             Motoristas
         </a>
 
-        <a href="/listar-entregas">
+        <a href="entregas.html">
+            <%if (tabela=="entrega"){%>
+            <div id="barra-indicacao"></div>
+            <%}else {%>
+            <div id="espaco"></div>
+            <%}%>
             <img src="../../assets/icons/icon-entregas.svg" alt="Entregas" class="icones-aside">
             Entregas
-        </a>
-
-        <a href="/listar-telefones">
-            <img src="" alt="Telefones" class="icones-aside">
-            Telefones
         </a>
     </nav>
 

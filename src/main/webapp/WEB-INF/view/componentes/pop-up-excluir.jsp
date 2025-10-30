@@ -7,8 +7,8 @@
     <img src="../../../assets/icons/atencao.svg" alt="Ícone de Atenção" id="atencao">
     <p>Você tem certeza que deseja excluir esses dados?</p>
     <div class="botoes-excluir-container">
-        <button id="cancelar" class="botoes-excluir">Cancelar</button>
-        <button id="efetuar" class="botoes-excluir">Efetuar</button>
+        <button id="cancelar" class="botoes-excluir" type="button">Cancelar</button>
+        <button id="efetuar" class="botoes-excluir" type="button">Efetuar</button>
     </div>
     <script src="../../../assets/JS/pop-up-excluir.js"></script>
 </section>

@@ -45,3 +45,14 @@
 .menu-lateral a{
     margin: 0.4rem 0rem;
 }
+#barra-indicacao{
+    height: 3.3rem;
+    width: 0.3rem;
+    border-radius: 1.3rem;
+    background-color: white;
+}
+#espaco{
+    height: 3.3rem;
+    width: 0.3rem;
+    border-radius: 1.3rem;
+}

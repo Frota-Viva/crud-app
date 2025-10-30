@@ -128,7 +128,7 @@ main * {
     justify-content: space-between;
 }
 
-.mensagem-sucesso{
+.mensagem{
     display: flex;
     align-items: center;
     gap: 0.6rem;
