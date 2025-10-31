@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+/* Determinando a base */
+:root {
+    --body-gradient: linear-gradient(130deg, rgba(0, 0, 0, 1) 10%, rgba(0, 24, 51, 1) 34%, rgba(3, 39, 79, 1) 52%, rgba(16, 88, 137, 1) 83%);
+    --footer-gradient: linear-gradient(to left, rgba(30, 30, 30, 1), rgba(68, 68, 68, 1));
+    --box-gradient: linear-gradient(to right, rgba(16, 88, 137, 0.5), rgba(4, 22, 35, 0.5));
+}
+
+html {
+    font-size: 62.5%;
+    font-family: "Roboto", sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* Principal */
+body {
+    background: var(--body-gradient);
+    min-height: 100dvh;
+    max-width: 100dvw;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+button {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Principal */
+main {
+    height: 100dvh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main * {
+    transition: all 0.3s ease-in-out;
+}
+
+.conteudo-container {
+    width: 98%;
+    padding: 4rem 4rem;
+    background-color: white;
+    border-radius: 1rem;
+}
+
+/* Header da Tabela */
+.table-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #202B45;
+    border-radius: 8px;
+}
+
+.table-header h1{
+    color: white;
+    font-size: xx-large;
+}
+/* Área de Edição */
+.area-edicao {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+    align-self: center;
+    justify-self: center;
+}
+
+.campo-edicao {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 2rem 0rem;
+}
+
+.campo-edicao label {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.campo-edicao input {
+    width: 100%;
+    height: 4.7rem;
+    padding: 1.5rem;
+    font-size: 1.6rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-family: "Roboto", sans-serif;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.campo-edicao input[type="date"] {
+    cursor: pointer;
+}
+
+/* Media Queries */
+@media (max-width: 800px) {
+    * {
+        border: none;
+        box-sizing: border-box;
+    }
+
+    body {
+        flex-direction: column;
+        width: clamp(100px, 100%, 100dvw);
+        min-height: 100dvh;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .menu-lateral {
+        width: 100%;
+        height: 20vh;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 1rem 0.5rem;
+    }
+
+    .menu-lateral>nav {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0;
+        gap: 1rem;
+        max-width: 50%;
+    }
+
+    .menu-lateral>nav>a {
+        font-size: 1.2rem;
+        gap: 0.5rem;
+    }
+
+    .perfil-menu {
+        margin: 0;
+        font-size: 1.2rem;
+        gap: 0.5rem;
+    }
+
+    #logo {
+        height: 70px;
+        width: 120px;
+    }
+
+    main {
+        width: 92%;
+        height: auto;
+        padding: 1rem 0;
+    }
+
+    .campo-edicao label {
+        font-size: 1.6rem;
+    }
+}
+#button-cancelar{
+    background-color: #D1D5DB;
+}
+.icones-botao{
+    width: 2.3rem;
+    margin-bottom: 0;
+}
+#button-confirmar{
+    background-color: #2F416B;
+    color: white;
+}
+#botoes{
+    display: flex;
+    justify-content: right;
+    gap: 3.5rem;
+    margin-top: 2rem;
+}
+#botoes button{
+    display: flex;
+    flex-direction: column;
+    width: 14rem;
+    border: 0;
+    border-radius: 0.8rem;
+    align-items: center;
+    padding: 1rem 0 0 0;
+}
+#botoes button p{
+    margin-top: 0.7rem;
+    font-size: 1.5rem;
+}
+#ultima-linha{
+    display: flex;
+    justify-content: space-between;
+    margin: 1.3rem 7rem;
+}
