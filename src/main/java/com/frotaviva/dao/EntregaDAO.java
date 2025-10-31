@@ -356,4 +356,61 @@ public class EntregaDAO extends AbstractDAO implements DAO<Entrega>{
             conexao.desconectar(conn);
         }
     }
+    public List<Entrega> buscarPorIdEmpresaComDatas(long idEmpresa, Date data) {
+        List<Entrega> entregas = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection conn = null;
+        String dataString = data.toString();
+
+        String sql = "select * from entrega e join motorista m on m.id = e.id_motorista " +
+                "join empresa ep on ep.id = m.id_empresa " +
+                "where ep.id = ? and (TO_CHAR(dt_entrega, 'YYYY-MM-DD') ILIKE ? or " +
+                "TO_CHAR(dt_pedido, 'YYYY-MM-DD') ILIKE ?);";
+
+        try {
+            conn = conexao.conectar();
+            stmt = conn.prepareStatement(sql);
+            stmt.setLong(1, idEmpresa);
+            stmt.setString(2, "%"+dataString+"%");
+            stmt.setString(3, "%"+dataString+"%");
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                long idEntrega = rs.getLong("cod_entrega");
+                String descricaoProduto = rs.getString("descricao_produto");
+                Date dtPedido = rs.getDate("dt_pedido");
+                Date dtEntrega = rs.getDate("dt_entrega");
+                String cep = rs.getString("cep");
+                String rua = rs.getString("rua");
+                String complemento = rs.getString("complemento");
+                int numero = rs.getInt("numero");
+                String pais = rs.getString("pais");
+                String estado = rs.getString("estado");
+                String cidade = rs.getString("cidade");
+                long idMotorista = rs.getLong("id_motorista");
+
+                Entrega entrega = new Entrega(
+                        idEntrega,
+                        descricaoProduto,
+                        dtPedido,
+                        dtEntrega,
+                        new Endereco(pais, cep, estado, cidade, rua, numero, complemento),
+                        idMotorista
+                );
+                entregas.add(entrega);
+            }
+
+            return entregas;
+
+        } catch (SQLException e) {
+            log.error("Erro ao buscar entrega", e);
+            throw throwDAOException(e, SELECT);
+        } finally {
+            fechar(stmt, rs);
+            conexao.desconectar(conn);
+        }
+    }
 }

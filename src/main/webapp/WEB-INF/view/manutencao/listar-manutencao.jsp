@@ -49,7 +49,7 @@
                 </div>
                 <div class="header-cell header-action">
                     <button class="bt-adicionar">
-                        <img src="../../assets/imgs/img-home/mais.png" alt="Adicionar">
+                        <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
                         Adicionar Manutenção
                     </button>
                 </div>

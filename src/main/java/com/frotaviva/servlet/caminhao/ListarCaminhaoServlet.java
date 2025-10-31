@@ -24,6 +24,8 @@ public class ListarCaminhaoServlet extends HttpServlet {
         HttpSession session = request.getSession(true); //Pega a sessão
         Object id = session.getAttribute("idEmpresa"); //Pega o id da empresa na sessão
 
+        String buscar = request.getParameter("buscar");
+
         //Verifica se o id existe
         if (id == null){
             response.sendRedirect("/");
@@ -36,11 +38,18 @@ public class ListarCaminhaoServlet extends HttpServlet {
 
         try{
 
-            List<Caminhao> caminhoes = dao.buscarPorEmpresa(idEmpresa);
+            List<Caminhao> caminhoes;
+
+            if (buscar != null && !buscar.isBlank()){
+                System.out.println("Tem buscar");
+                caminhoes = dao.buscarPorEmpresaComPlaca(idEmpresa, buscar);
+            } else {
+                System.out.println("Não tem buscar");
+                caminhoes = dao.buscarPorEmpresa(idEmpresa);
+            }
 
             request.setAttribute("caminhoes", caminhoes);
             request.getRequestDispatcher("WEB-INF/view/caminhao/listar-caminhao.jsp").forward(request, response);
-
         } catch (ErroAoConsultar e) {
             request.setAttribute("mensagem", "Erro ao listar caminhao. Tente novamente mais tarde.");
             request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);

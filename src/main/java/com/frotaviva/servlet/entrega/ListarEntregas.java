@@ -3,6 +3,7 @@ package com.frotaviva.servlet.entrega;
 import com.frotaviva.dao.EntregaDAO;
 import com.frotaviva.exception.ErroAoConsultar;
 import com.frotaviva.model.Entrega;
+import com.frotaviva.util.Validar;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @WebServlet(name = "ListarEntregas", value = "/listar-entregas")
@@ -21,6 +23,8 @@ public class ListarEntregas extends HttpServlet {
         HttpSession session = req.getSession(true);
         Object id = session.getAttribute("idEmpresa");
 
+        String buscar = req.getParameter("buscar");
+
         if (id == null){
             resp.sendRedirect("/");
             return;
@@ -30,7 +34,14 @@ public class ListarEntregas extends HttpServlet {
 
         try {
             EntregaDAO entregaDAO = new EntregaDAO();
-            List<Entrega> entregas = entregaDAO.buscarPorIdEmpresa(idEmpresa);
+            List<Entrega> entregas;
+
+            if (buscar != null && !buscar.isBlank() && Validar.data(buscar)){
+                Date data = Date.valueOf(buscar);
+                entregas = entregaDAO.buscarPorIdEmpresaComDatas(idEmpresa, data);
+            } else {
+                entregas = entregaDAO.buscarPorIdEmpresa(idEmpresa);
+            }
 
             req.setAttribute("entregas", entregas);
             req.getRequestDispatcher("/WEB-INF/view/entrega/listar-entrega.jsp").forward(req, resp);
