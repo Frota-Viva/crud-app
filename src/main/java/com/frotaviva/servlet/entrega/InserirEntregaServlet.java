@@ -16,7 +16,7 @@ import java.sql.Date;
 
 
 @WebServlet(name = "InserirEntrega", value = "/inserir-entrega")
-public class InserirEntrega extends HttpServlet {
+public class InserirEntregaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean erro = false;

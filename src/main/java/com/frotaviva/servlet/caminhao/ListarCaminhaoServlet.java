@@ -26,7 +26,6 @@ public class ListarCaminhaoServlet extends HttpServlet {
 
         String buscar = request.getParameter("buscar");
 
-        //Verifica se o id existe
         if (id == null){
             response.sendRedirect("/");
             return;
@@ -34,9 +33,8 @@ public class ListarCaminhaoServlet extends HttpServlet {
 
         long idEmpresa = (long) id;
 
-        CaminhaoDAO dao = new CaminhaoDAO();
-
         try{
+            CaminhaoDAO dao = new CaminhaoDAO();
 
             List<Caminhao> caminhoes;
 
@@ -50,6 +48,7 @@ public class ListarCaminhaoServlet extends HttpServlet {
 
             request.setAttribute("caminhoes", caminhoes);
             request.getRequestDispatcher("WEB-INF/view/caminhao/listar-caminhao.jsp").forward(request, response);
+
         } catch (ErroAoConsultar e) {
             request.setAttribute("mensagem", "Erro ao listar caminhao. Tente novamente mais tarde.");
             request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);

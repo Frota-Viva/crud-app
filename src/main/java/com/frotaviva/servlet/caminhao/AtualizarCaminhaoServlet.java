@@ -20,6 +20,7 @@ import java.util.List;
 
 @WebServlet(name = "AtualizarCaminhao", value = "/atualizar-caminhao")
 public class AtualizarCaminhaoServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -81,25 +82,15 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
             capacidade = Integer.parseInt(request.getParameter("capacidade"));
             idFrota = Long.parseLong(request.getParameter("idFrota"));
 
-            if (!Validar.placa(placa)){
-                request.setAttribute("erroPlaca", "Placa inválida! Deve seguir o padrão XXX1X11");
-            }
+            if (!Validar.placa(placa)) request.setAttribute("erroPlaca", "Placa inválida! Deve seguir o padrão XXX1X11");
 
-            if (!Validar.status(status)){
-                request.setAttribute("erroStatus", "Status inválido! Deve ser 'I' (Inativo), 'A' (Ativo) ou 'M'(Em manutenção).");
-            }
+            if (!Validar.status(status)) request.setAttribute("erroStatus", "Status inválido! Deve ser 'I' (Inativo), 'A' (Ativo) ou 'M'(Em manutenção).");
 
-            if (modelo ==  null || modelo.isEmpty()){
-                request.setAttribute("erroModelo", "Modelo inválido! Não pode ser nulo.");
-            }
-            
-            if (capacidade <= 0){
-                request.setAttribute("erroCapacidade", "Capacidade inválida! Deve ser maior que 0.");
-            }
+            if (modelo ==  null || modelo.isEmpty()) request.setAttribute("erroModelo", "Modelo inválido! Não pode ser nulo.");
 
-            if (kmRodados < 0){
-                request.setAttribute("erroKmRodados", "Kilometragem inválida! Não pode ser menor que 0.");
-            }
+            if (capacidade <= 0) request.setAttribute("erroCapacidade", "Capacidade inválida! Deve ser maior que 0.");
+
+            if (kmRodados < 0) request.setAttribute("erroKmRodados", "Kilometragem inválida! Não pode ser menor que 0.");
 
             /*
               Para verificar a frota,

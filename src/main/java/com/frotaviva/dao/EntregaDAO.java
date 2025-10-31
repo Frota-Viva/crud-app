@@ -76,6 +76,40 @@ public class EntregaDAO extends AbstractDAO implements DAO<Entrega>{
         }
     }
 
+    public int atualizar(Entrega entrega) {
+        Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        Connection conn = null;
+
+        String sql = "UPDATE entrega SET descricao_produto = ?, dt_pedido = ?, dt_entrega = ?, id_motorista = ?, cep = ?, rua = ?, numero = ?, complemento = ?, estado = ?, cidade = ?  WHERE cod_entrega = ?";
+
+        try {
+            conn = conexao.conectar();
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, entrega.getDescricaoProduto());
+            stmt.setDate(2, entrega.getDtPedido());
+            stmt.setDate(3, entrega.getDtEntrega());
+            stmt.setLong(4, entrega.getIdMotorista());
+            stmt.setString(5, entrega.getEndereco().getCep());
+            stmt.setString(6, entrega.getEndereco().getRua());
+            stmt.setString(7, entrega.getEndereco().getComplemento());
+            stmt.setString(8, entrega.getEndereco().getEstado());
+            stmt.setString(9, entrega.getEndereco().getCidade());
+            stmt.setLong(10, entrega.getCod_entrega());
+
+            if (stmt.executeUpdate() > 0) return 1;
+            return 0;
+
+        } catch (SQLException e) {
+            log.error("Erro ao atualizar entrega", e);
+            throw throwDAOException(e, UPDATE);
+        } finally {
+            fechar(stmt);
+            conexao.desconectar(conn);
+        }
+    }
+
     public int atualizarDescricao(Entrega entrega) {
         Conexao conexao = new Conexao();
         PreparedStatement stmt = null;
