@@ -10,11 +10,39 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
 @WebServlet(name = "AtualizarCaminhao", value = "/atualizar-caminhao")
 public class AtualizarCaminhaoServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        long id;
+        CaminhaoDAO dao =  new CaminhaoDAO();
+
+        HttpSession session = req.getSession(true);
+        Object id_empresa = session.getAttribute("idEmpresa");
+
+        if (id_empresa == null) {
+            resp.sendRedirect("/");
+            return;
+        }
+
+        try {
+            id = Long.parseLong(req.getParameter("id"));
+
+            if (dao.buscarPorId(id) == null) {
+                resp.sendRedirect("/listar-caminhao");
+            }
+
+            req.setAttribute("caminhao", dao.buscarPorId(id));
+            req.getRequestDispatcher("WEB-INF/view/caminhao/atualizar-caminhao.jsp").forward(req, resp);
+
+        } catch (NumberFormatException e) {
+            resp.sendRedirect("/listar-caminhao");
+        }
+    }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,15 +65,15 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
             idFrota = Long.parseLong(request.getParameter("idFrota"));
 
             if (!Validar.placa(placa)){
-                request.setAttribute("erro", "Placa inválida! Deve seguir o padrão XXX1X11");
+                request.setAttribute("erroPlaca", "Placa inválida! Deve seguir o padrão XXX1X11");
             }
 
             if (!Validar.status(status)){
-                request.setAttribute("erro", "Status inválido! Deve ser 'I' (Inativo), 'A' (Ativo) ou 'M'(Em manutenção).");
+                request.setAttribute("erroStatus", "Status inválido! Deve ser 'I' (Inativo), 'A' (Ativo) ou 'M'(Em manutenção).");
             }
 
             if (modelo ==  null || modelo.isEmpty()){
-                request.setAttribute("erro", "Modelo inválido! Não pode ser nulo.");
+                request.setAttribute("erroModelo", "Modelo inválido! Não pode ser nulo.");
             }
 
             CaminhaoDAO dao = new CaminhaoDAO();

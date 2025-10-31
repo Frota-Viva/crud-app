@@ -1,5 +1,9 @@
+<%@ page import="com.frotaviva.model.Caminhao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%request.setAttribute("tabela","caminhao");%>
+<%
+    request.setAttribute("tabela","caminhao");
+    Caminhao c = (Caminhao) request.getAttribute("caminhao");
+;%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -15,7 +19,7 @@
 <main>
   <section class="conteudo-container">
 
-    <form action="">
+    <form action="/atualizar-caminhao">
       <header class="cabecalho-info">
         <div class="table-header">
           <div class="th-esquerda">
@@ -35,14 +39,14 @@
         </div>
         <div class="table-row">
           <div class="t-esquerda">
-            <div class="table-cell cell">1</div>
-            <div class="table-cell cell">text</div>
-            <div class="table-cell cell">text</div>
-            <div class="table-cell cell">text</div>
-            <div class="table-cell cell">text</div>
-            <div class="table-cell cell">text</div>
+            <div class="table-cell cell"><%=c.getId()%></div>
+            <div class="table-cell cell"><%=c.getPlaca()%></div>
+            <div class="table-cell cell"><%=c.getStatus()%></div>
+            <div class="table-cell cell"><%=c.getKmRodados()%></div>
+            <div class="table-cell cell"><%=c.getModelo()%></div>
+            <div class="table-cell cell"><%=c.getCapacidade()%></div>
           </div>
-          <button class="btn-sair" type="button">
+          <button class="btn-sair" type="button" onclick="window.location.href='/listar-caminhao'">
             <img src="../../../assets/icons/icon-sair-edicao.svg" alt="Sair" id="sair-edicao">
             Sair da Edição
           </button>
@@ -52,38 +56,48 @@
       </header>
       <section class="area-edicao">
         <div class="linha-info">
+            <input type="hidden" name="id" value="<%=c.getId()%>">
           <div class="campo-edicao">
             <label for="idFrota">ID Frota:</label>
-            <input type="number" value="4" min="1" id="idFrota" name="idFrota" required>
+            <input type="number" value="<%=c.getIdFrota()%>" min="1" id="idFrota" name="idFrota" required>
           </div>
           <div class="campo-edicao">
             <label for="kmsRodados">Kms Rodados:</label>
-            <input type="number" value="4789" min="0" id="kmsRodados" name="kmsRodados" required>
+            <input type="number" value="<%=c.getKmRodados()%>" min="0" id="kmsRodados" name="kmsRodados" required>
           </div>
         </div>
         <div class="linha-info">
           <div class="campo-edicao">
             <label for="placa">Placa:</label>
-            <input type="text" value="BEE 4R22" id="placa" name="placa" required>
+            <input type="text" value="<%=c.getPlaca()%>" id="placa" name="placa" required>
+              <%if (request.getAttribute("erroPlaca") != null){%>
+              <p style="color: red"><%=request.getAttribute("erroPlaca")%></p>
+              <%}%>
           </div>
           <div class="campo-edicao">
             <label for="modelo">Modelo:</label>
-            <input type="text" value="Scania R450" id="modelo" name="modelo" required>
+            <input type="text" value="<%=c.getModelo()%>" id="modelo" name="modelo" required>
+              <%if (request.getAttribute("erroModelo") != null){%>
+              <p style="color: red"><%=request.getAttribute("erroModelo")%></p>
+              <%}%>
           </div>
         </div>
         <div class="linha-info">
           <div class="campo-edicao">
-            <label for="estado">Estado:</label>
-            <input type="text" value="Ativo" id="estado" name="estado" required>
+            <label for="estado">Status:</label>
+            <input type="text" value="<%=c.getStatus()%>" id="estado" name="estado" required>7
+              <%if (request.getAttribute("erroStatus") != null){%>
+              <p style="color: red"><%=request.getAttribute("erroStatus")%></p>
+              <%}%>
           </div>
           <div class="campo-edicao">
             <label for="capacidade">Capacidade:</label >
-            <input type="number" value="16350" id="capacidade" name="capacidade" min="1">
+            <input type="number" value="<%=c.getCapacidade()%>>" id="capacidade" name="capacidade" min="1">
           </div>
         </div>
       </section>
-  </section>
   </form>
+  </section>
 </main>
 </body>
 

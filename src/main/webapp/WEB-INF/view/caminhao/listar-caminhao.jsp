@@ -62,7 +62,7 @@
                         <div class="table-cell cell"><%=c.getCapacidade()%></div>
                     </div>
                     <div class="table-cell cell table-actions">
-                        <button class="bt-editar">
+                        <button class="bt-editar" onclick="window.location.href='/atualizar-caminhao?id=<%=c.getId()%>'">
                             <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
                             Editar
                         </button>

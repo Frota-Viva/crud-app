@@ -2,7 +2,6 @@ package com.frotaviva.servlet.motorista;
 
 import com.frotaviva.dao.MotoristaDAO;
 
-import com.frotaviva.exception.ErroAoConsultar;
 import com.frotaviva.exception.ErroAoDeletar;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
