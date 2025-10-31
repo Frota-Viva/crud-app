@@ -5,7 +5,7 @@ import java.sql.Date;
 
 public class Entrega {
 
-    private long cod_entrega;
+    private final long cod_entrega;
     private String descricaoProduto;
     private Date dtPedido;
     private Date dtEntrega;

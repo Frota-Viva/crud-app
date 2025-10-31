@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: lucasporto-ieg
-  Date: 30/10/2025
-  Time: 11:44
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%request.setAttribute("tabela","entrega");%>
 <html lang="pt-BR">

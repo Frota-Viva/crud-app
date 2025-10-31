@@ -24,7 +24,6 @@ public class ListarCaminhaoServlet extends HttpServlet {
         HttpSession session = request.getSession(true); //Pega a sessão
         Object id = session.getAttribute("idEmpresa"); //Pega o id da empresa na sessão
 
-        //Verifica se o id existe
         if (id == null){
             response.sendRedirect("/");
             return;
@@ -32,9 +31,8 @@ public class ListarCaminhaoServlet extends HttpServlet {
 
         long idEmpresa = (long) id;
 
-        CaminhaoDAO dao = new CaminhaoDAO();
-
         try{
+            CaminhaoDAO dao = new CaminhaoDAO();
 
             List<Caminhao> caminhoes = dao.buscarPorEmpresa(idEmpresa);
 
