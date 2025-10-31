@@ -3,6 +3,8 @@
 <%@ page import="com.frotaviva.model.Caminhao" %>
 <%
     List<Caminhao> caminhoes = (List<Caminhao>) request.getAttribute("caminhoes");
+    String msg = request.getParameter("msg");
+    request.setAttribute("tabela","caminhao");
 %>
 <head>
     <meta charset="UTF-8">

@@ -13,7 +13,7 @@ if (tabelaReq!=null){
     <img src="../../assets/imgs/img-home/logo2.png" alt="Frota Viva" id="logo">
     <nav>
         <a href="/home">
-            <%if (tabela=="home"){%>
+            <%if (tabela.equals("home")){%>
             <div id="barra-indicacao"></div>
             <%}else {%>
             <div id="espaco"></div>
@@ -22,7 +22,7 @@ if (tabelaReq!=null){
             Pagina Inicial
         </a>
         <a href="/home/perfis">
-            <%if (tabela=="perfis"){%>
+            <%if (tabela.equals("perfis")){%>
             <div id="barra-indicacao"></div>
             <%}else {%>
             <div id="espaco"></div>
@@ -31,7 +31,7 @@ if (tabelaReq!=null){
             Perfis
         </a>
         <a href="/listar-manutencao">
-            <%if (tabela=="manutencao"){%>
+            <%if (tabela.equals("manutencao")){%>
             <div id="barra-indicacao"></div>
             <%}else {%>
             <div id="espaco"></div>
@@ -41,7 +41,7 @@ if (tabelaReq!=null){
         </a>
 
         <a href="/listar-caminhao">
-            <%if (tabela=="caminhao"){%>
+            <%if (tabela.equals("caminhao")){%>
             <div id="barra-indicacao"></div>
             <%}else {%>
             <div id="espaco"></div>
@@ -51,7 +51,7 @@ if (tabelaReq!=null){
         </a>
 
         <a href="/listar-frota">
-            <%if (tabela=="frota"){%>
+            <%if (tabela.equals("frota")){%>
             <div id="barra-indicacao"></div>
             <%}else {%>
             <div id="espaco"></div>
@@ -61,7 +61,7 @@ if (tabelaReq!=null){
         </a>
 
         <a href="/listar-motoristas">
-            <%if (tabela=="motorista"){%>
+            <%if (tabela.equals("motorista")){%>
             <div id="barra-indicacao"></div>
             <%}else {%>
             <div id="espaco"></div>
@@ -70,10 +70,8 @@ if (tabelaReq!=null){
             Motoristas
         </a>
 
-
-
         <a href="/listar-entregas">
-            <%if (tabela=="entrega"){%>
+            <%if (tabela.equals("entrega")){%>
             <div id="barra-indicacao"></div>
             <%}else {%>
             <div id="espaco"></div>
