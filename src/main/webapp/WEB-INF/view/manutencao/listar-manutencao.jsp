@@ -10,8 +10,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frota Viva - Manutenções</title>
-    <link rel="stylesheet" href="../../assets/CSS/tabelasStyle.css">
-</head>
+    <link rel="stylesheet" href="../../../assets/CSS/tabelasStyle.css?<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="../../../assets/CSS/pop-up-excluir.css?<%=System.currentTimeMillis()%>">
+    <script src="../../../assets/JS/pop-up-excluir.js?<%=System.currentTimeMillis()%>"></script></head>
 
 <body>
 <jsp:include page="../componentes/aside.jsp"/>
