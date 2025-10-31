@@ -19,7 +19,7 @@
 <main>
   <section class="conteudo-container">
 
-    <form action="/atualizar-caminhao">
+    <form action="/atualizar-caminhao" method="POST">
       <header class="cabecalho-info">
         <div class="table-header">
           <div class="th-esquerda">
@@ -32,7 +32,7 @@
           </div>
           <div class="header-cell header-action">
             <button class="btn-salvar" type="submit">
-              <img src="../../../assets/icons/icon-salvar-alteracoes.svg" alt="salvar" id="salvar-edicao">
+              <img src="../../../assets/icons/" alt="salvar" id="salvar-edicao">
               Salvar Alterações
             </button>
           </div>
@@ -85,14 +85,14 @@
         <div class="linha-info">
           <div class="campo-edicao">
             <label for="estado">Status:</label>
-            <input type="text" value="<%=c.getStatus()%>" id="estado" name="estado" required>7
+            <input type="text" value="<%=c.getStatus()%>" id="estado" name="estado" required>
               <%if (request.getAttribute("erroStatus") != null){%>
               <p style="color: red"><%=request.getAttribute("erroStatus")%></p>
               <%}%>
           </div>
           <div class="campo-edicao">
             <label for="capacidade">Capacidade:</label >
-            <input type="number" value="<%=c.getCapacidade()%>>" id="capacidade" name="capacidade" min="1">
+            <input type="number" value="<%=c.getCapacidade()%>" id="capacidade" name="capacidade" min="1">
           </div>
         </div>
       </section>

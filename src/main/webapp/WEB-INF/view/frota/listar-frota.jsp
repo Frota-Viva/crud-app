@@ -35,7 +35,7 @@
                         <div class="header-cell">ID</div>
                         <div class="header-cell">Tamanho da frota</div>
                         <div class="header-cell">Tipo da frota</div>
-                        <div class="header-cell">Região de atuaçao</div>
+                        <div class="header-cell">Região de atuação</div>
                     </div>
                     <div class="header-cell header-action">
                         <button class="bt-adicionar">
@@ -58,7 +58,7 @@
                         <div class="table-cell cell"><%=f.getRegiao()%></div>
                     </div>
                     <div class="table-cell cell table-actions">
-                        <button class="bt-editar">
+                        <button class="bt-editar" onclick="window.location.href='/atualizar-frota?id=<%=f.getId()%>'">
                             <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
                             Editar
                         </button>

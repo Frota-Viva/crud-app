@@ -62,7 +62,7 @@
                     <div class="table-cell cell"><%=m.getUltimoMotorista()%></div>
                 </div>
                 <div class="table-cell cell table-actions">
-                    <button class="bt-editar">
+                    <button class="bt-editar" onclick="window.location.href='/atualizar-manutencao?id=<%=m.getId()%>'">
                         <img src="../../assets/icons/icon-editar.svg" alt="Editar">
                         Editar
                     </button>
