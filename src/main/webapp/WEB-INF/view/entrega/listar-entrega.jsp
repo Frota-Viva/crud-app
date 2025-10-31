@@ -4,6 +4,8 @@
 <%
     List<Entrega> entregas = (List<Entrega>) request.getAttribute("entregas");
     String msg = request.getParameter("msg");
+    request.setAttribute("tabela","entrega");
+
 %>
 <head>
     <meta charset="UTF-8">
