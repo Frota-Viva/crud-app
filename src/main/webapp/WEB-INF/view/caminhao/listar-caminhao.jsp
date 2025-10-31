@@ -20,10 +20,17 @@
 
         <header class="top-bar">
             <div class="procurar-container">
-                <form action="">
-                    <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
-                    <input type="text" placeholder="Buscar nome ou placa" class="input-search">
+                <form action="listar-caminhao" class="form-buscar">
+                    <button type="submit" class="bt-buscar">
+                        <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
+                    </button>
+                    <input type="text" placeholder="Buscar placa" class="input-search" name="buscar">
                 </form>
+                <div class="mensagem">
+                    <%if (msg != null){%>
+                    <p><%=msg%></p>
+                    <%}%>
+                </div>
             </div>
         </header>
 

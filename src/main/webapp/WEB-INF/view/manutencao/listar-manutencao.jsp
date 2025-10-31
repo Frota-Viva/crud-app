@@ -4,6 +4,7 @@
 <%@ page import="com.frotaviva.model.Manutencao" %>
 <%
     List<Manutencao> manutencoes = (List<Manutencao>) request.getAttribute("manutencoes");
+    String msg = request.getParameter("msg");
     request.setAttribute("tabela","manutencao");
 %>
 <head>
@@ -21,10 +22,17 @@
 
         <header class="top-bar">
             <div class="procurar-container">
-                <form action="">
-                    <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
-                    <input type="text" placeholder="Buscar nome ou placa" class="input-search">
+                <form action="listar-manutencao" class="form-buscar">
+                    <button type="submit" class="bt-buscar">
+                        <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
+                    </button>
+                    <input type="text" placeholder="Buscar tipo" class="input-search" name="buscar">
                 </form>
+                <div class="mensagem">
+                    <%if (msg != null){%>
+                    <p><%=msg%></p>
+                    <%}%>
+                </div>
             </div>
         </header>
 
