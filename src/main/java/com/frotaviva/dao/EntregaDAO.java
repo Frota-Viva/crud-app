@@ -312,11 +312,12 @@ public class EntregaDAO extends AbstractDAO implements DAO<Entrega>{
 
         String sql = "select * from entrega e join motorista m on m.id = e.id_motorista " +
                 "join empresa ep on ep.id = m.id_empresa " +
-                "where ep.id = 1;";
+                "where ep.id = ?;";
 
         try {
             conn = conexao.conectar();
             stmt = conn.prepareStatement(sql);
+            stmt.setLong(1, idEmpresa);
 
             rs = stmt.executeQuery();
 

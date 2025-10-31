@@ -70,7 +70,9 @@ if (tabelaReq!=null){
             Motoristas
         </a>
 
-        <a href="/listar-frota">
+
+
+        <a href="/listar-entregas">
             <%if (tabela=="entrega"){%>
             <div id="barra-indicacao"></div>
             <%}else {%>
