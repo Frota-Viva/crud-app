@@ -47,13 +47,14 @@
                 <%
                     if ( (entregas != null) && (! entregas.isEmpty()) ) {
                         for (Entrega e : entregas){
+                            boolean entregaNull = e.getDtEntrega() == null;
                 %>
 
                 <div class="table-row">
                     <div class="t-esquerda">
                         <div class="table-cell cell"><%=e.getCod_entrega()%></div>
                         <div class="table-cell cell"><%=e.getDtPedido()%></div>
-                        <div class="table-cell cell"><%=e.getDtEntrega()%></div>
+                        <div class="table-cell cell"><%=entregaNull ? "Não entregue!" : e.getDtEntrega()%></div>
                         <div class="table-cell cell"><%=e.getEndereco().getCep()%></div>
                         <div class="table-cell cell"><%=e.getIdMotorista()%></div>
                     </div>

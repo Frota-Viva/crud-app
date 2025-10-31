@@ -39,53 +39,53 @@
             </div>
         </header>
 
-            <article class="tabela">
-                <div class="table-header">
-                    <div class="th-esquerda">
-                        <div class="header-cell">ID</div>
-                        <div class="header-cell">Nome</div>
-                        <div class="header-cell">CPF</div>
-                        <div class="header-cell">Email</div>
-                    </div>
-                    <div class="header-cell header-action">
-                        <button class="bt-adicionar">
-                            <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
-                            Adicionar Usuário
-                        </button>
-                    </div>
+        <article class="tabela">
+            <div class="table-header">
+                <div class="th-esquerda">
+                    <div class="header-cell">ID</div>
+                    <div class="header-cell">Nome</div>
+                    <div class="header-cell">CPF</div>
+                    <div class="header-cell">Email</div>
                 </div>
+                <div class="header-cell header-action">
+                    <button class="bt-adicionar">
+                        <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
+                        Adicionar Usuário
+                    </button>
+                </div>
+            </div>
 
-                <%
-                    if ( (motoristas != null) && (! motoristas.isEmpty()) ) {
-                    for (Motorista motorista : motoristas){
-                %>
-                <div class="table-row">
-                    <div class="t-esquerda">
-                        <div class="table-cell cell"><%=motorista.getId()%></div>
-                        <div class="table-cell cell"><%=motorista.getNome()%></div>
-                        <div class="table-cell cell"><%=motorista.getCpf()%></div>
-                        <div class="table-cell cell"><%=motorista.getEmail()%></div>
-                    </div>
-                    <div class="table-cell cell table-actions">
-                        <button class="bt-editar">
-                            <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
-                            Editar
-                        </button>
-                        <button class="bt-excluir" data-id="<%=motorista.getId()%>">
-                            <img src="../../../assets/icons/icon-excluir.svg" alt="Excluir">
-                            Excluir
-                        </button>
-                    </div>
+            <%
+                if ( (motoristas != null) && (! motoristas.isEmpty()) ) {
+                for (Motorista motorista : motoristas){
+            %>
+            <div class="table-row">
+                <div class="t-esquerda">
+                    <div class="table-cell cell"><%=motorista.getId()%></div>
+                    <div class="table-cell cell"><%=motorista.getNome()%></div>
+                    <div class="table-cell cell"><%=motorista.getCpf()%></div>
+                    <div class="table-cell cell"><%=motorista.getEmail()%></div>
                 </div>
-                <%}
-                } else {%>
-                <div class="table-row">
-                    <div class="t-esquerda">
-                        <td class="table-cell cell">Nenhum motorista encontrado</td>
-                    </div>
+                <div class="table-cell cell table-actions">
+                    <button class="bt-editar">
+                        <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
+                        Editar
+                    </button>
+                    <button class="bt-excluir" data-id="<%=motorista.getId()%>">
+                        <img src="../../../assets/icons/icon-excluir.svg" alt="Excluir">
+                        Excluir
+                    </button>
                 </div>
-                <%}%>
-            </article>
+            </div>
+            <%}
+            } else {%>
+            <div class="table-row">
+                <div class="t-esquerda">
+                    <td class="table-cell cell">Nenhum motorista encontrado</td>
+                </div>
+            </div>
+            <%}%>
+        </article>
     </section>
     <jsp:include page="../componentes/pop-up-excluir.jsp">
         <jsp:param name="servletExclusao" value="/deletar-motorista"/>

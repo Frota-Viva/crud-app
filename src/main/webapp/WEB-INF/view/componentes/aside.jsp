@@ -30,7 +30,7 @@ if (tabelaReq!=null){
             <img src="../../assets/icons/icon-perfis.svg" alt="" class="icones-aside">
             Perfis
         </a>
-        <a href="manutencoes.html">
+        <a href="/listar-manutencao">
             <%if (tabela=="manutencao"){%>
             <div id="barra-indicacao"></div>
             <%}else {%>
@@ -40,7 +40,7 @@ if (tabelaReq!=null){
             Manutenções
         </a>
 
-        <a href="caminhoes.html">
+        <a href="/listar-caminhao">
             <%if (tabela=="caminhao"){%>
             <div id="barra-indicacao"></div>
             <%}else {%>
@@ -50,7 +50,7 @@ if (tabelaReq!=null){
             Caminhões
         </a>
 
-        <a href="frota.html">
+        <a href="/listar-frota">
             <%if (tabela=="frota"){%>
             <div id="barra-indicacao"></div>
             <%}else {%>
@@ -70,7 +70,7 @@ if (tabelaReq!=null){
             Motoristas
         </a>
 
-        <a href="entregas.html">
+        <a href="/listar-entregas">
             <%if (tabela=="entrega"){%>
             <div id="barra-indicacao"></div>
             <%}else {%>
