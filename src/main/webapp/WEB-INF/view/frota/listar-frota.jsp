@@ -3,6 +3,7 @@
 <%@ page import="com.frotaviva.model.Frota" %>
 <%
     List<Frota> frotas = (List<Frota>) request.getAttribute("frotas");
+<%request.setAttribute("tabela","frota");%>
 %>
 <head>
     <meta charset="UTF-8">
