@@ -48,6 +48,8 @@ public class InserirCaminhaoServlet extends HttpServlet {
 
         boolean erro = false;
 
+        // Recuperando a sessão do usuario
+
         HttpSession session = request.getSession(true);
         Object id = session.getAttribute("idEmpresa");
 
@@ -68,6 +70,7 @@ public class InserirCaminhaoServlet extends HttpServlet {
             int capacidade = Integer.parseInt(request.getParameter("capacidade"));
             long idFrota = Long.parseLong(request.getParameter("idFrota"));
 
+            // Validação dos dados
 
             if (!Validar.placa(placa)){
                 request.setAttribute("erroPlaca", "Placa inválida! Deve seguir o padrão: XXX1X11");
@@ -114,6 +117,8 @@ public class InserirCaminhaoServlet extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/view/caminhao/inserir-caminhao.jsp").forward(request, response);
                 return;
             }
+
+            // Inserção do caminhao
 
             Caminhao caminhao = new Caminhao(placa, status, kmRodados, modelo, capacidade, idFrota);
 
