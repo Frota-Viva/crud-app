@@ -47,11 +47,9 @@ public class ListarEntregaServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/view/entrega/listar-entrega.jsp").forward(req, resp);
 
         } catch (ErroAoConsultar e) {
-            req.setAttribute("mensagem", "Erro ao acessar o encontrar entregas. Tente novamente mais tarde.");
-            req.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(req, resp);
+            resp.sendRedirect("/home?msg=Erro ao consultar entregas");
         } catch (Exception e) {
-            req.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            req.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(req, resp);
+            resp.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
 
 
