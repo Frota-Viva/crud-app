@@ -21,11 +21,21 @@ import java.nio.charset.StandardCharsets;
 @WebServlet(name = "InserirCaminhao", value = "/inserir-caminhao")
 public class InserirCaminhaoServlet extends HttpServlet {
 
-    private static final String URL_LISTAR = "/listar-caminhao";
+    /**
+     *
+     * Recebe uma mensagem, codifica ela para o padrão UTF_8 e redireciona para /listar-caminhao
+     * Apenas para maior legibilidade do código, pois cada mensagem teria que ser codificada e isso
+     * seria repetido muitas vezes no código.
+     *
+     * @param response para executar o redirect
+     * @param mensagem para a especificação da mensagem de erro/sucesso
+     *
+     *  @author Davi
+     */
 
     private void redirectComMensagem(HttpServletResponse response, String mensagem) throws IOException {
         String mensagemEncoded = URLEncoder.encode(mensagem, StandardCharsets.UTF_8);
-        response.sendRedirect(InserirCaminhaoServlet.URL_LISTAR + "?msg=" + mensagemEncoded);
+        response.sendRedirect( "/listar-caminhao?msg=" + mensagemEncoded);
     }
 
     @Override
@@ -58,8 +68,9 @@ public class InserirCaminhaoServlet extends HttpServlet {
             int capacidade = Integer.parseInt(request.getParameter("capacidade"));
             long idFrota = Long.parseLong(request.getParameter("idFrota"));
 
+
             if (!Validar.placa(placa)){
-                request.setAttribute("erroPlaca", "Placa inválida! Deve seguir o padrão XXX1X11");
+                request.setAttribute("erroPlaca", "Placa inválida! Deve seguir o padrão: XXX1X11");
                 erro = true;
             }
 
@@ -73,18 +84,19 @@ public class InserirCaminhaoServlet extends HttpServlet {
                 erro = true;
             }
 
-            if (capacidade <= 0){
+            if (capacidade <= 0 || Validar.testeVazio(String.valueOf(capacidade))){
                 request.setAttribute("erroCapacidade", "Capacidade inválida! Deve ser maior que zero.");
                 erro = true;
             }
 
-            if (kmRodados < 0){
+            if (kmRodados < 0 || Validar.testeVazio(String.valueOf(kmRodados))){
                 request.setAttribute("erroKms", "Kilometragem inválida! Deve ser maior ou igual que zero.");
                 erro = true;
             }
 
             /*
-              Para verificar a frota, apenas se verifica o id_empresa de frota
+              Verifica o id_empresa de frota bate com o id do usuário logado (idEmpresa)
+              para que nao inclue um caminhao em uma frota que nao é dele ou nao existe
              */
 
             FrotaDAO frotaDAO = new FrotaDAO();
@@ -115,7 +127,7 @@ public class InserirCaminhaoServlet extends HttpServlet {
         } catch (ErroAoInserir e) {
             redirectComMensagem(response, "Erro ao inserir caminhão: " + e.getMessage());
         } catch (NumberFormatException e) {
-            redirectComMensagem(response, "Formato inválido inserido.");
+            redirectComMensagem(response, "Formato inválido inserido." + e.getMessage());
         } catch (Exception e) {
             redirectComMensagem(response, "Erro inesperado: " + e.getMessage());
         }

@@ -71,7 +71,7 @@
                 </div>
             </section>
             <section id="botoes">
-                <button id="button-cancelar" type="button">
+                <button id="button-cancelar" type="button" onclick="window.location.href='/listar-caminhao'">
                     <img src="../../../assets/icons/icon-cancelar.svg" alt="" class="icones-botao">
                     <b>Cancelar</b>
                 </button>

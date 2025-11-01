@@ -89,7 +89,7 @@ public class Validar {
         return status.matches(regex);
     }
     public static boolean testeVazio(String texto){
-        if (texto == null || texto.equals("")) return true;
+        if (texto == null || texto.isEmpty()) return true;
 
         String regex = "^ +$";
         return texto.matches(regex);

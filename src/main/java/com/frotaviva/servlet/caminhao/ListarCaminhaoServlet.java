@@ -39,10 +39,8 @@ public class ListarCaminhaoServlet extends HttpServlet {
             List<Caminhao> caminhoes;
 
             if (buscar != null && !buscar.isBlank()){
-                System.out.println("Tem buscar");
                 caminhoes = dao.buscarPorEmpresaComPlaca(idEmpresa, buscar);
             } else {
-                System.out.println("Não tem buscar");
                 caminhoes = dao.buscarPorEmpresa(idEmpresa);
             }
 
