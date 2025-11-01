@@ -26,14 +26,14 @@
                         <label for="regiao">Região:</label>
                         <input type="text" placeholder="Região que a frota opera." id="regiao" name="regiao" required>
                         <%if (request.getAttribute("erroRegiao") != null){%>
-                        <p style="color: red"><%=request.getAttribute("erroRegiao")%></p>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroRegiao")%></p>
                         <%}%>
                     </div>
                     <div class="campo-edicao">
                         <label for="tamanhoFrota">Tamanho Frota:</label>
                         <input type="number" placeholder="Quantidade de caminhões da frota." min="1" id="tamanhoFrota" name="tamanhoFrota" required>
                         <%if (request.getAttribute("erroTamanhoFrota") != null){%>
-                        <p style="color: red"><%=request.getAttribute("erroTamanhoFrota")%></p>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroTamanhoFrota")%></p>
                         <%}%>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                         <label for="tipoFrota">Tipo da Frota:</label>
                         <input type="text" placeholder="Digite o tipo da frota." id="tipoFrota" name="tipoFrota" required>
                         <%if (request.getAttribute("erroTipoFrota") != null){%>
-                        <p style="color: red"><%=request.getAttribute("erroTipoFrota")%></p>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroTipoFrota")%></p>
                         <%}%>
                     </div>
                 </div>

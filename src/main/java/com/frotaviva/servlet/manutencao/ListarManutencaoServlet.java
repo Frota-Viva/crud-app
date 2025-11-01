@@ -18,8 +18,7 @@ import java.util.List;
 public class ListarManutencaoServlet extends HttpServlet {
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession(true);
         Object id = session.getAttribute("idEmpresa");
@@ -49,14 +48,11 @@ public class ListarManutencaoServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/view/manutencao/listar-manutencao.jsp").forward(request, response);
 
         } catch (ServletException e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Ocorreu um no servidor. Tente novamente mais tarde.");
         } catch (ErroAoConsultar e) {
-            request.setAttribute("mensagem", "Erro ao acessar o encontrar motoristas. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Erro ao acessar o encontrar motoristas. Tente novamente mais tarde.");
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
     }
 }

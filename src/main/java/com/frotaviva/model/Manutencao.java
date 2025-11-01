@@ -27,6 +27,17 @@ public class Manutencao {
         this.idCaminhao=idCaminhao;
     }
 
+    public Manutencao(Date dataCadastro, Date dataConclusao,String tipoManutencao,BigDecimal custo,
+                      long ultimoMotorista,String descricaoServico,long idCaminhao){
+        this.dtCadastro =dataCadastro;
+        this.dtConclusao =dataConclusao;
+        this.tipoManutencao=tipoManutencao;
+        this.custo=custo;
+        this.ultimoMotorista=ultimoMotorista;
+        this.descricaoServico=descricaoServico;
+        this.idCaminhao=idCaminhao;
+    }
+
     public long getId(){
         return this.id;
     }

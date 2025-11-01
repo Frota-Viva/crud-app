@@ -48,7 +48,7 @@
                     <div class="header-cell">Ultimo Motorista</div>
                 </div>
                 <div class="header-cell header-action">
-                    <button class="bt-adicionar">
+                    <button class="bt-adicionar" onclick="window.location.href='/inserir-manutencao'">
                         <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
                         Adicionar Manutenção
                     </button>
@@ -75,7 +75,7 @@
                         <img src="../../assets/icons/icon-editar.svg" alt="Editar">
                         Editar
                     </button>
-                    <button class="bt-excluir">
+                    <button class="bt-excluir" data-id="<%=m.getId()%>">
                         <img src="../../assets/icons/icon-excluir.svg" alt="Excluir">
                         Excluir
                     </button>
