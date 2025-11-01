@@ -8,12 +8,34 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Responsável por gerenciar a exibição dos perfis dos motoristas da empresa na página principal
+ * <p>
+ * Verifica se há uma sessão ativa com o ID da empresa, busca os perfis dos motoristas de acordo
+ * com a página e o termo de busca informados, e encaminha as informações para a página perfis.jsp.
+ * </p>
+ * 
+ * @author Ricardo
+ */
+
 @WebServlet("/home/perfis")
 public class PerfisServlet extends HttpServlet {
+
+    /**
+     * Recebe uma requisição GET, verifica a sessão da empresa e monta a lista de perfis
+     * dos motoristas para exibição na página perfis.jsp.
+     * <p>
+     * Caso não exista sessão ativa, o usuário é redirecionado para a página inicial.
+     * </p>
+     *
+     * @param req objeto da requisição HTTP
+     * @param res objeto da resposta HTTP
+     * @throws ServletException se ocorrer um erro de servlet
+     * @throws IOException se ocorrer um erro de entrada ou saída
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession(true); //Pega a sessão
@@ -57,12 +79,10 @@ public class PerfisServlet extends HttpServlet {
             req.setAttribute("perfisMotoristas", perfisMotoristas);
             req.setAttribute("paginaAtual", paginaAtual);
 
-
             req.getRequestDispatcher("/WEB-INF/view/perfis.jsp").forward(req, res);
 
         } catch (NumberFormatException e){
             res.sendRedirect("/home/perfis");
         }
-
     }
 }
