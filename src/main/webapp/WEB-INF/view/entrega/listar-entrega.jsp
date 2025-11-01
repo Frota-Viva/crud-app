@@ -47,7 +47,7 @@
                         <div class="header-cell">Motorista</div>
                     </div>
                     <div class="header-cell header-action">
-                        <button class="bt-adicionar">
+                        <button class="bt-adicionar" onclick="window.location.href='/inserir-entrega'">
                             <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
                             Adicionar Entrega
                         </button>
@@ -69,11 +69,11 @@
                         <div class="table-cell cell"><%=e.getIdMotorista()%></div>
                     </div>
                     <div class="table-cell cell table-actions">
-                        <button class="bt-editar">
+                        <button class="bt-editar" onclick="window.location.href='/inserir-caminhao?id=<%=e.getCod_entrega()%>'">
                             <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
                             Editar
                         </button>
-                        <button class="bt-excluir">
+                        <button class="bt-excluir" data-id="<%=e.getCod_entrega()%>">
                             <img src="../../../assets/icons/icon-excluir.svg" alt="Excluir">
                             Excluir
                         </button>
@@ -83,7 +83,7 @@
                 } else {%>
                 <div class="table-row">
                     <div class="t-esquerda">
-                        <td class="table-cell cell">Nenhum entrega encontrado</td>
+                        <td class="table-cell cell">Nenhum entrega encontrada</td>
                     </div>
                 </div>
                 <%}%>
