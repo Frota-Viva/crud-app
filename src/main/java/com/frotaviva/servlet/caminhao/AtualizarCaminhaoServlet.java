@@ -171,11 +171,13 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
         }
     }
     /**
-     * Percorre as frotas dessa empresa e verifica se o id passado pelo usuário existe.
+     * Recebe o id da frota e a lista de frotas da empresa.
+     * Percorre a lista e verifica se alguma frota tem o mesmo id.
      *
      * @param idFrota id da frota a ser verificada
      * @param frotas lista de frotas da empresa
-     * */
+     * @author Ricardo
+     **/
     private static boolean frotaExiste(long idFrota, List<Frota> frotas) {
         for (Frota frota : frotas) {
             if (frota.getId() == idFrota) return true;
