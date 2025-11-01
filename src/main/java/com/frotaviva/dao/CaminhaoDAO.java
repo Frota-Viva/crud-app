@@ -28,7 +28,7 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
         Conexao conexao = new Conexao();
         Connection con = null;
 
-        String sql = "INSERT INTO caminhao(placa, status, km_rodados, modelo, capacidade, id_frota) VALUES(?, ?, ?, ?, ? ,?)";
+        String sql = "INSERT INTO caminhao(placa, status, kms_rodados, modelo, capacidade, id_frota) VALUES(?, ?, ?, ?, ? ,?)";
 
         try {
             con = conexao.conectar();

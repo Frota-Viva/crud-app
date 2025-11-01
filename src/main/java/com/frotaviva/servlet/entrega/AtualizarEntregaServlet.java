@@ -25,7 +25,7 @@ public class AtualizarEntregaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        long id;
+        long cod_entrega;
         EntregaDAO dao = new EntregaDAO();
 
         HttpSession session = req.getSession(true);
@@ -37,13 +37,14 @@ public class AtualizarEntregaServlet extends HttpServlet {
         }
 
         try {
-            id = Long.parseLong(req.getParameter("id"));
+            cod_entrega = Long.parseLong(req.getParameter("cod_entrega"));
+            Entrega entrega = dao.buscarPorId(cod_entrega);
 
-            if (dao.buscarPorId(id) == null) {
+            if (entrega == null) {
                 resp.sendRedirect("/listar-entrega");
             }
 
-            req.setAttribute("entrega", dao.buscarPorId(id));
+            req.setAttribute("entrega", entrega);
             req.getRequestDispatcher("WEB-INF/view/entrega/atualizar-entrega.jsp").forward(req, resp);
 
         } catch (NumberFormatException e) {
@@ -75,12 +76,19 @@ public class AtualizarEntregaServlet extends HttpServlet {
             EntregaDAO dao = new EntregaDAO();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-            cod_entrega = Long.parseLong(request.getParameter("cod_entrega"));
+            String cod_entregaReq = request.getParameter("cod_entrega");
+            cod_entrega = (! Validar.testeVazio(cod_entregaReq)) ? Long.parseLong(cod_entregaReq) : -1;
+
             descricaoProduto = request.getParameter("descricao_produto");
             dtPedido = new Date(sdf.parse(request.getParameter("dt_pedido")).getTime());
+            //Continuar as validações a partir daqui (validar a data)
+            System.out.println(dtPedido);
             dtEntrega = new Date(sdf.parse(request.getParameter("dt_entrega")).getTime());
+            System.out.println(dtEntrega);
             endereco = (Endereco) session.getAttribute("endereco");
-            idMotorista = Long.parseLong(request.getParameter("id_motorista"));
+            System.out.println(endereco);
+            idMotorista = Long.parseLong(request.getParameter("idMotorista"));
+            System.out.println(idMotorista);
 
             if (descricaoProduto == null || descricaoProduto.isEmpty()) request.setAttribute("erroDescricao", "Descrição inválida! Não pode ser nula.");
 
