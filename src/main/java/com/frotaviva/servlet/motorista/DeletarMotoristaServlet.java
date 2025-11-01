@@ -26,21 +26,17 @@ public class DeletarMotoristaServlet extends HttpServlet {
             MotoristaDAO dao = new MotoristaDAO();
 
             if (dao.deletar(id) != 1) {
-                System.out.println("Deu errado");
                 request.setAttribute("mensagem", "Erro ao deletar motoristas. Tente novamente mais tarde.");
                 request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
                 return;
             }
 
-                System.out.println("Deu certo deletar");
                 response.sendRedirect("/listar-motoristas?msg=Motorista+deletado+com+sucesso");
 
         } catch (ErroAoDeletar e) {
-            response.sendRedirect("/listar-caminhao?msg=Erro+ao+deletar+motorista.+Tente+novamente+mais+tarde");
-        }
-        catch (Exception e) {
-            response.sendRedirect("/listar-caminhao?msg=Ocorreu+um+erro+inesperado+ao+deletar+motorista.+Tente+novamente+mais+tarde");
-
+            response.sendRedirect("/listar-motorista?msg=Erro ao deletar motorista. Tente novamente mais tarde");
+        } catch (Exception e) {
+            response.sendRedirect("/listar-motorista?msg=Ocorreu+um+erro+inesperado+ao+deletar+motorista.+Tente+novamente+mais+tarde");
         }
     }
 

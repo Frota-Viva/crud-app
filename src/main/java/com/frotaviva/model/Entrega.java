@@ -5,7 +5,7 @@ import java.sql.Date;
 
 public class Entrega {
 
-    private final long cod_entrega;
+    private long cod_entrega;
     private String descricaoProduto;
     private Date dtPedido;
     private Date dtEntrega;
@@ -14,6 +14,14 @@ public class Entrega {
 
     public Entrega(long cod_entrega,String descricaoProduto,Date dtPedido,Date dtEntrega,Endereco endereco,long idMotorista){
         this.cod_entrega=cod_entrega;
+        this.dtPedido=dtPedido;
+        this.dtEntrega=dtEntrega;
+        this.endereco=endereco;
+        this.descricaoProduto=descricaoProduto;
+        this.idMotorista=idMotorista;
+    }
+
+    public Entrega(String descricaoProduto,Date dtPedido,Date dtEntrega,Endereco endereco,long idMotorista){
         this.dtPedido=dtPedido;
         this.dtEntrega=dtEntrega;
         this.endereco=endereco;

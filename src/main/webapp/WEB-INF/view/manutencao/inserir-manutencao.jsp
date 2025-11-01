@@ -1,12 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: davifranco-ieg
-  Date: 30/10/2025
-  Time: 09:51
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%request.setAttribute("tabela","manutencao");%>
+<%
+    request.setAttribute("tabela","manutencao");
+%>
 <html lang="pt-BR">
 
 <head>
@@ -15,7 +10,6 @@
     <title>Inserir Manutenção - Frota Viva</title>
     <link rel="stylesheet" href="../../../assets/CSS/tabelaIserirStyle.css">
 </head>
-
 <body>
 <jsp:include page="../componentes/aside.jsp"/>
 <main>
@@ -25,51 +19,74 @@
                 <h1>Inserir Manutenção</h1>
             </div>
         </header>
-        <form action="">
+        <form action="/inserir-manutencao" method="post">
             <section class="area-edicao">
                 <div class="linha-info">
                     <div class="campo-edicao">
-                        <label for="descricao">Descrição Serviço:</label>
-                        <input type="text" placeholder="Digite a descrição do serviço." required id="descricao" name="descricao">
+                        <label for="idCaminhao">ID Caminhão:</label>
+                        <input type="number" placeholder="Digite o ID do caminhão." min="1" id="idCaminhao" name="idCaminhao" required>
+                        <%if (request.getAttribute("erroCaminhao") != null){%>
+                        <p style="color: red"><%=request.getAttribute("erroCaminhao")%></p>
+                        <%}%>
                     </div>
                     <div class="campo-edicao">
-                        <label for="cadastro">Cadastro:</label>
-                        <input type="date" required id="cadastro" name="cadastro">
+                        <label for="ultimoMotorista">Último Motorista:</label>
+                        <input type="number" placeholder="Digite o ID do último motorista." min="1" id="ultimoMotorista" name="ultimoMotorista" required>
+                        <%if (request.getAttribute("erroMotorista") != null){%>
+                        <p style="color: red"><%=request.getAttribute("erroMotorista")%></p>
+                        <%}%>
+                    </div>
+                </div>
+                <div class="linha-info">
+                    <div class="campo-edicao">
+                        <label for="dtCadastro">Data Cadastro:</label>
+                        <input type="date" id="dtCadastro" name="dtCadastro" required>
+                        <%if (request.getAttribute("erroDtCadastro") != null){%>
+                        <p style="color: red"><%=request.getAttribute("erroDtCadastro")%></p>
+                        <%}%>
                     </div>
                     <div class="campo-edicao">
-                        <label for="conclusao">Conclusão:</label>
-                        <input type="date" id="conclusao" name="conclusao">
+                        <label for="dtConclusao">Data Conclusão:</label>
+                        <input type="date" id="dtConclusao" name="dtConclusao" required>
+                        <%if (request.getAttribute("erroDtConclusao") != null){%>
+                        <p style="color: red"><%=request.getAttribute("erroDtConclusao")%></p>
+                        <%}%>
                     </div>
                 </div>
                 <div class="linha-info">
                     <div class="campo-edicao">
                         <label for="tipoManutencao">Tipo Manutenção:</label>
-                        <input type="text" placeholder="Corretiva/Preventiva" required id="tipoManutencao" name="tipoManutencao">
+                        <input type="text" placeholder="Corretiva/Preventiva" id="tipoManutencao" name="tipoManutencao" required>
+                        <%if (request.getAttribute("erroTipoManutencao") != null){%>
+                        <p style="color: red"><%=request.getAttribute("erroTipoManutencao")%></p>
+                        <%}%>
                     </div>
                     <div class="campo-edicao">
                         <label for="custo">Custo:</label>
-                        <input type="number" placeholder="Digite o custo da manutenção." min="1" required id="custo" name="custo" step="0.01">
+                        <input type="number" placeholder="Digite o custo da manutenção." min="0.01" id="custo" name="custo" step="0.01" required>
+                        <%if (request.getAttribute("erroCusto") != null){%>
+                        <p style="color: red"><%=request.getAttribute("erroCusto")%></p>
+                        <%}%>
                     </div>
                 </div>
                 <div class="linha-info">
                     <div class="campo-edicao">
-                        <label for="idCaminhao">Id Caminhão:</label>
-                        <input type="number" placeholder="ID do Caminhão que fez a manutenção." min="1" required id="idCaminhao" name="idCaminhao">
-                    </div>
-                    <div class="campo-edicao">
-                        <label for="ultimoMotorista">Ultimo Motorista:</label>
-                        <input type="number" placeholder="ID do último motorista." required id="ultimoMotorista" name="idMotorista">
+                        <label for="descricao">Descrição Serviço:</label>
+                        <input type="text" placeholder="Digite a descrição do serviço." id="descricao" name="descricao" required>
+                        <%if (request.getAttribute("erroDescricao") != null){%>
+                        <p style="color: red"><%=request.getAttribute("erroDescricao")%></p>
+                        <%}%>
                     </div>
                 </div>
             </section>
             <section id="botoes">
-                <button id="button-cancelar" type="button">
+                <button id="button-cancelar" type="button" onclick="window.location.href='/listar-manutencao'">
                     <img src="../../../assets/icons/icon-cancelar.svg" alt="" class="icones-botao">
-                    <p><b>Cancelar</b></p>
+                    <b>Cancelar</b>
                 </button>
                 <button id="button-confirmar" type="submit">
                     <img src="../../../assets/icons/icon-confirmar.svg" alt="" class="icones-botao">
-                    <p><b>Confirmar</b></p>
+                    <b>Confirmar</b>
                 </button>
             </section>
         </form>
