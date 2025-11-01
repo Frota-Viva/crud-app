@@ -19,7 +19,7 @@
                 <h1>Inserir Entrega</h1>
             </div>
         </header>
-        <form action="/inserir-entrega" method="post">
+        <form action="/inserir-entregas" method="post">
             <section class="area-edicao">
                 <div class="linha-info">
                     <div class="campo-edicao">

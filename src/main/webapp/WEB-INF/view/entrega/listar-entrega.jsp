@@ -47,7 +47,7 @@
                         <div class="header-cell">Motorista</div>
                     </div>
                     <div class="header-cell header-action">
-                        <button class="bt-adicionar" onclick="window.location.href='/inserir-entrega'">
+                        <button class="bt-adicionar" onclick="window.location.href='/inserir-entregas'">
                             <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
                             Adicionar Entrega
                         </button>

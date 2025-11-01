@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @WebServlet(name = "AtualizarEntrega", value = "/atualizar-entrega")
-public class AtualizarEntregaServlet extends HttpServlet {
+public class AtualizarEntrega extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

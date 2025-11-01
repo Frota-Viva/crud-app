@@ -20,8 +20,8 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 
-@WebServlet(name = "InserirEntrega", value = "/inserir-entrega")
-public class InserirEntregaServlet extends HttpServlet {
+@WebServlet(name = "InserirEntrega", value = "/inserir-entregas")
+public class InserirEntrega extends HttpServlet {
 
     /**
      * Recebe uma mensagem, codifica ela para o padrão UTF_8 e redireciona para /listar-entregas
@@ -145,7 +145,7 @@ public class InserirEntregaServlet extends HttpServlet {
             }
 
             Endereco endereco = new Endereco(pais, cep, estado, cidade, rua, numero, complemento);
-            Entrega entrega = new Entrega(codEntrega, descricao, dataPedido, dataConclusao, endereco, idMotorista);
+            Entrega entrega = new Entrega(descricao, dataPedido, dataConclusao, endereco, idMotorista);
 
             if (dao.inserir(entrega) == 1){
                 redirectComMensagem(response, "Entrega inserida com sucesso!");
