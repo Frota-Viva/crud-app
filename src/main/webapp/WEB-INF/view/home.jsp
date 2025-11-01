@@ -25,7 +25,7 @@
 <jsp:include page="componentes/aside.jsp"/>
 <main>
     <section class="informacoes">
-        <h1>Seja bem-vindo <%=informacoesHome != null ? informacoesHome.getNome() : empresa.getNome()%>!</h1>
+        <h1>Seja bem-vindo,  "<%=informacoesHome != null ? informacoesHome.getNome() : empresa.getNome()%>"!</h1>
         <section class="cards">
             <article class="card-info" id="card-frota">
                 <h2>Caminhões</h2>

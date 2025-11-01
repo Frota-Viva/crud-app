@@ -24,6 +24,8 @@ public class ListarManutencaoServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         Object id = session.getAttribute("idEmpresa");
 
+        String buscar = request.getParameter("buscar");
+
         if (id == null) {
             response.sendRedirect("/");
             return;
@@ -35,9 +37,15 @@ public class ListarManutencaoServlet extends HttpServlet {
 
             ManutencaoDAO dao = new ManutencaoDAO();
 
-            List<Manutencao> manutencao = dao.buscarPorEmpresa(idEmpresa);
+            List<Manutencao> manutencoes;
 
-            request.setAttribute("manutencao", manutencao);
+            if (buscar != null && !buscar.isBlank()){
+                manutencoes = dao.buscarPorEmpresaComTipo(idEmpresa, buscar);
+            } else {
+                manutencoes = dao.buscarPorEmpresa(idEmpresa);
+            }
+
+            request.setAttribute("manutencoes", manutencoes);
             request.getRequestDispatcher("WEB-INF/view/manutencao/listar-manutencao.jsp").forward(request, response);
 
         } catch (ServletException e) {

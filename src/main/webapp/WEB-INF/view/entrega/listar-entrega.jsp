@@ -27,7 +27,7 @@
                     <button type="submit" class="bt-buscar">
                         <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
                     </button>
-                    <input type="text" placeholder="Buscar data" class="input-search" name="buscar">
+                    <input type="text" placeholder="Data: yyyy-mm-dd" class="input-search" name="buscar">
                 </form>
                 <div class="mensagem">
                     <%if (msg != null){%>

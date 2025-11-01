@@ -49,7 +49,7 @@
                 </div>
                 <div class="header-cell header-action">
                     <button class="bt-adicionar">
-                        <img src="../../assets/imgs/img-home/mais.png" alt="Adicionar">
+                        <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
                         Adicionar Manutenção
                     </button>
                 </div>
@@ -58,13 +58,14 @@
             <%
                 if (manutencoes != null && !manutencoes.isEmpty()){
                     for(Manutencao m : manutencoes){
+                        boolean conclusaoNull = m.getDtConclusao() == null;
             %>
 
             <div class="table-row">
                 <div class="t-esquerda">
                     <div class="table-cell cell"><%=m.getId()%></div>
                     <div class="table-cell cell"><%=m.getDtCadastro()%></div>
-                    <div class="table-cell cell"><%=m.getDtConclusao()%></div>
+                    <div class="table-cell cell"><%=conclusaoNull ? "Não concluída" : m.getDtConclusao()%></div>
                     <div class="table-cell cell"><%=m.getTipoManutencao()%></div>
                     <div class="table-cell cell"><%=m.getCusto()%></div>
                     <div class="table-cell cell"><%=m.getUltimoMotorista()%></div>

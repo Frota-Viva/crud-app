@@ -24,6 +24,8 @@ public class ListarFrotaServlet extends HttpServlet {
         HttpSession session = request.getSession(true); //Pega a sessão
         Object id = session.getAttribute("idEmpresa"); //Pega o id da empresa na sessão
 
+        String buscar = request.getParameter("buscar");
+
         //Verifica se o id existe
         if (id == null){
             response.sendRedirect("/");
@@ -35,9 +37,15 @@ public class ListarFrotaServlet extends HttpServlet {
         try{
             FrotaDAO dao = new FrotaDAO();
 
-            List<Frota> frota = dao.buscarPorEmpresa(idEmpresa);
+            List<Frota> frotas;
 
-            request.setAttribute("frota", frota);
+            if (buscar != null && !buscar.isBlank()){
+                frotas = dao.buscarPorEmpresaComTipoFrota(idEmpresa, buscar);
+            } else {
+                frotas = dao.buscarPorEmpresa(idEmpresa);
+            }
+
+            request.setAttribute("frotas", frotas);
             request.getRequestDispatcher("WEB-INF/view/frota/listar-frota.jsp").forward(request, response);
 
         } catch (ErroAoConsultar e) {

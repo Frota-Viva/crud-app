@@ -32,7 +32,7 @@
           </div>
           <div class="header-cell header-action">
             <button class="btn-salvar" type="submit">
-              <img src="../../../assets/icons/" alt="salvar" id="salvar-edicao">
+              <img src="../../../assets/icons/icon-salvar-alteracoes.svg" alt="salvar" id="salvar-edicao">
               Salvar Alterações
             </button>
           </div>
