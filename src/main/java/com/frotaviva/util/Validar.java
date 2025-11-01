@@ -3,6 +3,26 @@ package com.frotaviva.util;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;import java.time.format.DateTimeParseException;
 
+/**
+ * Classe responsável por validar determinados parâmetros utilizando, na sua maioria, REGEX para a validação
+ * <p>Principais métodos:</p>
+ * <ul>
+ * <li>email -> valida se o email coincide com o REGEX</li>
+ * <li>senha -> valida se o senha coincide com o REGEX</li>
+ * <li>telefone -> valida se o telefone coincide com o REGEX</li>
+ * <li>telefoneValidado -> retorna o telefone somente com números</li>
+ * <li>cep -> valida se o cep coincide com o REGEX</li>
+ * <li>cepValidado -> retorna o cep somente com números</li>
+ * <li>data -> valida se a data coincide com o REGEX</li>
+ * <li>cpf -> valida se o cpf coincide com o REGEX</li>
+ * <li>cpfValidado -> retorna o cpf somente com números</li>
+ * <li>placa -> valida se a placa coincide com o REGEX</li>
+ * <li>status -> valida se o status do caminhão coincide com o REGEX</li>
+ * <li>testeVazio -> valida se a String recebida não contém caracteres (sem ser espaço ' ')</li>
+ * </ul>
+ * 
+ * @author Ricardo e Lucas Cayres
+ */
 public class Validar {
     public Validar(){}
 
