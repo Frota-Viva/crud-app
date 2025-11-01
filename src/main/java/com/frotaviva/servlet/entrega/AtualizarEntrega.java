@@ -96,7 +96,7 @@ public class AtualizarEntrega extends HttpServlet {
 
             if (!Validar.data(String.valueOf(dtEntrega))) request.setAttribute("erroDtEntrega", "Data de entrega inválida!");
 
-            if (dtPedido != null && dtEntrega != null && dtEntrega.before(dtPedido)) {
+            if (dtEntrega.before(dtPedido)) {
                 request.setAttribute("erroDtEntrega", "Data de entrega não pode ser anterior à data do pedido!");
             }
 
@@ -133,10 +133,10 @@ public class AtualizarEntrega extends HttpServlet {
             }
 
         } catch (ErroAoDeletar e) {
-            request.setAttribute("mensagem", "Erro ao atualizar entrega. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            request.setAttribute("msg", "Erro ao atualizar entrega. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/listar-motorista.jsp").forward(request, response);
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            request.setAttribute("msg", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
             request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
     }

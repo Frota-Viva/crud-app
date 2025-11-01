@@ -56,14 +56,16 @@ public class FrotaDAO extends AbstractDAO implements DAO<Frota>{
         PreparedStatement stmt = null;
         Connection con = null;
 
-        String sql = "UPDATE frota SET tamanho_frota = ?, tipo_frota = ?, regiao = ?, id_empresa = ? WHERE id = ?";
+        String sql = "UPDATE frota SET tamanho_frota = ?, tipo_frota = ?, regiao = ? WHERE id = ?";
 
         try {
             con = conexao.conectar();
             stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, frota.getTamanhoFrota());
-            stmt.setLong(2, frota.getId());
+            stmt.setString(2, frota.getTipoFrota());
+            stmt.setString(3, frota.getRegiao());
+            stmt.setLong(4, frota.getId());
 
             if (stmt.executeUpdate() > 0) return 1;
             return 0;
