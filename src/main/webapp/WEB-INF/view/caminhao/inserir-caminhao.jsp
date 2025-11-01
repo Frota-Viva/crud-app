@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%request.setAttribute("tabela","caminhao");%>
+<%
+    request.setAttribute("tabela","caminhao");
+%>
 <html lang="pt-BR">
 
 <head>
@@ -17,7 +19,7 @@
                 <h1>Inserir Caminhão</h1>
             </div>
         </header>
-        <form action="">
+        <form action="/inserir-caminhao" method="post">
             <section class="area-edicao">
                 <div class="linha-info">
                     <div class="campo-edicao">
@@ -53,11 +55,11 @@
             <section id="botoes">
                 <button id="button-cancelar" type="button">
                     <img src="../../../assets/icons/icon-cancelar.svg" alt="" class="icones-botao">
-                    <p><b>Cancelar</b></p>
+                    <b>Cancelar</b>
                 </button>
                 <button id="button-confirmar" type="submit">
                     <img src="../../../assets/icons/icon-confirmar.svg" alt="" class="icones-botao">
-                    <p><b>Confirmar</b></p>
+                    <b>Confirmar</b>
                 </button>
             </section>
         </form>

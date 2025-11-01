@@ -2,7 +2,6 @@ package com.frotaviva.servlet.caminhao;
 
 import com.frotaviva.dao.CaminhaoDAO;
 
-import com.frotaviva.exception.ErroAoConsultar;
 import com.frotaviva.exception.ErroAoDeletar;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,7 +23,7 @@ public class DeletarCaminhaoServlet extends HttpServlet {
         try{
 
             if (dao.deletar(id) == 1) {
-                response.sendRedirect("/listar-caminhoes");
+                response.sendRedirect("/listar-caminhao");
                 return;
             }
 

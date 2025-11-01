@@ -18,8 +18,15 @@ import java.io.IOException;
 public class InserirCaminhaoServlet extends HttpServlet {
 
     @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("WEB-INF/view/caminhao/inserir-caminhao.jsp").forward(request, response);
+    }
+
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        boolean erro = false;
 
         try{
 
@@ -35,33 +42,39 @@ public class InserirCaminhaoServlet extends HttpServlet {
 
             if (!Validar.placa(placa)){
                 request.setAttribute("erro", "Placa inválida! Deve seguir o padrão XXX1X11");
+                erro = true;
             }
 
             if (!Validar.status(status)){
-                request.setAttribute("erro", "Status inválido! Deve ser 'I' (Inativo), 'A' (Ativo) ou 'M'(Em manutenção).");
+                request.setAttribute("erro", "Status inválido! Deve ser 'I' | 'A' | 'M'.");
+                erro = true;
             }
 
             if (modelo ==  null || modelo.isEmpty()){
                 request.setAttribute("erro", "Modelo inválido! Não pode ser nulo.");
+                erro = true;
+            }
+
+            if (erro){
+                request.getRequestDispatcher("WEB-INF/view/caminhao/inserir-caminhao.jsp").forward(request, response);
             }
 
 
             Caminhao caminhao = new Caminhao(placa, status, kmRodados, modelo, capacidade, idFrota);
 
             if (dao.inserir(caminhao) == 1){
-                response.sendRedirect("/listar-caminhao");
+                response.sendRedirect("/listar-caminhao?msg=Caminhão+inserido+com+sucesso");
                 return;
             }
 
-            request.setAttribute("mensagem", "Erro ao inserir caminhao. Tente novamente mais tarde.");
-            request.getRequestDispatcher("WEB-INF/view/listar-caminhao.jsp").forward(request, response);
+            response.sendRedirect("/listar-caminhao?msg=Erro+ao+inserir+caminhao.+Tente+novamente+mais+tarde");
 
         } catch (ErroAoInserir e) {
-            request.setAttribute("mensagem", "Erro ao inserir caminhao. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/listar-caminhao?msg=Erro+ao+inserir+caminhao.+Tente+novamente+mais+tarde");
+        } catch (NumberFormatException e) {
+            response.sendRedirect("/listar-caminhao?msg=Formato+inválido+inserido.+Tente+novamente+mais+tarde");
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/listar-caminhao?msg=Ocorreu+um+erro+inesperado.+Tente+novamente+mais+tarde");
         }
     }
 }

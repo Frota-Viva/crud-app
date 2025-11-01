@@ -48,7 +48,7 @@
                         <div class="header-cell">Capacidade</div>
                     </div>
                     <div class="header-cell header-action">
-                        <button class="bt-adicionar">
+                        <button class="bt-adicionar" onclick="window.location.href='/inserir-caminhao'">
                             <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
                             Adicionar Caminhão
                         </button>
@@ -75,7 +75,7 @@
                             <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
                             Editar
                         </button>
-                        <button class="bt-excluir">
+                        <button class="bt-excluir" data-id="<%=c.getId()%>">
                             <img src="../../../assets/icons/icon-excluir.svg" alt="Excluir">
                             Excluir
                         </button>

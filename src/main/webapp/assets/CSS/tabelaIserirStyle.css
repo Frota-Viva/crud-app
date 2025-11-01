@@ -13,6 +13,11 @@ html {
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
+#logo {
+    width: clamp(94px, 94%, 188px);
+    height: auto;
+    margin-left: 1.6rem;
+}
 
 /* Principal */
 body {

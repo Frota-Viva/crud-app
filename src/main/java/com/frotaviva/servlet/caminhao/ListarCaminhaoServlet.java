@@ -40,11 +40,9 @@ public class ListarCaminhaoServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/view/caminhao/listar-caminhao.jsp").forward(request, response);
 
         } catch (ErroAoConsultar e) {
-            request.setAttribute("mensagem", "Erro ao listar caminhao. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Erro ao consultar motoristas");
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Ocorreu um erro desconhecido");
         }
     }
 }
