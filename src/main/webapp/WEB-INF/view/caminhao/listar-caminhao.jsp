@@ -46,6 +46,7 @@
                         <div class="header-cell">Kms rodados</div>
                         <div class="header-cell">Modelo</div>
                         <div class="header-cell">Capacidade</div>
+                        <div class="header-cell">Id Frota</div>
                     </div>
                     <div class="header-cell header-action">
                         <button class="bt-adicionar" onclick="window.location.href='/inserir-caminhao'">
@@ -69,6 +70,7 @@
                         <div class="table-cell cell"><%=c.getKmRodados()%></div>
                         <div class="table-cell cell"><%=c.getModelo()%></div>
                         <div class="table-cell cell"><%=c.getCapacidade()%></div>
+                        <div class="table-cell cell"><%=c.getIdFrota()%></div>
                     </div>
                     <div class="table-cell cell table-actions">
                         <button class="bt-editar" onclick="window.location.href='/atualizar-caminhao?id=<%=c.getId()%>'">

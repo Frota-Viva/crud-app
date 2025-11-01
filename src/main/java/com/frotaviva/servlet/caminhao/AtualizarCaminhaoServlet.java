@@ -61,8 +61,10 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
         int capacidade;
         long idFrota;
 
+
         HttpSession session = request.getSession(true);
         Object id_empresa = session.getAttribute("idEmpresa");
+        boolean erro = false;
 
         if (id_empresa == null) {
             response.sendRedirect("/");
@@ -77,20 +79,55 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
             id = Long.parseLong(request.getParameter("id"));
             placa = request.getParameter("placa");
             status = request.getParameter("status");
-            kmRodados = Integer.parseInt(request.getParameter("kmRodados"));
+
+            String kmRodadosReq = request.getParameter("kmsRodados");
+            kmRodados = (!Validar.testeVazio(kmRodadosReq)) ? Integer.parseInt(kmRodadosReq) : -1;
+
             modelo = request.getParameter("modelo");
-            capacidade = Integer.parseInt(request.getParameter("capacidade"));
-            idFrota = Long.parseLong(request.getParameter("idFrota"));
 
-            if (!Validar.placa(placa)) request.setAttribute("erroPlaca", "Placa inválida! Deve seguir o padrão XXX1X11");
+            String capacidadeReq = request.getParameter("capacidade");
+            capacidade = (!Validar.testeVazio(capacidadeReq)) ? Integer.parseInt(capacidadeReq) : -1;
 
-            if (!Validar.status(status)) request.setAttribute("erroStatus", "Status inválido! Deve ser 'I' (Inativo), 'A' (Ativo) ou 'M'(Em manutenção).");
+            String idFrotaReq = request.getParameter("idFrota");
+            idFrota = (!Validar.testeVazio(idFrotaReq)) ? Long.parseLong(idFrotaReq) : -1;
 
-            if (modelo ==  null || modelo.isEmpty()) request.setAttribute("erroModelo", "Modelo inválido! Não pode ser nulo.");
+            if (!Validar.placa(placa)) {
+                request.setAttribute("erroPlaca", "Placa inválida! Deve seguir o padrão XXX1X11");
+                erro = true;
+            }
 
-            if (capacidade <= 0) request.setAttribute("erroCapacidade", "Capacidade inválida! Deve ser maior que 0.");
+            if (!Validar.status(status)) {
+                request.setAttribute("erroStatus", "Status inválido! Deve ser 'I' (Inativo), 'A' (Ativo) ou 'M'(Em manutenção).");
+                erro = true;
+            }
 
-            if (kmRodados < 0) request.setAttribute("erroKmRodados", "Kilometragem inválida! Não pode ser menor que 0.");
+            if (Validar.testeVazio(modelo)) {
+                request.setAttribute("erroModelo", "Modelo inválido! Não pode ser nulo.");
+                erro = true;
+            }
+
+            if (capacidade <= 0) {
+                request.setAttribute("erroCapacidade", "Capacidade inválida! Deve ser maior que 0.");
+                erro = true;
+            }
+
+            if (kmRodados < 0) {
+                request.setAttribute("erroKmRodados", "Kilometragem inválida! Não pode ser menor que 0.");
+                erro = true;
+            }
+
+            if (idFrota <= 0) {
+                request.setAttribute("erroFrota", "Frota inválida! Selecione uma frota existente.");
+                erro = true;
+            }
+
+            Caminhao caminhao = dao.buscarPorId(id);
+
+            if (erro) {
+                request.setAttribute("caminhao", caminhao);
+                request.getRequestDispatcher("WEB-INF/view/caminhao/atualizar-caminhao.jsp").forward(request, response);
+                return;
+            }
 
             /*
               Para verificar a frota,
@@ -101,13 +138,14 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
             FrotaDAO frotaDAO = new FrotaDAO();
 
             List<Frota> frotas = frotaDAO.buscarPorEmpresa(idEmpresa);
-            Frota frota = frotaDAO.buscarPorId(idFrota);
 
-            if (!frotas.contains(frota)){
+            if (! frotaExiste(idFrota, frotas)){
+                request.setAttribute("caminhao", caminhao);
                 request.setAttribute("erroFrota", "Frota inválida! Selecione uma frota existente.");
+                request.getRequestDispatcher("WEB-INF/view/caminhao/atualizar-caminhao.jsp").forward(request, response);
+                return;
             }
 
-            Caminhao caminhao = dao.buscarPorId(id);
 
             caminhao.setPlaca(placa);
             caminhao.setStatus(status);
@@ -117,7 +155,7 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
             caminhao.setIdFrota(idFrota);
 
             if (dao.atualizar(caminhao) == 1) {
-                response.sendRedirect("/listar-caminhao?msg=Caminhão+atualizado+com+sucesso");
+                response.sendRedirect("/listar-caminhao?msg=Caminhao+atualizado+com+sucesso");
             } else{
                 request.setAttribute("mensagem", "Erro ao atualizar caminhao. Tente novamente mais tarde.");
                 request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
@@ -131,5 +169,17 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
             request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
             request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
+    }
+    /**
+     * Percorre as frotas dessa empresa e verifica se o id passado pelo usuário existe.
+     *
+     * @param idFrota id da frota a ser verificada
+     * @param frotas lista de frotas da empresa
+     * */
+    private static boolean frotaExiste(long idFrota, List<Frota> frotas) {
+        for (Frota frota : frotas) {
+            if (frota.getId() == idFrota) return true;
+        }
+        return false;
     }
 }
