@@ -1,150 +1,167 @@
 package com.frotaviva.servlet.entrega;
 
 import com.frotaviva.dao.EntregaDAO;
-import com.frotaviva.exception.ErroAoConsultar;
+import com.frotaviva.dao.MotoristaDAO;
+import com.frotaviva.exception.ErroAoInserir;
 import com.frotaviva.model.Endereco;
 import com.frotaviva.model.Entrega;
+import com.frotaviva.model.Motorista;
 import com.frotaviva.util.Validar;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
-
 
 @WebServlet(name = "InserirEntrega", value = "/inserir-entrega")
 public class InserirEntregaServlet extends HttpServlet {
+
+    /**
+     * Recebe uma mensagem, codifica ela para o padrão UTF_8 e redireciona para /listar-entregas
+     * Apenas para maior legibilidade do código, pois cada mensagem teria que ser codificada e isso
+     * seria repetido muitas vezes no código.
+     *
+     * @param response para executar o redirect
+     * @param mensagem para a especificação da mensagem de erro/sucesso
+     */
+    private void redirectComMensagem(HttpServletResponse response, String mensagem) throws IOException {
+        String mensagemEncoded = URLEncoder.encode(mensagem, StandardCharsets.UTF_8);
+        response.sendRedirect("/listar-entregas?msg=" + mensagemEncoded);
+    }
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.getRequestDispatcher("WEB-INF/view/entrega/inserir-entrega.jsp").forward(request, response);
+    }
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         boolean erro = false;
-        boolean dadoFaltando = false;
-        Date dataConclusao = null;
-        Date dataPedido = null;
-        EntregaDAO entregaDAO = new EntregaDAO();
 
-        //Faz a validação do código da entrega
-        long codEntrega = 0;
-        String codEntregaReq = request.getParameter("codEntrega");
-        if (codEntregaReq == null || codEntregaReq.equals("")){
-            dadoFaltando = true;
-        }
-        try {
-            codEntrega = Long.parseLong(codEntregaReq);
-        } catch (NumberFormatException e) {
-            request.setAttribute("erroCodEntrega", "Apenas valores numéricos são permitidos!");
-        }
+        HttpSession session = request.getSession(true);
+        Object id = session.getAttribute("idEmpresa");
 
-        //Faz a validação da descrição do produto da entrega
-        String descricaoReq = request.getParameter("descricao");
-        if (descricaoReq.equals("") || descricaoReq == null){
-            dadoFaltando = true;
-        }
-
-        //Faz a validação da data de pedido da entrega
-        String dataPedidoReq = request.getParameter("dataPedido");
-        if (! Validar.data(dataPedidoReq)){
-            erro = true;
-            request.setAttribute("erroDataPedido", "A data deve estar no formato yyyy-MM-dd!");
-        } else {
-            dataPedido = Date.valueOf(dataPedidoReq);
-        }
-
-        //Faz a validação da data de conclusão da entrega
-        String dataConclusaoReq = request.getParameter("dataConclusao");
-        if (! Validar.data(dataConclusaoReq) && ! dataConclusaoReq.equals("")){
-            erro = true;
-            request.setAttribute("erroDataPedido", "A data deve estar no formato yyyy-MM-dd!");
-        }
-        if (! (dataConclusaoReq.equals("")) && ! (dataConclusaoReq == null)){
-            dataConclusao = Date.valueOf(dataConclusaoReq);
-        }
-
-        //Faz a validação do cep
-        String cep = request.getParameter("cep");
-        cep = Validar.cepValidado(cep);
-        if (cep == null){
-            request.setAttribute("erroCep", "Formato não compatível!");
-            erro = true;
-        }
-
-        //Faz a validação da rua
-        String rua = request.getParameter("rua");
-        if (rua == null || rua.equals("")) dadoFaltando = true;
-
-        //Pega o complemento (pode ser nulo)
-        String complemento = request.getParameter("complemento");
-
-        //Faz a validação do número
-        int numero = 0;
-        try {
-            numero = Integer.parseInt(request.getParameter("numero"));
-        } catch (NumberFormatException e){
-            request.setAttribute("erroNumero", "Apenas valores numéricos são permitidos!");
-            erro = true;
-        }
-
-        //Faz a validação do país
-        String pais = request.getParameter("pais");
-        if (pais == null || pais.equals("")) dadoFaltando = true;
-
-        //Faz a validação do estado
-        String estado = request.getParameter("estado");
-        if (estado == null || estado.equals("")) dadoFaltando = true;
-
-        //Faz a validação da cidade
-        String cidade = request.getParameter("cidade");
-        if (cidade == null || cidade.equals("")) dadoFaltando = true;
-
-        //Faz a validação do idMotorista
-        long idMotorista = 0;
-        String idMotoristaReq = request.getParameter("idMotorista");
-        try {
-            idMotorista = Long.parseLong(idMotoristaReq);
-        } catch (NumberFormatException e) {
-            request.setAttribute("erroIdMotorista", "Apenas valores numéricos são permitidos!");
-            erro = true;
-        }
-
-        //Verifica se existe algum erro nos dados
-        if (dadoFaltando) request.setAttribute("dadoFaltando", "Todos os campos com (*) devem ser preenchidos!");
-        if (dadoFaltando || erro) {
-            request.getRequestDispatcher("/WEB-INF/entrega/inserir-entrega.jsp").forward(request, response);
+        if (id == null){
+            response.sendRedirect("/");
             return;
         }
-
-        //Verifica se já existe alguma entrega com o código informado
-        if (entregaDAO.buscarPorId(codEntrega) != null){
-            request.setAttribute("existeEntrega", "Já existe uma entrega com esse código!");
-            request.getRequestDispatcher("/WEB-INF/entrega/inserir-entrega.jsp").forward(request, response);
-            return;
-        }
+        long idEmpresa = (long) id;
 
         try{
-            Endereco endereco = new Endereco(pais, cep, estado, cidade, rua, numero, complemento);
-            Entrega entrega = new Entrega(codEntrega, descricaoReq, dataPedido, dataConclusao, endereco, idMotorista);
 
-            //Insere a entrega no banco de dados
-            switch (entregaDAO.inserir(entrega)){
-                case 1 -> response.sendRedirect("/listar-entregas");
-                case 0 -> {
-                    request.setAttribute("erroCadastrar", "Erro ao cadastrar entrega");
-                    request.getRequestDispatcher("/WEB-INF/entrega/inserir-entrega.jsp").forward(request, response);
-                }
-                default ->{
-                    request.setAttribute("erroBD", "Erro no banco de dados");
-                    request.getRequestDispatcher("/WEB-INF/entrega/inserir-entrega.jsp").forward(request, response);
-                }
+            EntregaDAO dao = new EntregaDAO();
+
+            long codEntrega = Long.parseLong(request.getParameter("codEntrega"));
+            String descricao = request.getParameter("descricao");
+            Date dataPedido = Date.valueOf(request.getParameter("dataPedido"));
+            String dataConclusaoParam = request.getParameter("dataConclusao");
+            Date dataConclusao = (dataConclusaoParam != null && !dataConclusaoParam.isEmpty()) ? Date.valueOf(dataConclusaoParam) : null;
+            String cep = request.getParameter("cep");
+            String rua = request.getParameter("rua");
+            String complemento = request.getParameter("complemento");
+            int numero = Integer.parseInt(request.getParameter("numero"));
+            String pais = request.getParameter("pais");
+            String estado = request.getParameter("estado");
+            String cidade = request.getParameter("cidade");
+            long idMotorista = Long.parseLong(request.getParameter("idMotorista"));
+
+            if (descricao == null || descricao.isEmpty()){
+                request.setAttribute("erroDescricao", "Descrição inválida! Não pode ser nula.");
+                erro = true;
             }
-        } catch (ErroAoConsultar e) {
-            request.setAttribute("mensagem", "Erro ao encontrar motoristas. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
-        }
 
+            if (dataPedido == null || Validar.testeVazio(String.valueOf(dataPedido))){
+                request.setAttribute("erroDataPedido", "Data de pedido inválida! Não pode ser nula.");
+                erro = true;
+            }
+
+            if (dataConclusao != null && dataPedido != null && dataConclusao.before(dataPedido)
+                    || Validar.testeVazio(String.valueOf(dataConclusao))){
+                request.setAttribute("erroDataConclusao", "Data de conclusão deve ser posterior à data de pedido!");
+                erro = true;
+            }
+
+            if (!Validar.cep(cep)){
+                request.setAttribute("erroCep", "CEP inválido! Formato esperado: XXXXX-XXX");
+                erro = true;
+            } else {
+                cep = Validar.cepValidado(cep);
+            }
+
+            if (rua == null || rua.isEmpty()){
+                request.setAttribute("erroRua", "Rua inválida! Não pode ser nula.");
+                erro = true;
+            }
+
+            if (numero <= 0 || Validar.testeVazio(String.valueOf(numero))){
+                request.setAttribute("erroNumero", "Número inválido! Deve ser maior que zero.");
+                erro = true;
+            }
+
+            if (pais == null || pais.isEmpty()){
+                request.setAttribute("erroPais", "País inválido! Não pode ser nulo.");
+                erro = true;
+            }
+
+            if (estado == null || estado.isEmpty()){
+                request.setAttribute("erroEstado", "Estado inválido! Não pode ser nulo.");
+                erro = true;
+            }
+
+            if (cidade == null || cidade.isEmpty()){
+                request.setAttribute("erroCidade", "Cidade inválida! Não pode ser nula.");
+                erro = true;
+            }
+
+            // Verifica se já existe uma entrega com esse código
+            if (dao.buscarPorId(codEntrega) != null){
+                request.setAttribute("erroCodEntrega", "Já existe uma entrega com esse código!");
+                erro = true;
+            }
+
+            // Garante que o motorista pertence à empresa do usuário logado
+            MotoristaDAO motoristaDAO = new MotoristaDAO();
+            Motorista motorista = motoristaDAO.buscarPorId(idMotorista);
+
+            if (motorista == null){
+                request.setAttribute("erroMotorista", "Motorista não encontrado!");
+                erro = true;
+            } else if (motorista.getIdEmpresa() != idEmpresa){
+                request.setAttribute("erroMotorista", "Motorista inválido! Selecione um motorista da sua empresa.");
+                erro = true;
+            }
+
+            if (erro){
+                request.getRequestDispatcher("WEB-INF/view/entrega/inserir-entrega.jsp").forward(request, response);
+                return;
+            }
+
+            Endereco endereco = new Endereco(pais, cep, estado, cidade, rua, numero, complemento);
+            Entrega entrega = new Entrega(codEntrega, descricao, dataPedido, dataConclusao, endereco, idMotorista);
+
+            if (dao.inserir(entrega) == 1){
+                redirectComMensagem(response, "Entrega inserida com sucesso!");
+                return;
+            }
+
+            redirectComMensagem(response, "Erro ao inserir entrega.");
+
+        } catch (ErroAoInserir e) {
+            redirectComMensagem(response, "Erro ao inserir entrega: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            redirectComMensagem(response, "Formato inválido inserido: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            redirectComMensagem(response, "Data inválida: " + e.getMessage());
+        } catch (Exception e) {
+            redirectComMensagem(response, "Ocorreu um erro inesperado: " + e.getMessage());
+        }
     }
 }
