@@ -45,7 +45,7 @@ public class ListarFrotaServlet extends HttpServlet {
             }
 
             request.setAttribute("frotas", frotas);
-            request.getRequestDispatcher("WEB-INF/view/frota/listar-frota.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/frota/listar-frota.jsp").forward(request, response);
 
         } catch (ErroAoConsultar e) {
             response.sendRedirect("/home?msg=Erro ao consultar frotas");

@@ -27,15 +27,13 @@ public class DeletarFrotaServlet extends HttpServlet {
                 return;
             }
 
-            request.setAttribute("mensagem", "Erro ao deletar frota. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            request.setAttribute("msg", "Erro ao deletar frota. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/listar-frota.jsp").forward(request, response);
 
         } catch (ErroAoDeletar e) {
-            request.setAttribute("mensagem", "Erro ao deletar frota. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/listar-frota?msg=Erro ao deletar frota. Tente novamente mais tarde.");
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/listar-frota?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
     }
 

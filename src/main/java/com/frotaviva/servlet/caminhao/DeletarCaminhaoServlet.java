@@ -23,19 +23,17 @@ public class DeletarCaminhaoServlet extends HttpServlet {
         try{
 
             if (dao.deletar(id) == 1) {
-                response.sendRedirect("/listar-caminhao");
+                response.sendRedirect("/listar-caminhao?msg=Caminhao deletado com sucesso.");
                 return;
             }
 
-            request.setAttribute("mensagem", "Erro ao deletar caminhao. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            request.setAttribute("msg", "Erro ao deletar caminhao. Tente novamente mais tarde.");
+            request.getRequestDispatcher("/WEB-INF/view/listar-caminhao.jsp").forward(request, response);
 
         } catch (ErroAoDeletar e) {
-            request.setAttribute("mensagem", "Erro ao deletar caminhao. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/listar-caminhao?msg=Erro ao deletar caminhao. Tente novamente mais tarde.");
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/listar-caminhao?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
     }
 

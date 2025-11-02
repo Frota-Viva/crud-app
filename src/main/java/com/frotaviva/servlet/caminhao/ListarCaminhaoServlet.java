@@ -45,7 +45,7 @@ public class ListarCaminhaoServlet extends HttpServlet {
             }
 
             request.setAttribute("caminhoes", caminhoes);
-            request.getRequestDispatcher("WEB-INF/view/caminhao/listar-caminhao.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/caminhao/listar-caminhao.jsp").forward(request, response);
 
         } catch (ErroAoConsultar e) {
             response.sendRedirect("/home?msg=Erro ao consultar motoristas");

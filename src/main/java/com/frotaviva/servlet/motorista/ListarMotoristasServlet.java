@@ -82,14 +82,13 @@ public class ListarMotoristasServlet extends HttpServlet {
             }
 
             request.setAttribute("motoristas", motoristas);
-            request.getRequestDispatcher("WEB-INF/view/motorista/listar-motorista.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/motorista/listar-motorista.jsp").forward(request, response);
 
         } catch (ErroAoConsultar e) {
-            request.setAttribute("mensagem", "Erro ao encontrar motoristas. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Erro ao encontrar motoristas. Tente novamente mais tarde.");
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
+
         }
     }
 }
