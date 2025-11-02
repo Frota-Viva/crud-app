@@ -1,9 +1,16 @@
 package com.frotaviva.servlet.manutencao;
 
+import com.frotaviva.dao.CaminhaoDAO;
+import com.frotaviva.dao.FrotaDAO;
 import com.frotaviva.dao.ManutencaoDAO;
+import com.frotaviva.dao.MotoristaDAO;
 import com.frotaviva.exception.ErroAoDeletar;
+import com.frotaviva.model.Caminhao;
+import com.frotaviva.model.Frota;
 import com.frotaviva.model.Manutencao;
 
+import com.frotaviva.model.Motorista;
+import com.frotaviva.util.Validar;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -93,6 +100,18 @@ public class AtualizarManutencaoServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        HttpSession session = request.getSession(true);
+        Object id_empresa = session.getAttribute("idEmpresa");
+
+        if (id_empresa == null) {
+            response.sendRedirect("/");
+            return;
+        }
+
+        long idEmpresa = (long) id_empresa;
+
+        boolean erro = false;
+
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -100,19 +119,72 @@ public class AtualizarManutencaoServlet extends HttpServlet {
             long ultimoMotorista = Long.parseLong(request.getParameter("ultimoMotorista"));
             long idCaminhao = Long.parseLong(request.getParameter("idCaminhao"));
             Date dtCadastro = sdf.parse(request.getParameter("dtCadastro"));
-            Date dtConclusao = !request.getParameter("dtConclusao").equals("") ?
+            Date dtConclusao = !request.getParameter("dtConclusao").isEmpty() ?
                     sdf.parse(request.getParameter("dtConclusao")) : null;
             BigDecimal custo = new BigDecimal(request.getParameter("custo"));
             String tipoManutencao = request.getParameter("tipoManutencao");
             String descricaoServico = request.getParameter("descricaoServico");
 
+            // Validação
+
+            if (dtCadastro == null || dtCadastro.after(dtConclusao)) {
+                request.setAttribute("erroDtCadastro", "Data de conclusão inválida! Deve ser anterior a de cadastro");
+                erro = true;
+            }
+
+            if (dtConclusao == null || dtConclusao.before(dtCadastro)) {
+                request.setAttribute("erroDtConclusao", "Data de conclusão inválida! Deve ser posterior a de cadastro");
+                erro = true;
+            }
+
             if (tipoManutencao == null || tipoManutencao.isEmpty()) {
-                request.setAttribute("erro", "Tipo de manutenção inválido! Não pode ser nulo.");
+                request.setAttribute("erroTipoManutencao", "Tipo de manutenção inválido! Não pode ser nulo.");
+                erro = true;
             }
 
             if (descricaoServico == null || descricaoServico.isEmpty()) {
-                request.setAttribute("erro", "Descrição inválida! Não pode ser nula.");
+                request.setAttribute("erroDescricao", "Descrição inválida! Não pode ser nula.");
+                erro = true;
             }
+
+            if (custo.compareTo(BigDecimal.ZERO) < 0 || Validar.testeVazio(String.valueOf(custo))){
+                request.setAttribute("erroCusto", "Custo inválido! Não pode ser menor que zero.");
+                erro = true;
+            }
+
+            /*
+                Verificando o id_caminhao para que o usuario nao insira um caminhao
+                que nao exista ou que nao seja dele
+             */
+
+            CaminhaoDAO caminhaoDAO = new CaminhaoDAO();
+            Caminhao caminhao = caminhaoDAO.buscarPorId(idCaminhao);
+
+            FrotaDAO frotaDAO = new FrotaDAO();
+            Frota frota = frotaDAO.buscarPorId(caminhao.getIdFrota());
+
+            if (frota.getIdEmpresa() != idEmpresa) {
+                request.setAttribute("erroCaminhao", "Caminhão inválido! Digite um caminhão existente.");
+                erro = true;
+            }
+
+            /*
+                Verificando o id_motorista para que o usuario nao insira um motorista
+                que nao exista ou que nao seja dele
+             */
+
+            MotoristaDAO motoristaDAO = new MotoristaDAO();
+            Motorista motorista = motoristaDAO.buscarPorId(ultimoMotorista);
+
+            if (motorista.getIdEmpresa() != idEmpresa){
+                request.setAttribute("erroMotorista", "Motorista inválido! Digite um motorista existente.");
+                erro = true;
+            }
+
+            if (erro){
+                request.getRequestDispatcher("/atualizar-manutencao").forward(request, response);
+            }
+
 
             ManutencaoDAO dao = new ManutencaoDAO();
             Manutencao manutencao = dao.buscarPorId(id);
