@@ -60,8 +60,8 @@ public class DeletarMotoristaServlet extends HttpServlet {
             MotoristaDAO dao = new MotoristaDAO();
 
             if (dao.deletar(id) != 1) {
-                request.setAttribute("mensagem", "Erro ao deletar motorista. Tente novamente mais tarde.");
-                request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+                request.setAttribute("msg", "Erro ao deletar motorista. Tente novamente mais tarde.");
+                request.getRequestDispatcher("/WEB-INF/view/listar-frota.jsp").forward(request, response);
                 return;
             }
 

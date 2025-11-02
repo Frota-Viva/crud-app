@@ -7,8 +7,9 @@
     String msg = request.getParameter("msg");
     request.setAttribute("tabela","manutencao");
     String sucesso = ".*sucesso.*";
-    String cor = msg.matches(sucesso) ? "green" : "red";
 %>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,10 +32,13 @@
                     <input type="text" placeholder="Buscar tipo" class="input-search" name="buscar">
                 </form>
                 <div class="mensagem">
-                    <% if (msg != null) {%>
-                    <span id="aviso-span-tabela">
-                        <p style="color: <%=cor%>"><%=msg%></p>
-                    </span>
+                    <%
+                        if (msg != null) {
+                            String cor = msg.matches(sucesso) ? "green" : "red";
+                    %>
+                        <span id="aviso-span-tabela">
+                            <p style="color: <%=cor%>"><%=msg%></p>
+                        </span>
                     <%}%>
                 </div>
             </div>
@@ -103,3 +107,4 @@
     </jsp:include>
 </main>
 </body>
+</html>

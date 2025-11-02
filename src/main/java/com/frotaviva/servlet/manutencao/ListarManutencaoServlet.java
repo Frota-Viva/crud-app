@@ -45,10 +45,8 @@ public class ListarManutencaoServlet extends HttpServlet {
             }
 
             request.setAttribute("manutencoes", manutencoes);
-            request.getRequestDispatcher("WEB-INF/view/manutencao/listar-manutencao.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/manutencao/listar-manutencao.jsp").forward(request, response);
 
-        } catch (ServletException e) {
-            response.sendRedirect("/home?msg=Ocorreu um no servidor. Tente novamente mais tarde.");
         } catch (ErroAoConsultar e) {
             response.sendRedirect("/home?msg=Erro ao acessar o encontrar motoristas. Tente novamente mais tarde.");
         } catch (Exception e) {

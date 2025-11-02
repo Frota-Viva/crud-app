@@ -6,8 +6,9 @@
     String msg = request.getParameter("msg");
     request.setAttribute("tabela","caminhao");
     String sucesso = ".*sucesso.*";
-    String cor = msg.matches(sucesso) ? "green" : "red";
 %>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +32,10 @@
                     <input type="text" placeholder="Buscar placa" class="input-search" name="buscar">
                 </form>
                 <div class="mensagem">
-                    <% if (msg != null) {%>
+                    <%
+                        if (msg != null) {
+                            String cor = msg.matches(sucesso) ? "green" : "red";
+                    %>
                         <span id="aviso-span-tabela">
                             <p style="color: <%=cor%>"><%=msg%></p>
                         </span>
@@ -91,7 +95,7 @@
                 } else {%>
                 <div class="table-row">
                     <div class="t-esquerda">
-                        <td class="table-cell cell">Nenhum caminhão encontrado</td>
+                        <div class="table-cell cell">Nenhum caminhão encontrado</div>
                     </div>
                 </div>
                 <%}%>
@@ -102,3 +106,4 @@
     </jsp:include>
 </main>
 </body>
+</html>
