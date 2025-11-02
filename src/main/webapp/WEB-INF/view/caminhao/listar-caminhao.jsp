@@ -5,6 +5,8 @@
     List<Caminhao> caminhoes = (List<Caminhao>) request.getAttribute("caminhoes");
     String msg = request.getParameter("msg");
     request.setAttribute("tabela","caminhao");
+    String sucesso = ".*sucesso.*";
+    String cor = msg.matches(sucesso) ? "green" : "red";
 %>
 <head>
     <meta charset="UTF-8">
@@ -30,9 +32,9 @@
                 </form>
                 <div class="mensagem">
                     <% if (msg != null) {%>
-                    <span id="aviso-span-tabela">
-                        <p style="color: red"><%=msg%></p>
-                    </span>
+                        <span id="aviso-span-tabela">
+                            <p style="color: <%=cor%>"><%=msg%></p>
+                        </span>
                     <%}%>
                 </div>
             </div>
