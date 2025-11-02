@@ -7,8 +7,8 @@ import com.frotaviva.exception.ErroAoInserir;
 import com.frotaviva.model.Caminhao;
 import com.frotaviva.model.Manutencao;
 import com.frotaviva.model.Motorista;
-
 import com.frotaviva.util.Validar;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,29 +22,89 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 
+/**
+ * Responsável por cadastrar novas manutenções no sistema.
+ * <p>
+ * Este servlet processa os dados enviados pelo formulário de cadastro,
+ * verifica as informações, garante a correspondência entre motoristas e caminhões
+ * e insere a manutenção no banco de dados.
+ * </p>
+ * <p>
+ * Principais funcionalidades:
+ * <ul>
+ *     <li><b>redirectComMensagem:</b> Redireciona para /listar-manutencao com a mensagem codificada;</li>
+ *     <li><b>GET:</b> Exibe a página de cadastro de manutenção;</li>
+ *     <li><b>POST:</b> Valida e insere a manutenção no banco de dados;</li>
+ *     <li>Redireciona o usuário com mensagens de sucesso ou erro conforme o resultado.</li>
+ * </ul>
+ * </p>
+ * 
+ * @author Davi Alcanfor
+ */
 @WebServlet(name = "InserirManutencao", value = "/inserir-manutencao")
 public class InserirManutencaoServlet extends HttpServlet {
 
     /**
-     * Recebe uma mensagem, codifica ela para o padrão UTF_8 e redireciona para /listar-manutencao
-     * Apenas para maior legibilidade do código, pois cada mensagem teria que ser codificada e isso
-     * seria repetido muitas vezes no código.
+     * Recebe uma mensagem, codifica ela para o padrão UTF-8 e redireciona para /listar-manutencao.
+     * <p>
+     * Evita repetição de código de codificação de mensagens em múltiplos pontos.
+     * </p>
      *
      * @param response para executar o redirect
-     * @param mensagem para a especificação da mensagem de erro/sucesso
-     *
-     * @author Davi
+     * @param mensagem mensagem de sucesso ou erro
+     * @throws IOException se ocorrer erro de entrada ou saída
      */
     private void redirectComMensagem(HttpServletResponse response, String mensagem) throws IOException {
         String mensagemEncoded = URLEncoder.encode(mensagem, StandardCharsets.UTF_8);
         response.sendRedirect("/listar-manutencao?msg=" + mensagemEncoded);
     }
 
+    /**
+     * Exibe a página de cadastro de manutenção.
+     * <p>
+     * Se não houver empresa logada, o usuário é redirecionado para a landing page.
+     * </p>
+     *
+     * @param request  requisição HTTP recebida
+     * @param response resposta HTTP enviada ao cliente
+     * @throws IOException se ocorrer erro de entrada ou saída
+     * @throws ServletException se ocorrer erro no processamento do servlet
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession(true);
+        Object id = session.getAttribute("idEmpresa");
+
+        if (id == null) {
+            response.sendRedirect("/");
+            return;
+        }
+
         request.getRequestDispatcher("WEB-INF/view/manutencao/inserir-manutencao.jsp").forward(request, response);
     }
 
+    /**
+     * Processa os dados do formulário de cadastro de manutenção.
+     * <p>
+     * Principais etapas:
+     * <ul>
+     *     <li>Verifica se há uma empresa logada;</li>
+     *     <li>Recebe e valida os campos do formulário (datas, descrição, custo, motorista, caminhão e tipo de manutenção);</li>
+     *     <li>Garante que motorista e caminhão existem e pertencem à empresa;</li>
+     *     <li>Cria o objeto {@link Manutencao} e insere no banco de dados usando {@link ManutencaoDAO};</li>
+     *     <li>Redireciona com mensagens específicas de acordo com o resultado.</li>
+     * </ul>
+     * </p>
+     * <p>
+     * Se houver erros de validação, o formulário é reexibido com mensagens de erro.
+     * Se ocorrer uma exceção inesperada, o usuário é redirecionado com uma mensagem explicativa.
+     * </p>
+     *
+     * @param request  requisição HTTP contendo os dados do formulário
+     * @param response resposta HTTP enviada ao cliente
+     * @throws ServletException se ocorrer erro interno no servlet
+     * @throws IOException se ocorrer erro de entrada ou saída durante o processamento
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -59,8 +119,7 @@ public class InserirManutencaoServlet extends HttpServlet {
         }
         long idEmpresa = (long) id;
 
-        try{
-
+        try {
             ManutencaoDAO dao = new ManutencaoDAO();
 
             Date dtCadastro = Date.valueOf(request.getParameter("dtCadastro"));
@@ -71,6 +130,7 @@ public class InserirManutencaoServlet extends HttpServlet {
             long idCaminhao = Long.parseLong(request.getParameter("idCaminhao"));
             String tipoManutencao = request.getParameter("tipoManutencao");
 
+            // Validações
             if (dtCadastro == null){
                 request.setAttribute("erroDtCadastro", "Data de cadastro inválida! Não pode ser nula.");
                 erro = true;
@@ -82,7 +142,7 @@ public class InserirManutencaoServlet extends HttpServlet {
             }
 
             if (dtCadastro != null && dtConclusao != null && dtConclusao.before(dtCadastro)
-                    ||  Validar.testeVazio(String.valueOf(dtCadastro))){
+                    || Validar.testeVazio(String.valueOf(dtCadastro))){
                 request.setAttribute("erroDtConclusao", "Data de conclusão deve ser maior que a data de cadastro!");
                 erro = true;
             }
@@ -104,7 +164,6 @@ public class InserirManutencaoServlet extends HttpServlet {
 
             CaminhaoDAO caminhaoDAO = new CaminhaoDAO();
             Caminhao caminhao = caminhaoDAO.buscarPorId(idCaminhao);
-
             if (caminhao == null){
                 request.setAttribute("erroCaminhao", "Caminhão não encontrado!");
                 erro = true;
@@ -112,7 +171,6 @@ public class InserirManutencaoServlet extends HttpServlet {
 
             MotoristaDAO motoristaDAO = new MotoristaDAO();
             Motorista motorista = motoristaDAO.buscarPorId(ultimoMotorista);
-
             if (motorista == null){
                 request.setAttribute("erroMotorista", "Motorista não encontrado!");
                 erro = true;
