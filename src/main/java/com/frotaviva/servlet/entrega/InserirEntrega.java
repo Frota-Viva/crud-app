@@ -20,27 +20,89 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 
+/**
+ * Servlet responsável por cadastrar novas entregas no banco de dados.
+ * <p>
+ * Este servlet processa os dados enviados pelo formulário de cadastro,
+ * valida as informações fornecidas, garante a correspondência entre
+ * motoristas e a empresa logada e insere a entrega no banco de dados.
+ * </p>
+ * <p>
+ * Principais funcionalidades:
+ * <ul>
+ *     <li><b>redirectComMensagem:</b> Redireciona para /listar-entregas com a mensagem codificada;</li>
+ *     <li><b>GET:</b> Exibe a página de cadastro de entrega;</li>
+ *     <li><b>POST:</b> Valida e insere a entrega no banco de dados;</li>
+ *     <li>Redireciona o usuário com mensagens de sucesso ou erro conforme o resultado.</li>
+ * </ul>
+ * </p>
+ * 
+ * @author Ricardo
+ */
 @WebServlet(name = "InserirEntrega", value = "/inserir-entregas")
 public class InserirEntrega extends HttpServlet {
 
     /**
-     * Recebe uma mensagem, codifica ela para o padrão UTF_8 e redireciona para /listar-entregas
-     * Apenas para maior legibilidade do código, pois cada mensagem teria que ser codificada e isso
-     * seria repetido muitas vezes no código.
+     * Recebe uma mensagem, codifica ela para o padrão UTF-8 e redireciona para /listar-entregas.
+     * <p>
+     * Evita repetição de código de codificação de mensagens em múltiplos pontos.
+     * </p>
      *
      * @param response para executar o redirect
-     * @param mensagem para a especificação da mensagem de erro/sucesso
+     * @param mensagem mensagem de sucesso ou erro
+     * @throws IOException se ocorrer erro de entrada ou saída
      */
     private void redirectComMensagem(HttpServletResponse response, String mensagem) throws IOException {
         String mensagemEncoded = URLEncoder.encode(mensagem, StandardCharsets.UTF_8);
         response.sendRedirect("/listar-entregas?msg=" + mensagemEncoded);
     }
 
+    /**
+     * Exibe a página de cadastro de entrega.
+     * <p>
+     * Se não houver empresa logada, o usuário é redirecionado para a página inicial.
+     * </p>
+     *
+     * @param request  requisição HTTP recebida
+     * @param response resposta HTTP enviada ao cliente
+     * @throws IOException se ocorrer erro de entrada/saída
+     * @throws ServletException se ocorrer erro no processamento do servlet
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession(true);
+        Object id_empresa = session.getAttribute("idEmpresa");
+
+        if (id_empresa == null) {
+            response.sendRedirect("/");
+            return;
+        }
+
         request.getRequestDispatcher("WEB-INF/view/entrega/inserir-entrega.jsp").forward(request, response);
     }
 
+    /**
+     * Processa os dados do formulário de cadastro de entrega.
+     * <p>
+     * Principais etapas:
+     * <ul>
+     *     <li>Verifica se há uma empresa logada;</li>
+     *     <li>Recebe e valida os campos do formulário (datas, descrição, endereço, motorista, código da entrega);</li>
+     *     <li>Garante que o motorista existe e pertence à empresa;</li>
+     *     <li>Cria o objeto {@link Entrega} e insere no banco de dados usando {@link EntregaDAO};</li>
+     *     <li>Redireciona com mensagens específicas de acordo com o resultado.</li>
+     * </ul>
+     * </p>
+     * <p>
+     * Se houver erros de validação, o formulário é reexibido com mensagens de erro.
+     * Se ocorrer uma exceção inesperada, o usuário é redirecionado com uma mensagem explicativa.
+     * </p>
+     *
+     * @param request  requisição HTTP contendo os dados do formulário
+     * @param response resposta HTTP enviada ao cliente
+     * @throws ServletException se ocorrer erro interno no servlet
+     * @throws IOException se ocorrer erro de entrada/saída durante o processamento
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -73,6 +135,7 @@ public class InserirEntrega extends HttpServlet {
             String cidade = request.getParameter("cidade");
             long idMotorista = Long.parseLong(request.getParameter("idMotorista"));
 
+            // Validações
             if (descricao == null || descricao.isEmpty()){
                 request.setAttribute("erroDescricao", "Descrição inválida! Não pode ser nula.");
                 erro = true;

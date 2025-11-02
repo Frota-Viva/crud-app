@@ -1,7 +1,6 @@
 package com.frotaviva.servlet.entrega;
 
 import com.frotaviva.dao.EntregaDAO;
-import com.frotaviva.dao.MotoristaDAO;
 import com.frotaviva.exception.ErroAoDeletar;
 
 import jakarta.servlet.ServletException;
@@ -12,18 +11,39 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * Servlet responsável por deletar uma entrega do banco de dados.
+ * <p>
+ * Este servlet recebe o ID da entrega como parâmetro, verifica se a operação
+ * é possível e realiza a exclusão da entrega.
+ * </p>
+ * <p>
+ * Em caso de sucesso, redireciona para a listagem de entregas com mensagem de confirmação.
+ * Em caso de falha ou erro inesperado, redireciona com mensagem específica.
+ * </p>
+ * 
+ * @author Ricardo
+ */
 @WebServlet(name = "DeletarServlet", value = "/deletar-entrega")
 public class DeletarEntrega extends HttpServlet {
+
+    /**
+     * Processa a requisição GET para deletar uma entrega.
+     * 
+     * @param request requisição HTTP contendo o ID da entrega
+     * @param response resposta HTTP enviada ao cliente
+     * @throws ServletException se ocorrer erro no processamento do servlet
+     * @throws IOException se ocorrer erro de entrada/saída
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         long id = Long.parseLong(request.getParameter("id"));
 
-
-        try{
+        try {
             EntregaDAO dao = new EntregaDAO();
 
-            if (dao.deletar(id) == 1){
+            if (dao.deletar(id) == 1) {
                 response.sendRedirect("/listar-entregas?msg=Entrega deletada com sucesso!");
                 return;
             }

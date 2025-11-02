@@ -20,14 +20,36 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * Servlet responsável por atualizar os dados de uma entrega.
+ * <p>
+ * Este servlet permite alterar informações da entrega, como datas,
+ * descrição do produto, endereço e motorista responsável.
+ * Realiza validações de campos obrigatórios e consistência de datas.
+ * </p>
+ * <p>
+ * Se a empresa não estiver logada, redireciona para a landing page.
+ * </p>
+ * 
+ * @author Ricardo
+ */
 @WebServlet(name = "AtualizarEntrega", value = "/atualizar-entrega")
 public class AtualizarEntrega extends HttpServlet {
+
+    /**
+     * Exibe a página de atualização de uma entrega.
+     * <p>
+     * Se o ID da empresa não existir na sessão, redireciona para a landing page.
+     * Se o código da entrega não existir ou estiver incorreto, redireciona para a listagem de entregas.
+     * </p>
+     *
+     * @param req  requisição HTTP recebida
+     * @param resp resposta HTTP a ser enviada
+     * @throws ServletException se ocorrer erro no processamento do servlet
+     * @throws IOException      se ocorrer erro de entrada/saída
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        long cod_entrega;
-        EntregaDAO dao = new EntregaDAO();
-
         HttpSession session = req.getSession(true);
         Object id_empresa = session.getAttribute("idEmpresa");
 
@@ -37,11 +59,13 @@ public class AtualizarEntrega extends HttpServlet {
         }
 
         try {
-            cod_entrega = Long.parseLong(req.getParameter("cod_entrega"));
+            long cod_entrega = Long.parseLong(req.getParameter("cod_entrega"));
+            EntregaDAO dao = new EntregaDAO();
             Entrega entrega = dao.buscarPorId(cod_entrega);
 
             if (entrega == null) {
                 resp.sendRedirect("/listar-entregas");
+                return;
             }
 
             req.setAttribute("entrega", entrega);
@@ -52,25 +76,23 @@ public class AtualizarEntrega extends HttpServlet {
         }
     }
 
+    /**
+     * Realiza a atualização da entrega com os dados enviados pelo formulário.
+     * <p>
+     * Realiza validação dos campos obrigatórios, valida datas e verifica se o motorista
+     * pertence à empresa logada.
+     * </p>
+     *
+     * @param request  requisição HTTP contendo os dados do formulário
+     * @param response resposta HTTP enviada ao cliente
+     * @throws ServletException se ocorrer erro no processamento do servlet
+     * @throws IOException      se ocorrer erro de entrada/saída
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        long cod_entrega;
-        String descricaoProduto;
-        Date dtPedido;
-        Date dtEntrega;
-        String cep;
-        String rua;
-        String complemento;
-        int numero;
-        String pais;
-        String estado;
-        String cidade;
-        Endereco endereco;
-        long idMotorista;
-
         HttpSession session = request.getSession(true);
         Object id_empresa = session.getAttribute("idEmpresa");
+        boolean erro = false;
 
         if (id_empresa == null) {
             response.sendRedirect("/");
@@ -80,64 +102,71 @@ public class AtualizarEntrega extends HttpServlet {
         long idEmpresa = (long) id_empresa;
 
         try {
-
-            EntregaDAO dao = new EntregaDAO();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            EntregaDAO dao = new EntregaDAO();
 
-            String cod_entregaReq = request.getParameter("cod_entrega");
-            cod_entrega = (! Validar.testeVazio(cod_entregaReq)) ? Long.parseLong(cod_entregaReq) : -1;
+            long cod_entrega = Long.parseLong(request.getParameter("cod_entrega"));
+            String descricaoProduto = request.getParameter("descricao_produto");
+            Date dtPedido = new Date(sdf.parse(request.getParameter("dt_pedido")).getTime());
+            Date dtEntrega = !request.getParameter("dt_entrega").equals("") ?
+                    new Date(sdf.parse(request.getParameter("dt_entrega")).getTime()) : null;
 
-            descricaoProduto = request.getParameter("descricao_produto");
-            dtPedido = new Date(sdf.parse(request.getParameter("dt_pedido")).getTime());
-            //Continuar as validações a partir daqui (validar a data)
-            if (!request.getParameter("dt_entrega").equals("")){
-                dtEntrega = new Date(sdf.parse(request.getParameter("dt_entrega")).getTime());
-            }else {
-                dtEntrega = null;
-            }
-            cep = (String) request.getParameter("cep");
-            numero = Integer.parseInt((String) request.getParameter("numero"));
-            cidade = (String) request.getParameter("cidade");
-            rua = (String) request.getParameter("rua");
-            pais = (String) request.getParameter("pais");
-            estado = (String) request.getParameter("estado");
-            complemento = (String) request.getParameter("complemento");
+            String cep = request.getParameter("cep");
+            int numero = Integer.parseInt(request.getParameter("numero"));
+            String cidade = request.getParameter("cidade");
+            String rua = request.getParameter("rua");
+            String pais = request.getParameter("pais");
+            String estado = request.getParameter("estado");
+            String complemento = request.getParameter("complemento");
 
-            endereco = new Endereco(pais,cep,estado,cidade,rua,numero,complemento);
-            idMotorista = Long.parseLong(request.getParameter("idMotorista"));
+            Endereco endereco = new Endereco(pais, cep, estado, cidade, rua, numero, complemento);
+            long idMotorista = Long.parseLong(request.getParameter("idMotorista"));
 
-            if (descricaoProduto == null || descricaoProduto.isEmpty()) request.setAttribute("erroDescricao", "Descrição inválida! Não pode ser nula.");
-
-            if (!Validar.data(String.valueOf(dtPedido))) request.setAttribute("erroDtPedido", "Data de pedido inválida!");
-
-            if (!Validar.data(String.valueOf(dtEntrega))) request.setAttribute("erroDtEntrega", "Data de entrega inválida!");
-
-            if (dtEntrega!=null){
-                if (dtEntrega.before(dtPedido)) {
-                    request.setAttribute("erroDtEntrega", "Data de entrega não pode ser anterior à data do pedido!");
-                }
+            // Validações
+            if (descricaoProduto == null || descricaoProduto.isEmpty()){
+                erro = true;
+                request.setAttribute("erroDescricao", "Descrição inválida! Não pode ser nula.");
             }
 
-
-            if (endereco == null) request.setAttribute("erroEndereco", "Endereço inválido! Não pode ser nulo.");
-
-            /*
-              Para verificar o motorista,
-              primeiro eu verifico os motoristas que o usuário possui,
-              depois verifico se o motorista inserido está dentro deles
-             */
-
-            MotoristaDAO motoristaDAO = new MotoristaDAO();
-
-            List<Motorista> motoristas = motoristaDAO.buscarPorEmpresa(idEmpresa);
-            Motorista motorista = motoristaDAO.buscarPorId(idMotorista);
-
-            if (!motoristas.contains(motorista)) {
-                request.setAttribute("erroMotorista", "Motorista inválido! Selecione um motorista existente.");
+            if (!Validar.data(String.valueOf(dtPedido))){
+                erro = true;
+                request.setAttribute("erroDtPedido", "Data de pedido inválida!");
             }
 
+            if (!Validar.data(String.valueOf(dtEntrega))){
+                erro = true;
+                request.setAttribute("erroDtEntrega", "Data de entrega inválida!");
+            }
+
+            if (dtEntrega != null && dtEntrega.before(dtPedido)){
+                erro = true;
+                request.setAttribute("erroDtEntrega", "Data de entrega não pode ser anterior à data do pedido!");
+            }
+
+            if (endereco == null) {
+                erro = true;
+                request.setAttribute("erroEndereco", "Endereço inválido! Não pode ser nulo.");
+            }
+            
             Entrega entrega = dao.buscarPorId(cod_entrega);
 
+            if (erro){
+                request.setAttribute("entrega", entrega);
+                request.getRequestDispatcher("WEB-INF/view/entrega/atualizar-entrega.jsp").forward(request, response);
+                return;
+            }
+            
+            MotoristaDAO motoristaDAO = new MotoristaDAO();
+            List<Motorista> motoristas = motoristaDAO.buscarPorEmpresa(idEmpresa);
+
+            if (!motoristaExiste(idMotorista, motoristas)){
+                request.setAttribute("erroMotorista", "Motorista inválido! Selecione um motorista existente.");
+                request.setAttribute("entrega", entrega);
+                request.getRequestDispatcher("WEB-INF/view/entrega/atualizar-entrega.jsp").forward(request, response);
+                return;
+            }
+
+            // Atualiza a entrega
             entrega.setDescricaoProduto(descricaoProduto);
             entrega.setDtPedido(dtPedido);
             entrega.setDtEntrega(dtEntrega);
@@ -146,16 +175,30 @@ public class AtualizarEntrega extends HttpServlet {
 
             if (dao.atualizar(entrega) == 1) {
                 response.sendRedirect("/listar-entregas?msg=Entrega+atualizada+com+sucesso");
-            } else{
+            } else {
                 request.setAttribute("msg", "Erro ao atualizar entrega. Tente novamente mais tarde.");
                 request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
             }
-
 
         } catch (ErroAoDeletar e) {
             response.sendRedirect("/home?msg=Erro ao atualizar entrega. Tente novamente mais tarde.");
         } catch (Exception e) {
             response.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
+    }
+
+    /**
+     * Verifica se o motorista com o ID fornecido existe na lista de motoristas.
+     * 
+     * 
+     * @param idMotorista ID do motorista a ser verificado
+     * @param motoristas lista de motoristas da empresa
+     * @return
+     */
+    private static boolean motoristaExiste(long idMotorista, List<Motorista> motoristas) {
+        for (Motorista motorista : motoristas) {
+            if (motorista.getId() == idMotorista) return true;
+        }
+        return false;
     }
 }
