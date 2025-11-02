@@ -75,24 +75,21 @@ public class AlterarSenhaServlet extends HttpServlet {
             //Alterando a senha
             int retorno = empresaDAO.atualizarSenha(empresa);
 
-            if (retorno==0){
-                request.setAttribute("erroAlterar","Não foi possível alterar!");
-                request.getRequestDispatcher("/WEB-INF/view/perfi-NovaSenha.jsp").forward(request, response);
-            } else if (retorno==1) {
+            if (retorno==1) {
                 request.setAttribute("alteracaoFeita","Senha alterada com sucesso!");
                 request.getRequestDispatcher("/WEB-INF/view/perfi-NovaSenha.jsp").forward(request, response);
+            } else {
+                request.setAttribute("msg", "Erro ao atualizar a senha. Tente novamente mais tarde.");
+                request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
             }
 
 
         }catch (ErroAoAtualizar eaa){
-            eaa.printStackTrace();
             request.setAttribute("mensagem", "Erro ao atualizar manutenção. Tente novamente mais tarde.");
             request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         } catch (Exception e){
-            e.printStackTrace();
-            System.out.println(e);
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
+
         }
 
     }

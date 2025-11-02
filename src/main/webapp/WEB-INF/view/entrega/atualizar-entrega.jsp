@@ -4,7 +4,6 @@
 <%
     request.setAttribute("tabela","entrega");
     Entrega e = (Entrega) request.getAttribute("entrega");
-    Endereco endereco = (Endereco) request.getAttribute("endereco");
     boolean dtEntregaNull = e.getDtEntrega() == null;
 %>
 <!DOCTYPE html>
@@ -44,7 +43,7 @@
                         <div class="table-cell cell"><%=e.getCod_entrega()%></div>
                         <div class="table-cell cell"><%=e.getDtPedido()%></div>
                         <div class="table-cell cell"><%=dtEntregaNull ? "Não foi entregue" : e.getDtEntrega()%></div>
-                        <div class="table-cell cell"><%=endereco.getCep()%></div>
+                        <div class="table-cell cell"><%=e.getEndereco().getCep()%></div>
                         <div class="table-cell cell"><%=e.getIdMotorista()%></div>
                     </div>
                     <button class="btn-sair" type="button" onclick="window.location.href='/listar-entregas'">
@@ -68,21 +67,21 @@
                     </div>
                     <div class="campo-edicao">
                         <label for="cep">CEP:</label>
-                        <input type="text" value="<%=endereco.getCep()%>" maxlength="9" required name="cep" id="cep">
+                        <input type="text" value="<%=e.getEndereco().getCep()%>" maxlength="9" required name="cep" id="cep">
                         <% if (request.getAttribute("erroCep") != null) { %>
                         <p style="color: red; font-size: 16px"><%=request.getAttribute("erroCep")%></p>
                         <% } %>
                     </div>
                     <div class="campo-edicao">
                         <label for="numero">Número:</label>
-                        <input type="number" value="<%=endereco.getNumero()%>" min="1" required id="numero" name="numero">
+                        <input type="number" value="<%=e.getEndereco().getNumero()%>" min="1" required id="numero" name="numero">
                         <% if (request.getAttribute("erroNumero") != null) { %>
                         <p style="color: red; font-size: 16px"><%=request.getAttribute("erroNumero")%></p>
                         <% } %>
                     </div>
                     <div class="campo-edicao">
                         <label for="cidade">Cidade:</label>
-                        <input type="text" value="<%=endereco.getCidade()%>" required id="cidade" name="cidade">
+                        <input type="text" value="<%=e.getEndereco().getCidade()%>" required id="cidade" name="cidade">
                         <% if (request.getAttribute("erroCidade") != null) { %>
                         <p style="color: red; font-size: 16px"><%=request.getAttribute("erroCidade")%></p>
                         <% } %>
@@ -99,14 +98,14 @@
                     </div>
                     <div class="campo-edicao">
                         <label for="rua">Rua:</label>
-                        <input type="text" value="<%=endereco.getRua()%>" required id="rua" name="rua">
+                        <input type="text" value="<%=e.getEndereco().getRua()%>" required id="rua" name="rua">
                         <% if (request.getAttribute("erroRua") != null) { %>
                         <p style="color: red; font-size: 16px"><%=request.getAttribute("erroRua")%></p>
                         <% } %>
                     </div>
                     <div class="campo-edicao">
                         <label for="pais">País:</label>
-                        <input type="text" value="<%=endereco.getPais()%>" required id="pais" name="pais">
+                        <input type="text" value="<%=e.getEndereco().getPais()%>" required id="pais" name="pais">
                         <% if (request.getAttribute("erroPais") != null) { %>
                         <p style="color: red; font-size: 16px"><%=request.getAttribute("erroPais")%></p>
                         <% } %>
@@ -130,14 +129,14 @@
                     </div>
                     <div class="campo-edicao">
                         <label for="complemento">Complemento:</label>
-                        <input type="text" value="<%=endereco.getComplemento()%>" id="complemento" name="complemento">
+                        <input type="text" value="<%=e.getEndereco().getComplemento()%>" id="complemento" name="complemento">
                         <% if (request.getAttribute("erroComplemento") != null) { %>
                         <p style="color: red; font-size: 16px"><%=request.getAttribute("erroComplemento")%></p>
                         <% } %>
                     </div>
                     <div class="campo-edicao">
                         <label for="estado">Estado:</label>
-                        <input type="text" value="<%=endereco.getEstado()%>" required id="estado" name="estado">
+                        <input type="text" value="<%=e.getEndereco().getEstado()%>" required id="estado" name="estado">
                         <% if (request.getAttribute("erroEstado") != null) { %>
                         <p style="color: red; font-size: 16px"><%=request.getAttribute("erroEstado")%></p>
                         <% } %>

@@ -15,10 +15,10 @@ import java.io.IOException;
 @WebServlet(name = "EditarPerfilServlet", value = "/home/editar-perfil")
 public class EditarPerfilServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             boolean testeVazio = false;
-            HttpSession session = req.getSession(true);
+            HttpSession session = request.getSession(true);
 
             Object empresaSession = session.getAttribute("empresa");
 
@@ -26,16 +26,16 @@ public class EditarPerfilServlet extends HttpServlet {
             EmpresaDAO empresaDAO = new EmpresaDAO();
 
             String cepBD = "";
-            String numForms = req.getParameter("numero");
-            String email = req.getParameter("email");
-            String tipo = req.getParameter("tipo");
-            String cep = req.getParameter("cep");
-            String rua = req.getParameter("rua");
-            String complemento = req.getParameter("complemento");
-            String pais = req.getParameter("pais");
-            String cidade = req.getParameter("cidade");
-            String estado  = req.getParameter("estado");
-            String nome = req.getParameter("nome");
+            String numForms = request.getParameter("numero");
+            String email = request.getParameter("email");
+            String tipo = request.getParameter("tipo");
+            String cep = request.getParameter("cep");
+            String rua = request.getParameter("rua");
+            String complemento = request.getParameter("complemento");
+            String pais = request.getParameter("pais");
+            String cidade = request.getParameter("cidade");
+            String estado  = request.getParameter("estado");
+            String nome = request.getParameter("nome");
 
 
             if (Validar.testeVazio(email)){
@@ -62,26 +62,26 @@ public class EditarPerfilServlet extends HttpServlet {
             }
 
             if (testeVazio){
-                req.setAttribute("erroVazio","Não deixe campos vazios!");
-                req.getRequestDispatcher("/home/perfil").forward(req, res);
+                request.setAttribute("erroVazio","Não deixe campos vazios!");
+                request.getRequestDispatcher("/home/perfil").forward(request, response);
                 return;
             }
 
             int num = Integer.parseInt(numForms);
 
             if (num<=0){
-                req.setAttribute("erroNumero", "Digite apenas números inteiros!");
+                request.setAttribute("erroNumero", "Digite apenas números inteiros!");
             }
             if ((!Validar.email(email))) {
-                req.setAttribute("erroEmail", "Email Invalido!");
+                request.setAttribute("erroEmail", "Email Invalido!");
             }
             if (Validar.cepValidado(cep) == null) {
-                req.setAttribute("erroCep", "CEP Invalido!");
+                request.setAttribute("erroCep", "CEP Invalido!");
             } else {
                 cepBD = Validar.cepValidado(cep);
             }
-            if ((req.getAttribute("erroCep") != null) || (req.getAttribute("erroEmail") != null) || req.getAttribute("erroNumero") != null){
-                req.getRequestDispatcher("/home/perfil").forward(req, res);
+            if ((request.getAttribute("erroCep") != null) || (request.getAttribute("erroEmail") != null) || request.getAttribute("erroNumero") != null){
+                request.getRequestDispatcher("/home/perfil").forward(request, response);
                 return;
             }
 
@@ -89,23 +89,23 @@ public class EditarPerfilServlet extends HttpServlet {
                     empresaSalva.getSenha(),nome,new Endereco(pais,cepBD,estado,cidade,rua,num,complemento));
 
             if (empresaSalva.equals(empresa)){
-                req.setAttribute("erroIgualdade", "Nenhum campo foi modificado!");
-                req.getRequestDispatcher("/home/perfil").forward(req, res);
+                request.setAttribute("erroIgualdade", "Nenhum campo foi modificado!");
+                request.getRequestDispatcher("/home/perfil").forward(request, response);
             } else if (empresaSalva.getEmail().equals(empresa.getEmail()) || (empresaDAO.buscarPorEmail(email) == 0)){
-                req.setAttribute("realizado", "Mudança realizada com sucesso!");
+                request.setAttribute("realizado", "Mudança realizada com sucesso!");
                 empresaDAO.atualizar(empresa);
                 session.setAttribute("empresa",empresa);
-                req.getRequestDispatcher("/home/perfil").forward(req, res);
+                request.getRequestDispatcher("/home/perfil").forward(request, response);
             } else if ((empresaDAO.buscarPorEmail(email) == 1)) {
-                req.setAttribute("erroEmail", "Email Invalido!");
-                req.getRequestDispatcher("/home/perfil").forward(req, res);
+                request.setAttribute("erroEmail", "Email Invalido!");
+                request.getRequestDispatcher("/home/perfil").forward(request, response);
             }
 
         }catch (NumberFormatException nfe){
-            req.setAttribute("erroNumero", "Digite apenas números inteiros!");
-            req.getRequestDispatcher("/home/perfil").forward(req, res);
+            request.setAttribute("erroNumero", "Digite apenas números inteiros!");
+            request.getRequestDispatcher("/home/perfil").forward(request, response);
         } catch (Exception e){
-            res.sendRedirect("/");
+            response.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
 
 

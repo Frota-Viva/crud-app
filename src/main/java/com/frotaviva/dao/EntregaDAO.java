@@ -93,10 +93,11 @@ public class EntregaDAO extends AbstractDAO implements DAO<Entrega>{
             stmt.setLong(4, entrega.getIdMotorista());
             stmt.setString(5, entrega.getEndereco().getCep());
             stmt.setString(6, entrega.getEndereco().getRua());
-            stmt.setString(7, entrega.getEndereco().getComplemento());
-            stmt.setString(8, entrega.getEndereco().getEstado());
-            stmt.setString(9, entrega.getEndereco().getCidade());
-            stmt.setLong(10, entrega.getCod_entrega());
+            stmt.setInt(7, entrega.getEndereco().getNumero());
+            stmt.setString(8, entrega.getEndereco().getComplemento());
+            stmt.setString(9, entrega.getEndereco().getEstado());
+            stmt.setString(10, entrega.getEndereco().getCidade());
+            stmt.setLong(11, entrega.getCod_entrega());
 
             if (stmt.executeUpdate() > 0) return 1;
             return 0;

@@ -68,6 +68,7 @@ public class AtualizarManutencaoServlet extends HttpServlet {
         String descricaoServico;
 
         try{
+            System.out.println(request.getParameter("dtConclusao"));
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -75,7 +76,11 @@ public class AtualizarManutencaoServlet extends HttpServlet {
             ultimoMotorista = Long.parseLong(request.getParameter("ultimoMotorista"));
             idCaminhao = Long.parseLong(request.getParameter("idCaminhao"));
             dtCadastro = sdf.parse(request.getParameter("dtCadastro"));
-            dtConclusao = sdf.parse(request.getParameter("dtConclusao"));
+            if (!request.getParameter("dtConclusao").equals("")){
+                dtConclusao = sdf.parse(request.getParameter("dtConclusao"));
+            } else {
+                dtConclusao = null;
+            }
             custo = new BigDecimal(request.getParameter("custo"));
             tipoManutencao = request.getParameter("tipoManutencao");
             descricaoServico = request.getParameter("descricaoServico");
@@ -91,7 +96,6 @@ public class AtualizarManutencaoServlet extends HttpServlet {
             ManutencaoDAO dao = new ManutencaoDAO();
             Manutencao manutecao = dao.buscarPorId(id);
             java.sql.Date dtCadastroBD = new java.sql.Date(dtCadastro.getTime());
-            java.sql.Date dtConclusaoBD = new java.sql.Date(dtConclusao.getTime());
 
             manutecao.setDescricaoServico(descricaoServico);
             manutecao.setUltimoMotorista(ultimoMotorista);
@@ -99,7 +103,10 @@ public class AtualizarManutencaoServlet extends HttpServlet {
             manutecao.setTipoManutencao(tipoManutencao);
             manutecao.setCusto(custo);
             manutecao.setDtCadastro(dtCadastroBD);
-            manutecao.setDtConclusao(dtConclusaoBD);
+            if (dtConclusao!=null){
+                java.sql.Date dtConclusaoBD = new java.sql.Date(dtConclusao.getTime());
+                manutecao.setDtConclusao(dtConclusaoBD);
+            }
 
             if (dao.atualizar(manutecao) == 1) {
                 response.sendRedirect("/listar-manutencao?msg=Manutencao atualizada com sucesso!");
@@ -112,7 +119,6 @@ public class AtualizarManutencaoServlet extends HttpServlet {
         } catch (ErroAoDeletar e) {
             response.sendRedirect("/home?msg=Erro ao atualizar manutencao. Tente novamente mais tarde.");
         } catch (Exception e) {
-            e.printStackTrace();
             response.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
     }

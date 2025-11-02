@@ -41,14 +41,14 @@ public class AtualizarEntrega extends HttpServlet {
             Entrega entrega = dao.buscarPorId(cod_entrega);
 
             if (entrega == null) {
-                resp.sendRedirect("/listar-entrega");
+                resp.sendRedirect("/listar-entregas");
             }
 
             req.setAttribute("entrega", entrega);
             req.getRequestDispatcher("WEB-INF/view/entrega/atualizar-entrega.jsp").forward(req, resp);
 
         } catch (NumberFormatException e) {
-            resp.sendRedirect("/listar-entrega");
+            resp.sendRedirect("/listar-entregas");
         }
     }
 
@@ -59,6 +59,13 @@ public class AtualizarEntrega extends HttpServlet {
         String descricaoProduto;
         Date dtPedido;
         Date dtEntrega;
+        String cep;
+        String rua;
+        String complemento;
+        int numero;
+        String pais;
+        String estado;
+        String cidade;
         Endereco endereco;
         long idMotorista;
 
@@ -73,6 +80,7 @@ public class AtualizarEntrega extends HttpServlet {
         long idEmpresa = (long) id_empresa;
 
         try {
+
             EntregaDAO dao = new EntregaDAO();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -82,13 +90,21 @@ public class AtualizarEntrega extends HttpServlet {
             descricaoProduto = request.getParameter("descricao_produto");
             dtPedido = new Date(sdf.parse(request.getParameter("dt_pedido")).getTime());
             //Continuar as validações a partir daqui (validar a data)
-            System.out.println(dtPedido);
-            dtEntrega = new Date(sdf.parse(request.getParameter("dt_entrega")).getTime());
-            System.out.println(dtEntrega);
-            endereco = (Endereco) session.getAttribute("endereco");
-            System.out.println(endereco);
+            if (!request.getParameter("dt_entrega").equals("")){
+                dtEntrega = new Date(sdf.parse(request.getParameter("dt_entrega")).getTime());
+            }else {
+                dtEntrega = null;
+            }
+            cep = (String) request.getParameter("cep");
+            numero = Integer.parseInt((String) request.getParameter("numero"));
+            cidade = (String) request.getParameter("cidade");
+            rua = (String) request.getParameter("rua");
+            pais = (String) request.getParameter("pais");
+            estado = (String) request.getParameter("estado");
+            complemento = (String) request.getParameter("complemento");
+
+            endereco = new Endereco(pais,cep,estado,cidade,rua,numero,complemento);
             idMotorista = Long.parseLong(request.getParameter("idMotorista"));
-            System.out.println(idMotorista);
 
             if (descricaoProduto == null || descricaoProduto.isEmpty()) request.setAttribute("erroDescricao", "Descrição inválida! Não pode ser nula.");
 
@@ -96,9 +112,12 @@ public class AtualizarEntrega extends HttpServlet {
 
             if (!Validar.data(String.valueOf(dtEntrega))) request.setAttribute("erroDtEntrega", "Data de entrega inválida!");
 
-            if (dtEntrega.before(dtPedido)) {
-                request.setAttribute("erroDtEntrega", "Data de entrega não pode ser anterior à data do pedido!");
+            if (dtEntrega!=null){
+                if (dtEntrega.before(dtPedido)) {
+                    request.setAttribute("erroDtEntrega", "Data de entrega não pode ser anterior à data do pedido!");
+                }
             }
+
 
             if (endereco == null) request.setAttribute("erroEndereco", "Endereço inválido! Não pode ser nulo.");
 
@@ -126,7 +145,7 @@ public class AtualizarEntrega extends HttpServlet {
             entrega.setIdMotorista(idMotorista);
 
             if (dao.atualizar(entrega) == 1) {
-                response.sendRedirect("/listar-entrega?msg=Entrega+atualizada+com+sucesso");
+                response.sendRedirect("/listar-entregas?msg=Entrega+atualizada+com+sucesso");
             } else{
                 request.setAttribute("msg", "Erro ao atualizar entrega. Tente novamente mais tarde.");
                 request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);

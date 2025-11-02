@@ -71,7 +71,7 @@
                         <div class="table-cell cell"><%=e.getIdMotorista()%></div>
                     </div>
                     <div class="table-cell cell table-actions">
-                        <button class="bt-editar" onclick="window.location.href='/atualizar-entrega?id=<%=e.getCod_entrega()%>'">
+                        <button class="bt-editar" onclick="window.location.href='/atualizar-entrega?cod_entrega=<%=e.getCod_entrega()%>'">
                             <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
                             Editar
                         </button>

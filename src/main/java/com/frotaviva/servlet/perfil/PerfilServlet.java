@@ -12,18 +12,18 @@ import java.io.IOException;
 @WebServlet("/home/perfil")
 public class PerfilServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        HttpSession session = req.getSession(true);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
         Empresa empresa;
 
-        Object empresaSession = req.getAttribute("empresa");
+        Object empresaSession = request.getAttribute("empresa");
         if (empresaSession == null){
             EmpresaDAO empresaDAO = new EmpresaDAO();
 
             Object idSession = session.getAttribute("idEmpresa");
 
             if (idSession == null){
-                res.sendRedirect("/");
+                response.sendRedirect("/");
                 return;
             }
             long idEmpresa = (long) idSession;
@@ -31,16 +31,16 @@ public class PerfilServlet extends HttpServlet {
             empresa = empresaDAO.buscarPorId(idEmpresa);
 
             if (empresa == null){
-                res.sendRedirect("/");
+                response.sendRedirect("/");
                 return;
             }
-            req.setAttribute("empresa",empresa);
+            request.setAttribute("empresa",empresa);
         } else {
             empresa = (Empresa) empresaSession;
-            req.setAttribute("empresa",empresa);
+            request.setAttribute("empresa",empresa);
         }
 
-        req.getRequestDispatcher("/WEB-INF/view/perfil.jsp").forward(req, res);
+        request.getRequestDispatcher("/WEB-INF/view/perfil.jsp").forward(request, response);
 
 
     }
