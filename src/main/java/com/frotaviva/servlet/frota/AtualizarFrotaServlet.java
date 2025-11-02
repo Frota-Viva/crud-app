@@ -16,13 +16,44 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-
+/**
+ * Responsável por atualizar os dados de uma frota cadastrada.
+ * <p>
+ * Este servlet exibe os dados da frota para atualização e processa as alterações
+ * enviadas pelo usuário, validando os campos antes de atualizar o registro no banco.
+ * </p>
+ * <p>
+ * Principais funcionalidades:
+ * <ul>
+ *     <li><b>GET:</b> Exibe o formulário com os dados atuais da frota;</li>
+ *     <li><b>POST:</b> Valida e atualiza os dados da frota;</li>
+ *     <li>Redireciona o usuário com mensagens de sucesso ou erro conforme o resultado da operação.</li>
+ * </ul>
+ * </p>
+ * <p>
+ * Se não houver uma empresa logada, o usuário é redirecionado para a landing page.
+ * Se ocorrer algum erro durante a atualização, são exibidas mensagens específicas.
+ * </p>
+ * 
+ * @author Davi Alcanfor
+ */
 @WebServlet(name = "AtualizarFrota", value = "/atualizar-frota")
 public class AtualizarFrotaServlet extends HttpServlet {
 
+    /**
+     * Exibe o formulário de atualização da frota.
+     * <p>
+     * Obtém o ID da frota a partir dos parâmetros da requisição e busca o registro no banco.
+     * Se o ID for inválido ou a frota não existir, redireciona para a listagem de frotas.
+     * </p>
+     *
+     * @param req  requisição HTTP recebida
+     * @param resp resposta HTTP enviada
+     * @throws ServletException se ocorrer um erro no processamento do servlet
+     * @throws IOException se ocorrer um erro de entrada ou saída
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         long id;
         FrotaDAO dao = new FrotaDAO();
 
@@ -52,6 +83,22 @@ public class AtualizarFrotaServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Processa a atualização da respectiva frota.
+     * <p>
+     * Valida os campos de entrada, atualiza o objeto {@link Frota} e chama
+     * o método <code>atualizar</code> da classe {@link FrotaDAO} para realizar as alterações.
+     * </p>
+     * <p>
+     * Se houver erros de validação, o formulário é exibido novamente com as mensagens de erro.
+     * Se houver uma exceção, o usuário é redirecionado com mensagem explicativa.
+     * </p>
+     *
+     * @param request  requisição HTTP contendo os dados do formulário
+     * @param response resposta HTTP enviada ao cliente
+     * @throws ServletException se ocorrer um erro interno no servlet
+     * @throws IOException se ocorrer um erro de entrada ou saída
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -99,7 +146,7 @@ public class AtualizarFrotaServlet extends HttpServlet {
 
             Frota frota = dao.buscarPorId(id);
 
-            // Verifica se a frota pertence à empresa do usuário logado
+            // Se a frota não pertence à empresa logada, exibe erro
             if (frota.getIdEmpresa() != idEmpresa) {
                 request.setAttribute("erroGeral", "Frota inválida! Digite uma frota existente.");
                 erro = true;
@@ -133,10 +180,11 @@ public class AtualizarFrotaServlet extends HttpServlet {
     }
 
     /**
-     * Redireciona para a listagem de frotas com uma mensagem.
+     * Redireciona para a listagem de frotas com uma mensagem codificada.
      *
      * @param response objeto HttpServletResponse
      * @param mensagem mensagem a ser exibida
+     * @throws IOException se ocorrer erro de redirecionamento
      */
     private void redirectComMensagem(HttpServletResponse response, String mensagem) throws IOException {
         String mensagemEncoded = URLEncoder.encode(mensagem, StandardCharsets.UTF_8);
