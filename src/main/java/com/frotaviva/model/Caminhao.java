@@ -86,3 +86,4 @@ public class Caminhao {
         this.capacidade = capacidade;
     }
 }
+
