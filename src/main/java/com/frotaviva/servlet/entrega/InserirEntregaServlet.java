@@ -20,8 +20,8 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 
-@WebServlet(name = "InserirEntrega", value = "/inserir-entregas")
-public class InserirEntrega extends HttpServlet {
+@WebServlet(name = "InserirEntregaServlet", value = "/inserir-entregas")
+public class InserirEntregaServlet extends HttpServlet {
 
     /**
      * Recebe uma mensagem, codifica ela para o padrão UTF_8 e redireciona para /listar-entregas

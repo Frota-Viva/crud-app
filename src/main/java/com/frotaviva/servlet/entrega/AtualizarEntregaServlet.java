@@ -20,8 +20,8 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-@WebServlet(name = "AtualizarEntrega", value = "/atualizar-entrega")
-public class AtualizarEntrega extends HttpServlet {
+@WebServlet(name = "AtualizarEntregaServlet", value = "/atualizar-entrega")
+public class AtualizarEntregaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

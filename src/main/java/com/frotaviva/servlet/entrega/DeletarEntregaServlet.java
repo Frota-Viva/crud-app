@@ -1,7 +1,6 @@
 package com.frotaviva.servlet.entrega;
 
 import com.frotaviva.dao.EntregaDAO;
-import com.frotaviva.dao.MotoristaDAO;
 import com.frotaviva.exception.ErroAoDeletar;
 
 import jakarta.servlet.ServletException;
@@ -13,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "DeletarServlet", value = "/deletar-entrega")
-public class DeletarEntrega extends HttpServlet {
+public class DeletarEntregaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
