@@ -29,8 +29,10 @@
                     <input type="text" placeholder="Buscar tipo" class="input-search" name="buscar">
                 </form>
                 <div class="mensagem">
-                    <%if (msg != null){%>
-                    <p><%=msg%></p>
+                    <% if (msg != null) {%>
+                    <span id="aviso-span-tabela">
+                        <p style="color: red"><%=msg%></p>
+                    </span>
                     <%}%>
                 </div>
             </div>
@@ -48,8 +50,8 @@
                     <div class="header-cell">Ultimo Motorista</div>
                 </div>
                 <div class="header-cell header-action">
-                    <button class="bt-adicionar">
-                        <img src="../../assets/imgs/img-home/mais.png" alt="Adicionar">
+                    <button class="bt-adicionar" onclick="window.location.href='/inserir-manutencao'">
+                        <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
                         Adicionar Manutenção
                     </button>
                 </div>
@@ -58,13 +60,14 @@
             <%
                 if (manutencoes != null && !manutencoes.isEmpty()){
                     for(Manutencao m : manutencoes){
+                        boolean conclusaoNull = m.getDtConclusao() == null;
             %>
 
             <div class="table-row">
                 <div class="t-esquerda">
                     <div class="table-cell cell"><%=m.getId()%></div>
                     <div class="table-cell cell"><%=m.getDtCadastro()%></div>
-                    <div class="table-cell cell"><%=m.getDtConclusao()%></div>
+                    <div class="table-cell cell"><%=conclusaoNull ? "Não concluída" : m.getDtConclusao()%></div>
                     <div class="table-cell cell"><%=m.getTipoManutencao()%></div>
                     <div class="table-cell cell"><%=m.getCusto()%></div>
                     <div class="table-cell cell"><%=m.getUltimoMotorista()%></div>
@@ -74,7 +77,7 @@
                         <img src="../../assets/icons/icon-editar.svg" alt="Editar">
                         Editar
                     </button>
-                    <button class="bt-excluir">
+                    <button class="bt-excluir" data-id="<%=m.getId()%>">
                         <img src="../../assets/icons/icon-excluir.svg" alt="Excluir">
                         Excluir
                     </button>

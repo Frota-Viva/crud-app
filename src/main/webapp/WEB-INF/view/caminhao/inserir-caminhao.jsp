@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%request.setAttribute("tabela","caminhao");%>
+<%
+    request.setAttribute("tabela","caminhao");
+%>
 <html lang="pt-BR">
 
 <head>
@@ -17,47 +19,65 @@
                 <h1>Inserir Caminhão</h1>
             </div>
         </header>
-        <form action="">
+        <form action="/inserir-caminhao" method="post">
             <section class="area-edicao">
                 <div class="linha-info">
                     <div class="campo-edicao">
                         <label for="idFrota">ID Frota:</label>
                         <input type="number" placeholder="Digite o ID da frota do caminhão." min="1" id="idFrota" name="idFrota" required>
+                        <%if (request.getAttribute("erroFrota") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroFrota")%></p>
+                        <%}%>
                     </div>
                     <div class="campo-edicao">
-                        <label for="kmsRodados">Kms Rodados:</label>
-                        <input type="number" placeholder="Digite a quantidade de Km rodados do caminhão." min="0" id="kmsRodados" name="kmsRodados" required>
+                        <label for="kmRodados">Kms Rodados:</label>
+                        <input type="number" placeholder="Digite a quantidade de Km rodados do caminhão." min="0" id="kmsRodados" name="kmRodados" required>
+                        <%if (request.getAttribute("erroKms") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroKms")%></p>
+                        <%}%>
                     </div>
                 </div>
                 <div class="linha-info">
                     <div class="campo-edicao">
                         <label for="placa">Placa:</label>
                         <input type="text" placeholder="Digite a placa do caminhão." id="placa" name="placa" required>
+                        <%if (request.getAttribute("erroPlaca") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroPlaca")%></p>
+                        <%}%>
                     </div>
                     <div class="campo-edicao">
                         <label for="modelo">Modelo:</label>
                         <input type="text" placeholder="Digite o modelo do caminhão." id="modelo" name="modelo" required>
+                        <%if (request.getAttribute("erroModelo") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroModelo")%></p>
+                        <%}%>
                     </div>
                 </div>
                 <div class="linha-info">
                     <div class="campo-edicao">
-                        <label for="estado">Estado:</label>
-                        <input type="text" placeholder="A/I/M" id="estado" name="estado" required>
+                        <label for="estado">Status:</label>
+                        <input type="text" placeholder="A/I/M" id="estado" name="status" required>
+                        <%if (request.getAttribute("erroStatus") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroStatus")%></p>
+                        <%}%>
                     </div>
                     <div class="campo-edicao">
                         <label for="capacidade">Capacidade:</label>
-                        <input type="number" placeholder="Digite a capacidade em Kg do caminhão." id="capacidade" name="capacidade" min="1">
+                        <input type="number" placeholder="Digite a capacidade em Kg do caminhão." id="capacidade" name="capacidade" min="1" required>
+                        <%if (request.getAttribute("erroCapacidade") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroCapacidade")%></p>
+                        <%}%>
                     </div>
                 </div>
             </section>
             <section id="botoes">
-                <button id="button-cancelar" type="button">
+                <button id="button-cancelar" type="button" onclick="window.location.href='/listar-caminhao'">
                     <img src="../../../assets/icons/icon-cancelar.svg" alt="" class="icones-botao">
-                    <p><b>Cancelar</b></p>
+                    <b>Cancelar</b>
                 </button>
                 <button id="button-confirmar" type="submit">
                     <img src="../../../assets/icons/icon-confirmar.svg" alt="" class="icones-botao">
-                    <p><b>Confirmar</b></p>
+                    <b>Confirmar</b>
                 </button>
             </section>
         </form>

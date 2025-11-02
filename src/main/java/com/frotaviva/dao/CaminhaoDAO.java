@@ -28,7 +28,7 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
         Conexao conexao = new Conexao();
         Connection con = null;
 
-        String sql = "INSERT INTO caminhao(placa, status, km_rodados, modelo, capacidade, id_frota) VALUES(?, ?, ?, ?, ? ,?)";
+        String sql = "INSERT INTO caminhao(placa, status, kms_rodados, modelo, capacidade, id_frota) VALUES(?, ?, ?, ?, ? ,?)";
 
         try {
             con = conexao.conectar();
@@ -60,7 +60,8 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
         PreparedStatement stmt = null;
         Connection conn = null;
 
-        String sql = "UPDATE caminhao SET placa = ?, status = ?, km_rodados - ?, modelo = ?, capacidade = ?, idFrota = ? WHERE id = ?";
+        String sql = "UPDATE caminhao SET placa = ?, status = ?, kms_rodados = ?, modelo = ?, " +
+                "capacidade = ?, id_frota = ? WHERE id = ?";
 
         try {
 
@@ -238,7 +239,7 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
         ResultSet rs = null;
         Connection conn = null;
 
-        String sql = "SELECT * FROM caminhao WHERE id = ?";
+        String sql = "SELECT * FROM caminhao WHERE id = ? ORDER BY id";
 
         try {
             conn = conexao.conectar();
@@ -279,7 +280,7 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
         ResultSet rs = null;
         Connection conn = null;
 
-        String sql = "SELECT * FROM caminhao";
+        String sql = "SELECT * FROM caminhao ORDER BY id";
 
         try {
             conn = conexao.conectar();
@@ -320,7 +321,8 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
         ResultSet rs = null;
         Connection conn = null;
 
-        String sql = "SELECT * FROM caminhao JOIN frota ON caminhao.id_frota = frota.id WHERE frota.id_empresa = ?";
+        String sql = "SELECT caminhao.* FROM caminhao JOIN frota ON caminhao.id_frota = frota.id WHERE frota.id_empresa = ? " +
+                "ORDER BY id";
 
         try {
             conn = conexao.conectar();
@@ -340,6 +342,48 @@ public class CaminhaoDAO extends AbstractDAO implements DAO<Caminhao>{
                 long id_frota = rs.getLong("id_frota");
 
                 Caminhao caminhao = new Caminhao(idCaminhao, placa, status, kms_rodados, modelo,
+                        capacidade, id_frota);
+                caminhoes.add(caminhao);
+            }
+            return caminhoes;
+
+        } catch (SQLException e){
+            log.error("Erro ao consultar caminhão", e);
+            throw throwDAOException(e, SELECT);
+        } finally{
+            fechar(stmt, rs);
+            conexao.desconectar(conn);
+        }
+
+    }public List<Caminhao> buscarPorEmpresaComPlaca(long id_empresa, String placa) {
+        List<Caminhao> caminhoes = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection conn = null;
+
+        String sql = "SELECT caminhao.* FROM caminhao JOIN frota ON caminhao.id_frota = frota.id WHERE frota.id_empresa = ? " +
+                "AND placa ILIKE ? ORDER BY id";
+
+        try {
+            conn = conexao.conectar();
+            stmt = conn.prepareStatement(sql);
+            stmt.setLong(1, id_empresa);
+            stmt.setString(2, "%"+placa+"%");
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+
+                long idCaminhao = rs.getLong("id");
+                String placaCaminhao = rs.getString("placa");
+                String status = rs.getString("status");
+                int kms_rodados = rs.getInt("kms_rodados");
+                String modelo = rs.getString("modelo");
+                int capacidade = rs.getInt("capacidade");
+                long id_frota = rs.getLong("id_frota");
+
+                Caminhao caminhao = new Caminhao(idCaminhao, placaCaminhao, status, kms_rodados, modelo,
                         capacidade, id_frota);
                 caminhoes.add(caminhao);
             }

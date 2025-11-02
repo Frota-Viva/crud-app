@@ -1,12 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: davifranco-ieg
-  Date: 23/10/2025
-  Time: 07:01
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%request.setAttribute("tabela","motorista");%>
+<%
+    request.setAttribute("tabela","motorista");
+%>
 <html lang="pt-BR">
 
 <head>
@@ -15,7 +10,6 @@
     <title>Inserir Motorista - Frota Viva</title>
     <link rel="stylesheet" href="../../../assets/CSS/tabelaIserirStyle.css">
 </head>
-
 <body>
 <jsp:include page="../componentes/aside.jsp"/>
 <main>
@@ -25,40 +19,49 @@
                 <h1>Inserir Motorista</h1>
             </div>
         </header>
-        <form action="">
+        <form action="/inserir-motoristas" method="post">
             <section class="area-edicao">
                 <div class="linha-info">
                     <div class="campo-edicao">
                         <label for="nome">Nome:</label>
-                        <input type="text" required id="nome" name="nome" placeholder="Digite o nome do motorista.">
+                        <input type="text" placeholder="Digite o nome do motorista." id="nome" name="nome" required>
+                        <%if (request.getAttribute("erroNome") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroNome")%></p>
+                        <%}%>
                     </div>
-                    <div class="campo-edicao">
-                        <label for="senha">Senha:</label>
-                        <input type="password" required id="senha" name="senha" placeholder="Exemplo: Abc1$def">
-                    </div>
-                </div>
-
-                <div class="linha-info">
                     <div class="campo-edicao">
                         <label for="cpf">CPF:</label>
-                        <input type="text" maxlength="14" required id="cpf" name="cpf" placeholder="Exemplo: 000.000.000-00">
+                        <input type="text" placeholder="Exemplo: 000.000.000-00" maxlength="14" id="cpf" name="cpf" required>
+                        <%if (request.getAttribute("erroCpf") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroCpf")%></p>
+                        <%}%>
                     </div>
                 </div>
                 <div class="linha-info">
                     <div class="campo-edicao">
                         <label for="email">Email:</label>
-                        <input type="email" placeholder="Exemplo: exemplo123@email.com" required name="email" id="email">
+                        <input type="email" placeholder="Exemplo: exemplo123@email.com" id="email" name="email" required>
+                        <%if (request.getAttribute("erroEmail") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroEmail")%></p>
+                        <%}%>
+                    </div>
+                    <div class="campo-edicao">
+                        <label for="senha">Senha:</label>
+                        <input type="password" placeholder="Exemplo: Abc1$def" id="senha" name="senha" required>
+                        <%if (request.getAttribute("erroSenha") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroSenha")%></p>
+                        <%}%>
                     </div>
                 </div>
             </section>
             <section id="botoes">
-                <button id="button-cancelar" type="button">
+                <button id="button-cancelar" type="button" onclick="window.location.href='/listar-motoristas'">
                     <img src="../../../assets/icons/icon-cancelar.svg" alt="" class="icones-botao">
-                    <p><b>Cancelar</b></p>
+                    <b>Cancelar</b>
                 </button>
                 <button id="button-confirmar" type="submit">
                     <img src="../../../assets/icons/icon-confirmar.svg" alt="" class="icones-botao">
-                    <p><b>Confirmar</b></p>
+                    <b>Confirmar</b>
                 </button>
             </section>
         </form>

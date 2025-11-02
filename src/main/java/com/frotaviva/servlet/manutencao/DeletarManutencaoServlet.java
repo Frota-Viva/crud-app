@@ -1,9 +1,8 @@
 package com.frotaviva.servlet.manutencao;
 
 import com.frotaviva.dao.ManutencaoDAO;
-
-import com.frotaviva.exception.ErroAoConsultar;
 import com.frotaviva.exception.ErroAoDeletar;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,19 +24,18 @@ public class DeletarManutencaoServlet extends HttpServlet {
             ManutencaoDAO dao = new ManutencaoDAO();
 
             if (dao.deletar(id) == 1) {
-                response.sendRedirect("/listar-motoristas");
+                response.sendRedirect("/listar-manutencao?msg=Manutencao deletada com sucesso");
                 return;
             }
 
-            request.setAttribute("erro", "Manutenção não encontrada...");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/listar-manutencao?msg=Nao foi possivel deletar manutencao.");
 
         } catch (ErroAoDeletar e) {
-            request.setAttribute("mensagem", "Erro ao acessar manutencoes. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/listar-manutencao?msg=Ocorreu um erro ao deletar mantuencao.");
+
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/listar-manutencao?msg=Ocorreu um erro inesperado ao deletar mantuencao.");
+
         }
     }
 

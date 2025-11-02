@@ -21,10 +21,11 @@ public class ListarFrotaServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession(true); //Pega a sessão
-        Object id = session.getAttribute("idEmpresa"); //Pega o id da empresa na sessão
+        HttpSession session = request.getSession(true);
+        Object id = session.getAttribute("idEmpresa");
 
-        //Verifica se o id existe
+        String buscar = request.getParameter("buscar");
+
         if (id == null){
             response.sendRedirect("/");
             return;
@@ -35,18 +36,21 @@ public class ListarFrotaServlet extends HttpServlet {
         try{
             FrotaDAO dao = new FrotaDAO();
 
-            List<Frota> frota = dao.buscarPorEmpresa(idEmpresa);
+            List<Frota> frotas;
 
-            request.setAttribute("frota", frota);
+            if (buscar != null && !buscar.isBlank()){
+                frotas = dao.buscarPorEmpresaComTipoFrota(idEmpresa, buscar);
+            } else {
+                frotas = dao.buscarPorEmpresa(idEmpresa);
+            }
+
+            request.setAttribute("frotas", frotas);
             request.getRequestDispatcher("WEB-INF/view/frota/listar-frota.jsp").forward(request, response);
 
         } catch (ErroAoConsultar e) {
-            request.setAttribute("mensagem", "Erro ao listar frotas. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Erro ao consultar frotas");
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Ocorreu um erro desconhecido");
         }
     }
 }
-

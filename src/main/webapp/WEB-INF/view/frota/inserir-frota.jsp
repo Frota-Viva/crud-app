@@ -1,12 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: davifranco-ieg
-  Date: 30/10/2025
-  Time: 09:52
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%request.setAttribute("tabela","frota");%>
+<%
+    request.setAttribute("tabela","frota");
+%>
 <html lang="pt-BR">
 
 <head>
@@ -15,7 +10,6 @@
     <title>Inserir Frota - Frota Viva</title>
     <link rel="stylesheet" href="../../../assets/CSS/tabelaIserirStyle.css">
 </head>
-
 <body>
 <jsp:include page="../componentes/aside.jsp"/>
 <main>
@@ -25,35 +19,42 @@
                 <h1>Inserir Frota</h1>
             </div>
         </header>
-        <form action="">
+        <form action="/inserir-frota" method="post">
             <section class="area-edicao">
                 <div class="linha-info">
                     <div class="campo-edicao">
                         <label for="regiao">Região:</label>
-                        <input type="text" placeholder="Região que a frota opera."  required id="regiao" name="regiao">
+                        <input type="text" placeholder="Região que a frota opera." id="regiao" name="regiao" required>
+                        <%if (request.getAttribute("erroRegiao") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroRegiao")%></p>
+                        <%}%>
                     </div>
-                </div>
-                <div class="linha-info">
                     <div class="campo-edicao">
                         <label for="tamanhoFrota">Tamanho Frota:</label>
-                        <input type="number" placeholder="Quantidade de caminhões da frota." min="1" required id="tamanhoFrota" name="tamanhoFrota">
+                        <input type="number" placeholder="Quantidade de caminhões da frota." min="1" id="tamanhoFrota" name="tamanhoFrota" required>
+                        <%if (request.getAttribute("erroTamanhoFrota") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroTamanhoFrota")%></p>
+                        <%}%>
                     </div>
                 </div>
                 <div class="linha-info">
                     <div class="campo-edicao">
                         <label for="tipoFrota">Tipo da Frota:</label>
-                        <input type="text" placeholder="Digite o tipo da frota." required id="tipoFrota" name="tipoFrota">
+                        <input type="text" placeholder="Digite o tipo da frota." id="tipoFrota" name="tipoFrota" required>
+                        <%if (request.getAttribute("erroTipoFrota") != null){%>
+                        <p style="color: red; font-size: 20px"><%=request.getAttribute("erroTipoFrota")%></p>
+                        <%}%>
                     </div>
                 </div>
             </section>
             <section id="botoes">
-                <button id="button-cancelar" type="button">
+                <button id="button-cancelar" type="button" onclick="window.location.href='/listar-frota'">
                     <img src="../../../assets/icons/icon-cancelar.svg" alt="" class="icones-botao">
-                    <p><b>Cancelar</b></p>
+                    <b>Cancelar</b>
                 </button>
                 <button id="button-confirmar" type="submit">
                     <img src="../../../assets/icons/icon-confirmar.svg" alt="" class="icones-botao">
-                    <p><b>Confirmar</b></p>
+                    <b>Confirmar</b>
                 </button>
             </section>
         </form>

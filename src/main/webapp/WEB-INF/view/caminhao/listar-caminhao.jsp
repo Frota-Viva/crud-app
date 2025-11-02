@@ -29,8 +29,10 @@
                     <input type="text" placeholder="Buscar placa" class="input-search" name="buscar">
                 </form>
                 <div class="mensagem">
-                    <%if (msg != null){%>
-                    <p><%=msg%></p>
+                    <% if (msg != null) {%>
+                    <span id="aviso-span-tabela">
+                        <p style="color: red"><%=msg%></p>
+                    </span>
                     <%}%>
                 </div>
             </div>
@@ -46,9 +48,10 @@
                         <div class="header-cell">Kms rodados</div>
                         <div class="header-cell">Modelo</div>
                         <div class="header-cell">Capacidade</div>
+                        <div class="header-cell">Id Frota</div>
                     </div>
                     <div class="header-cell header-action">
-                        <button class="bt-adicionar">
+                        <button class="bt-adicionar" onclick="window.location.href='/inserir-caminhao'">
                             <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
                             Adicionar Caminhão
                         </button>
@@ -69,13 +72,14 @@
                         <div class="table-cell cell"><%=c.getKmRodados()%></div>
                         <div class="table-cell cell"><%=c.getModelo()%></div>
                         <div class="table-cell cell"><%=c.getCapacidade()%></div>
+                        <div class="table-cell cell"><%=c.getIdFrota()%></div>
                     </div>
                     <div class="table-cell cell table-actions">
                         <button class="bt-editar" onclick="window.location.href='/atualizar-caminhao?id=<%=c.getId()%>'">
                             <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
                             Editar
                         </button>
-                        <button class="bt-excluir">
+                        <button class="bt-excluir" data-id="<%=c.getId()%>">
                             <img src="../../../assets/icons/icon-excluir.svg" alt="Excluir">
                             Excluir
                         </button>

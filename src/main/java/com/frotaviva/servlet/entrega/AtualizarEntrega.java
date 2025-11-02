@@ -21,11 +21,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @WebServlet(name = "AtualizarEntrega", value = "/atualizar-entrega")
-public class AtualizarEntregaServlet extends HttpServlet {
+public class AtualizarEntrega extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        long id;
+        long cod_entrega;
         EntregaDAO dao = new EntregaDAO();
 
         HttpSession session = req.getSession(true);
@@ -37,13 +37,14 @@ public class AtualizarEntregaServlet extends HttpServlet {
         }
 
         try {
-            id = Long.parseLong(req.getParameter("id"));
+            cod_entrega = Long.parseLong(req.getParameter("cod_entrega"));
+            Entrega entrega = dao.buscarPorId(cod_entrega);
 
-            if (dao.buscarPorId(id) == null) {
+            if (entrega == null) {
                 resp.sendRedirect("/listar-entrega");
             }
 
-            req.setAttribute("entrega", dao.buscarPorId(id));
+            req.setAttribute("entrega", entrega);
             req.getRequestDispatcher("WEB-INF/view/entrega/atualizar-entrega.jsp").forward(req, resp);
 
         } catch (NumberFormatException e) {
@@ -75,12 +76,19 @@ public class AtualizarEntregaServlet extends HttpServlet {
             EntregaDAO dao = new EntregaDAO();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-            cod_entrega = Long.parseLong(request.getParameter("cod_entrega"));
+            String cod_entregaReq = request.getParameter("cod_entrega");
+            cod_entrega = (! Validar.testeVazio(cod_entregaReq)) ? Long.parseLong(cod_entregaReq) : -1;
+
             descricaoProduto = request.getParameter("descricao_produto");
             dtPedido = new Date(sdf.parse(request.getParameter("dt_pedido")).getTime());
+            //Continuar as validações a partir daqui (validar a data)
+            System.out.println(dtPedido);
             dtEntrega = new Date(sdf.parse(request.getParameter("dt_entrega")).getTime());
+            System.out.println(dtEntrega);
             endereco = (Endereco) session.getAttribute("endereco");
-            idMotorista = Long.parseLong(request.getParameter("id_motorista"));
+            System.out.println(endereco);
+            idMotorista = Long.parseLong(request.getParameter("idMotorista"));
+            System.out.println(idMotorista);
 
             if (descricaoProduto == null || descricaoProduto.isEmpty()) request.setAttribute("erroDescricao", "Descrição inválida! Não pode ser nula.");
 
@@ -88,7 +96,7 @@ public class AtualizarEntregaServlet extends HttpServlet {
 
             if (!Validar.data(String.valueOf(dtEntrega))) request.setAttribute("erroDtEntrega", "Data de entrega inválida!");
 
-            if (dtPedido != null && dtEntrega != null && dtEntrega.before(dtPedido)) {
+            if (dtEntrega.before(dtPedido)) {
                 request.setAttribute("erroDtEntrega", "Data de entrega não pode ser anterior à data do pedido!");
             }
 
@@ -119,17 +127,16 @@ public class AtualizarEntregaServlet extends HttpServlet {
 
             if (dao.atualizar(entrega) == 1) {
                 response.sendRedirect("/listar-entrega?msg=Entrega+atualizada+com+sucesso");
-            } else {
-                request.setAttribute("mensagem", "Erro ao atualizar entrega. Tente novamente mais tarde.");
-                request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            } else{
+                request.setAttribute("msg", "Erro ao atualizar entrega. Tente novamente mais tarde.");
+                request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
             }
 
+
         } catch (ErroAoDeletar e) {
-            request.setAttribute("mensagem", "Erro ao atualizar entrega. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Erro ao atualizar entrega. Tente novamente mais tarde.");
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
     }
 }

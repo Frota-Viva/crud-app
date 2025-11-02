@@ -25,6 +25,13 @@ public class Motorista {
         this.idEmpresa=idEmpresa;
     }
 
+    public Motorista(String nome,String email,String cpf, String senha){
+        this.nome=nome;
+        this.email=email;
+        this.cpf=cpf;
+        this.senha=senha;
+    }
+
     public Motorista(long id, String nome,String email,String cpf, String senha){
         this.id = id;
         this.nome=nome;

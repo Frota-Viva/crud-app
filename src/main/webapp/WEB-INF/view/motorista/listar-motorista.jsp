@@ -32,8 +32,10 @@
                     <input type="text" placeholder="Buscar nome" class="input-search" name="buscar">
                 </form>
                 <div class="mensagem">
-                    <%if (msg != null){%>
-                    <p><%=msg%></p>
+                    <% if (msg != null) {%>
+                    <span id="aviso-span-tabela">
+                        <p style="color: red"><%=msg%></p>
+                    </span>
                     <%}%>
                 </div>
             </div>
@@ -48,7 +50,7 @@
                     <div class="header-cell">Email</div>
                 </div>
                 <div class="header-cell header-action">
-                    <button class="bt-adicionar">
+                    <button class="bt-adicionar" onclick="window.location.href='/inserir-motoristas'">
                         <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
                         Adicionar Usuário
                     </button>
@@ -57,7 +59,7 @@
 
             <%
                 if ( (motoristas != null) && (! motoristas.isEmpty()) ) {
-                for (Motorista motorista : motoristas){
+                    for (Motorista motorista : motoristas){
             %>
             <div class="table-row">
                 <div class="t-esquerda">
@@ -67,7 +69,7 @@
                     <div class="table-cell cell"><%=motorista.getEmail()%></div>
                 </div>
                 <div class="table-cell cell table-actions">
-                    <button class="bt-editar">
+                    <button class="bt-editar" onclick="window.location.href='/atualizar-motorista?id=<%=motorista.getId()%>'">
                         <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
                         Editar
                     </button>

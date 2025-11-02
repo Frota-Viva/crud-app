@@ -24,6 +24,8 @@ public class ListarCaminhaoServlet extends HttpServlet {
         HttpSession session = request.getSession(true); //Pega a sessão
         Object id = session.getAttribute("idEmpresa"); //Pega o id da empresa na sessão
 
+        String buscar = request.getParameter("buscar");
+
         if (id == null){
             response.sendRedirect("/");
             return;
@@ -34,17 +36,21 @@ public class ListarCaminhaoServlet extends HttpServlet {
         try{
             CaminhaoDAO dao = new CaminhaoDAO();
 
-            List<Caminhao> caminhoes = dao.buscarPorEmpresa(idEmpresa);
+            List<Caminhao> caminhoes;
+
+            if (buscar != null && !buscar.isBlank()){
+                caminhoes = dao.buscarPorEmpresaComPlaca(idEmpresa, buscar);
+            } else {
+                caminhoes = dao.buscarPorEmpresa(idEmpresa);
+            }
 
             request.setAttribute("caminhoes", caminhoes);
             request.getRequestDispatcher("WEB-INF/view/caminhao/listar-caminhao.jsp").forward(request, response);
 
         } catch (ErroAoConsultar e) {
-            request.setAttribute("mensagem", "Erro ao listar caminhao. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Erro ao consultar motoristas");
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Ocorreu um erro desconhecido");
         }
     }
 }

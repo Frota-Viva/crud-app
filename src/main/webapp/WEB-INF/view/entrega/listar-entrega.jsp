@@ -27,11 +27,13 @@
                     <button type="submit" class="bt-buscar">
                         <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
                     </button>
-                    <input type="text" placeholder="Buscar data" class="input-search" name="buscar">
+                    <input type="text" placeholder="Data: yyyy-mm-dd" class="input-search" name="buscar">
                 </form>
                 <div class="mensagem">
-                    <%if (msg != null){%>
-                    <p><%=msg%></p>
+                    <% if (msg != null) {%>
+                    <span id="aviso-span-tabela">
+                        <p style="color: red"><%=msg%></p>
+                    </span>
                     <%}%>
                 </div>
             </div>
@@ -47,7 +49,7 @@
                         <div class="header-cell">Motorista</div>
                     </div>
                     <div class="header-cell header-action">
-                        <button class="bt-adicionar">
+                        <button class="bt-adicionar" onclick="window.location.href='/inserir-entregas'">
                             <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
                             Adicionar Entrega
                         </button>
@@ -69,11 +71,11 @@
                         <div class="table-cell cell"><%=e.getIdMotorista()%></div>
                     </div>
                     <div class="table-cell cell table-actions">
-                        <button class="bt-editar">
+                        <button class="bt-editar" onclick="window.location.href='/atualizar-entrega?id=<%=e.getCod_entrega()%>'">
                             <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
                             Editar
                         </button>
-                        <button class="bt-excluir">
+                        <button class="bt-excluir" data-id="<%=e.getCod_entrega()%>">
                             <img src="../../../assets/icons/icon-excluir.svg" alt="Excluir">
                             Excluir
                         </button>
@@ -83,7 +85,7 @@
                 } else {%>
                 <div class="table-row">
                     <div class="t-esquerda">
-                        <td class="table-cell cell">Nenhum entrega encontrado</td>
+                        <td class="table-cell cell">Nenhum entrega encontrada</td>
                     </div>
                 </div>
                 <%}%>

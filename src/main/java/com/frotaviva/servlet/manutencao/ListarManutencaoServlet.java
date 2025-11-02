@@ -18,11 +18,12 @@ import java.util.List;
 public class ListarManutencaoServlet extends HttpServlet {
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession(true);
         Object id = session.getAttribute("idEmpresa");
+
+        String buscar = request.getParameter("buscar");
 
         if (id == null) {
             response.sendRedirect("/");
@@ -35,20 +36,23 @@ public class ListarManutencaoServlet extends HttpServlet {
 
             ManutencaoDAO dao = new ManutencaoDAO();
 
-            List<Manutencao> manutencao = dao.buscarPorEmpresa(idEmpresa);
+            List<Manutencao> manutencoes;
 
-            request.setAttribute("manutencao", manutencao);
+            if (buscar != null && !buscar.isBlank()){
+                manutencoes = dao.buscarPorEmpresaComTipo(idEmpresa, buscar);
+            } else {
+                manutencoes = dao.buscarPorEmpresa(idEmpresa);
+            }
+
+            request.setAttribute("manutencoes", manutencoes);
             request.getRequestDispatcher("WEB-INF/view/manutencao/listar-manutencao.jsp").forward(request, response);
 
         } catch (ServletException e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Ocorreu um no servidor. Tente novamente mais tarde.");
         } catch (ErroAoConsultar e) {
-            request.setAttribute("mensagem", "Erro ao acessar o encontrar motoristas. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Erro ao acessar o encontrar motoristas. Tente novamente mais tarde.");
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
     }
 }

@@ -1,107 +1,152 @@
+<%@ page import="com.frotaviva.model.Entrega" %>
+<%@ page import="com.frotaviva.model.Endereco" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%request.setAttribute("tabela","entrega");%>
+<%
+    request.setAttribute("tabela","entrega");
+    Entrega e = (Entrega) request.getAttribute("entrega");
+    Endereco endereco = (Endereco) request.getAttribute("endereco");
+    boolean dtEntregaNull = e.getDtEntrega() == null;
+%>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edição de Entregas - Frota Viva</title>
-  <link rel="stylesheet" href="../../../assets/CSS/tabelaEditStyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edição de Entregas - Frota Viva</title>
+    <link rel="stylesheet" href="../../../assets/CSS/tabelaEditStyle.css?<%=System.currentTimeMillis()%>">
 </head>
 
 <body>
 <jsp:include page="../componentes/aside.jsp"/>
 <main>
-  <section class="conteudo-container">
+    <section class="conteudo-container">
 
-    <form action="">
-      <header class="cabecalho-info">
-        <div class="table-header">
-          <div class="th-esquerda">
-            <div class="header-cell">ID</div>
-            <div class="header-cell">Pedido</div>
-            <div class="header-cell">Entrega</div>
-            <div class="header-cell">CEP</div>
-            <div class="header-cell">Motorista</div>
-          </div>
-          <div class="header-cell header-action">
-            <button class="btn-salvar" type="submit">
-              <img src="../../../assets/icons/icon-salvar-alteracoes.svg" alt="salvar" id="salvar-edicao">
-              Salvar Alterações
-            </button>
-          </div>
-        </div>
-        <div class="table-row">
-          <div class="t-esquerda">
-            <div class="table-cell cell">1</div>
-            <div class="table-cell cell">text</div>
-            <div class="table-cell cell">text</div>
-            <div class="table-cell cell">text</div>
-            <div class="table-cell cell">text</div>
-          </div>
-          <button class="btn-sair" type="button">
-            <img src="../../../assets/icons/icon-sair-edicao.svg" alt="Sair" id="sair-edicao">
-            Sair da Edição
-          </button>
-        </div>
+        <form action="/atualizar-entrega" method="post">
+            <header class="cabecalho-info">
+                <div class="table-header">
+                    <div class="th-esquerda">
+                        <div class="header-cell">ID</div>
+                        <div class="header-cell">Pedido</div>
+                        <div class="header-cell">Entrega</div>
+                        <div class="header-cell">CEP</div>
+                        <div class="header-cell">Motorista</div>
+                    </div>
+                    <div class="header-cell header-action">
+                        <button class="btn-salvar" type="submit">
+                            <img src="../../../assets/icons/icon-salvar-alteracoes.svg" alt="salvar" id="salvar-edicao">
+                            Salvar Alterações
+                        </button>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="t-esquerda">
+                        <div class="table-cell cell"><%=e.getCod_entrega()%></div>
+                        <div class="table-cell cell"><%=e.getDtPedido()%></div>
+                        <div class="table-cell cell"><%=dtEntregaNull ? "Não foi entregue" : e.getDtEntrega()%></div>
+                        <div class="table-cell cell"><%=endereco.getCep()%></div>
+                        <div class="table-cell cell"><%=e.getIdMotorista()%></div>
+                    </div>
+                    <button class="btn-sair" type="button" onclick="window.location.href='/listar-entregas'">
+                        <img src="../../../assets/icons/icon-sair-edicao.svg" alt="Sair" id="sair-edicao">
+                        Sair da Edição
+                    </button>
+                </div>
+            </header>
 
-        </div>
-      </header>
-      <section class="area-edicao">
-        <div class="linha-info">
-          <div class="campo-edicao">
-            <label for="descricao">Descrição:</label>
-            <input type="text" value="Nisi voluptates provident et." id="descricao" name="descricao" required>
-          </div>
-          <div class="campo-edicao">
-            <label for="cep">CEP:</label>
-            <input type="text" value="08148589" maxlength="9" required name="cep" id="cep">
-          </div>
-          <div class="campo-edicao">
-            <label for="numero">Número:</label>
-            <input type="number" value="84825" mim="1" required id="numero" name="numero">
-          </div>
-          <div class="campo-edicao">
-            <label for="cidade">Cidade:</label>
-            <input type="text" value="Pereira Verde" required id="cidade" name="cidade">
-          </div>
-        </div>
-        <div class="linha-info">
-          <div class="campo-edicao">
-            <label for="pedido">Pedido:</label>
-            <input type="date" value="2025-01-03" required id="pedido" name="pedido">
-          </div>
-          <div class="campo-edicao">
-            <label for="rua">Rua:</label>
-            <input type="text" value="Lago de Moura" required id="rua" name="rua">
-          </div>
-          <div class="campo-edicao">
-            <label for="pais">País:</label>
-            <input type="text" value="Brasil" required id="pais" name="pais">
-          </div>
-          <div class="campo-edicao">
-            <label for="idMotorista">ID Motorista:</label>
-            <input type="number" value="3" min="1" required id="idMotorista" name="idMotorista">
-          </div>
-        </div>
-        <div class="linha-info">
-          <div class="campo-edicao">
-            <label for="entrega">Entrega:</label>
-            <input type="date" value="20125-03-17" id="entrega" name="entrega">
-          </div>
-          <div class="campo-edicao">
-            <label for="complemento">Complemento:</label >
-            <input type="text" value="Molestiae repellendus veritatis." id="complemento" name="complemento">
-          </div>
-          <div class="campo-edicao">
-            <label for="estado">Estado:</label>
-            <input type="text" value="SP" required id="estado" name="estado">
-          </div>
-        </div>
-      </section>
-    </form>
-  </section>
+            <section class="area-edicao">
+
+                <input type="hidden" name="cod_entrega" value="<%=e.getCod_entrega()%>">
+
+                <div class="linha-info">
+                    <div class="campo-edicao">
+                        <label for="descricao_produto">Descrição:</label>
+                        <input type="text" value="<%=e.getDescricaoProduto()%>" id="descricao_produto" name="descricao_produto" required>
+                        <% if (request.getAttribute("erroDescricao") != null) { %>
+                        <p style="color: red; font-size: 16px"><%=request.getAttribute("erroDescricao")%></p>
+                        <% } %>
+                    </div>
+                    <div class="campo-edicao">
+                        <label for="cep">CEP:</label>
+                        <input type="text" value="<%=endereco.getCep()%>" maxlength="9" required name="cep" id="cep">
+                        <% if (request.getAttribute("erroCep") != null) { %>
+                        <p style="color: red; font-size: 16px"><%=request.getAttribute("erroCep")%></p>
+                        <% } %>
+                    </div>
+                    <div class="campo-edicao">
+                        <label for="numero">Número:</label>
+                        <input type="number" value="<%=endereco.getNumero()%>" min="1" required id="numero" name="numero">
+                        <% if (request.getAttribute("erroNumero") != null) { %>
+                        <p style="color: red; font-size: 16px"><%=request.getAttribute("erroNumero")%></p>
+                        <% } %>
+                    </div>
+                    <div class="campo-edicao">
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" value="<%=endereco.getCidade()%>" required id="cidade" name="cidade">
+                        <% if (request.getAttribute("erroCidade") != null) { %>
+                        <p style="color: red; font-size: 16px"><%=request.getAttribute("erroCidade")%></p>
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="linha-info">
+                    <div class="campo-edicao">
+                        <label for="dt_pedido">Data pedido:</label>
+                        <input type="date" value="<%=e.getDtPedido()%>" required id="dt_pedido" name="dt_pedido">
+                        <% if (request.getAttribute("erroDtPedido") != null) { %>
+                        <p style="color: red; font-size: 16px"><%=request.getAttribute("erroDtPedido")%></p>
+                        <% } %>
+                    </div>
+                    <div class="campo-edicao">
+                        <label for="rua">Rua:</label>
+                        <input type="text" value="<%=endereco.getRua()%>" required id="rua" name="rua">
+                        <% if (request.getAttribute("erroRua") != null) { %>
+                        <p style="color: red; font-size: 16px"><%=request.getAttribute("erroRua")%></p>
+                        <% } %>
+                    </div>
+                    <div class="campo-edicao">
+                        <label for="pais">País:</label>
+                        <input type="text" value="<%=endereco.getPais()%>" required id="pais" name="pais">
+                        <% if (request.getAttribute("erroPais") != null) { %>
+                        <p style="color: red; font-size: 16px"><%=request.getAttribute("erroPais")%></p>
+                        <% } %>
+                    </div>
+                    <div class="campo-edicao">
+                        <label for="idMotorista">ID Motorista:</label>
+                        <input type="number" value="<%=e.getIdMotorista()%>" min="1" required id="idMotorista" name="idMotorista">
+                        <% if (request.getAttribute("erroMotorista") != null) { %>
+                        <p style="color: red; font-size: 16px"><%=request.getAttribute("erroMotorista")%></p>
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="linha-info">
+                    <div class="campo-edicao">
+                        <label for="dt_entrega">Data entrega:</label>
+                        <input type="date" value="<%=dtEntregaNull ? "" : e.getDtEntrega()%>" id="dt_entrega" name="dt_entrega">
+                        <% if (request.getAttribute("erroDtEntrega") != null) { %>
+                        <p style="color: red; font-size: 16px"><%=request.getAttribute("erroDtEntrega")%></p>
+                        <% } %>
+                    </div>
+                    <div class="campo-edicao">
+                        <label for="complemento">Complemento:</label>
+                        <input type="text" value="<%=endereco.getComplemento()%>" id="complemento" name="complemento">
+                        <% if (request.getAttribute("erroComplemento") != null) { %>
+                        <p style="color: red; font-size: 16px"><%=request.getAttribute("erroComplemento")%></p>
+                        <% } %>
+                    </div>
+                    <div class="campo-edicao">
+                        <label for="estado">Estado:</label>
+                        <input type="text" value="<%=endereco.getEstado()%>" required id="estado" name="estado">
+                        <% if (request.getAttribute("erroEstado") != null) { %>
+                        <p style="color: red; font-size: 16px"><%=request.getAttribute("erroEstado")%></p>
+                        <% } %>
+                    </div>
+                </div>
+
+            </section>
+        </form>
+    </section>
 </main>
 </body>
-
 </html>

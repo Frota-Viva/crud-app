@@ -56,14 +56,16 @@ public class FrotaDAO extends AbstractDAO implements DAO<Frota>{
         PreparedStatement stmt = null;
         Connection con = null;
 
-        String sql = "UPDATE frota SET tamanho_frota = ?, tipo_frota = ?, regiao = ?, id_empresa = ? WHERE id = ?";
+        String sql = "UPDATE frota SET tamanho_frota = ?, tipo_frota = ?, regiao = ? WHERE id = ?";
 
         try {
             con = conexao.conectar();
             stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, frota.getTamanhoFrota());
-            stmt.setLong(2, frota.getId());
+            stmt.setString(2, frota.getTipoFrota());
+            stmt.setString(3, frota.getRegiao());
+            stmt.setLong(4, frota.getId());
 
             if (stmt.executeUpdate() > 0) return 1;
             return 0;
@@ -234,7 +236,7 @@ public class FrotaDAO extends AbstractDAO implements DAO<Frota>{
 
             rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 long idFrota = rs.getLong("id");
                 int tamanhoFrota = rs.getInt("tamanho_frota");
                 String tipoFrota = rs.getString("tipo_frota");
@@ -248,7 +250,46 @@ public class FrotaDAO extends AbstractDAO implements DAO<Frota>{
             return frotas;
 
         } catch (SQLException e) {
-            log.error("Erro ao buscar frota", e);
+            log.error("Erro ao buscar frotsa", e);
+            throw throwDAOException(e, SELECT);
+        } finally {
+            fechar(stmt, rs);
+            conexao.desconectar(con);
+        }
+    }
+    public List<Frota> buscarPorEmpresaComTipoFrota(long id_empresa, String buscar) {
+        List<Frota> frotas = new ArrayList<>();
+        Conexao conexao = new Conexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Connection con = null;
+
+        String sql = "SELECT * FROM frota WHERE id_empresa = ? AND tipo_frota ILIKE ?";
+
+        try {
+            con = conexao.conectar();
+            stmt = con.prepareStatement(sql);
+
+            stmt.setLong(1, id_empresa);
+            stmt.setString(2, "%" + buscar + "%");
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                long idFrota = rs.getLong("id");
+                int tamanhoFrota = rs.getInt("tamanho_frota");
+                String tipoFrota = rs.getString("tipo_frota");
+                String regiao = rs.getString("regiao");
+                long idEmpresa = rs.getLong("id_empresa");
+
+                Frota frota = new Frota(idFrota, tamanhoFrota, tipoFrota, regiao, idEmpresa);
+                frotas.add(frota);
+            }
+
+            return frotas;
+
+        } catch (SQLException e) {
+            log.error("Erro ao buscar frotsa", e);
             throw throwDAOException(e, SELECT);
         } finally {
             fechar(stmt, rs);

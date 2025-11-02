@@ -27,11 +27,13 @@
                     <button type="submit" class="bt-buscar">
                         <img src="../../../assets/imgs/img-home/lupa.png" alt="Buscar" class="icon-acomp">
                     </button>
-                    <input type="text" placeholder="Buscar data" class="input-search" name="buscar">
+                    <input type="text" placeholder="Buscar tipo-frota" class="input-search" name="buscar">
                 </form>
                 <div class="mensagem">
-                    <%if (msg != null){%>
-                    <p><%=msg%></p>
+                    <% if (msg != null) {%>
+                    <span id="aviso-span-tabela">
+                        <p style="color: red"><%=msg%></p>
+                    </span>
                     <%}%>
                 </div>
             </div>
@@ -46,7 +48,7 @@
                         <div class="header-cell">Região de atuação</div>
                     </div>
                     <div class="header-cell header-action">
-                        <button class="bt-adicionar">
+                        <button class="bt-adicionar" onclick="window.location.href='/inserir-frota'">
                             <img src="../../../assets/icons/icon-adicionar.svg" alt="Adicionar">
                             Adicionar Frota
                         </button>
@@ -70,7 +72,7 @@
                             <img src="../../../assets/icons/icon-editar.svg" alt="Editar">
                             Editar
                         </button>
-                        <button class="bt-excluir">
+                        <button class="bt-excluir" data-id="<%=f.getId()%>">
                             <img src="../../../assets/icons/icon-excluir.svg" alt="Excluir">
                             Excluir
                         </button>

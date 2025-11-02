@@ -1,11 +1,38 @@
 package com.frotaviva.util;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
+/**
+ * Classe responsável por validar determinados parâmetros utilizando, na sua maioria, REGEX para a validação
+ * <p>Principais métodos:</p>
+ * <ul>
+ * <li>email -> valida se o email coincide com o REGEX</li>
+ * <li>senha -> valida se o senha coincide com o REGEX</li>
+ * <li>telefone -> valida se o telefone coincide com o REGEX</li>
+ * <li>telefoneValidado -> retorna o telefone somente com números</li>
+ * <li>cep -> valida se o cep coincide com o REGEX</li>
+ * <li>cepValidado -> retorna o cep somente com números</li>
+ * <li>data -> valida se a data coincide com o REGEX</li>
+ * <li>cpf -> valida se o cpf coincide com o REGEX</li>
+ * <li>cpfValidado -> retorna o cpf somente com números</li>
+ * <li>placa -> valida se a placa coincide com o REGEX</li>
+ * <li>status -> valida se o status do caminhão coincide com o REGEX</li>
+ * <li>testeVazio -> valida se a String recebida não contém caracteres (sem ser espaço ' ')</li>
+ * </ul>
+ * 
+ * @author Ricardo e Lucas Cayres
+ */
 public class Validar {
     public Validar(){}
 
+    /**
+     * Verifica se o email coincide com o REGEX
+     * 
+     * @param email email a ser validado
+     * @return {@code true} se email coincide com REGEX ou {@code false} se não coincide
+     */
     public static boolean email(String email){
         if (email == null) return false;
 
@@ -13,6 +40,12 @@ public class Validar {
         return email.matches(regex);
     }
 
+    /**
+     * Verifica se a senha coincide com o REGEX
+     * 
+     * @param senha senha a ser validada
+     * @return {@code true} se senha coincide com REGEX ou {@code false} se não coincide
+     */
     public static boolean senha(String senha){
         if (senha == null) return false;
 
@@ -20,6 +53,12 @@ public class Validar {
         return senha.matches(regex);
     }
 
+    /**
+     * Verifica se o telefone coincide com o REGEX
+     * 
+     * @param telefone telefone a ser validado
+     * @return {@code true} se telefone coincide com REGEX ou {@code false} se não coincide
+     */
     public static boolean telefone(String telefone){
         if (telefone == null) return false;
 
@@ -27,6 +66,12 @@ public class Validar {
         return telefone.matches(regex);
     }
 
+    /**
+     * Retorna o telefone somente com números se o telefone for válido
+     * 
+     * @param telefone telefone a ser tratado
+     * @return telefone apenas com números ou {@code null} se o telefone não for válido
+     */
     public static String telefoneValidado(String telefone){
         if (telefone == null) return null;
 
@@ -35,6 +80,12 @@ public class Validar {
         return telefone.replaceAll("[^0-9]", "");
     }
 
+    /**
+     * Verifica se o cep coincide com o REGEX
+     * 
+     * @param cep cep a ser validado
+     * @return {@code true} se cep coincide com REGEX ou {@code false} se não coincide
+     */
     public static boolean cep(String cep){
         if (cep == null) return false;
 
@@ -42,6 +93,12 @@ public class Validar {
         return cep.matches(regex);
     }
 
+    /**
+     * Retorna o cep somente com números se o cep for válido
+     * 
+     * @param cep cep a ser tratado
+     * @return cep apenas com números ou {@code null} se o cep não for válido
+     */
     public static String cepValidado(String cep){
         if (cep == null) return null;
 
@@ -50,6 +107,12 @@ public class Validar {
         return cep.replaceAll("[^0-9]", "");
     }
 
+    /**
+     * Verifica se a data é válida e está no formato yyyy-MM-dd
+     * 
+     * @param data data a ser validada
+     * @return {@code true} se a data for válida ou {@code false} se não for
+     */
     public static boolean data(String data){
         try {
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -60,6 +123,12 @@ public class Validar {
         }
     }
 
+    /**
+     * Verifica se o cpf coincide com o REGEX
+     * 
+     * @param cpf cpf a ser validado
+     * @return {@code true} se cpf coincide com REGEX ou {@code false} se não coincide
+     */
     public static boolean cpf(String cpf){
         if (cpf == null) return false;
 
@@ -67,6 +136,12 @@ public class Validar {
         return cpf.matches(regex);
     }
 
+    /**
+     * Retorna o cpf somente com números se o cpf for válido
+     * 
+     * @param cpf cpf a ser tratado
+     * @return cpf apenas com números ou {@code null} se o cpf não for válido
+     */
     public static String cpfValidado(String cpf){
         if (cpf == null) return null;
 
@@ -75,6 +150,12 @@ public class Validar {
         return cpf.replaceAll("[^0-9]", "");
     }
 
+    /**
+     * Verifica se a placa coincide com o REGEX
+     * 
+     * @param placa placa a ser validada
+     * @return {@code true} se placa coincide com REGEX ou {@code false} se não coincide
+     */
     public static boolean placa(String placa){
         if (placa == null) return false;
 
@@ -82,14 +163,27 @@ public class Validar {
         return placa.matches(regex);
     }
 
+    /**
+     * Verifica se o status do caminhão coincide com o REGEX
+     * 
+     * @param status status a ser validado
+     * @return {@code true} se status coincide com REGEX ou {@code false} se não coincide
+     */
     public static boolean status(String status){
         if (status == null) return false;
 
         String regex = "(I)|(A)|(M)";
         return status.matches(regex);
     }
+
+    /**
+     * Verifica se a string recebida não contém caracteres (sem ser espaço ' ')
+     * 
+     * @param texto texto a ser verificado
+     * @return {@code true} se a string estiver vazia ou contiver apenas espaços, {@code false} caso contrário
+     */
     public static boolean testeVazio(String texto){
-        if (texto == null || texto.equals("")) return true;
+        if (texto == null || texto.isEmpty()) return true;
 
         String regex = "^ +$";
         return texto.matches(regex);
