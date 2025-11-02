@@ -57,7 +57,7 @@ if (tabelaReq!=null){
             <div id="espaco"></div>
             <%}%>
             <img src="../../assets/icons/icon-frota.svg" alt="Frota" class="icones-aside">
-            Frota
+            Frotas
         </a>
 
         <a href="/listar-motoristas">

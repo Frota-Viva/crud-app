@@ -20,25 +20,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 
-/**
- * Servlet responsável por cadastrar novas entregas no banco de dados.
- * <p>
- * Este servlet processa os dados enviados pelo formulário de cadastro,
- * valida as informações fornecidas, garante a correspondência entre
- * motoristas e a empresa logada e insere a entrega no banco de dados.
- * </p>
- * <p>
- * Principais funcionalidades:
- * <ul>
- *     <li><b>redirectComMensagem:</b> Redireciona para /listar-entregas com a mensagem codificada;</li>
- *     <li><b>GET:</b> Exibe a página de cadastro de entrega;</li>
- *     <li><b>POST:</b> Valida e insere a entrega no banco de dados;</li>
- *     <li>Redireciona o usuário com mensagens de sucesso ou erro conforme o resultado.</li>
- * </ul>
- * </p>
- * 
- * @author Ricardo
- */
 @WebServlet(name = "InserirEntrega", value = "/inserir-entregas")
 public class InserirEntrega extends HttpServlet {
 
