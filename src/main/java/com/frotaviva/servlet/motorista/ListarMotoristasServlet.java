@@ -14,19 +14,56 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Responsável por listar os motoristas cadastrados de uma empresa.
+ * <p>
+ * Este servlet exibe a lista completa de motoristas ou realiza uma busca filtrada pelo nome,
+ * retornando os resultados para a página JSP de listagem.
+ * </p>
+ * <p>
+ * Principais funcionalidades:
+ * <ul>
+ *     <li>Verifica se existe uma empresa logada, senão redireciona para a landing page;</li>
+ *     <li>Se o parâmetro de busca estiver presente, filtra os motoristas pelo nome;</li>
+ *     <li>Se não houver filtro, lista todos os motoristas da empresa;</li>
+ *     <li>Envia os dados para a JSP responsável por exibir a lista;</li>
+ *     <li>Se ocorrer algum erro de consulta ou inesperado, encaminha para a página de erro com a mensagem apropriada.</li>
+ * </ul>
+ * </p>
+ * 
+ * @author Davi Alcanfor
+ */
 @WebServlet(name = "ListaMotoristas", value = "/listar-motoristas")
 public class ListarMotoristasServlet extends HttpServlet {
 
+    /**
+     * Exibe a lista de motoristas da empresa.
+     * <p>
+     * Etapas principais:
+     * <ul>
+     *     <li>Recupera a sessão e verifica se existe uma empresa logada;</li>
+     *     <li>Recebe o parâmetro opcional "buscar" para filtro de nome;</li>
+     *     <li>Se houver filtro, busca motoristas pelo nome associado à empresa;</li>
+     *     <li>Se não houver filtro, busca todos os motoristas da empresa;</li>
+     *     <li>Envia a lista de motoristas para a JSP de listagem;</li>
+     *     <li>Se ocorrer {@link ErroAoConsultar} ou qualquer outro erro, encaminha para página de erro.</li>
+     * </ul>
+     * </p>
+     *
+     * @param request  requisição HTTP recebida
+     * @param response resposta HTTP enviada ao cliente
+     * @throws ServletException se ocorrer um erro interno no servlet
+     * @throws IOException se ocorrer um erro de entrada ou saída
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
-        HttpSession session = request.getSession(true); //Pega a sessão
-        Object id = session.getAttribute("idEmpresa"); //Pega o id da empresa na sessão
-
+        HttpSession session = request.getSession(true);
+        Object id = session.getAttribute("idEmpresa");
         String buscar = request.getParameter("buscar");
 
+        // Se não existir empresa logada, redireciona para landing page
         if (id == null){
             response.sendRedirect("/");
             return;
@@ -34,13 +71,12 @@ public class ListarMotoristasServlet extends HttpServlet {
 
         long idEmpresa = (long) id;
 
-        try{
+        try {
             MotoristaDAO dao = new MotoristaDAO();
             List<Motorista> motoristas;
 
-            if (buscar != null && !buscar.isBlank()){
+            if (buscar != null && !buscar.isBlank()) {
                 motoristas = dao.buscarPorEmpresaComNome(idEmpresa, buscar);
-
             } else {
                 motoristas = dao.buscarPorEmpresa(idEmpresa);
             }
@@ -55,6 +91,5 @@ public class ListarMotoristasServlet extends HttpServlet {
             request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
             request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
         }
-
     }
 }
