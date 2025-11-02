@@ -204,6 +204,11 @@ main {
     font-size: large;
     border-radius: 0.8rem;
 }
+#caixa-excluirConta{
+    background-color: #F06060;
+    font-size: large;
+    border-radius: 0.8rem;
+}
 .erroCaixa {
     padding: 1rem;
     background-color: #F06060;

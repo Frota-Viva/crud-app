@@ -94,6 +94,9 @@ Empresa empresa = (Empresa) reqEmpresa;%>
                     <div id="caixa-alterarSenha">
                         <a href="/home/perfil/alterar-senha">Alterar senha</a>
                     </div>
+                    <div id="caixa-excluirConta">
+                        <a href="/home/perfil/alterar-senha">Excluir Conta</a>
+                    </div>
                 </div>
                 <div>
                     <% if (request.getAttribute("erroIgualdade") != null) { %>
