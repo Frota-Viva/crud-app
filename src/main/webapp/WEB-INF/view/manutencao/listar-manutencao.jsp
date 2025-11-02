@@ -6,6 +6,8 @@
     List<Manutencao> manutencoes = (List<Manutencao>) request.getAttribute("manutencoes");
     String msg = request.getParameter("msg");
     request.setAttribute("tabela","manutencao");
+    String sucesso = ".*sucesso.*";
+    String cor = msg.matches(sucesso) ? "green" : "red";
 %>
 <head>
     <meta charset="UTF-8">
@@ -31,7 +33,7 @@
                 <div class="mensagem">
                     <% if (msg != null) {%>
                     <span id="aviso-span-tabela">
-                        <p style="color: red"><%=msg%></p>
+                        <p style="color: <%=cor%>"><%=msg%></p>
                     </span>
                     <%}%>
                 </div>

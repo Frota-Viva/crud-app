@@ -5,6 +5,8 @@
     List<Motorista> motoristas = (List<Motorista>) request.getAttribute("motoristas");
     String msg = request.getParameter("msg");
     request.setAttribute("tabela","motorista");
+    String sucesso = ".*sucesso.*";
+    String cor = msg.matches(sucesso) ? "green" : "red";
 %>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -34,7 +36,7 @@
                 <div class="mensagem">
                     <% if (msg != null) {%>
                     <span id="aviso-span-tabela">
-                        <p style="color: red"><%=msg%></p>
+                        <p style="color: <%=cor%>"><%=msg%></p>
                     </span>
                     <%}%>
                 </div>
