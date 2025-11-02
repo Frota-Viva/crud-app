@@ -35,20 +35,6 @@ import java.util.List;
  */
 @WebServlet(name = "ListarEntregas", value = "/listar-entregas")
 public class ListarEntrega extends HttpServlet {
-
-    /**
-     * Processa a requisição GET para listar as entregas.
-     * <p>
-     * Se não houver empresa logada, o usuário é redirecionado para a landing page.
-     * Se for o parâmetro 'buscar' existir contendo uma data válida, a lista será filtrada.
-     * Caso contrário, retorna todas as entregas da empresa.
-     * </p>
-     *
-     * @param req  requisição HTTP recebida
-     * @param resp resposta HTTP enviada ao cliente
-     * @throws ServletException se ocorrer erro interno no servlet
-     * @throws IOException se ocorrer erro de entrada/saída durante o processamento
-     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

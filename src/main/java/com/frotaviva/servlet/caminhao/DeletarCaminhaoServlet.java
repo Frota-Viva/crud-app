@@ -86,7 +86,7 @@ public class DeletarCaminhaoServlet extends HttpServlet {
             }
 
             request.setAttribute("msg", "Erro ao deletar caminhao. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/listar-caminhao.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/caminhao/listar-caminhao.jsp").forward(request, response);
 
         } catch (ErroAoDeletar e) {
             response.sendRedirect("/listar-caminhao?msg=Erro ao deletar caminhao. Tente novamente mais tarde.");

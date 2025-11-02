@@ -20,34 +20,8 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-/**
- * Servlet responsável por atualizar os dados de uma entrega.
- * <p>
- * Este servlet permite alterar informações da entrega, como datas,
- * descrição do produto, endereço e motorista responsável.
- * Realiza validações de campos obrigatórios e consistência de datas.
- * </p>
- * <p>
- * Se a empresa não estiver logada, redireciona para a landing page.
- * </p>
- * 
- * @author Ricardo
- */
 @WebServlet(name = "AtualizarEntrega", value = "/atualizar-entrega")
 public class AtualizarEntrega extends HttpServlet {
-
-    /**
-     * Exibe a página de atualização de uma entrega.
-     * <p>
-     * Se o ID da empresa não existir na sessão, redireciona para a landing page.
-     * Se o código da entrega não existir ou estiver incorreto, redireciona para a listagem de entregas.
-     * </p>
-     *
-     * @param req  requisição HTTP recebida
-     * @param resp resposta HTTP a ser enviada
-     * @throws ServletException se ocorrer erro no processamento do servlet
-     * @throws IOException      se ocorrer erro de entrada/saída
-     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(true);

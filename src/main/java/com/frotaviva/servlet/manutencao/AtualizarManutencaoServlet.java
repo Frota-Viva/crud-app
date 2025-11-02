@@ -4,6 +4,7 @@ import com.frotaviva.dao.CaminhaoDAO;
 import com.frotaviva.dao.FrotaDAO;
 import com.frotaviva.dao.ManutencaoDAO;
 import com.frotaviva.dao.MotoristaDAO;
+import com.frotaviva.exception.ErroAoAtualizar;
 import com.frotaviva.exception.ErroAoDeletar;
 import com.frotaviva.model.Caminhao;
 import com.frotaviva.model.Frota;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Responsável por atualizar os registros de manutenção dos veículos.
@@ -85,6 +87,36 @@ public class AtualizarManutencaoServlet extends HttpServlet {
     }
 
     /**
+     * Recebe o id da frota e a lista de frotas da empresa.
+     * Percorre a lista e verifica se alguma frota tem o mesmo id.
+     *
+     * @param idFrota id da frota a ser verificada
+     * @param frotas lista de frotas da empresa
+     * @author Ricardo
+     **/
+    private static boolean frotaExiste(long idFrota, List<Frota> frotas) {
+        for (Frota frota : frotas) {
+            if (frota.getId() == idFrota) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Verifica se o motorista com o ID fornecido existe na lista de motoristas.
+     *
+     *
+     * @param idMotorista ID do motorista a ser verificado
+     * @param motoristas lista de motoristas da empresa
+     * @return boolean
+     */
+    private static boolean motoristaExiste(long idMotorista, List<Motorista> motoristas) {
+        for (Motorista motorista : motoristas) {
+            if (motorista.getId() == idMotorista) return true;
+        }
+        return false;
+    }
+
+    /**
      * Realiza a atualização da manutenção recebida do formulário.
      * <p>
      * Se algum campo estiver inválido, exibe mensagem de erro. Caso todos os campos estejam corretos,
@@ -127,8 +159,8 @@ public class AtualizarManutencaoServlet extends HttpServlet {
 
             // Validação
 
-            if (dtCadastro == null || dtCadastro.after(dtConclusao)) {
-                request.setAttribute("erroDtCadastro", "Data de conclusão inválida! Deve ser anterior a de cadastro");
+            if (dtCadastro == null) {
+                request.setAttribute("erroDtCadastro", "Data de cadastro inválida! Deve ser anterior a de cadastro");
                 erro = true;
             }
 
@@ -147,7 +179,7 @@ public class AtualizarManutencaoServlet extends HttpServlet {
                 erro = true;
             }
 
-            if (custo.compareTo(BigDecimal.ZERO) < 0 || Validar.testeVazio(String.valueOf(custo))){
+            if (custo == null || custo.compareTo(BigDecimal.ZERO) < 0){
                 request.setAttribute("erroCusto", "Custo inválido! Não pode ser menor que zero.");
                 erro = true;
             }
@@ -158,12 +190,12 @@ public class AtualizarManutencaoServlet extends HttpServlet {
              */
 
             CaminhaoDAO caminhaoDAO = new CaminhaoDAO();
-            Caminhao caminhao = caminhaoDAO.buscarPorId(idCaminhao);
-
             FrotaDAO frotaDAO = new FrotaDAO();
-            Frota frota = frotaDAO.buscarPorId(caminhao.getIdFrota());
+            
+            Caminhao caminhao = caminhaoDAO.buscarPorId(idCaminhao);
+            List<Frota> frotas = frotaDAO.buscarPorEmpresa(idEmpresa);
 
-            if (frota.getIdEmpresa() != idEmpresa) {
+            if (caminhao == null || !frotaExiste(caminhao.getIdFrota(), frotas)){
                 request.setAttribute("erroCaminhao", "Caminhão inválido! Digite um caminhão existente.");
                 erro = true;
             }
@@ -174,20 +206,22 @@ public class AtualizarManutencaoServlet extends HttpServlet {
              */
 
             MotoristaDAO motoristaDAO = new MotoristaDAO();
-            Motorista motorista = motoristaDAO.buscarPorId(ultimoMotorista);
+            List<Motorista>  motoristas = motoristaDAO.buscarPorEmpresa(idEmpresa);
 
-            if (motorista.getIdEmpresa() != idEmpresa){
+            if (motoristas == null || !motoristaExiste(ultimoMotorista, motoristas)){
                 request.setAttribute("erroMotorista", "Motorista inválido! Digite um motorista existente.");
                 erro = true;
-            }
-
-            if (erro){
-                request.getRequestDispatcher("/atualizar-manutencao").forward(request, response);
             }
 
 
             ManutencaoDAO dao = new ManutencaoDAO();
             Manutencao manutencao = dao.buscarPorId(id);
+
+            if (erro){
+                request.setAttribute("manutencao", manutencao);
+                request.getRequestDispatcher("/atualizar-manutencao").forward(request, response);
+                return;
+            }
 
             java.sql.Date dtCadastroBD = new java.sql.Date(dtCadastro.getTime());
             manutencao.setDescricaoServico(descricaoServico);
@@ -210,7 +244,7 @@ public class AtualizarManutencaoServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
             }
 
-        } catch (ErroAoDeletar e) {
+        } catch (ErroAoAtualizar e) {
             response.sendRedirect("/home?msg=Erro ao atualizar manutencao. Tente novamente mais tarde.");
         } catch (Exception e) {
             response.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");

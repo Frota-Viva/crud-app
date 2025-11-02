@@ -26,15 +26,6 @@ import java.io.IOException;
  */
 @WebServlet(name = "DeletarServlet", value = "/deletar-entrega")
 public class DeletarEntrega extends HttpServlet {
-
-    /**
-     * Processa a requisição GET para deletar uma entrega.
-     * 
-     * @param request requisição HTTP contendo o ID da entrega
-     * @param response resposta HTTP enviada ao cliente
-     * @throws ServletException se ocorrer erro no processamento do servlet
-     * @throws IOException se ocorrer erro de entrada/saída
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
