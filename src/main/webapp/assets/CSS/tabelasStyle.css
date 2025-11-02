@@ -346,3 +346,33 @@ main * {
     width: 1.6rem;
     height: auto;
 }
+/* Aviso */
+#aviso-span-tabela {
+    background-color: white;
+    border: 1px solid lightgray;
+    width: clamp(120px, 40%, 300px);
+    padding: 0.6rem;
+    border-radius: 8px;
+}
+
+#aviso-span-tabela p{
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* nao-encontrado */
+.nao-encontrado {
+    display: flex;
+    background-color: #D1D5DB;
+    width: 100%;
+    height: 6rem;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 8px;
+}
+.nao-encontrado p {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color:black;
+}

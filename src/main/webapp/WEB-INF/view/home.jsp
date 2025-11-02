@@ -4,6 +4,7 @@
 <%
     Object reqInformacoesHome = request.getAttribute("informacoesHome");
     InformacoesHome informacoesHome = null;
+    String msg = request.getParameter("msg");
     Empresa empresa = (Empresa) request.getAttribute("empresa");
     if (reqInformacoesHome != null){
         informacoesHome = (InformacoesHome) reqInformacoesHome;
@@ -26,6 +27,12 @@
 <main>
     <section class="informacoes">
         <h1>Seja bem-vindo,  "<%=informacoesHome != null ? informacoesHome.getNome() : empresa.getNome()%>"!</h1>
+        <% if (msg != null) {%>
+        <span id="aviso-span-home">
+                <h2>Aviso!</h2>
+                <p style="color: red"><%=msg%></p>
+            </span>
+        <%}%>
         <section class="cards">
             <article class="card-info" id="card-frota">
                 <h2>Caminhões</h2>

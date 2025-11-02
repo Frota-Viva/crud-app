@@ -157,17 +157,15 @@ public class AtualizarCaminhaoServlet extends HttpServlet {
             if (dao.atualizar(caminhao) == 1) {
                 response.sendRedirect("/listar-caminhao?msg=Caminhao+atualizado+com+sucesso");
             } else{
-                request.setAttribute("mensagem", "Erro ao atualizar caminhao. Tente novamente mais tarde.");
-                request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+                request.setAttribute("msg", "Erro ao atualizar caminhao. Tente novamente mais tarde.");
+                request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
             }
 
 
         } catch (ErroAoDeletar e) {
-            request.setAttribute("mensagem", "Erro ao atualizar caminhao. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Erro ao atualizar caminhao. Tente novamente mais tarde.");
         } catch (Exception e) {
-            request.setAttribute("mensagem", "Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
     }
     /**
