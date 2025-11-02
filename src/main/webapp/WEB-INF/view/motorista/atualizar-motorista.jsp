@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edição de Motoristas - Frota Viva</title>
     <link rel="stylesheet" href="../../../assets/CSS/tabelaEditStyle.css?<%=System.currentTimeMillis()%>">
+    <link rel="shortcut icon" href="../../../assets/imgs/Logo16x16.png">
+
 </head>
 
 <body>
