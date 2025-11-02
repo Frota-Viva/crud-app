@@ -32,7 +32,7 @@ import java.util.List;
  * Se não houver empresa logada, o usuário é redirecionado para a landing page.
  * </p>
  * 
- * @author Davi
+ * @author Davi Alcanfor
  */
 @WebServlet(name = "ListaFrota", value = "/listar-frota")
 public class ListarFrotaServlet extends HttpServlet {

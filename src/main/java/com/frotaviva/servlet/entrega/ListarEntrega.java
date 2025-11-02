@@ -15,8 +15,26 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
+/**
+ * Servlet responsável por listar todas as entregas de uma empresa.
+ * <p>
+ * Este servlet permite consultar entregas cadastradas, podendo filtrar por data.
+ * </p>
+ * <p>
+ * Principais funcionalidades:
+ * <ul>
+ *     <li>Verifica se há uma empresa logada;</li>
+ *     <li>Consulta todas as entregas da empresa;</li>
+ *     <li>Permite busca filtrada por data, se o parâmetro 'buscar' for fornecido;</li>
+ *     <li>Exibe a lista de entregas na página correspondente;</li>
+ *     <li>Redireciona com mensagens de erro em caso de falha na consulta.</li>
+ * </ul>
+ * </p>
+ * 
+ * @author Ricardo
+ */
 @WebServlet(name = "ListarEntregas", value = "/listar-entregas")
-public class ListarEntregaServlet extends HttpServlet {
+public class ListarEntrega extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -51,7 +69,5 @@ public class ListarEntregaServlet extends HttpServlet {
         } catch (Exception e) {
             resp.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
-
-
     }
 }
