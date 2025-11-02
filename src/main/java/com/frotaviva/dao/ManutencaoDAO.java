@@ -59,7 +59,13 @@ public class ManutencaoDAO extends AbstractDAO implements DAO<Manutencao> {
             stmt = conn.prepareStatement(sql);
 
             stmt.setBigDecimal(1, manutencao.getCusto());
-            stmt.setLong(2, manutencao.getId());
+            stmt.setDate(2, manutencao.getDtConclusao());
+            stmt.setDate(3,manutencao.getDtCadastro());
+            stmt.setString(4,manutencao.getTipoManutencao());
+            stmt.setLong(5,manutencao.getIdCaminhao());
+            stmt.setString(6,manutencao.getDescricaoServico());
+            stmt.setLong(7,manutencao.getUltimoMotorista());
+            stmt.setLong(8,manutencao.getId());
 
             if (stmt.executeUpdate() > 0) return 1;
             return 0;
