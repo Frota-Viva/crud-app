@@ -14,15 +14,48 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+/**
+ * Responsável por atualizar os dados de um motorista cadastrado.
+ * <p>
+ * Principais funcionalidades:
+ * <ul>
+ *     <li><b>GET:</b> Busca e exibe os dados do motorista selecionado para atualização.</li>
+ *     <li><b>POST:</b> Processa as alterações feitas pelo usuário, valida os dados e atualiza o registro no banco.</li>
+ * </ul>
+ * </p>
+ * <p>
+ * O servlet valida se existe uma empresa logada, senão o usuário é redirecionado para landing page.
+ * </p>
+ *
+ * @author Davi Alcanfor
+ */
 @WebServlet(name = "AtualizarMotorista", value = "/atualizar-motorista")
 public class AtualizarMotoristaServlet extends HttpServlet {
 
+    /**
+     * Exibe o formulário de atualização com os dados atuais do motorista.
+     * <p>
+     * Principais funcionalidades:
+     * <ul>
+     *     <li>Verifica se existe uma empresa logada (sessão válida);</li>
+     *     <li>Busca o ID do motorista a partir do parâmetro da requisição;</li>
+     *     <li>Busca o motorista no banco de dados através do {@link MotoristaDAO};</li>
+     *     <li>Redireciona os dados para a página JSP de atualização;</li>
+     *     <li>Caso o ID seja inválido ou o motorista não seja encontrado, redireciona para a listagem de motoristas
+     * com os determinados erros.</li>
+     * </ul>
+     * </p>
+     *
+     * @param req  requisição HTTP recebida
+     * @param resp resposta HTTP enviada
+     * @throws ServletException se ocorrer um erro no processamento do servlet
+     * @throws IOException se ocorrer um erro de entrada ou saída
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         // Recuperando o motorista que será atualizado
-
         HttpSession session = req.getSession(true);
         Object idEmpresaSession = session.getAttribute("idEmpresa");
 
@@ -50,13 +83,29 @@ public class AtualizarMotoristaServlet extends HttpServlet {
         }
     }
 
-
+    /**
+     * Processa a atualização dos dados do motorista enviados pelo formulário.
+     * <p>
+     * Principais funcionalidades:
+     * <ul>
+     *     <li>Verifica a sessão e valida se há uma empresa logada;</li>
+     *     <li>Busca e valida os campos de entrada (nome, email, CPF, senha);</li>
+     *     <li>Exibe mensagens de erro em se haver entradas inválidas;</li>
+     *     <li>Atualiza o motorista no banco de dados se todos os dados forem válidos;</li>
+     *     <li>Redireciona para a listagem com uma mensagem de sucesso ou erro.</li>
+     * </ul>
+     * </p>
+     *
+     * @param request  requisição HTTP com os dados enviados pelo formulário
+     * @param response resposta HTTP a ser enviada ao cliente
+     * @throws ServletException se ocorrer um erro no processamento do servlet
+     * @throws IOException se ocorrer um erro de entrada ou saída
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // Sessão
-
         HttpSession session = request.getSession(true);
         Object idEmpresaSession = session.getAttribute("idEmpresa");
 
@@ -77,8 +126,7 @@ public class AtualizarMotoristaServlet extends HttpServlet {
             String nome = request.getParameter("nome");
             String email = request.getParameter("email");
 
-            // Validação
-
+            // Validação dos campos
             if (!Validar.senha(senha)) {
                 request.setAttribute("erroSenha", "Senha inválida! Deve conter números, maiúsculas, minúsculas e 8+ caracteres.");
                 erro = true;
@@ -101,9 +149,9 @@ public class AtualizarMotoristaServlet extends HttpServlet {
                 erro = true;
             }
 
-
             Motorista motorista = dao.buscarPorId(id);
 
+            // Caso haja erros de validação, retorna para a página com mensagens
             if (erro) {
                 request.setAttribute("motorista", motorista);
                 request.getRequestDispatcher("WEB-INF/view/motorista/atualizar-motorista.jsp").forward(request, response);
@@ -111,7 +159,6 @@ public class AtualizarMotoristaServlet extends HttpServlet {
             }
 
             // Atualização do objeto
-
             motorista.setNome(nome);
             motorista.setEmail(email);
             motorista.setSenha(senha);

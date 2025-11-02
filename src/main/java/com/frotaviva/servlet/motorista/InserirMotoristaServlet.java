@@ -16,12 +16,30 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Responsável por cadastrar novos motoristas no sistema.
+ * <p>
+ * Este servlet processa os dados enviados pelo formulário de cadastro,
+ * valida as informações e insere o motorista no banco de dados.
+ * </p>
+ * <p>
+ * Principais funcionalidades:
+ * <ul>
+ *     <li><b>redirectComMensagem:<b> Redireciona para /listar-motoristas com a mensagem codificada como parâmetro
+ *     <li><b>GET:</b> Exibe a página de cadastro de motorista;</li>
+ *     <li><b>POST:</b> Valida e insere o motorista no banco de dados;</li>
+ *     <li>Redireciona o usuário com mensagens de sucesso ou erro conforme o resultado da operação.</li>
+ * </ul>
+ * </p>
+ *
+ * @author Davi Alcanfor
+ */
 @WebServlet(name = "InserirMotoristas", value = "/inserir-motoristas")
 public class InserirMotoristaServlet extends HttpServlet {
 
     /**
      * Recebe uma mensagem, codifica ela para o padrão UTF_8 e redireciona para /listar-motoristas
-     * Apenas para maior legibilidade do código, pois cada mensagem teria que ser codificada e isso
+     * apenas para maior legibilidade do código, pois cada mensagem teria que ser codificada e isso
      * seria repetido muitas vezes no código.
      *
      * @param response para executar o redirect
@@ -32,11 +50,52 @@ public class InserirMotoristaServlet extends HttpServlet {
         response.sendRedirect("/listar-motoristas?msg=" + mensagemEncoded);
     }
 
+    /**
+     * Exibe a página de cadastro de motorista se a empresa estiver logada.
+     * <p>
+     * Se não existir uma empresa logado o usuário é redirecionado para a landing page
+     * </p>
+     *
+     * @param request  requisição HTTP recebida
+     * @param response resposta HTTP a ser enviada
+     * @throws IOException se ocorrer um erro de entrada ou saída
+     * @throws ServletException se ocorrer um erro no processamento do servlet
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession(true);
+        Object id = session.getAttribute("idEmpresa");
+
+        if (id == null){
+            response.sendRedirect("/");
+            return;
+        }
+
         request.getRequestDispatcher("WEB-INF/view/motorista/inserir-motorista.jsp").forward(request, response);
     }
 
+
+    /**
+     * Processa os dados do formulário de cadastro do motorista específico.
+     * <p>
+     * Principais etapas:
+     * <ul>
+     *     <li>Verifica se há uma empresa logada;</li>
+     *     <li>Recebe e valida os campos do formulário (nome, email, CPF e senha);</li>
+     *     <li>Cria o objeto {@link Motorista} e o insere no banco de dados através do {@link MotoristaDAO};</li>
+     *     <li>Redireciona o usuário com mensagens específicas de acordo com o resultado.</li>
+     * </ul>
+     * </p>
+     * <p>
+     * Se ocorrer alguma falha na validação, o formulário é reexibido com mensagens de erro.
+     * Já se acontecer uma exceção, o usuário é redirecionado com uma mensagem explicativa.
+     * </p>
+     *
+     * @param request  requisição HTTP contendo os dados do formulário
+     * @param response resposta HTTP enviada ao cliente
+     * @throws ServletException se ocorrer um erro interno no servlet
+     * @throws IOException se ocorrer um erro de entrada ou saída durante o processamento
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
