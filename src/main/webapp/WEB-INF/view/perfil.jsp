@@ -88,9 +88,12 @@ Empresa empresa = (Empresa) reqEmpresa;%>
                 </section>
             </article>
             <section id="ultima-linha">
-                <div id="caixa-alterarSenha">
-                    <a>Alterar senha</a>
+                <div>
+                    <div id="caixa-alterarSenha">
+                        <a href="/home/perfil/alterar-senha">Alterar senha</a>
+                    </div>
                 </div>
+                <div>
                     <% if (request.getAttribute("erroIgualdade") != null) { %>
                     <div class="erroCaixa">
                         <span><%= request.getAttribute("erroIgualdade") %></span>
@@ -104,7 +107,6 @@ Empresa empresa = (Empresa) reqEmpresa;%>
                         <span><%= request.getAttribute("erroVazio") %></span>
                     </div>
                     <% } %>
-
                 </div>
                 <section id="botoes">
                     <a href="/home">

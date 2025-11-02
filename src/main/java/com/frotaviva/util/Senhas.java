@@ -42,6 +42,7 @@ public class Senhas {
             stmt.setLong(1, id);
 
             ResultSet rs = stmt.executeQuery();
+            rs.next();
 
             return rs.getString("senha");
         } 

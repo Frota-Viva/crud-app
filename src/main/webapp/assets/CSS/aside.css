@@ -56,3 +56,8 @@
     width: 0.4rem;
     border-radius: 1.3rem;
 }
+#logo {
+    width: clamp(94px, 94%, 188px);
+    height: auto;
+    margin-left: 3rem;
+}

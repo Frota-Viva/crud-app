@@ -28,6 +28,10 @@ public class Empresa {
         this.tipoEmpresa=tipoEmpresa;
         this.senha=senha;
     }
+    public Empresa(long id,String senha){
+        this.id=id;
+        this.senha=senha;
+    }
 
     public long getId(){
         return this.id;
