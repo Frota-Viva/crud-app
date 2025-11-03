@@ -95,7 +95,7 @@ Empresa empresa = (Empresa) reqEmpresa;%>
                         <a href="/home/perfil/alterar-senha">Alterar senha</a>
                     </div>
                     <div id="caixa-excluirConta">
-                        <a href="/home/perfil/alterar-senha">Excluir Conta</a>
+                        <a href="/home/perfil/excluir-conta">Excluir Conta</a>
                     </div>
                 </div>
                 <div>

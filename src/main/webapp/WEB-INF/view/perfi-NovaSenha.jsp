@@ -89,7 +89,7 @@ Empresa empresa = (Empresa) empresaReq;%>
       <% } %>
 
       <div id="botoes-forms-altSenha">
-        <a href="/home/perfil">
+        <a href="/home/perfilx">
           <button id="button-cancelar" type="button">
             <img src="../../assets/icons/icon-cancelar.svg" alt="" class="icones-botao">
             <p><b>Cancelar</b></p>

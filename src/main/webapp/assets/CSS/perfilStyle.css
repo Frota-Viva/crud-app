@@ -202,11 +202,15 @@ main {
 #caixa-alterarSenha{
     background-color: #202B45;
     font-size: large;
+    padding: 1rem;
+    margin: 1rem;
     border-radius: 0.8rem;
 }
 #caixa-excluirConta{
     background-color: #F06060;
     font-size: large;
+    padding: 1rem;
+    margin: 1rem;
     border-radius: 0.8rem;
 }
 .erroCaixa {
@@ -223,7 +227,8 @@ main {
     border-radius: 0.8rem;
 }
 
-#caixa-alterarSenha,
+#caixa-alterarSenha
+#caixa-excluirConta,
 .erroCaixa,
 #realizado {
     display: inline-block;
@@ -240,4 +245,12 @@ main {
     color: white;
     text-decoration: none;
 }
+#caixa-excluirConta a,
+#caixa-excluirConta a:visited,
+#caixa-excluirConta a:hover,
+#caixa-excluirConta a:active{
+    color: black;
+    text-decoration: none;
+}
+
 

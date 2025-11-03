@@ -112,8 +112,7 @@ public class AlterarSenhaServlet extends HttpServlet {
             }
 
         } catch (ErroAoAtualizar eaa) {
-            request.setAttribute("mensagem", "Erro ao atualizar manutenção. Tente novamente mais tarde.");
-            request.getRequestDispatcher("/WEB-INF/view/erro.jsp").forward(request, response);
+            response.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         } catch (Exception e) {
             response.sendRedirect("/home?msg=Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
@@ -126,17 +125,17 @@ public class AlterarSenhaServlet extends HttpServlet {
      * </p>
      *
      * @param request objeto da requisição HTTP
-     * @param res objeto da resposta HTTP
+     * @param response objeto da resposta HTTP
      * @throws ServletException se ocorrer um erro de servlet
      * @throws IOException se ocorrer um erro de entrada ou saída
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse res) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
 
         Object empresaSession = session.getAttribute("empresa");
         Empresa empresaPagina = (Empresa) empresaSession;
         request.setAttribute("empresa", empresaPagina);
-        request.getRequestDispatcher("/WEB-INF/view/perfi-NovaSenha.jsp").forward(request, res);
+        request.getRequestDispatcher("/WEB-INF/view/perfi-NovaSenha.jsp").forward(request, response);
     }
 }

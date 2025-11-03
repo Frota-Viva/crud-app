@@ -40,7 +40,9 @@
                 </label>
                 <%if (request.getAttribute("erro") != null){%>
                 <span class="erro" style="color: red; font-size: medium"><%=request.getAttribute("erro")%></span>
-                <%}%>
+                <%} else if (request.getParameter("exclusaoConta")!=null) {%>
+                    <span class="erro" style="color: white; font-size: medium" ><%=request.getParameter("exclusaoConta")%></span>
+                <%} %>
             </div>
             <hr>
             <button type="submit" class="botao-forms" id="botao1">Entrar</button>

@@ -137,3 +137,10 @@ form.cadastro-forms > div {
     font-size: 2.4rem;
     margin-bottom: 2rem;
 }
+#realizado{
+    padding: 1rem;
+    color: white;
+    background-color: #1F2A44;
+    font-size: medium;
+    border-radius: 0.8rem;
+}
