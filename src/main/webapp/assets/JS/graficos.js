@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 //     Fazendo o gráfico das informações dos caminhões
     const ctxCaminhoes = document.getElementById("graficoCaminhoes");
-    let totalCaminhoes = document.getElementById("totalCaminhoes").textContent;
     let inativosCaminhoes = parseInt(document.getElementById("inativosCaminhoes").textContent);
     let manutencaoCaminhoes = parseInt(document.getElementById("manutencaoCaminhoes").textContent);
     let ativosCaminhoes = parseInt(document.getElementById("ativosCaminhoes").textContent);
@@ -43,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fazendo o gráfico das entregas
 
     const ctxEntregas = document.getElementById("graficoEntregas");
-    let totalEntregas = document.getElementById("totalEntregas").textContent;
     let realizadasEntregas = parseInt(document.getElementById("realizadasEntregas").textContent);
     let aCaminhoEntregas = parseInt(document.getElementById("aCaminhoEntregas").textContent);
 
@@ -124,15 +122,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Fazendo o gráfico dos preços das manutenções
     const ctxPrecos = document.getElementById("graficoPrecosManutencoes");
-    let corretivasPrecos = document.getElementById("corretivasPrecoManutencao").textContent;
-    let preventivasPrecos = document.getElementById("preventivasPrecoManutencao").textContent;
+    let totalPrecos = document.getElementById("totalPrecoManutencao");
+    console.log(totalPrecos.textContent);
+    let corretivasPrecos = document.getElementById("corretivasPrecoManutencao");
+    let preventivasPrecos = document.getElementById("preventivasPrecoManutencao");
+    let corretivasValor = parseFloat(corretivasPrecos.textContent);
+    let preventivasValor = parseFloat(preventivasPrecos.textContent);
+
+    totalPrecos.textContent = formatarDinheiro(totalPrecos.textContent);
+    corretivasPrecos.textContent = formatarDinheiro(corretivasValor);
+    preventivasPrecos.textContent = formatarDinheiro(preventivasValor);
+
+
 
     new Chart(ctxPrecos, {
         type: 'doughnut',
         data: {
             labels: ['Corretivas', 'Preventivas'],
             datasets: [{
-                data: [corretivasPrecos, preventivasPrecos],
+                data: [corretivasValor, preventivasValor],
                 backgroundColor: ['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)'],
                 borderWidth: 2,
                 borderColor: ['rgba(255, 51, 51, 1)',
@@ -161,5 +169,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    function formatarDinheiro(valor) {
+        return parseFloat(valor).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+    }
+
 
 })
